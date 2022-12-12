@@ -245,6 +245,80 @@
       </tags>
   </entry>
   <entry>
+    <title>axios的基本知识</title>
+    <url>/2022/09/30/axios%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<h1 id="axios的基本使用"><a href="#axios的基本使用" class="headerlink" title="axios的基本使用"></a>axios的基本使用</h1><h2 id="什么是axios？"><a href="#什么是axios？" class="headerlink" title="什么是axios？"></a>什么是axios？</h2><ol>
+<li><p>前端最流行的ajax请求库（轻量级）</p>
+</li>
+<li><p>react/vue都推荐的方法（绝对靠谱好用）</p>
+</li>
+<li><p>文档： <a href="https://github.com/axios/axios">https://github.com/axios/axios</a></p>
+<span id="more"></span>
+
+<h2 id="axios的特点"><a href="#axios的特点" class="headerlink" title="axios的特点"></a>axios的特点</h2></li>
+<li><p>基本promise的异步ajax请求库</p>
+</li>
+<li><p>浏览器和node都能使用</p>
+</li>
+<li><p>支持请求和响应拦截器（为我们书写更多逻辑提供方便）</p>
+</li>
+<li><p>支持请求取消</p>
+</li>
+<li><p>请求和响应数据转换</p>
+</li>
+<li><p>批量发送多个请求</p>
+</li>
+</ol>
+<h3 id="axios的常用方法"><a href="#axios的常用方法" class="headerlink" title="axios的常用方法"></a>axios的常用方法</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">##### axios.<span class="title function_">request</span>(config)  等同于 axios（config）</span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">get</span>(url[, config])    发get请求</span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">delete</span>(url[, config])     发<span class="keyword">delete</span>请求</span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">head</span>(url[, config])    </span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">options</span>(url[, config])</span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">post</span>(url[, data[, config]])    发post请求</span><br><span class="line">     </span><br><span class="line">##### axios.<span class="title function_">put</span>(url[, data[, config]])      发put请求</span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">patch</span>(url[, data[, config]])</span><br></pre></td></tr></table></figure>
+
+<h3 id="axios-create"><a href="#axios-create" class="headerlink" title="axios.create()"></a>axios.create()</h3><ol>
+<li>根据指定配置创建一个新的axios, 也就是每个新axios都有自己的配置</li>
+<li>新axios没有取消请求和批量发请求的方法， 其他所有的语法都是一致的</li>
+<li>为什么要设计这个语法？<ol>
+<li>需求： 项目中有部分接口与另一部分接口需要的配置不太一样</li>
+<li>解决： 创建2个新axios， 每个都有自己特有的配置， 分别应用到不同要求的接口请求中</li>
+</ol>
+</li>
+</ol>
+<p>创建一个axios实例：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> instance = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">&#x27;https://some-domain.com/api/&#x27;</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">1000</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123;<span class="string">&#x27;X-Custom-Header&#x27;</span>: <span class="string">&#x27;foobar&#x27;</span>&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>instance是一个函数， 并不是一个对象， 如果大家学完源码就可以很清晰的了解它了</p>
+<p><img src="image-20220930105930304.png" alt="axios的基本知识"></p>
+<h3 id="axios拦截器"><a href="#axios拦截器" class="headerlink" title="axios拦截器"></a>axios拦截器</h3><p>在请求或响应被 then 或 catch 处理前拦截它们。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加请求拦截器</span></span><br><span class="line">axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params">config</span>) &#123;</span><br><span class="line">    <span class="comment">// 在发送请求之前做些什么</span></span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;, <span class="keyword">function</span> (<span class="params">error</span>) &#123;</span><br><span class="line">    <span class="comment">// 对请求错误做些什么</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加响应拦截器</span></span><br><span class="line">axios.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params">response</span>) &#123;</span><br><span class="line">    <span class="comment">// 2xx 范围内的状态码都会触发该函数。</span></span><br><span class="line">    <span class="comment">// 对响应数据做点什么</span></span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;, <span class="keyword">function</span> (<span class="params">error</span>) &#123;</span><br><span class="line">    <span class="comment">// 超出 2xx 范围的状态码都会触发该函数。</span></span><br><span class="line">    <span class="comment">// 对响应错误做点什么</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>如果你稍后需要移除拦截器，可以这样：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myInterceptor = axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;<span class="comment">/*...*/</span>&#125;);</span><br><span class="line">axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">eject</span>(myInterceptor);</span><br></pre></td></tr></table></figure>
+
+<p>可以给自定义的 axios 实例添加拦截器。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> instance = axios.<span class="title function_">create</span>();</span><br><span class="line">instance.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;<span class="comment">/*...*/</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上就是axios基本的使用。</p>
+<p>接下来我们开始测试，</p>
+<p>参考地址：<a href="https://github.com/typicode/json-server">https://github.com/typicode/json-server</a></p>
+<p> 先创建一个json-server的文件， 进入该文件夹， </p>
+<p>执行：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm i -g json-server</span><br></pre></td></tr></table></figure>
+
+<p>接着就是在json-server文件夹下面创建一个db.json,在该文件中加入以下内容：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;posts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span> <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span> <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;json-server&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;author&quot;</span><span class="punctuation">:</span> <span class="string">&quot;typicode&quot;</span> <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;comments&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span> <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span> <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="string">&quot;some comment&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;postId&quot;</span><span class="punctuation">:</span> <span class="number">1</span> <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;profile&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;typicode&quot;</span> <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后就是启动服务：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">json-server --watch db.json</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是， 执行这个命令的时候， 必须要在db.json文件夹下， 不然会启动失败</p>
+<p><img src="image-20221002071632112.png"></p>
+<p>之后你就可以直接在本地访问到信息了</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>axios的基本使用</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>composition ApI 和 options API 的区别</title>
     <url>/2022/11/16/composition-ApI-%E5%92%8C-options-API-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
     <content><![CDATA[<h1 id="composition-ApI-和-options-API-的区别"><a href="#composition-ApI-和-options-API-的区别" class="headerlink" title="composition ApI 和 options API 的区别"></a>composition ApI 和 options API 的区别</h1><h2 id="面试官：Vue3-0-所采用的-Composition-Api-与-Vue2-x-使用的-Options-Api-有什么不同？"><a href="#面试官：Vue3-0-所采用的-Composition-Api-与-Vue2-x-使用的-Options-Api-有什么不同？" class="headerlink" title="面试官：Vue3.0 所采用的 Composition Api 与 Vue2.x 使用的 Options Api 有什么不同？"></a>面试官：Vue3.0 所采用的 Composition Api 与 Vue2.x 使用的 Options Api 有什么不同？</h2><img src="/2022/11/16/composition-ApI-%E5%92%8C-options-API-%E7%9A%84%E5%8C%BA%E5%88%AB/image-20221209153316265.png" class="" title="image-20221209153316265">
@@ -328,80 +402,6 @@
       </categories>
       <tags>
         <tag>composition ApI 和 options API 的区别</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>axios的基本知识</title>
-    <url>/2022/09/30/axios%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</url>
-    <content><![CDATA[<h1 id="axios的基本使用"><a href="#axios的基本使用" class="headerlink" title="axios的基本使用"></a>axios的基本使用</h1><h2 id="什么是axios？"><a href="#什么是axios？" class="headerlink" title="什么是axios？"></a>什么是axios？</h2><ol>
-<li><p>前端最流行的ajax请求库（轻量级）</p>
-</li>
-<li><p>react/vue都推荐的方法（绝对靠谱好用）</p>
-</li>
-<li><p>文档： <a href="https://github.com/axios/axios">https://github.com/axios/axios</a></p>
-<span id="more"></span>
-
-<h2 id="axios的特点"><a href="#axios的特点" class="headerlink" title="axios的特点"></a>axios的特点</h2></li>
-<li><p>基本promise的异步ajax请求库</p>
-</li>
-<li><p>浏览器和node都能使用</p>
-</li>
-<li><p>支持请求和响应拦截器（为我们书写更多逻辑提供方便）</p>
-</li>
-<li><p>支持请求取消</p>
-</li>
-<li><p>请求和响应数据转换</p>
-</li>
-<li><p>批量发送多个请求</p>
-</li>
-</ol>
-<h3 id="axios的常用方法"><a href="#axios的常用方法" class="headerlink" title="axios的常用方法"></a>axios的常用方法</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">##### axios.<span class="title function_">request</span>(config)  等同于 axios（config）</span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">get</span>(url[, config])    发get请求</span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">delete</span>(url[, config])     发<span class="keyword">delete</span>请求</span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">head</span>(url[, config])    </span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">options</span>(url[, config])</span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">post</span>(url[, data[, config]])    发post请求</span><br><span class="line">     </span><br><span class="line">##### axios.<span class="title function_">put</span>(url[, data[, config]])      发put请求</span><br><span class="line"></span><br><span class="line">##### axios.<span class="title function_">patch</span>(url[, data[, config]])</span><br></pre></td></tr></table></figure>
-
-<h3 id="axios-create"><a href="#axios-create" class="headerlink" title="axios.create()"></a>axios.create()</h3><ol>
-<li>根据指定配置创建一个新的axios, 也就是每个新axios都有自己的配置</li>
-<li>新axios没有取消请求和批量发请求的方法， 其他所有的语法都是一致的</li>
-<li>为什么要设计这个语法？<ol>
-<li>需求： 项目中有部分接口与另一部分接口需要的配置不太一样</li>
-<li>解决： 创建2个新axios， 每个都有自己特有的配置， 分别应用到不同要求的接口请求中</li>
-</ol>
-</li>
-</ol>
-<p>创建一个axios实例：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> instance = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">&#x27;https://some-domain.com/api/&#x27;</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">1000</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123;<span class="string">&#x27;X-Custom-Header&#x27;</span>: <span class="string">&#x27;foobar&#x27;</span>&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>instance是一个函数， 并不是一个对象， 如果大家学完源码就可以很清晰的了解它了</p>
-<p><img src="image-20220930105930304.png" alt="axios的基本知识"></p>
-<h3 id="axios拦截器"><a href="#axios拦截器" class="headerlink" title="axios拦截器"></a>axios拦截器</h3><p>在请求或响应被 then 或 catch 处理前拦截它们。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加请求拦截器</span></span><br><span class="line">axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params">config</span>) &#123;</span><br><span class="line">    <span class="comment">// 在发送请求之前做些什么</span></span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;, <span class="keyword">function</span> (<span class="params">error</span>) &#123;</span><br><span class="line">    <span class="comment">// 对请求错误做些什么</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加响应拦截器</span></span><br><span class="line">axios.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params">response</span>) &#123;</span><br><span class="line">    <span class="comment">// 2xx 范围内的状态码都会触发该函数。</span></span><br><span class="line">    <span class="comment">// 对响应数据做点什么</span></span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;, <span class="keyword">function</span> (<span class="params">error</span>) &#123;</span><br><span class="line">    <span class="comment">// 超出 2xx 范围的状态码都会触发该函数。</span></span><br><span class="line">    <span class="comment">// 对响应错误做点什么</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-
-<p>如果你稍后需要移除拦截器，可以这样：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myInterceptor = axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;<span class="comment">/*...*/</span>&#125;);</span><br><span class="line">axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">eject</span>(myInterceptor);</span><br></pre></td></tr></table></figure>
-
-<p>可以给自定义的 axios 实例添加拦截器。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> instance = axios.<span class="title function_">create</span>();</span><br><span class="line">instance.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;<span class="comment">/*...*/</span>&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>以上就是axios基本的使用。</p>
-<p>接下来我们开始测试，</p>
-<p>参考地址：<a href="https://github.com/typicode/json-server">https://github.com/typicode/json-server</a></p>
-<p> 先创建一个json-server的文件， 进入该文件夹， </p>
-<p>执行：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm i -g json-server</span><br></pre></td></tr></table></figure>
-
-<p>接着就是在json-server文件夹下面创建一个db.json,在该文件中加入以下内容：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;posts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span> <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span> <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;json-server&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;author&quot;</span><span class="punctuation">:</span> <span class="string">&quot;typicode&quot;</span> <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;comments&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span> <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span> <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="string">&quot;some comment&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;postId&quot;</span><span class="punctuation">:</span> <span class="number">1</span> <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;profile&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;typicode&quot;</span> <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后就是启动服务：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">json-server --watch db.json</span><br></pre></td></tr></table></figure>
-
-<p>值得注意的是， 执行这个命令的时候， 必须要在db.json文件夹下， 不然会启动失败</p>
-<p><img src="image-20221002071632112.png"></p>
-<p>之后你就可以直接在本地访问到信息了</p>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>axios的基本使用</tag>
       </tags>
   </entry>
   <entry>
@@ -1410,6 +1410,30 @@
       </tags>
   </entry>
   <entry>
+    <title>vue3_reactive</title>
+    <url>/2022/10/15/vue3-reactive/</url>
+    <content><![CDATA[<h1 id="Vue3——reactive"><a href="#Vue3——reactive" class="headerlink" title="Vue3——reactive"></a>Vue3——reactive</h1><p>上次我们说到了ref的用法， 今天来聊聊reactive， 其实它和ref的区别不大</p>
+<h2 id="1-传值"><a href="#1-传值" class="headerlink" title="1. 传值"></a>1. 传值</h2><p> reactive只能传引用类型的值， 比如Array， Object， Map，Set。 那么如果你用到了原始值的话：就会出现以下的报错：</p>
+<span id="more"></span>
+
+<img src="/2022/10/15/vue3-reactive/image-20221015171147671.png" class="" title="image-20221015171147671">
+
+<p>我们来看看原因：</p>
+<img src="/2022/10/15/vue3-reactive/image-20221015171228024.png" class="" title="image-20221015171228024">
+
+<p>reactive在被定义的时候就已经指明了它的类型是个对象；那么你传个对象就不会报错了；</p>
+<h2 id="2-修改的时候不需要-value"><a href="#2-修改的时候不需要-value" class="headerlink" title="2. 修改的时候不需要.value"></a>2. 修改的时候不需要.value</h2><img src="/2022/10/15/vue3-reactive/image-20221015171712071.png" class="" title="image-20221015171712071">
+
+<p>看看页面效果：</p>
+<img src="/2022/10/15/vue3-reactive/image-20221015171734668.png" class="" title="image-20221015171734668">]]></content>
+      <categories>
+        <category>vue3</category>
+      </categories>
+      <tags>
+        <tag>reactive</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue3_ref</title>
     <url>/2022/10/15/vue3-ref/</url>
     <content><![CDATA[<h1 id="vue3-ref的用法解析"><a href="#vue3-ref的用法解析" class="headerlink" title="vue3_ref的用法解析"></a>vue3_ref的用法解析</h1><h2 id="ref是干什么的？"><a href="#ref是干什么的？" class="headerlink" title="ref是干什么的？"></a>ref是干什么的？</h2><p>我们知道， vue2是这样配置响应式的：</p>
@@ -1633,30 +1657,6 @@
       </categories>
       <tags>
         <tag>vue3和vue2的区别</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue3_reactive</title>
-    <url>/2022/10/15/vue3-reactive/</url>
-    <content><![CDATA[<h1 id="Vue3——reactive"><a href="#Vue3——reactive" class="headerlink" title="Vue3——reactive"></a>Vue3——reactive</h1><p>上次我们说到了ref的用法， 今天来聊聊reactive， 其实它和ref的区别不大</p>
-<h2 id="1-传值"><a href="#1-传值" class="headerlink" title="1. 传值"></a>1. 传值</h2><p> reactive只能传引用类型的值， 比如Array， Object， Map，Set。 那么如果你用到了原始值的话：就会出现以下的报错：</p>
-<span id="more"></span>
-
-<img src="/2022/10/15/vue3-reactive/image-20221015171147671.png" class="" title="image-20221015171147671">
-
-<p>我们来看看原因：</p>
-<img src="/2022/10/15/vue3-reactive/image-20221015171228024.png" class="" title="image-20221015171228024">
-
-<p>reactive在被定义的时候就已经指明了它的类型是个对象；那么你传个对象就不会报错了；</p>
-<h2 id="2-修改的时候不需要-value"><a href="#2-修改的时候不需要-value" class="headerlink" title="2. 修改的时候不需要.value"></a>2. 修改的时候不需要.value</h2><img src="/2022/10/15/vue3-reactive/image-20221015171712071.png" class="" title="image-20221015171712071">
-
-<p>看看页面效果：</p>
-<img src="/2022/10/15/vue3-reactive/image-20221015171734668.png" class="" title="image-20221015171734668">]]></content>
-      <categories>
-        <category>vue3</category>
-      </categories>
-      <tags>
-        <tag>reactive</tag>
       </tags>
   </entry>
   <entry>
@@ -4066,6 +4066,116 @@
       </tags>
   </entry>
   <entry>
+    <title>数组的常用方法</title>
+    <url>/2022/11/28/%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="数据的常用方法"><a href="#数据的常用方法" class="headerlink" title="数据的常用方法"></a>数据的常用方法</h1><h1 id="面试官：数组的常用方法有哪些？"><a href="#面试官：数组的常用方法有哪些？" class="headerlink" title="面试官：数组的常用方法有哪些？"></a>面试官：数组的常用方法有哪些？</h1><img src="/2022/11/28/%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/5842e560-67b6-11eb-85f6-6fac77c0c9b3.png" class="" title="img">
+
+<h2 id="一、操作方法"><a href="#一、操作方法" class="headerlink" title="一、操作方法"></a>一、操作方法</h2><p>数组基本操作可以归纳为 增、删、改、查，需要留意的是哪些方法会对原数组产生影响，哪些方法不会</p>
+<p>下面对数组常用的操作方法做一个归纳</p>
+<span id="more"></span>
+
+<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><p>下面前三种是对原数组产生影响的增添方法，第四种则不会对原数组产生影响</p>
+<ul>
+<li>push()</li>
+<li>unshift()</li>
+<li>splice()</li>
+<li>concat()</li>
+</ul>
+<h4 id="push"><a href="#push" class="headerlink" title="push()"></a>push()</h4><p><code>push()</code>方法接收任意数量的参数，并将它们添加到数组末尾，返回数组的最新长度</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = []; <span class="comment">// 创建一个数组</span></span><br><span class="line"><span class="keyword">let</span> count = colors.<span class="title function_">push</span>(<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>); <span class="comment">// 推入两项</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(count) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="unshift"><a href="#unshift" class="headerlink" title="unshift()"></a>unshift()</h4><p>unshift()在数组开头添加任意多个值，然后返回新的数组长度</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = <span class="keyword">new</span> <span class="title class_">Array</span>(); <span class="comment">// 创建一个数组</span></span><br><span class="line"><span class="keyword">let</span> count = colors.<span class="title function_">unshift</span>(<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>); <span class="comment">// 从数组开头推入两项</span></span><br><span class="line"><span class="title function_">alert</span>(count); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="splice"><a href="#splice" class="headerlink" title="splice"></a>splice</h4><p>传入三个参数，分别是开始位置、0（要删除的元素数量）、插入的元素，返回空数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> removed = colors.<span class="title function_">splice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;orange&quot;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors) <span class="comment">// red,yellow,orange,green,blue</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(removed) <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h4><p>首先会创建一个当前数组的副本，然后再把它的参数添加到副本末尾，最后返回这个新构建的数组，不会影响原始数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> colors2 = colors.<span class="title function_">concat</span>(<span class="string">&quot;yellow&quot;</span>, [<span class="string">&quot;black&quot;</span>, <span class="string">&quot;brown&quot;</span>]);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors); <span class="comment">// [&quot;red&quot;, &quot;green&quot;,&quot;blue&quot;]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors2); <span class="comment">// [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;yellow&quot;, &quot;black&quot;, &quot;brown&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>下面三种都会影响原数组，最后一项不影响原数组：</p>
+<ul>
+<li>pop()</li>
+<li>shift()</li>
+<li>splice()</li>
+<li>slice()</li>
+</ul>
+<h4 id="pop"><a href="#pop" class="headerlink" title="pop()"></a>pop()</h4><p><code>pop()</code> 方法用于删除数组的最后一项，同时减少数组的<code>length</code> 值，返回被删除的项</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>]</span><br><span class="line"><span class="keyword">let</span> item = colors.<span class="title function_">pop</span>(); <span class="comment">// 取得最后一项</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(item) <span class="comment">// green</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors.<span class="property">length</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="shift"><a href="#shift" class="headerlink" title="shift()"></a>shift()</h4><p><code>shift()</code>方法用于删除数组的第一项，同时减少数组的<code>length</code> 值，返回被删除的项</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>]</span><br><span class="line"><span class="keyword">let</span> item = colors.<span class="title function_">shift</span>(); <span class="comment">// 取得第一项</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(item) <span class="comment">// red</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors.<span class="property">length</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="splice-1"><a href="#splice-1" class="headerlink" title="splice()"></a>splice()</h4><p>传入两个参数，分别是开始位置，删除元素的数量，返回包含删除元素的数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> removed = colors.<span class="title function_">splice</span>(<span class="number">0</span>,<span class="number">1</span>); <span class="comment">// 删除第一项</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors); <span class="comment">// green,blue</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(removed); <span class="comment">// red，只有一个元素的数组</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p>slice() 用于创建一个包含原有数组中一个或多个元素的新数组，不会影响原始数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>, <span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;purple&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> colors2 = colors.<span class="title function_">slice</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">let</span> colors3 = colors.<span class="title function_">slice</span>(<span class="number">1</span>, <span class="number">4</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors)   <span class="comment">// red,green,blue,yellow,purple</span></span><br><span class="line">concole.<span class="title function_">log</span>(colors2); <span class="comment">// green,blue,yellow,purple</span></span><br><span class="line">concole.<span class="title function_">log</span>(colors3); <span class="comment">// green,blue,yellow</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="改"><a href="#改" class="headerlink" title="改"></a>改</h4><p>即修改原来数组的内容，常用<code>splice</code></p>
+<h4 id="splice-2"><a href="#splice-2" class="headerlink" title="splice()"></a>splice()</h4><p>传入三个参数，分别是开始位置，要删除元素的数量，要插入的任意多个元素，返回删除元素的数组，对原数组产生影响</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> removed = colors.<span class="title function_">splice</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="string">&quot;red&quot;</span>, <span class="string">&quot;purple&quot;</span>); <span class="comment">// 插入两个值，删除一个元素</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors); <span class="comment">// red,red,purple,blue</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(removed); <span class="comment">// green，只有一个元素的数组</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查"><a href="#查" class="headerlink" title="查"></a>查</h4><p>即查找元素，返回元素坐标或者元素值</p>
+<ul>
+<li>indexOf()</li>
+<li>includes()</li>
+<li>find()</li>
+</ul>
+<h4 id="indexOf"><a href="#indexOf" class="headerlink" title="indexOf()"></a>indexOf()</h4><p>返回要查找的元素在数组中的位置，如果没找到则返回 -1</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line">numbers.<span class="title function_">indexOf</span>(<span class="number">4</span>) <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="includes"><a href="#includes" class="headerlink" title="includes()"></a>includes()</h4><p>返回要查找的元素在数组中的位置，找到返回<code>true</code>，否则<code>false</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line">numbers.<span class="title function_">includes</span>(<span class="number">4</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="find"><a href="#find" class="headerlink" title="find()"></a>find()</h4><p>返回第一个匹配的元素</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> people = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;Matt&quot;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">27</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;Nicholas&quot;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">29</span></span><br><span class="line">    &#125;</span><br><span class="line">];</span><br><span class="line">people.<span class="title function_">find</span>(<span class="function">(<span class="params">element, index, array</span>) =&gt;</span> element.<span class="property">age</span> &lt; <span class="number">28</span>) <span class="comment">// // &#123;name: &quot;Matt&quot;, age: 27&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、排序方法"><a href="#二、排序方法" class="headerlink" title="二、排序方法"></a>二、排序方法</h2><p>数组有两个方法可以用来对元素重新排序：</p>
+<ul>
+<li>reverse()</li>
+<li>sort()</li>
+</ul>
+<h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h3><p>顾名思义，将数组元素方向反转</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> values = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">values.<span class="title function_">reverse</span>();</span><br><span class="line"><span class="title function_">alert</span>(values); <span class="comment">// 5,4,3,2,1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p>sort()方法接受一个比较函数，用于判断哪个值应该排在前面</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">compare</span>(<span class="params">value1, value2</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value1 &lt; value2) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value1 &gt; value2) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> values = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>];</span><br><span class="line">values.<span class="title function_">sort</span>(compare);</span><br><span class="line"><span class="title function_">alert</span>(values); <span class="comment">// 0,1,5,10,15</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、转换方法"><a href="#三、转换方法" class="headerlink" title="三、转换方法"></a>三、转换方法</h2><p>常见的转换方法有：</p>
+<h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3><p>join() 方法接收一个参数，即字符串分隔符，返回包含所有项的字符串</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>];</span><br><span class="line"><span class="title function_">alert</span>(colors.<span class="title function_">join</span>(<span class="string">&quot;,&quot;</span>)); <span class="comment">// red,green,blue</span></span><br><span class="line"><span class="title function_">alert</span>(colors.<span class="title function_">join</span>(<span class="string">&quot;||&quot;</span>)); <span class="comment">// red||green||blue</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="四、迭代方法"><a href="#四、迭代方法" class="headerlink" title="四、迭代方法"></a>四、迭代方法</h2><p>常用来迭代数组的方法（都不改变原数组）有如下：</p>
+<ul>
+<li>some()</li>
+<li>every()</li>
+<li>forEach()</li>
+<li>filter()</li>
+<li>map()</li>
+</ul>
+<h3 id="some"><a href="#some" class="headerlink" title="some()"></a>some()</h3><p>对数组每一项都运行传入的测试函数，如果至少有1个元素返回 true ，则这个方法返回 true</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> someResult = numbers.<span class="title function_">some</span>(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> item &gt; <span class="number">2</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(someResult) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="every"><a href="#every" class="headerlink" title="every()"></a>every()</h3><p>对数组每一项都运行传入的测试函数，如果所有元素都返回 true ，则这个方法返回 true</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> everyResult = numbers.<span class="title function_">every</span>(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> item &gt; <span class="number">2</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(everyResult) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach()"></a>forEach()</h3><p>对数组每一项都运行传入的函数，没有返回值</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line">numbers.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 执行某些操作</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="filter"><a href="#filter" class="headerlink" title="filter()"></a>filter()</h3><p>对数组每一项都运行传入的函数，函数返回 <code>true</code> 的项会组成数组之后返回</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> filterResult = numbers.<span class="title function_">filter</span>(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> item &gt; <span class="number">2</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(filterResult); <span class="comment">// 3,4,5,4,3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="map"><a href="#map" class="headerlink" title="map()"></a>map()</h3><p>对数组每一项都运行传入的函数，返回由每次函数调用的结果构成的数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> mapResult = numbers.<span class="title function_">map</span>(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> item * <span class="number">2</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(mapResult) <span class="comment">// 2,4,6,8,10,8,6,4,2</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>数组的常用方法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>模拟实现axios发送请求</title>
     <url>/2022/10/04/%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0axios%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82/</url>
     <content><![CDATA[<h1 id="模拟实现axios发送请求"><a href="#模拟实现axios发送请求" class="headerlink" title="模拟实现axios发送请求"></a>模拟实现axios发送请求</h1><span id="more"></span>
@@ -4345,116 +4455,6 @@
       </categories>
       <tags>
         <tag>破解游戏</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数组的常用方法</title>
-    <url>/2022/11/28/%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="数据的常用方法"><a href="#数据的常用方法" class="headerlink" title="数据的常用方法"></a>数据的常用方法</h1><h1 id="面试官：数组的常用方法有哪些？"><a href="#面试官：数组的常用方法有哪些？" class="headerlink" title="面试官：数组的常用方法有哪些？"></a>面试官：数组的常用方法有哪些？</h1><img src="/2022/11/28/%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/5842e560-67b6-11eb-85f6-6fac77c0c9b3.png" class="" title="img">
-
-<h2 id="一、操作方法"><a href="#一、操作方法" class="headerlink" title="一、操作方法"></a>一、操作方法</h2><p>数组基本操作可以归纳为 增、删、改、查，需要留意的是哪些方法会对原数组产生影响，哪些方法不会</p>
-<p>下面对数组常用的操作方法做一个归纳</p>
-<span id="more"></span>
-
-<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><p>下面前三种是对原数组产生影响的增添方法，第四种则不会对原数组产生影响</p>
-<ul>
-<li>push()</li>
-<li>unshift()</li>
-<li>splice()</li>
-<li>concat()</li>
-</ul>
-<h4 id="push"><a href="#push" class="headerlink" title="push()"></a>push()</h4><p><code>push()</code>方法接收任意数量的参数，并将它们添加到数组末尾，返回数组的最新长度</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = []; <span class="comment">// 创建一个数组</span></span><br><span class="line"><span class="keyword">let</span> count = colors.<span class="title function_">push</span>(<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>); <span class="comment">// 推入两项</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(count) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="unshift"><a href="#unshift" class="headerlink" title="unshift()"></a>unshift()</h4><p>unshift()在数组开头添加任意多个值，然后返回新的数组长度</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = <span class="keyword">new</span> <span class="title class_">Array</span>(); <span class="comment">// 创建一个数组</span></span><br><span class="line"><span class="keyword">let</span> count = colors.<span class="title function_">unshift</span>(<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>); <span class="comment">// 从数组开头推入两项</span></span><br><span class="line"><span class="title function_">alert</span>(count); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="splice"><a href="#splice" class="headerlink" title="splice"></a>splice</h4><p>传入三个参数，分别是开始位置、0（要删除的元素数量）、插入的元素，返回空数组</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> removed = colors.<span class="title function_">splice</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;orange&quot;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors) <span class="comment">// red,yellow,orange,green,blue</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(removed) <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h4><p>首先会创建一个当前数组的副本，然后再把它的参数添加到副本末尾，最后返回这个新构建的数组，不会影响原始数组</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> colors2 = colors.<span class="title function_">concat</span>(<span class="string">&quot;yellow&quot;</span>, [<span class="string">&quot;black&quot;</span>, <span class="string">&quot;brown&quot;</span>]);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors); <span class="comment">// [&quot;red&quot;, &quot;green&quot;,&quot;blue&quot;]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors2); <span class="comment">// [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;yellow&quot;, &quot;black&quot;, &quot;brown&quot;]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>下面三种都会影响原数组，最后一项不影响原数组：</p>
-<ul>
-<li>pop()</li>
-<li>shift()</li>
-<li>splice()</li>
-<li>slice()</li>
-</ul>
-<h4 id="pop"><a href="#pop" class="headerlink" title="pop()"></a>pop()</h4><p><code>pop()</code> 方法用于删除数组的最后一项，同时减少数组的<code>length</code> 值，返回被删除的项</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>]</span><br><span class="line"><span class="keyword">let</span> item = colors.<span class="title function_">pop</span>(); <span class="comment">// 取得最后一项</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(item) <span class="comment">// green</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors.<span class="property">length</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="shift"><a href="#shift" class="headerlink" title="shift()"></a>shift()</h4><p><code>shift()</code>方法用于删除数组的第一项，同时减少数组的<code>length</code> 值，返回被删除的项</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>]</span><br><span class="line"><span class="keyword">let</span> item = colors.<span class="title function_">shift</span>(); <span class="comment">// 取得第一项</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(item) <span class="comment">// red</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors.<span class="property">length</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="splice-1"><a href="#splice-1" class="headerlink" title="splice()"></a>splice()</h4><p>传入两个参数，分别是开始位置，删除元素的数量，返回包含删除元素的数组</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> removed = colors.<span class="title function_">splice</span>(<span class="number">0</span>,<span class="number">1</span>); <span class="comment">// 删除第一项</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors); <span class="comment">// green,blue</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(removed); <span class="comment">// red，只有一个元素的数组</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p>slice() 用于创建一个包含原有数组中一个或多个元素的新数组，不会影响原始数组</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>, <span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;purple&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> colors2 = colors.<span class="title function_">slice</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">let</span> colors3 = colors.<span class="title function_">slice</span>(<span class="number">1</span>, <span class="number">4</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors)   <span class="comment">// red,green,blue,yellow,purple</span></span><br><span class="line">concole.<span class="title function_">log</span>(colors2); <span class="comment">// green,blue,yellow,purple</span></span><br><span class="line">concole.<span class="title function_">log</span>(colors3); <span class="comment">// green,blue,yellow</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="改"><a href="#改" class="headerlink" title="改"></a>改</h4><p>即修改原来数组的内容，常用<code>splice</code></p>
-<h4 id="splice-2"><a href="#splice-2" class="headerlink" title="splice()"></a>splice()</h4><p>传入三个参数，分别是开始位置，要删除元素的数量，要插入的任意多个元素，返回删除元素的数组，对原数组产生影响</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> removed = colors.<span class="title function_">splice</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="string">&quot;red&quot;</span>, <span class="string">&quot;purple&quot;</span>); <span class="comment">// 插入两个值，删除一个元素</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors); <span class="comment">// red,red,purple,blue</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(removed); <span class="comment">// green，只有一个元素的数组</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="查"><a href="#查" class="headerlink" title="查"></a>查</h4><p>即查找元素，返回元素坐标或者元素值</p>
-<ul>
-<li>indexOf()</li>
-<li>includes()</li>
-<li>find()</li>
-</ul>
-<h4 id="indexOf"><a href="#indexOf" class="headerlink" title="indexOf()"></a>indexOf()</h4><p>返回要查找的元素在数组中的位置，如果没找到则返回 -1</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line">numbers.<span class="title function_">indexOf</span>(<span class="number">4</span>) <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="includes"><a href="#includes" class="headerlink" title="includes()"></a>includes()</h4><p>返回要查找的元素在数组中的位置，找到返回<code>true</code>，否则<code>false</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line">numbers.<span class="title function_">includes</span>(<span class="number">4</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="find"><a href="#find" class="headerlink" title="find()"></a>find()</h4><p>返回第一个匹配的元素</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> people = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;Matt&quot;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">27</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;Nicholas&quot;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">29</span></span><br><span class="line">    &#125;</span><br><span class="line">];</span><br><span class="line">people.<span class="title function_">find</span>(<span class="function">(<span class="params">element, index, array</span>) =&gt;</span> element.<span class="property">age</span> &lt; <span class="number">28</span>) <span class="comment">// // &#123;name: &quot;Matt&quot;, age: 27&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="二、排序方法"><a href="#二、排序方法" class="headerlink" title="二、排序方法"></a>二、排序方法</h2><p>数组有两个方法可以用来对元素重新排序：</p>
-<ul>
-<li>reverse()</li>
-<li>sort()</li>
-</ul>
-<h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h3><p>顾名思义，将数组元素方向反转</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> values = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">values.<span class="title function_">reverse</span>();</span><br><span class="line"><span class="title function_">alert</span>(values); <span class="comment">// 5,4,3,2,1</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p>sort()方法接受一个比较函数，用于判断哪个值应该排在前面</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">compare</span>(<span class="params">value1, value2</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value1 &lt; value2) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value1 &gt; value2) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> values = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>];</span><br><span class="line">values.<span class="title function_">sort</span>(compare);</span><br><span class="line"><span class="title function_">alert</span>(values); <span class="comment">// 0,1,5,10,15</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="三、转换方法"><a href="#三、转换方法" class="headerlink" title="三、转换方法"></a>三、转换方法</h2><p>常见的转换方法有：</p>
-<h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3><p>join() 方法接收一个参数，即字符串分隔符，返回包含所有项的字符串</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>];</span><br><span class="line"><span class="title function_">alert</span>(colors.<span class="title function_">join</span>(<span class="string">&quot;,&quot;</span>)); <span class="comment">// red,green,blue</span></span><br><span class="line"><span class="title function_">alert</span>(colors.<span class="title function_">join</span>(<span class="string">&quot;||&quot;</span>)); <span class="comment">// red||green||blue</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="四、迭代方法"><a href="#四、迭代方法" class="headerlink" title="四、迭代方法"></a>四、迭代方法</h2><p>常用来迭代数组的方法（都不改变原数组）有如下：</p>
-<ul>
-<li>some()</li>
-<li>every()</li>
-<li>forEach()</li>
-<li>filter()</li>
-<li>map()</li>
-</ul>
-<h3 id="some"><a href="#some" class="headerlink" title="some()"></a>some()</h3><p>对数组每一项都运行传入的测试函数，如果至少有1个元素返回 true ，则这个方法返回 true</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> someResult = numbers.<span class="title function_">some</span>(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> item &gt; <span class="number">2</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(someResult) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="every"><a href="#every" class="headerlink" title="every()"></a>every()</h3><p>对数组每一项都运行传入的测试函数，如果所有元素都返回 true ，则这个方法返回 true</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> everyResult = numbers.<span class="title function_">every</span>(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> item &gt; <span class="number">2</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(everyResult) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach()"></a>forEach()</h3><p>对数组每一项都运行传入的函数，没有返回值</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line">numbers.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 执行某些操作</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="filter"><a href="#filter" class="headerlink" title="filter()"></a>filter()</h3><p>对数组每一项都运行传入的函数，函数返回 <code>true</code> 的项会组成数组之后返回</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> filterResult = numbers.<span class="title function_">filter</span>(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> item &gt; <span class="number">2</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(filterResult); <span class="comment">// 3,4,5,4,3</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="map"><a href="#map" class="headerlink" title="map()"></a>map()</h3><p>对数组每一项都运行传入的函数，返回由每次函数调用的结果构成的数组</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> mapResult = numbers.<span class="title function_">map</span>(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> item * <span class="number">2</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(mapResult) <span class="comment">// 2,4,6,8,10,8,6,4,2</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>数组的常用方法</tag>
       </tags>
   </entry>
   <entry>
@@ -5374,58 +5374,6 @@
       </tags>
   </entry>
   <entry>
-    <title>谈谈Vue.observable</title>
-    <url>/2022/10/25/%E8%B0%88%E8%B0%88Vue-observable/</url>
-    <content><![CDATA[<h1 id="谈谈Vue-observable"><a href="#谈谈Vue-observable" class="headerlink" title="谈谈Vue.observable"></a>谈谈Vue.observable</h1><h2 id="面试官：Vue-observable你有了解过吗？说说看"><a href="#面试官：Vue-observable你有了解过吗？说说看" class="headerlink" title="面试官：Vue.observable你有了解过吗？说说看"></a>面试官：Vue.observable你有了解过吗？说说看</h2><img src="/2022/10/25/%E8%B0%88%E8%B0%88Vue-observable/image-20221025070423402.png" class="" title="image-20221025070423402">
-
-<h3 id="一、Observable-是什么"><a href="#一、Observable-是什么" class="headerlink" title="一、Observable 是什么"></a>一、Observable 是什么</h3><p><code>Observable</code> 翻译过来我们可以理解成<strong>可观察的</strong></p>
-<span id="more"></span>
-
-<p>我们先来看一下其在<code>Vue</code>中的定义</p>
-<blockquote>
-<p><code>Vue.observable</code>，让一个对象变成响应式数据。<code>Vue</code> 内部会用它来处理 <code>data</code> 函数返回的对象</p>
-</blockquote>
-<p>返回的对象可以直接用于渲染函数和计算属性内，并且会在发生变更时触发相应的更新。也可以作为最小化的跨组件状态存储器</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">observable</span>(&#123; count : <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>其作用等同于</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title function_">vue</span>(&#123; count : <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>在 <code>Vue 2.x</code> 中，被传入的对象会直接被 <code>Vue.observable</code> 变更，它和被返回的对象是同一个对象</p>
-<p>在 <code>Vue 3.x</code> 中，则会返回一个可响应的代理，而对源对象直接进行变更仍然是不可响应的</p>
-<h3 id="二、使用场景"><a href="#二、使用场景" class="headerlink" title="二、使用场景"></a>二、使用场景</h3><p>在非父子组件通信时，可以使用通常的<code>bus</code>或者使用<code>vuex</code>，但是实现的功能不是太复杂，而使用上面两个又有点繁琐。这时，<code>observable</code>就是一个很好的选择</p>
-<p>创建一个<code>js</code>文件</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入vue</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue</span></span><br><span class="line"><span class="string">// 创建state对象，使用observable让state对象可响应</span></span><br><span class="line"><span class="string">export let state = Vue.observable(&#123;</span></span><br><span class="line"><span class="string">  name: &#x27;</span>张三<span class="string">&#x27;,</span></span><br><span class="line"><span class="string">  &#x27;</span>age<span class="string">&#x27;: 38</span></span><br><span class="line"><span class="string">&#125;)</span></span><br><span class="line"><span class="string">// 创建对应的方法</span></span><br><span class="line"><span class="string">export let mutations = &#123;</span></span><br><span class="line"><span class="string">  changeName(name) &#123;</span></span><br><span class="line"><span class="string">    state.name = name</span></span><br><span class="line"><span class="string">  &#125;,</span></span><br><span class="line"><span class="string">  setAge(age) &#123;</span></span><br><span class="line"><span class="string">    state.age = age</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>在<code>.vue</code>文件中直接使用即可</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    姓名：&#123;&#123; name &#125;&#125;</span></span><br><span class="line"><span class="language-xml">    年龄：&#123;&#123; age &#125;&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;changeName(&#x27;李四&#x27;)&quot;</span>&gt;</span>改变姓名<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;setAge(18)&quot;</span>&gt;</span>改变年龄<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; state, mutations &#125; <span class="keyword">from</span> <span class="string">&#x27;@/store</span></span><br><span class="line"><span class="string">export default &#123;</span></span><br><span class="line"><span class="string">  // 在计算属性中拿到值</span></span><br><span class="line"><span class="string">  computed: &#123;</span></span><br><span class="line"><span class="string">    name() &#123;</span></span><br><span class="line"><span class="string">      return state.name</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    age() &#123;</span></span><br><span class="line"><span class="string">      return state.age</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;,</span></span><br><span class="line"><span class="string">  // 调用mutations里面的方法，更新数据</span></span><br><span class="line"><span class="string">  methods: &#123;</span></span><br><span class="line"><span class="string">    changeName: mutations.changeName,</span></span><br><span class="line"><span class="string">    setAge: mutations.setAge</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="三、原理分析"><a href="#三、原理分析" class="headerlink" title="三、原理分析"></a>三、原理分析</h3><p>源码位置：src\core\observer\index.js</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">observe</span> (<span class="attr">value</span>: any, <span class="attr">asRootData</span>: ?boolean): <span class="title class_">Observer</span> | <span class="keyword">void</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title function_">isObject</span>(value) || value <span class="keyword">instanceof</span> <span class="title class_">VNode</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> <span class="attr">ob</span>: <span class="title class_">Observer</span> | <span class="keyword">void</span></span><br><span class="line">  <span class="comment">// 判断是否存在__ob__响应式属性</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">hasOwn</span>(value, <span class="string">&#x27;__ob__&#x27;</span>) &amp;&amp; value.<span class="property">__ob__</span> <span class="keyword">instanceof</span> <span class="title class_">Observer</span>) &#123;</span><br><span class="line">    ob = value.<span class="property">__ob__</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (</span><br><span class="line">    shouldObserve &amp;&amp;</span><br><span class="line">    !<span class="title function_">isServerRendering</span>() &amp;&amp;</span><br><span class="line">    (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(value) || <span class="title function_">isPlainObject</span>(value)) &amp;&amp;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">isExtensible</span>(value) &amp;&amp;</span><br><span class="line">    !value.<span class="property">_isVue</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="comment">// 实例化Observer响应式对象</span></span><br><span class="line">    ob = <span class="keyword">new</span> <span class="title class_">Observer</span>(value)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (asRootData &amp;&amp; ob) &#123;</span><br><span class="line">    ob.<span class="property">vmCount</span>++</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ob</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>Observer</code>类</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">    <span class="attr">value</span>: any;</span><br><span class="line">    <span class="attr">dep</span>: <span class="title class_">Dep</span>;</span><br><span class="line">    <span class="attr">vmCount</span>: number; <span class="comment">// number of vms that have this object as root $data</span></span><br><span class="line"></span><br><span class="line">    <span class="title function_">constructor</span> (<span class="attr">value</span>: any) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = value</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">dep</span> = <span class="keyword">new</span> <span class="title class_">Dep</span>()</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">vmCount</span> = <span class="number">0</span></span><br><span class="line">        <span class="title function_">def</span>(value, <span class="string">&#x27;__ob__&#x27;</span>, <span class="variable language_">this</span>)</span><br><span class="line">        <span class="keyword">if</span> (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(value)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hasProto) &#123;</span><br><span class="line">                <span class="title function_">protoAugment</span>(value, arrayMethods)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">copyAugment</span>(value, arrayMethods, arrayKeys)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">observeArray</span>(value)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 实例化对象是一个对象，进入walk方法</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">walk</span>(value)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>walk</code>函数</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">walk (<span class="attr">obj</span>: <span class="title class_">Object</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> keys = <span class="title class_">Object</span>.<span class="title function_">keys</span>(obj)</span><br><span class="line">    <span class="comment">// 遍历key，通过defineReactive创建响应式对象</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; keys.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        <span class="title function_">defineReactive</span>(obj, keys[i])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>defineReactive</code>方法</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">defineReactive</span> (</span><br><span class="line">  <span class="attr">obj</span>: <span class="title class_">Object</span>,</span><br><span class="line">  <span class="attr">key</span>: string,</span><br><span class="line">  <span class="attr">val</span>: any,</span><br><span class="line">  customSetter?: ?<span class="title class_">Function</span>,</span><br><span class="line">  shallow?: boolean</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="keyword">const</span> dep = <span class="keyword">new</span> <span class="title class_">Dep</span>()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> property = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(obj, key)</span><br><span class="line">  <span class="keyword">if</span> (property &amp;&amp; property.<span class="property">configurable</span> === <span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// cater for pre-defined getter/setters</span></span><br><span class="line">  <span class="keyword">const</span> getter = property &amp;&amp; property.<span class="property">get</span></span><br><span class="line">  <span class="keyword">const</span> setter = property &amp;&amp; property.<span class="property">set</span></span><br><span class="line">  <span class="keyword">if</span> ((!getter || setter) &amp;&amp; <span class="variable language_">arguments</span>.<span class="property">length</span> === <span class="number">2</span>) &#123;</span><br><span class="line">    val = obj[key]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> childOb = !shallow &amp;&amp; <span class="title function_">observe</span>(val)</span><br><span class="line">  <span class="comment">// 接下来调用Object.defineProperty()给对象定义响应式属性</span></span><br><span class="line">  <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">function</span> <span class="title function_">reactiveGetter</span> () &#123;</span><br><span class="line">      <span class="keyword">const</span> value = getter ? getter.<span class="title function_">call</span>(obj) : val</span><br><span class="line">      <span class="keyword">if</span> (<span class="title class_">Dep</span>.<span class="property">target</span>) &#123;</span><br><span class="line">        dep.<span class="title function_">depend</span>()</span><br><span class="line">        <span class="keyword">if</span> (childOb) &#123;</span><br><span class="line">          childOb.<span class="property">dep</span>.<span class="title function_">depend</span>()</span><br><span class="line">          <span class="keyword">if</span> (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(value)) &#123;</span><br><span class="line">            <span class="title function_">dependArray</span>(value)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> value</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">set</span>: <span class="keyword">function</span> <span class="title function_">reactiveSetter</span> (newVal) &#123;</span><br><span class="line">      <span class="keyword">const</span> value = getter ? getter.<span class="title function_">call</span>(obj) : val</span><br><span class="line">      <span class="comment">/* eslint-disable no-self-compare */</span></span><br><span class="line">      <span class="keyword">if</span> (newVal === value || (newVal !== newVal &amp;&amp; value !== value)) &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">/* eslint-enable no-self-compare */</span></span><br><span class="line">      <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;production&#x27;</span> &amp;&amp; customSetter) &#123;</span><br><span class="line">        <span class="title function_">customSetter</span>()</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// #7981: for accessor properties without setter</span></span><br><span class="line">      <span class="keyword">if</span> (getter &amp;&amp; !setter) <span class="keyword">return</span></span><br><span class="line">      <span class="keyword">if</span> (setter) &#123;</span><br><span class="line">        setter.<span class="title function_">call</span>(obj, newVal)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        val = newVal</span><br><span class="line">      &#125;</span><br><span class="line">      childOb = !shallow &amp;&amp; <span class="title function_">observe</span>(newVal)</span><br><span class="line">      <span class="comment">// 对观察者watchers进行通知,state就成了全局响应式对象</span></span><br><span class="line">      dep.<span class="title function_">notify</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a href="https://blog.csdn.net/qq_32682301/article/details/105419673">https://blog.csdn.net/qq_32682301/article/details/105419673</a></li>
-<li><a href="https://wbbyouzi.com/archives/343">https://wbbyouzi.com/archives/343</a></li>
-<li>@js语音答题社区</li>
-</ul>
-]]></content>
-      <categories>
-        <category>vue面试题</category>
-      </categories>
-      <tags>
-        <tag>Vue.observable</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>说说你对双向绑定的理解</title>
     <url>/2022/10/21/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E7%9A%84%E7%90%86%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="双向绑定："><a href="#双向绑定：" class="headerlink" title="双向绑定："></a>双向绑定：</h1><h2 id="面试官：双向数据绑定是什么？"><a href="#面试官：双向数据绑定是什么？" class="headerlink" title="面试官：双向数据绑定是什么？"></a>面试官：双向数据绑定是什么？</h2><img src="/2022/10/21/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E7%9A%84%E7%90%86%E8%A7%A3/image-20221021060613772.png" class="" title="image-20221021060613772">
@@ -5509,6 +5457,58 @@
       </categories>
       <tags>
         <tag>双向绑定</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>谈谈Vue.observable</title>
+    <url>/2022/10/25/%E8%B0%88%E8%B0%88Vue-observable/</url>
+    <content><![CDATA[<h1 id="谈谈Vue-observable"><a href="#谈谈Vue-observable" class="headerlink" title="谈谈Vue.observable"></a>谈谈Vue.observable</h1><h2 id="面试官：Vue-observable你有了解过吗？说说看"><a href="#面试官：Vue-observable你有了解过吗？说说看" class="headerlink" title="面试官：Vue.observable你有了解过吗？说说看"></a>面试官：Vue.observable你有了解过吗？说说看</h2><img src="/2022/10/25/%E8%B0%88%E8%B0%88Vue-observable/image-20221025070423402.png" class="" title="image-20221025070423402">
+
+<h3 id="一、Observable-是什么"><a href="#一、Observable-是什么" class="headerlink" title="一、Observable 是什么"></a>一、Observable 是什么</h3><p><code>Observable</code> 翻译过来我们可以理解成<strong>可观察的</strong></p>
+<span id="more"></span>
+
+<p>我们先来看一下其在<code>Vue</code>中的定义</p>
+<blockquote>
+<p><code>Vue.observable</code>，让一个对象变成响应式数据。<code>Vue</code> 内部会用它来处理 <code>data</code> 函数返回的对象</p>
+</blockquote>
+<p>返回的对象可以直接用于渲染函数和计算属性内，并且会在发生变更时触发相应的更新。也可以作为最小化的跨组件状态存储器</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">observable</span>(&#123; count : <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>其作用等同于</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title function_">vue</span>(&#123; count : <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>Vue 2.x</code> 中，被传入的对象会直接被 <code>Vue.observable</code> 变更，它和被返回的对象是同一个对象</p>
+<p>在 <code>Vue 3.x</code> 中，则会返回一个可响应的代理，而对源对象直接进行变更仍然是不可响应的</p>
+<h3 id="二、使用场景"><a href="#二、使用场景" class="headerlink" title="二、使用场景"></a>二、使用场景</h3><p>在非父子组件通信时，可以使用通常的<code>bus</code>或者使用<code>vuex</code>，但是实现的功能不是太复杂，而使用上面两个又有点繁琐。这时，<code>observable</code>就是一个很好的选择</p>
+<p>创建一个<code>js</code>文件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入vue</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue</span></span><br><span class="line"><span class="string">// 创建state对象，使用observable让state对象可响应</span></span><br><span class="line"><span class="string">export let state = Vue.observable(&#123;</span></span><br><span class="line"><span class="string">  name: &#x27;</span>张三<span class="string">&#x27;,</span></span><br><span class="line"><span class="string">  &#x27;</span>age<span class="string">&#x27;: 38</span></span><br><span class="line"><span class="string">&#125;)</span></span><br><span class="line"><span class="string">// 创建对应的方法</span></span><br><span class="line"><span class="string">export let mutations = &#123;</span></span><br><span class="line"><span class="string">  changeName(name) &#123;</span></span><br><span class="line"><span class="string">    state.name = name</span></span><br><span class="line"><span class="string">  &#125;,</span></span><br><span class="line"><span class="string">  setAge(age) &#123;</span></span><br><span class="line"><span class="string">    state.age = age</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>在<code>.vue</code>文件中直接使用即可</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    姓名：&#123;&#123; name &#125;&#125;</span></span><br><span class="line"><span class="language-xml">    年龄：&#123;&#123; age &#125;&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;changeName(&#x27;李四&#x27;)&quot;</span>&gt;</span>改变姓名<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;setAge(18)&quot;</span>&gt;</span>改变年龄<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; state, mutations &#125; <span class="keyword">from</span> <span class="string">&#x27;@/store</span></span><br><span class="line"><span class="string">export default &#123;</span></span><br><span class="line"><span class="string">  // 在计算属性中拿到值</span></span><br><span class="line"><span class="string">  computed: &#123;</span></span><br><span class="line"><span class="string">    name() &#123;</span></span><br><span class="line"><span class="string">      return state.name</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    age() &#123;</span></span><br><span class="line"><span class="string">      return state.age</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;,</span></span><br><span class="line"><span class="string">  // 调用mutations里面的方法，更新数据</span></span><br><span class="line"><span class="string">  methods: &#123;</span></span><br><span class="line"><span class="string">    changeName: mutations.changeName,</span></span><br><span class="line"><span class="string">    setAge: mutations.setAge</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="三、原理分析"><a href="#三、原理分析" class="headerlink" title="三、原理分析"></a>三、原理分析</h3><p>源码位置：src\core\observer\index.js</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">observe</span> (<span class="attr">value</span>: any, <span class="attr">asRootData</span>: ?boolean): <span class="title class_">Observer</span> | <span class="keyword">void</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title function_">isObject</span>(value) || value <span class="keyword">instanceof</span> <span class="title class_">VNode</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> <span class="attr">ob</span>: <span class="title class_">Observer</span> | <span class="keyword">void</span></span><br><span class="line">  <span class="comment">// 判断是否存在__ob__响应式属性</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">hasOwn</span>(value, <span class="string">&#x27;__ob__&#x27;</span>) &amp;&amp; value.<span class="property">__ob__</span> <span class="keyword">instanceof</span> <span class="title class_">Observer</span>) &#123;</span><br><span class="line">    ob = value.<span class="property">__ob__</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (</span><br><span class="line">    shouldObserve &amp;&amp;</span><br><span class="line">    !<span class="title function_">isServerRendering</span>() &amp;&amp;</span><br><span class="line">    (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(value) || <span class="title function_">isPlainObject</span>(value)) &amp;&amp;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">isExtensible</span>(value) &amp;&amp;</span><br><span class="line">    !value.<span class="property">_isVue</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="comment">// 实例化Observer响应式对象</span></span><br><span class="line">    ob = <span class="keyword">new</span> <span class="title class_">Observer</span>(value)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (asRootData &amp;&amp; ob) &#123;</span><br><span class="line">    ob.<span class="property">vmCount</span>++</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ob</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Observer</code>类</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">    <span class="attr">value</span>: any;</span><br><span class="line">    <span class="attr">dep</span>: <span class="title class_">Dep</span>;</span><br><span class="line">    <span class="attr">vmCount</span>: number; <span class="comment">// number of vms that have this object as root $data</span></span><br><span class="line"></span><br><span class="line">    <span class="title function_">constructor</span> (<span class="attr">value</span>: any) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = value</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">dep</span> = <span class="keyword">new</span> <span class="title class_">Dep</span>()</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">vmCount</span> = <span class="number">0</span></span><br><span class="line">        <span class="title function_">def</span>(value, <span class="string">&#x27;__ob__&#x27;</span>, <span class="variable language_">this</span>)</span><br><span class="line">        <span class="keyword">if</span> (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(value)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hasProto) &#123;</span><br><span class="line">                <span class="title function_">protoAugment</span>(value, arrayMethods)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">copyAugment</span>(value, arrayMethods, arrayKeys)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">observeArray</span>(value)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 实例化对象是一个对象，进入walk方法</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">walk</span>(value)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>walk</code>函数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">walk (<span class="attr">obj</span>: <span class="title class_">Object</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> keys = <span class="title class_">Object</span>.<span class="title function_">keys</span>(obj)</span><br><span class="line">    <span class="comment">// 遍历key，通过defineReactive创建响应式对象</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; keys.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        <span class="title function_">defineReactive</span>(obj, keys[i])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>defineReactive</code>方法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">defineReactive</span> (</span><br><span class="line">  <span class="attr">obj</span>: <span class="title class_">Object</span>,</span><br><span class="line">  <span class="attr">key</span>: string,</span><br><span class="line">  <span class="attr">val</span>: any,</span><br><span class="line">  customSetter?: ?<span class="title class_">Function</span>,</span><br><span class="line">  shallow?: boolean</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="keyword">const</span> dep = <span class="keyword">new</span> <span class="title class_">Dep</span>()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> property = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(obj, key)</span><br><span class="line">  <span class="keyword">if</span> (property &amp;&amp; property.<span class="property">configurable</span> === <span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// cater for pre-defined getter/setters</span></span><br><span class="line">  <span class="keyword">const</span> getter = property &amp;&amp; property.<span class="property">get</span></span><br><span class="line">  <span class="keyword">const</span> setter = property &amp;&amp; property.<span class="property">set</span></span><br><span class="line">  <span class="keyword">if</span> ((!getter || setter) &amp;&amp; <span class="variable language_">arguments</span>.<span class="property">length</span> === <span class="number">2</span>) &#123;</span><br><span class="line">    val = obj[key]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> childOb = !shallow &amp;&amp; <span class="title function_">observe</span>(val)</span><br><span class="line">  <span class="comment">// 接下来调用Object.defineProperty()给对象定义响应式属性</span></span><br><span class="line">  <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">function</span> <span class="title function_">reactiveGetter</span> () &#123;</span><br><span class="line">      <span class="keyword">const</span> value = getter ? getter.<span class="title function_">call</span>(obj) : val</span><br><span class="line">      <span class="keyword">if</span> (<span class="title class_">Dep</span>.<span class="property">target</span>) &#123;</span><br><span class="line">        dep.<span class="title function_">depend</span>()</span><br><span class="line">        <span class="keyword">if</span> (childOb) &#123;</span><br><span class="line">          childOb.<span class="property">dep</span>.<span class="title function_">depend</span>()</span><br><span class="line">          <span class="keyword">if</span> (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(value)) &#123;</span><br><span class="line">            <span class="title function_">dependArray</span>(value)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> value</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">set</span>: <span class="keyword">function</span> <span class="title function_">reactiveSetter</span> (newVal) &#123;</span><br><span class="line">      <span class="keyword">const</span> value = getter ? getter.<span class="title function_">call</span>(obj) : val</span><br><span class="line">      <span class="comment">/* eslint-disable no-self-compare */</span></span><br><span class="line">      <span class="keyword">if</span> (newVal === value || (newVal !== newVal &amp;&amp; value !== value)) &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">/* eslint-enable no-self-compare */</span></span><br><span class="line">      <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;production&#x27;</span> &amp;&amp; customSetter) &#123;</span><br><span class="line">        <span class="title function_">customSetter</span>()</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// #7981: for accessor properties without setter</span></span><br><span class="line">      <span class="keyword">if</span> (getter &amp;&amp; !setter) <span class="keyword">return</span></span><br><span class="line">      <span class="keyword">if</span> (setter) &#123;</span><br><span class="line">        setter.<span class="title function_">call</span>(obj, newVal)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        val = newVal</span><br><span class="line">      &#125;</span><br><span class="line">      childOb = !shallow &amp;&amp; <span class="title function_">observe</span>(newVal)</span><br><span class="line">      <span class="comment">// 对观察者watchers进行通知,state就成了全局响应式对象</span></span><br><span class="line">      dep.<span class="title function_">notify</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://blog.csdn.net/qq_32682301/article/details/105419673">https://blog.csdn.net/qq_32682301/article/details/105419673</a></li>
+<li><a href="https://wbbyouzi.com/archives/343">https://wbbyouzi.com/archives/343</a></li>
+<li>@js语音答题社区</li>
+</ul>
+]]></content>
+      <categories>
+        <category>vue面试题</category>
+      </categories>
+      <tags>
+        <tag>Vue.observable</tag>
       </tags>
   </entry>
   <entry>
