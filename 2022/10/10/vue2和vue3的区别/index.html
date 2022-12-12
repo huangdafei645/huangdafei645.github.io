@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="面试官：vue2 和 vue3 的区别有哪些？一、vue3 和 vue2 区别详述1. 生命周期对于生命周期来说，整体上变化不大，只是大部分生命周期钩子名称上 + “on”，功能上是类似的。不过有一点需要注意，Vue3 在组合式 API（Composition API，下面展开）中使用生命周期钩子时需要先引入，而 Vue2 在选项 API（Options API）中可以直接调用生命周期钩子，如下所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue2和vue3">
+<meta property="og:url" content="http://huangdafei645.github.io/2022/10/10/vue2%E5%92%8Cvue3%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="面试官：vue2 和 vue3 的区别有哪些？一、vue3 和 vue2 区别详述1. 生命周期对于生命周期来说，整体上变化不大，只是大部分生命周期钩子名称上 + “on”，功能上是类似的。不过有一点需要注意，Vue3 在组合式 API（Composition API，下面展开）中使用生命周期钩子时需要先引入，而 Vue2 在选项 API（Options API）中可以直接调用生命周期钩子，如下所">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-10T09:13:01.000Z">
+<meta property="article:modified_time" content="2022-12-09T07:48:08.691Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="vue2和vue3的区别">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://huangdafei645.github.io/2022/10/10/vue2%E5%92%8Cvue3%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vue2和vue3 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/2022/10/10/vue2%E5%92%8Cvue3%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue2和vue3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-10 17:13:01" itemprop="dateCreated datePublished" datetime="2022-10-10T17:13:01+08:00">2022-10-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 15:48:08" itemprop="dateModified" datetime="2022-12-09T15:48:08+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="面试官：vue2-和-vue3-的区别有哪些？"><a href="#面试官：vue2-和-vue3-的区别有哪些？" class="headerlink" title="面试官：vue2 和 vue3 的区别有哪些？"></a>面试官：vue2 和 vue3 的区别有哪些？</h1><h2 id="一、vue3-和-vue2-区别详述"><a href="#一、vue3-和-vue2-区别详述" class="headerlink" title="一、vue3 和 vue2 区别详述"></a>一、vue3 和 vue2 区别详述</h2><h3 id="1-生命周期"><a href="#1-生命周期" class="headerlink" title="1. 生命周期"></a>1. 生命周期</h3><p>对于生命周期来说，整体上变化不大，只是大部分生命周期钩子名称上 + “on”，功能上是类似的。不过有一点需要注意，Vue3 在组合式 API（Composition API，下面展开）中使用生命周期钩子时需要先引入，而 Vue2 在选项 API（Options API）中可以直接调用生命周期钩子，如下所示。</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// vue3</span><br><span class="line">&lt;script setup&gt;     </span><br><span class="line">import &#123; onMounted &#125; from &#x27;vue&#x27;;   // 使用前需引入生命周期钩子</span><br><span class="line"></span><br><span class="line">onMounted(() =&gt; &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 可将不同的逻辑拆开成多个onMounted，依然按顺序执行，不会被覆盖</span><br><span class="line">onMounted(() =&gt; &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">// vue2</span><br><span class="line">&lt;script&gt;     </span><br><span class="line">export default &#123;           mounted() &#123;   // 直接调用生命周期钩子            </span><br><span class="line">    // ...         </span><br><span class="line">  &#125;,           &#125;</span><br><span class="line">&lt;/script&gt; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>常用生命周期对比如下表所示。</p>
+<p>Tips： setup 是围绕 beforeCreate 和 created 生命周期钩子运行的，所以不需要显式地去定义。</p>
+<h3 id="2-多根节点"><a href="#2-多根节点" class="headerlink" title="2. 多根节点"></a>2. 多根节点</h3><p>熟悉 Vue2 的朋友应该清楚，在模板中如果使用多个根节点时会报错，如下所示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// vue2中在template里存在多个根节点会报错</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;header&gt;&lt;/header&gt;</span><br><span class="line">  &lt;main&gt;&lt;/main&gt;</span><br><span class="line">  &lt;footer&gt;&lt;/footer&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">// 只能存在一个根节点，需要用一个&lt;div&gt;来包裹着</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;header&gt;&lt;/header&gt;</span><br><span class="line">    &lt;main&gt;&lt;/main&gt;</span><br><span class="line">    &lt;footer&gt;&lt;/footer&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p>但是，Vue3 支持多个根节点，也就是 fragment。即以下多根节点的写法是被允许的。它会把多余的根节点转化为虚拟节点，所以这样一来 ，它就被允许了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;header&gt;&lt;/header&gt;</span><br><span class="line">  &lt;main&gt;&lt;/main&gt;</span><br><span class="line">  &lt;footer&gt;&lt;/footer&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Composition-API"><a href="#3-Composition-API" class="headerlink" title="3. Composition API"></a>3. Composition API</h3><p>Vue2 是选项 API（Options API），一个逻辑会散乱在文件不同位置（data、props、computed、watch、生命周期钩子等），导致代码的可读性变差。当需要修改某个逻辑时，需要上下来回跳转文件位置。这一点我深有感触</p>
+<p>Vue3 组合式 API（Composition API）则很好地解决了这个问题，可将同一逻辑的内容写到一起，增强了代码的可读性、内聚性，其还提供了较为完美的逻辑复用性方案。就像是组件的概念一样</p>
+<p>composition api 的简单使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  	setup() &#123;</span><br><span class="line">    	const count = ref(0)</span><br><span class="line">    	const double = computed(() =&gt; count.value * 2)</span><br><span class="line">    	function increment() &#123;</span><br><span class="line">        	count.value++</span><br><span class="line">    	&#125;</span><br><span class="line">    	onMounted(() =&gt; console.log(&#x27;component mounted!&#x27;))</span><br><span class="line">    	return &#123;</span><br><span class="line">        	count,</span><br><span class="line">        	double,</span><br><span class="line">        	increment</span><br><span class="line">    	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-异步组件（Suspense）"><a href="#4-异步组件（Suspense）" class="headerlink" title="4. 异步组件（Suspense）"></a>4. 异步组件（Suspense）</h3><p>Vue3 提供 Suspense 组件，允许程序在等待异步组件加载完成前渲染兜底的内容，如 loading ，使用户的体验更平滑。使用它，需在模板中声明，并包括两个命名插槽：default 和 fallback。Suspense 确保加载完异步内容时显示默认插槽，并将 fallback 插槽用作加载状态。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;tempalte&gt;</span><br><span class="line">  &lt;suspense&gt;</span><br><span class="line">    &lt;template #default&gt;</span><br><span class="line">      &lt;List /&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;template #fallback&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        Loading...      &lt;/div&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">  &lt;/suspense&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>在 List 组件（有可能是异步组件，也有可能是组件内部处理逻辑或查找操作过多导致加载过慢等）未加载完成前，显示 Loading…（即 fallback 插槽内容），加载完成时显示自身（即 default 插槽内容）。</p>
+<h3 id="5-Teleport"><a href="#5-Teleport" class="headerlink" title="5. Teleport"></a>5. Teleport</h3><p>Vue3 提供 Teleport 组件可将部分 DOM 移动到 Vue app 之外的位置。比如项目中常见的 Dialog 弹窗。</p>
+<p>在 vue2 中，像 modals，toast 等这样的元素，如果我们嵌套在 Vue 的某个组件内部，那么处理嵌套组件的定位、z-index 和样式就会变得很困难。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;button @click=&quot;dialogVisible = true&quot;&gt;显示弹窗&lt;/button&gt;</span><br><span class="line">&lt;teleport to=&quot;body&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;dialog&quot; v-if=&quot;dialogVisible&quot;&gt;</span><br><span class="line">    我是弹窗，我直接移动到了body标签下  &lt;/div&gt;</span><br><span class="line">&lt;/teleport&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-响应式原理"><a href="#6-响应式原理" class="headerlink" title="6. 响应式原理"></a>6. 响应式原理</h3><p>Vue2 响应式原理基础是 Object.defineProperty；Vue3 响应式原理基础是 Proxy。</p>
+<ul>
+<li>Object.defineProperty 基本用法：直接在一个对象上定义新的属性或修改现有的属性，并返回对象。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;&#125;;</span><br><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;leo&#x27;</span>;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, <span class="string">&#x27;name&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">true</span>,   <span class="comment">// 可枚举（是否可通过 for...in 或 Object.keys() 进行访问）</span></span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">true</span>,   <span class="comment">// 可配置（是否可使用 delete 删除，是否可再次设置属性）</span></span><br><span class="line">  <span class="comment">// value: &#x27;&#x27;,   // 任意类型的值，默认undefined</span></span><br><span class="line">  <span class="comment">// writable: true,   // 可重写</span></span><br><span class="line">  <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">set</span>(<span class="params">value</span>) &#123;</span><br><span class="line">    name = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Tips： <code>writable</code> 和 <code>value</code> 与 <code>getter</code> 和 <code>setter</code> 不共存。</p>
+<p>搬运 Vue2 核心源码，略删减。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">defineReactive</span>(<span class="params">obj, key, val</span>) &#123;</span><br><span class="line">  <span class="comment">// 一 key 一个 dep</span></span><br><span class="line">  <span class="keyword">const</span> dep = <span class="keyword">new</span> <span class="title class_">Dep</span>()</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取 key 的属性描述符，发现它是不可配置对象的话直接 return</span></span><br><span class="line">  <span class="keyword">const</span> property = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(obj, key)</span><br><span class="line">  <span class="keyword">if</span> (property &amp;&amp; property.<span class="property">configurable</span> === <span class="literal">false</span>) &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取 getter 和 setter，并获取 val 值</span></span><br><span class="line">  <span class="keyword">const</span> getter = property &amp;&amp; property.<span class="property">get</span></span><br><span class="line">  <span class="keyword">const</span> setter = property &amp;&amp; property.<span class="property">set</span></span><br><span class="line">  <span class="keyword">if</span>((!getter || setter) &amp;&amp; <span class="variable language_">arguments</span>.<span class="property">length</span> === <span class="number">2</span>) &#123; val = obj[key] &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 递归处理，保证对象中所有 key 被观察</span></span><br><span class="line">  <span class="keyword">let</span> childOb = <span class="title function_">observe</span>(val)</span><br><span class="line"></span><br><span class="line">  <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// get 劫持 obj[key] 的 进行依赖收集</span></span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">function</span> <span class="title function_">reactiveGetter</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> value = getter ? getter.<span class="title function_">call</span>(obj) : val</span><br><span class="line">      <span class="keyword">if</span>(<span class="title class_">Dep</span>.<span class="property">target</span>) &#123;</span><br><span class="line">        <span class="comment">// 依赖收集</span></span><br><span class="line">        dep.<span class="title function_">depend</span>()</span><br><span class="line">        <span class="keyword">if</span>(childOb) &#123;</span><br><span class="line">          <span class="comment">// 针对嵌套对象，依赖收集</span></span><br><span class="line">          childOb.<span class="property">dep</span>.<span class="title function_">depend</span>()</span><br><span class="line">          <span class="comment">// 触发数组响应式</span></span><br><span class="line">          <span class="keyword">if</span>(<span class="title class_">Array</span>.<span class="title function_">isArray</span>(value)) &#123;</span><br><span class="line">            <span class="title function_">dependArray</span>(value)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// set 派发更新 obj[key]</span></span><br><span class="line">  <span class="attr">set</span>: <span class="keyword">function</span> <span class="title function_">reactiveSetter</span>(<span class="params">newVal</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span>(setter) &#123;</span><br><span class="line">      setter.<span class="title function_">call</span>(obj, newVal)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      val = newVal</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 新值设置响应式</span></span><br><span class="line">    childOb = <span class="title function_">observe</span>(val)</span><br><span class="line">    <span class="comment">// 依赖通知更新</span></span><br><span class="line">    dep.<span class="title function_">notify</span>()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那 Vue3 为何会抛弃它呢？那肯定是因为它存在某些局限性。</p>
+<p>主要原因：无法监听对象或数组新增、删除的元素。</p>
+<p>Vue2 相应解决方案：针对常用数组原型方法 push、pop、shift、unshift、splice、sort、reverse 进行了 hack 处理；提供 Vue.set 监听对象/数组新增属性。对象的新增/删除响应，还可以 new 个新对象，新增则合并新属性和旧对象；删除则将删除属性后的对象深拷贝给新对象。</p>
+<ul>
+<li>ProxyProxy 是 ES6 新特性，通过第 2 个参数 handler 拦截目标对象的行为。相较于 Object.defineProperty 提供语言全范围的响应能力，消除了局限性。</li>
+</ul>
+<p>局限性：</p>
+<p>(1)、对象/数组的新增、删除</p>
+<p>(2)、监测 .length 修改</p>
+<p>(3)、Map、Set、WeakMap、WeakSet 的支持</p>
+<p>基本用法：创建对象的代理，从而实现基本操作的拦截和自定义操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> handler = &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">obj, prop</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> prop <span class="keyword">in</span> obj ? obj[prop] : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">set</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>搬运 vue3 的源码 reactive.ts 文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createReactiveObject</span>(<span class="params">target, isReadOnly, baseHandlers, collectionHandlers, proxyMap</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// collectionHandlers: 处理Map、Set、WeakMap、WeakSet</span></span><br><span class="line">  <span class="comment">// baseHandlers: 处理数组、对象</span></span><br><span class="line">  <span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(</span><br><span class="line">    target,</span><br><span class="line">    targetType === <span class="title class_">TargetType</span>.<span class="property">COLLECTION</span> ? collectionHandlers : baseHandlers</span><br><span class="line">  )</span><br><span class="line">  proxyMap.<span class="title function_">set</span>(target, proxy)</span><br><span class="line">  <span class="keyword">return</span> proxy</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-虚拟-DOM"><a href="#7-虚拟-DOM" class="headerlink" title="7. 虚拟 DOM"></a>7. 虚拟 DOM</h3><p>Vue3 相比于 Vue2，虚拟 DOM 上增加 patchFlag 字段。我们借助 Vue3 Template Explorer 来看。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>vue3虚拟DOM讲解<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>今天天气真不错<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;name&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>渲染函数如下所示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createElementVNode <span class="keyword">as</span> _createElementVNode, toDisplayString <span class="keyword">as</span> _toDisplayString, openBlock <span class="keyword">as</span> _openBlock, createElementBlock <span class="keyword">as</span> _createElementBlock, pushScopeId <span class="keyword">as</span> _pushScopeId, popScopeId <span class="keyword">as</span> _popScopeId &#125; <span class="keyword">from</span> vue</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">_withScopeId</span> = n =&gt; (<span class="title function_">_pushScopeId</span>(scope-id),n=<span class="title function_">n</span>(),<span class="title function_">_popScopeId</span>(),n)</span><br><span class="line"><span class="keyword">const</span> _hoisted_1 = &#123; <span class="attr">id</span>: app &#125;</span><br><span class="line"><span class="keyword">const</span> _hoisted_2 = <span class="comment">/*#__PURE__*/</span> <span class="title function_">_withScopeId</span>(<span class="function">() =&gt;</span> <span class="comment">/*#__PURE__*/</span><span class="title function_">_createElementVNode</span>(h1, <span class="literal">null</span>, vue3虚拟<span class="variable constant_">DOM</span>讲解, -<span class="number">1</span> <span class="comment">/* HOISTED */</span>))</span><br><span class="line"><span class="keyword">const</span> _hoisted_3 = <span class="comment">/*#__PURE__*/</span> <span class="title function_">_withScopeId</span>(<span class="function">() =&gt;</span> <span class="comment">/*#__PURE__*/</span><span class="title function_">_createElementVNode</span>(p, <span class="literal">null</span>, 今天天气真不错, -<span class="number">1</span> <span class="comment">/* HOISTED */</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params">_ctx, _cache, $props, $setup, $data, $options</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="title function_">_openBlock</span>(), <span class="title function_">_createElementBlock</span>(div, _hoisted_1, [</span><br><span class="line">    _hoisted_2,</span><br><span class="line">    _hoisted_3,</span><br><span class="line">    <span class="title function_">_createElementVNode</span>(div, <span class="literal">null</span>, <span class="title function_">_toDisplayString</span>(_ctx.<span class="property">name</span>), <span class="number">1</span> <span class="comment">/* TEXT */</span>)</span><br><span class="line">  ]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意第 3 个_createElementVNode 的第 4 个参数即 patchFlag 字段类型。</p>
+<p>字段类型情况：1 代表节点为动态文本节点，那在 diff 过程中，只需比对文本对容，无需关注 class、style 等。除此之外，发现所有的静态节点（HOISTED 为 -1），都保存为一个变量进行静态提升，可在重新渲染时直接引用，无需重新创建。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// patchFlags 字段类型列举</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> enum <span class="title class_">PatchFlags</span> &#123; </span><br><span class="line">  <span class="variable constant_">TEXT</span> = <span class="number">1</span>,   <span class="comment">// 动态文本内容</span></span><br><span class="line">  <span class="variable constant_">CLASS</span> = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,   <span class="comment">// 动态类名</span></span><br><span class="line">  <span class="variable constant_">STYLE</span> = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,   <span class="comment">// 动态样式</span></span><br><span class="line">  <span class="variable constant_">PROPS</span> = <span class="number">1</span> &lt;&lt; <span class="number">3</span>,   <span class="comment">// 动态属性，不包含类名和样式</span></span><br><span class="line">  <span class="variable constant_">FULL_PROPS</span> = <span class="number">1</span> &lt;&lt; <span class="number">4</span>,   <span class="comment">// 具有动态 key 属性，当 key 改变，需要进行完整的 diff 比较</span></span><br><span class="line">  <span class="variable constant_">HYDRATE_EVENTS</span> = <span class="number">1</span> &lt;&lt; <span class="number">5</span>,   <span class="comment">// 带有监听事件的节点</span></span><br><span class="line">  <span class="variable constant_">STABLE_FRAGMENT</span> = <span class="number">1</span> &lt;&lt; <span class="number">6</span>,   <span class="comment">// 不会改变子节点顺序的 fragment</span></span><br><span class="line">  <span class="variable constant_">KEYED_FRAGMENT</span> = <span class="number">1</span> &lt;&lt; <span class="number">7</span>,   <span class="comment">// 带有 key 属性的 fragment 或部分子节点</span></span><br><span class="line">  <span class="variable constant_">UNKEYED_FRAGMENT</span> = <span class="number">1</span> &lt;&lt; <span class="number">8</span>,   <span class="comment">// 子节点没有 key 的fragment</span></span><br><span class="line">  <span class="variable constant_">NEED_PATCH</span> = <span class="number">1</span> &lt;&lt; <span class="number">9</span>,   <span class="comment">// 只会进行非 props 的比较</span></span><br><span class="line">  <span class="variable constant_">DYNAMIC_SLOTS</span> = <span class="number">1</span> &lt;&lt; <span class="number">10</span>,   <span class="comment">// 动态的插槽</span></span><br><span class="line">  <span class="variable constant_">HOISTED</span> = -<span class="number">1</span>,   <span class="comment">// 静态节点，diff阶段忽略其子节点</span></span><br><span class="line">  <span class="variable constant_">BAIL</span> = -<span class="number">2</span>   <span class="comment">// 代表 diff 应该结束</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-事件缓存"><a href="#8-事件缓存" class="headerlink" title="8. 事件缓存"></a>8. 事件缓存</h3><p>Vue3 的<code>cacheHandler</code>可在第一次渲染后缓存我们的事件。相比于 Vue2 无需每次渲染都传递一个新函数。加一个 click 事件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>vue3事件缓存讲解<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>今天天气真不错<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;name&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">onCLick</span>=<span class="string">()</span> =&gt;</span> &#123;&#125;&gt;<span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>渲染函数如下所示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createElementVNode <span class="keyword">as</span> _createElementVNode, toDisplayString <span class="keyword">as</span> _toDisplayString, openBlock <span class="keyword">as</span> _openBlock, createElementBlock <span class="keyword">as</span> _createElementBlock, pushScopeId <span class="keyword">as</span> _pushScopeId, popScopeId <span class="keyword">as</span> _popScopeId &#125; <span class="keyword">from</span> vue</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">_withScopeId</span> = n =&gt; (<span class="title function_">_pushScopeId</span>(scope-id),n=<span class="title function_">n</span>(),<span class="title function_">_popScopeId</span>(),n)</span><br><span class="line"><span class="keyword">const</span> _hoisted_1 = &#123; <span class="attr">id</span>: app &#125;</span><br><span class="line"><span class="keyword">const</span> _hoisted_2 = <span class="comment">/*#__PURE__*/</span> <span class="title function_">_withScopeId</span>(<span class="function">() =&gt;</span> <span class="comment">/*#__PURE__*/</span><span class="title function_">_createElementVNode</span>(h1, <span class="literal">null</span>, vue3事件缓存讲解, -<span class="number">1</span> <span class="comment">/* HOISTED */</span>))</span><br><span class="line"><span class="keyword">const</span> _hoisted_3 = <span class="comment">/*#__PURE__*/</span> <span class="title function_">_withScopeId</span>(<span class="function">() =&gt;</span> <span class="comment">/*#__PURE__*/</span><span class="title function_">_createElementVNode</span>(p, <span class="literal">null</span>, 今天天气真不错, -<span class="number">1</span> <span class="comment">/* HOISTED */</span>))</span><br><span class="line"><span class="keyword">const</span> _hoisted_4 = <span class="comment">/*#__PURE__*/</span> <span class="title function_">_withScopeId</span>(<span class="function">() =&gt;</span> <span class="comment">/*#__PURE__*/</span><span class="title function_">_createElementVNode</span>(span, &#123; <span class="attr">onCLick</span>: <span class="function">() =&gt;</span> &#123;&#125; &#125;, [</span><br><span class="line">  <span class="comment">/*#__PURE__*/</span><span class="title function_">_createElementVNode</span>(span)</span><br><span class="line">], -<span class="number">1</span> <span class="comment">/* HOISTED */</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params">_ctx, _cache, $props, $setup, $data, $options</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="title function_">_openBlock</span>(), <span class="title function_">_createElementBlock</span>(div, _hoisted_1, [</span><br><span class="line">    _hoisted_2,</span><br><span class="line">    _hoisted_3,</span><br><span class="line">    <span class="title function_">_createElementVNode</span>(div, <span class="literal">null</span>, <span class="title function_">_toDisplayString</span>(_ctx.<span class="property">name</span>), <span class="number">1</span> <span class="comment">/* TEXT */</span>),</span><br><span class="line">    _hoisted_4</span><br><span class="line">  ]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>观察以上渲染函数，你会发现 click 事件节点为静态节点（HOISTED 为 -1），即不需要每次重新渲染。</p>
+<h3 id="9-Diff-算法优化"><a href="#9-Diff-算法优化" class="headerlink" title="9. Diff 算法优化"></a>9. Diff 算法优化</h3><p>搬运 Vue3 patchChildren 源码。结合上文与源码，patchFlag 帮助 diff 时区分静态节点，以及不同类型的动态节点。一定程度地减少节点本身及其属性的比对。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">patchChildren</span>(<span class="params">n1, n2, container, parentAnchor, parentComponent, parentSuspense, isSVG, optimized</span>) &#123;</span><br><span class="line">  <span class="comment">// 获取新老孩子节点</span></span><br><span class="line">  <span class="keyword">const</span> c1 = n1 &amp;&amp; n1.<span class="property">children</span></span><br><span class="line">  <span class="keyword">const</span> c2 = n2.<span class="property">children</span></span><br><span class="line">  <span class="keyword">const</span> prevShapeFlag = n1 ? n1.<span class="property">shapeFlag</span> : <span class="number">0</span></span><br><span class="line">  <span class="keyword">const</span> &#123; patchFlag, shapeFlag &#125; = n2</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 处理 patchFlag 大于 0 </span></span><br><span class="line">  <span class="keyword">if</span>(patchFlag &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(patchFlag &amp;&amp; <span class="title class_">PatchFlags</span>.<span class="property">KEYED_FRAGMENT</span>) &#123;</span><br><span class="line">      <span class="comment">// 存在 key</span></span><br><span class="line">      <span class="title function_">patchKeyedChildren</span>()</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125; els <span class="keyword">if</span>(patchFlag &amp;&amp; <span class="title class_">PatchFlags</span>.<span class="property">UNKEYED_FRAGMENT</span>) &#123;</span><br><span class="line">      <span class="comment">// 不存在 key</span></span><br><span class="line">      <span class="title function_">patchUnkeyedChildren</span>()</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 匹配是文本节点（静态）：移除老节点，设置文本节点</span></span><br><span class="line">  <span class="keyword">if</span>(shapeFlag &amp;&amp; <span class="title class_">ShapeFlags</span>.<span class="property">TEXT_CHILDREN</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (prevShapeFlag &amp; <span class="title class_">ShapeFlags</span>.<span class="property">ARRAY_CHILDREN</span>) &#123;</span><br><span class="line">      <span class="title function_">unmountChildren</span>(c1 <span class="keyword">as</span> <span class="title class_">VNode</span>[], parentComponent, parentSuspense)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (c2 !== c1) &#123;</span><br><span class="line">      <span class="title function_">hostSetElementText</span>(container, c2 <span class="keyword">as</span> string)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 匹配新老 Vnode 是数组，则全量比较；否则移除当前所有的节点</span></span><br><span class="line">    <span class="keyword">if</span> (prevShapeFlag &amp; <span class="title class_">ShapeFlags</span>.<span class="property">ARRAY_CHILDREN</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (shapeFlag &amp; <span class="title class_">ShapeFlags</span>.<span class="property">ARRAY_CHILDREN</span>) &#123;</span><br><span class="line">        <span class="title function_">patchKeyedChildren</span>(c1, c2, container, anchor, parentComponent, parentSuspense,...)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">unmountChildren</span>(c1 <span class="keyword">as</span> <span class="title class_">VNode</span>[], parentComponent, parentSuspense, <span class="literal">true</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(prevShapeFlag &amp; <span class="title class_">ShapeFlags</span>.<span class="property">TEXT_CHILDREN</span>) &#123;</span><br><span class="line">        <span class="title function_">hostSetElementText</span>(container, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">      &#125; </span><br><span class="line">      <span class="keyword">if</span> (shapeFlag &amp; <span class="title class_">ShapeFlags</span>.<span class="property">ARRAY_CHILDREN</span>) &#123;</span><br><span class="line">        <span class="title function_">mountChildren</span>(c2 <span class="keyword">as</span> <span class="title class_">VNodeArrayChildren</span>, container,anchor,parentComponent,...)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>patchUnkeyedChildren 源码如下所示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">patchUnkeyedChildren</span>(<span class="params">c1, c2, container, parentAnchor, parentComponent, parentSuspense, isSVG, optimized</span>) &#123;</span><br><span class="line">  c1 = c1 || <span class="variable constant_">EMPTY_ARR</span></span><br><span class="line">  c2 = c2 || <span class="variable constant_">EMPTY_ARR</span></span><br><span class="line">  <span class="keyword">const</span> oldLength = c1.<span class="property">length</span></span><br><span class="line">  <span class="keyword">const</span> newLength = c2.<span class="property">length</span></span><br><span class="line">  <span class="keyword">const</span> commonLength = <span class="title class_">Math</span>.<span class="title function_">min</span>(oldLength, newLength)</span><br><span class="line">  <span class="keyword">let</span> i</span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; commonLength; i++) &#123;</span><br><span class="line">    <span class="comment">// 如果新 Vnode 已经挂载，则直接 clone 一份，否则新建一个节点</span></span><br><span class="line">    <span class="keyword">const</span> nextChild = (c2[i] = optimized ? <span class="title function_">cloneIfMounted</span>(c2[i] <span class="keyword">as</span> <span class="title class_">Vnode</span>)) : <span class="title function_">normalizeVnode</span>(c2[i])</span><br><span class="line">    <span class="title function_">patch</span>()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(oldLength &gt; newLength) &#123;</span><br><span class="line">    <span class="comment">// 移除多余的节点</span></span><br><span class="line">    <span class="title function_">unmountedChildren</span>()</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 创建新的节点</span></span><br><span class="line">    <span class="title function_">mountChildren</span>()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-打包优化"><a href="#10-打包优化" class="headerlink" title="10. 打包优化"></a>10. 打包优化</h3><p>Tree-shaking：模块打包 webpack、rollup 等中的概念。移除 JavaScript 上下文中未引用的代码。主要依赖于 import 和 export 语句，用来检测代码模块是否被导出、导入，且被 JavaScript 文件使用。</p>
+<p>以 nextTick 为例子，在 Vue2 中，全局 API 暴露在 Vue 实例上，即使未使用，也无法通过 tree-shaking 进行消除。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">nextTick</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 一些和DOM有关的东西</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Vue3 中针对全局和内部的 API 进行了重构，并考虑到 tree-shaking 的支持。因此，全局 API 现在只能作为 ES 模块构建的命名导出进行访问。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; nextTick &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;   <span class="comment">// 显式导入</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">nextTick</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 一些和DOM有关的东西</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>通过这一更改，只要模块绑定器支持 tree-shaking，则 Vue 应用程序中未使用的 api 将从最终的捆绑包中消除，获得最佳文件大小。</p>
+<p>受此更改影响的全局 API 如下所示。</p>
+<ul>
+<li>Vue.nextTick</li>
+<li>Vue.observable （用 Vue.reactive 替换）</li>
+<li>Vue.version</li>
+<li>Vue.compile （仅全构建）</li>
+<li>Vue.set （仅兼容构建）</li>
+<li>Vue.delete （仅兼容构建）</li>
+</ul>
+<p>内部 API 也有诸如 transition、v-model 等标签或者指令被命名导出。只有在程序真正使用才会被捆绑打包。Vue3 将所有运行功能打包也只有约 22.5kb，比 Vue2 轻量很多。</p>
+<h3 id="11-TypeScript-支持"><a href="#11-TypeScript-支持" class="headerlink" title="11. TypeScript 支持"></a>11. TypeScript 支持</h3><p>Vue3 由 TypeScript 重写，相对于 Vue2 有更好的 TypeScript 支持。</p>
+<ul>
+<li>Vue2 Options API 中 option 是个简单对象，而 TypeScript 是一种类型系统，面向对象的语法，不是特别匹配。</li>
+<li>Vue2 需要 vue-class-component 强化 vue 原生组件，也需要 vue-property-decorator 增加更多结合 Vue 特性的装饰器，写法比较繁琐。</li>
+</ul>
+<h3 id="12-移除API"><a href="#12-移除API" class="headerlink" title="12. 移除API"></a>12. 移除API</h3><ul>
+<li><code>keyCode</code> 支持作为 <code>v-on</code> 的修饰符。</li>
+<li><code>$on</code>，<code>$off</code> 和 <code>$once</code> 实例方法。</li>
+<li>过滤 <code>filter</code> 。</li>
+<li>内联模板 <code>attribute</code> 。</li>
+<li><code>$destroy</code> 实例方法。用户不应再手动管理单个 Vue 组件的生命周期。</li>
+</ul>
+<h2 id="二、Options-API-与-Composition-API"><a href="#二、Options-API-与-Composition-API" class="headerlink" title="二、Options API 与 Composition API"></a>二、Options API 与 Composition API</h2><p>Vue 组件可以用两种不同的 API 风格编写：Options API 和 Composition API。</p>
+<h3 id="1-Options-API"><a href="#1-Options-API" class="headerlink" title="1. Options API"></a>1. Options API</h3><p>使用 Options API，我们使用选项对象定义组件的逻辑，例如 data、methods 和 mounted。由选项定义的属性在 this 内部函数中公开，指向组件实例，如下所示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;increment&quot;</span>&gt;</span>count is: &#123;&#123; count &#125;&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;  <span class="title function_">data</span>(<span class="params"></span>) &#123;    <span class="keyword">return</span> &#123;      <span class="attr">count</span>: <span class="number">0</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;  &#125;,  <span class="attr">methods</span>: &#123;    <span class="title function_">increment</span>(<span class="params"></span>) &#123;      <span class="variable language_">this</span>.<span class="property">count</span>++;    &#125;  &#125;,  <span class="title function_">mounted</span>(<span class="params"></span>) &#123;    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`The initial count is <span class="subst">$&#123;<span class="variable language_">this</span>.count&#125;</span>.`</span>);  &#125;&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Composition-API"><a href="#2-Composition-API" class="headerlink" title="2. Composition API"></a>2. Composition API</h3><p>使用 Composition API，我们使用导入的 API 函数定义组件的逻辑。在 SFC 中，Composition API 通常使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;button @click=&quot;increment&quot;&gt;Count is: &#123;&#123; count &#125;&#125;&lt;/button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; ref, onMounted &#125; from &#x27;vue&#x27;; </span><br><span class="line">const count = ref(0); </span><br><span class="line">function increment() &#123;  count.value++;&#125; </span><br><span class="line">onMounted(() =&gt; &#123;  console.log(`The initial count is $&#123;count.value&#125;.`);&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue2%E5%92%8Cvue3%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="tag"># vue2和vue3的区别</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/10/10/javascript%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%90%97%EF%BC%9F/" rel="prev" title="javascript是单线程吗？">
+      <i class="fa fa-chevron-left"></i> javascript是单线程吗？
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/10/11/%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9A%E4%BD%A0%E5%AF%B9SPA%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3/" rel="next" title="面试官：你对SPA单页面的理解">
+      面试官：你对SPA单页面的理解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9Avue2-%E5%92%8C-vue3-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">面试官：vue2 和 vue3 的区别有哪些？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81vue3-%E5%92%8C-vue2-%E5%8C%BA%E5%88%AB%E8%AF%A6%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">一、vue3 和 vue2 区别详述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A4%9A%E6%A0%B9%E8%8A%82%E7%82%B9"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 多根节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Composition-API"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. Composition API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%EF%BC%88Suspense%EF%BC%89"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. 异步组件（Suspense）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Teleport"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. Teleport</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.6.</span> <span class="nav-text">6. 响应式原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E8%99%9A%E6%8B%9F-DOM"><span class="nav-number">1.1.7.</span> <span class="nav-text">7. 虚拟 DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E4%BA%8B%E4%BB%B6%E7%BC%93%E5%AD%98"><span class="nav-number">1.1.8.</span> <span class="nav-text">8. 事件缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Diff-%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96"><span class="nav-number">1.1.9.</span> <span class="nav-text">9. Diff 算法优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E6%89%93%E5%8C%85%E4%BC%98%E5%8C%96"><span class="nav-number">1.1.10.</span> <span class="nav-text">10. 打包优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-TypeScript-%E6%94%AF%E6%8C%81"><span class="nav-number">1.1.11.</span> <span class="nav-text">11. TypeScript 支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-%E7%A7%BB%E9%99%A4API"><span class="nav-number">1.1.12.</span> <span class="nav-text">12. 移除API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Options-API-%E4%B8%8E-Composition-API"><span class="nav-number">1.2.</span> <span class="nav-text">二、Options API 与 Composition API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Options-API"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. Options API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Composition-API"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. Composition API</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>
