@@ -189,6 +189,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/2022/10/26/%E8%AF%B4%E8%AF%B4vue%E4%B8%AD%E7%9A%84key%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/26/%E8%AF%B4%E8%AF%B4vue%E4%B8%AD%E7%9A%84key%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">说说vue中的key原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-26 06:53:24" itemprop="dateCreated datePublished" datetime="2022-10-26T06:53:24+08:00">2022-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 16:19:58" itemprop="dateModified" datetime="2022-12-09T16:19:58+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="说说vue中的key原理"><a href="#说说vue中的key原理" class="headerlink" title="说说vue中的key原理"></a>说说vue中的key原理</h1><h2 id="面试官：你知道vue中key的原理吗？说说你对它的理解"><a href="#面试官：你知道vue中key的原理吗？说说你对它的理解" class="headerlink" title="面试官：你知道vue中key的原理吗？说说你对它的理解"></a>面试官：你知道vue中key的原理吗？说说你对它的理解</h2><img src="/2022/10/26/%E8%AF%B4%E8%AF%B4vue%E4%B8%AD%E7%9A%84key%E5%8E%9F%E7%90%86/image-20221026065449653.png" class="" title="image-20221026065449653">
+
+<h3 id="一、Key是什么"><a href="#一、Key是什么" class="headerlink" title="一、Key是什么"></a>一、Key是什么</h3><p>开始之前，我们先还原两个实际工作场景</p>
+<ol>
+<li><p>当我们在使用<code>v-for</code>时，需要给单元加上<code>key</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/26/%E8%AF%B4%E8%AF%B4vue%E4%B8%AD%E7%9A%84key%E5%8E%9F%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/2022/10/25/%E8%B0%88%E8%B0%88Vue-observable/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -943,92 +1028,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/2022/10/17/data%E5%B1%9E%E6%80%A7%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%B9%B6%E9%9D%9E%E5%AF%B9%E8%B1%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="coder-Tom">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder-Tom">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/17/data%E5%B1%9E%E6%80%A7%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%B9%B6%E9%9D%9E%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">data属性为什么是一个函数并非对象</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-17 05:52:45" itemprop="dateCreated datePublished" datetime="2022-10-17T05:52:45+08:00">2022-10-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-09 15:38:59" itemprop="dateModified" datetime="2022-12-09T15:38:59+08:00">2022-12-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="面试官：为什么data属性是一个函数而不是一个对象？"><a href="#面试官：为什么data属性是一个函数而不是一个对象？" class="headerlink" title="面试官：为什么data属性是一个函数而不是一个对象？"></a>面试官：为什么data属性是一个函数而不是一个对象？</h1><img src="/2022/10/17/data%E5%B1%9E%E6%80%A7%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%B9%B6%E9%9D%9E%E5%AF%B9%E8%B1%A1/image-20221017055354871.png" class="" title="image-20221017055354871">
-
-<h2 id="一、实例和组件定义data的区别"><a href="#一、实例和组件定义data的区别" class="headerlink" title="一、实例和组件定义data的区别"></a>一、实例和组件定义data的区别</h2><p><code>vue</code>实例的时候定义<code>data</code>属性既可以是一个对象，也可以是一个函数</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>:<span class="string">&quot;#app&quot;</span>,</span><br><span class="line">    <span class="comment">// 对象格式</span></span><br><span class="line">    <span class="attr">data</span>:&#123;</span><br><span class="line">        <span class="attr">foo</span>:<span class="string">&quot;foo&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 函数格式</span></span><br><span class="line">    <span class="title function_">data</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">             <span class="attr">foo</span>:<span class="string">&quot;foo&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>组件中定义<code>data</code>属性，只能是一个函数</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/10/17/data%E5%B1%9E%E6%80%A7%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%B9%B6%E9%9D%9E%E5%AF%B9%E8%B1%A1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1100,20 +1099,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
