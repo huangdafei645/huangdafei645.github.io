@@ -1400,6 +1400,30 @@
       </tags>
   </entry>
   <entry>
+    <title>vue3_reactive</title>
+    <url>/posts/28171.html</url>
+    <content><![CDATA[<h1 id="Vue3——reactive"><a href="#Vue3——reactive" class="headerlink" title="Vue3——reactive"></a>Vue3——reactive</h1><p>上次我们说到了ref的用法， 今天来聊聊reactive， 其实它和ref的区别不大</p>
+<h2 id="1-传值"><a href="#1-传值" class="headerlink" title="1. 传值"></a>1. 传值</h2><p> reactive只能传引用类型的值， 比如Array， Object， Map，Set。 那么如果你用到了原始值的话：就会出现以下的报错：</p>
+<span id="more"></span>
+
+<img src="/posts/28171/image-20221015171147671.png" class="" title="image-20221015171147671">
+
+<p>我们来看看原因：</p>
+<img src="/posts/28171/image-20221015171228024.png" class="" title="image-20221015171228024">
+
+<p>reactive在被定义的时候就已经指明了它的类型是个对象；那么你传个对象就不会报错了；</p>
+<h2 id="2-修改的时候不需要-value"><a href="#2-修改的时候不需要-value" class="headerlink" title="2. 修改的时候不需要.value"></a>2. 修改的时候不需要.value</h2><img src="/posts/28171/image-20221015171712071.png" class="" title="image-20221015171712071">
+
+<p>看看页面效果：</p>
+<img src="/posts/28171/image-20221015171734668.png" class="" title="image-20221015171734668">]]></content>
+      <categories>
+        <category>vue3</category>
+      </categories>
+      <tags>
+        <tag>reactive</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue3_ref</title>
     <url>/posts/19895.html</url>
     <content><![CDATA[<h1 id="vue3-ref的用法解析"><a href="#vue3-ref的用法解析" class="headerlink" title="vue3_ref的用法解析"></a>vue3_ref的用法解析</h1><h2 id="ref是干什么的？"><a href="#ref是干什么的？" class="headerlink" title="ref是干什么的？"></a>ref是干什么的？</h2><p>我们知道， vue2是这样配置响应式的：</p>
@@ -1457,6 +1481,69 @@
       </categories>
       <tags>
         <tag>ref</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue3环境搭建</title>
+    <url>/posts/25653.html</url>
+    <content><![CDATA[<h1 id="vue3环境搭建"><a href="#vue3环境搭建" class="headerlink" title="vue3环境搭建"></a>vue3环境搭建</h1><p>首先是需要安装node.js的， 没有安装的同学可以去官网下载： <a href="https://nodejs.org/zh-cn/">Node.js (nodejs.org)</a></p>
+<span id="more"></span>
+
+<img src="/posts/25653/image-20221015071028262.png" class="" title="image-20221015071028262">
+
+<p>一般不要尝试最新版， 会有很多问题的，下载完之后就是无脑安装；</p>
+<p>怎样检查node已经安装上了呢？</p>
+<p>在cmd输入这个命令， </p>
+<img src="/posts/25653/image-20221015071217989.png" class="" title="image-20221015071217989">
+
+<p>我们用node最重要用的就是npm的这个包管理工具：</p>
+<p>输入npm-v就可以查看这个版本：</p>
+<img src="/posts/25653/image-20221015071329703.png" class="" title="image-20221015071329703">
+
+<p>当然也有其他的很多包管理工具， 这里我就不意一一介绍了</p>
+<p>之后开始构建前端项目：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm init vite@latest</span><br></pre></td></tr></table></figure>
+
+<img src="/posts/25653/image-20221015072634753.png" class="" title="image-20221015072634753">
+
+<p>输入之后， 选择y， 然后vite-demo是项目名字， vue是选择的框架，typescript是选择的语言：</p>
+<p>之后进入vite-demo目录， </p>
+<p>运行</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm i</span><br></pre></td></tr></table></figure>
+
+<p>之后就会出现一个node modules目录：里面是项目的第三方依赖</p>
+<p>然后：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+
+<p>之后你就会看到这个页面：</p>
+<img src="/posts/25653/image-20221015073311912.png" class="" title="image-20221015073311912">
+
+<p>这个使用vite搭建的环境：</p>
+<img src="/posts/25653/image-20221015073412656.png" class="" title="image-20221015073412656">
+
+<p>这个就是目录</p>
+<p>当然这里还有用的脚手架搭建的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm init vue@latest</span><br></pre></td></tr></table></figure>
+
+<p>然后你根据需要选一下自己的项目就行；</p>
+<p>vite-env.d.ts是对项目做声明文件扩充的，原因就是typescript不认识.vue文件，最后实现兼容给</p>
+<p>vite是用html去入口文件的， webpack是用js作为入口文件的</p>
+<p>vite是基于esbuild做编译，基于rollup做打包</p>
+<p>然后就是推荐装这两个插件：</p>
+<img src="/posts/25653/image-20221015074236980.png" class="" title="image-20221015074236980">
+
+<p>如果装过vetur的话， 简单禁用就行；</p>
+<p>然后打开设置 —&gt; 添加用户代码片段：</p>
+<p>在vue.json中加入如下配置， 这样就可以很方便的编辑.vue文件了</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;Print to console&quot;</span>:&#123;</span><br><span class="line">		<span class="string">&quot;prefix&quot;</span>: <span class="string">&quot;vue3&quot;</span>,</span><br><span class="line">		<span class="string">&quot;body&quot;</span>: [</span><br><span class="line">			<span class="string">&quot;&lt;template&gt;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&lt;/template&gt;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&lt;script setup lang = &#x27;ts&#x27;&gt;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;import &#123; ref, reactive&#125; from &#x27;vue&#x27;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&lt;/script&gt;&quot;</span>,</span><br><span class="line"></span><br><span class="line">			<span class="string">&quot;&lt;style scoped&gt;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&lt;/style&gt;&quot;</span>,</span><br><span class="line"></span><br><span class="line">		],</span><br><span class="line">		<span class="string">&quot;description&quot;</span>: <span class="string">&quot;Log output to console&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样做的目的是在.vue文件中输入vue3点击Tab，就可以直接生成代码片段， 这算是一个小技巧</p>
+]]></content>
+      <categories>
+        <category>vue3</category>
+      </categories>
+      <tags>
+        <tag>vue3环境搭建</tag>
       </tags>
   </entry>
   <entry>
@@ -1623,69 +1710,6 @@
       </categories>
       <tags>
         <tag>vue3和vue2的区别</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue3环境搭建</title>
-    <url>/posts/25653.html</url>
-    <content><![CDATA[<h1 id="vue3环境搭建"><a href="#vue3环境搭建" class="headerlink" title="vue3环境搭建"></a>vue3环境搭建</h1><p>首先是需要安装node.js的， 没有安装的同学可以去官网下载： <a href="https://nodejs.org/zh-cn/">Node.js (nodejs.org)</a></p>
-<span id="more"></span>
-
-<img src="/posts/25653/image-20221015071028262.png" class="" title="image-20221015071028262">
-
-<p>一般不要尝试最新版， 会有很多问题的，下载完之后就是无脑安装；</p>
-<p>怎样检查node已经安装上了呢？</p>
-<p>在cmd输入这个命令， </p>
-<img src="/posts/25653/image-20221015071217989.png" class="" title="image-20221015071217989">
-
-<p>我们用node最重要用的就是npm的这个包管理工具：</p>
-<p>输入npm-v就可以查看这个版本：</p>
-<img src="/posts/25653/image-20221015071329703.png" class="" title="image-20221015071329703">
-
-<p>当然也有其他的很多包管理工具， 这里我就不意一一介绍了</p>
-<p>之后开始构建前端项目：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm init vite@latest</span><br></pre></td></tr></table></figure>
-
-<img src="/posts/25653/image-20221015072634753.png" class="" title="image-20221015072634753">
-
-<p>输入之后， 选择y， 然后vite-demo是项目名字， vue是选择的框架，typescript是选择的语言：</p>
-<p>之后进入vite-demo目录， </p>
-<p>运行</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm i</span><br></pre></td></tr></table></figure>
-
-<p>之后就会出现一个node modules目录：里面是项目的第三方依赖</p>
-<p>然后：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
-
-<p>之后你就会看到这个页面：</p>
-<img src="/posts/25653/image-20221015073311912.png" class="" title="image-20221015073311912">
-
-<p>这个使用vite搭建的环境：</p>
-<img src="/posts/25653/image-20221015073412656.png" class="" title="image-20221015073412656">
-
-<p>这个就是目录</p>
-<p>当然这里还有用的脚手架搭建的方法：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm init vue@latest</span><br></pre></td></tr></table></figure>
-
-<p>然后你根据需要选一下自己的项目就行；</p>
-<p>vite-env.d.ts是对项目做声明文件扩充的，原因就是typescript不认识.vue文件，最后实现兼容给</p>
-<p>vite是用html去入口文件的， webpack是用js作为入口文件的</p>
-<p>vite是基于esbuild做编译，基于rollup做打包</p>
-<p>然后就是推荐装这两个插件：</p>
-<img src="/posts/25653/image-20221015074236980.png" class="" title="image-20221015074236980">
-
-<p>如果装过vetur的话， 简单禁用就行；</p>
-<p>然后打开设置 —&gt; 添加用户代码片段：</p>
-<p>在vue.json中加入如下配置， 这样就可以很方便的编辑.vue文件了</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;Print to console&quot;</span>:&#123;</span><br><span class="line">		<span class="string">&quot;prefix&quot;</span>: <span class="string">&quot;vue3&quot;</span>,</span><br><span class="line">		<span class="string">&quot;body&quot;</span>: [</span><br><span class="line">			<span class="string">&quot;&lt;template&gt;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&lt;/template&gt;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&lt;script setup lang = &#x27;ts&#x27;&gt;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;import &#123; ref, reactive&#125; from &#x27;vue&#x27;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&lt;/script&gt;&quot;</span>,</span><br><span class="line"></span><br><span class="line">			<span class="string">&quot;&lt;style scoped&gt;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&quot;</span>,</span><br><span class="line">			<span class="string">&quot;&lt;/style&gt;&quot;</span>,</span><br><span class="line"></span><br><span class="line">		],</span><br><span class="line">		<span class="string">&quot;description&quot;</span>: <span class="string">&quot;Log output to console&quot;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样做的目的是在.vue文件中输入vue3点击Tab，就可以直接生成代码片段， 这算是一个小技巧</p>
-]]></content>
-      <categories>
-        <category>vue3</category>
-      </categories>
-      <tags>
-        <tag>vue3环境搭建</tag>
       </tags>
   </entry>
   <entry>
@@ -1879,30 +1903,6 @@
       </tags>
   </entry>
   <entry>
-    <title>vue3_reactive</title>
-    <url>/posts/28171.html</url>
-    <content><![CDATA[<h1 id="Vue3——reactive"><a href="#Vue3——reactive" class="headerlink" title="Vue3——reactive"></a>Vue3——reactive</h1><p>上次我们说到了ref的用法， 今天来聊聊reactive， 其实它和ref的区别不大</p>
-<h2 id="1-传值"><a href="#1-传值" class="headerlink" title="1. 传值"></a>1. 传值</h2><p> reactive只能传引用类型的值， 比如Array， Object， Map，Set。 那么如果你用到了原始值的话：就会出现以下的报错：</p>
-<span id="more"></span>
-
-<img src="/posts/28171/image-20221015171147671.png" class="" title="image-20221015171147671">
-
-<p>我们来看看原因：</p>
-<img src="/posts/28171/image-20221015171228024.png" class="" title="image-20221015171228024">
-
-<p>reactive在被定义的时候就已经指明了它的类型是个对象；那么你传个对象就不会报错了；</p>
-<h2 id="2-修改的时候不需要-value"><a href="#2-修改的时候不需要-value" class="headerlink" title="2. 修改的时候不需要.value"></a>2. 修改的时候不需要.value</h2><img src="/posts/28171/image-20221015171712071.png" class="" title="image-20221015171712071">
-
-<p>看看页面效果：</p>
-<img src="/posts/28171/image-20221015171734668.png" class="" title="image-20221015171734668">]]></content>
-      <categories>
-        <category>vue3</category>
-      </categories>
-      <tags>
-        <tag>reactive</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>vue中proxy代替Object.defineProperty的好处</title>
     <url>/posts/13466.html</url>
     <content><![CDATA[<h1 id="proxy-vs-Object-defineProperty"><a href="#proxy-vs-Object-defineProperty" class="headerlink" title="proxy vs Object.defineProperty"></a>proxy vs Object.defineProperty</h1><h2 id="面试官：Vue3-0里为什么要用-Proxy-API-替代-defineProperty-API-？"><a href="#面试官：Vue3-0里为什么要用-Proxy-API-替代-defineProperty-API-？" class="headerlink" title="面试官：Vue3.0里为什么要用 Proxy API 替代 defineProperty API ？"></a>面试官：Vue3.0里为什么要用 Proxy API 替代 defineProperty API ？</h2><img src="/posts/13466/image-20221209160323058.png" class="" title="image-20221209160323058">
@@ -1989,6 +1989,74 @@
       </categories>
       <tags>
         <tag>proxy vs Object.defineProperty</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue中组件和插件的区别</title>
+    <url>/posts/51138.html</url>
+    <content><![CDATA[<h1 id="vue中组件和插件的区别："><a href="#vue中组件和插件的区别：" class="headerlink" title="vue中组件和插件的区别："></a>vue中组件和插件的区别：</h1><h2 id="面试官：Vue中组件和插件有什么区别？"><a href="#面试官：Vue中组件和插件有什么区别？" class="headerlink" title="面试官：Vue中组件和插件有什么区别？"></a>面试官：Vue中组件和插件有什么区别？</h2><img src="/posts/51138/image-20221019060916057.png" class="" title="image-20221019060916057">
+
+<h3 id="一、组件是什么"><a href="#一、组件是什么" class="headerlink" title="一、组件是什么"></a>一、组件是什么</h3><p>回顾以前对组件的定义：</p>
+<p>组件就是把图形、非图形的各种逻辑均抽象为一个统一的概念（组件）来实现开发的模式，在<code>Vue</code>中每一个<code>.vue</code>文件都可以视为一个组件</p>
+<span id="more"></span>
+
+<p>组件的优势</p>
+<ul>
+<li>降低整个系统的耦合度，在保持接口不变的情况下，我们可以替换不同的组件快速完成需求，例如输入框，可以替换为日历、时间、范围等组件作具体的实现</li>
+<li>调试方便，由于整个系统是通过组件组合起来的，在出现问题的时候，可以用排除法直接移除组件，或者根据报错的组件快速定位问题，之所以能够快速定位，是因为每个组件之间低耦合，职责单一，所以逻辑会比分析整个系统要简单</li>
+<li>提高可维护性，由于每个组件的职责单一，并且组件在系统中是被复用的，所以对代码进行优化可获得系统的整体升级</li>
+</ul>
+<h3 id="二、插件是什么"><a href="#二、插件是什么" class="headerlink" title="二、插件是什么"></a>二、插件是什么</h3><p>插件通常用来为 <code>Vue</code> 添加全局功能。插件的功能范围没有严格的限制——一般有下面几种：</p>
+<ul>
+<li>添加全局方法或者属性。如: <code>vue-custom-element</code></li>
+<li>添加全局资源：指令/过滤器/过渡等。如 <code>vue-touch</code></li>
+<li>通过全局混入来添加一些组件选项。如<code>vue-router</code></li>
+<li>添加 <code>Vue</code> 实例方法，通过把它们添加到 <code>Vue.prototype</code> 上实现。</li>
+<li>一个库，提供自己的 <code>API</code>，同时提供上面提到的一个或多个功能。如<code>vue-router</code></li>
+</ul>
+<h3 id="三、两者的区别"><a href="#三、两者的区别" class="headerlink" title="三、两者的区别"></a>三、两者的区别</h3><p>两者的区别主要表现在以下几个方面：</p>
+<ul>
+<li>编写形式</li>
+<li>注册形式</li>
+<li>使用场景</li>
+</ul>
+<h4 id="编写形式"><a href="#编写形式" class="headerlink" title="编写形式"></a>编写形式</h4><h5 id="编写组件"><a href="#编写组件" class="headerlink" title="编写组件"></a>编写组件</h5><p>编写一个组件，可以有很多方式，我们最常见的就是<code>vue</code>单文件的这种格式，每一个<code>.vue</code>文件我们都可以看成是一个组件</p>
+<p><code>vue</code>文件标准格式</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span>&#123; </span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    ...</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>我们还可以通过<code>template</code>属性来编写一个组件，如果组件内容多，我们可以在外部定义<code>template</code>组件内容，如果组件内容并不多，我们可直接写在<code>template</code>属性上</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;template id=<span class="string">&quot;testComponent&quot;</span>&gt;     <span class="comment">// 组件显示的内容</span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>component!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>   </span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;componentA&#x27;</span>,&#123; </span><br><span class="line">    <span class="attr">template</span>: <span class="string">&#x27;#testComponent&#x27;</span>  </span><br><span class="line">    <span class="attr">template</span>: <span class="string">`&lt;div&gt;component&lt;/div&gt;`</span>  <span class="comment">// 组件内容少可以通过这种形式</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="编写插件"><a href="#编写插件" class="headerlink" title="编写插件"></a>编写插件</h5><p><code>vue</code>插件的实现应该暴露一个 <code>install</code> 方法。这个方法的第一个参数是 <code>Vue</code> 构造器，第二个参数是一个可选的选项对象</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">MyPlugin</span>.<span class="property">install</span> = <span class="keyword">function</span> (<span class="params">Vue, options</span>) &#123;</span><br><span class="line">  <span class="comment">// 1. 添加全局方法或 property</span></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property">myGlobalMethod</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2. 添加全局资源</span></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="title function_">directive</span>(<span class="string">&#x27;my-directive&#x27;</span>, &#123;</span><br><span class="line">    bind (el, binding, vnode, oldVnode) &#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 3. 注入组件选项</span></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="title function_">mixin</span>(&#123;</span><br><span class="line">    <span class="attr">created</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 4. 添加实例方法</span></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$myMethod</span> = <span class="keyword">function</span> (<span class="params">methodOptions</span>) &#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="注册形式"><a href="#注册形式" class="headerlink" title="注册形式"></a>注册形式</h4><h5 id="组件注册"><a href="#组件注册" class="headerlink" title="组件注册"></a>组件注册</h5><p><code>vue</code>组件注册主要分为全局注册与局部注册</p>
+<p>全局注册通过<code>Vue.component</code>方法，第一个参数为组件的名称，第二个参数为传入的配置项</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;my-component-name&#x27;</span>, &#123; <span class="comment">/* ... */</span> &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>局部注册只需在用到的地方通过<code>components</code>属性注册一个组件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> component1 = &#123;...&#125; <span class="comment">// 定义一个组件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">	<span class="attr">components</span>:&#123;</span><br><span class="line">		component1   <span class="comment">// 局部注册</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="插件注册"><a href="#插件注册" class="headerlink" title="插件注册"></a>插件注册</h5><p>插件的注册通过<code>Vue.use()</code>的方式进行注册（安装），第一个参数为插件的名字，第二个参数是可选择的配置项</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(插件名字,&#123; <span class="comment">/* ... */</span>&#125; )</span><br></pre></td></tr></table></figure>
+
+<p>注意的是：</p>
+<p>注册插件的时候，需要在调用 <code>new Vue()</code> 启动应用之前完成</p>
+<p><code>Vue.use</code>会自动阻止多次注册相同插件，只会注册一次</p>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>具体的其实在插件是什么章节已经表述了，这里在总结一下</p>
+<p>组件 <code>(Component)</code> 是用来构成你的 <code>App</code> 的业务模块，它的目标是 <code>App.vue</code></p>
+<p>插件 <code>(Plugin)</code> 是用来增强你的技术栈的功能模块，它的目标是 <code>Vue</code> 本身</p>
+<p>简单来说，插件就是指对<code>Vue</code>的功能的增强或补充</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
+<li>@js语音答题社区</li>
+</ul>
+]]></content>
+      <categories>
+        <category>vue面试题</category>
+      </categories>
+      <tags>
+        <tag>组件和插件</tag>
       </tags>
   </entry>
   <entry>
@@ -2120,74 +2188,6 @@
       </categories>
       <tags>
         <tag>vue实例挂载</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue中组件和插件的区别</title>
-    <url>/posts/51138.html</url>
-    <content><![CDATA[<h1 id="vue中组件和插件的区别："><a href="#vue中组件和插件的区别：" class="headerlink" title="vue中组件和插件的区别："></a>vue中组件和插件的区别：</h1><h2 id="面试官：Vue中组件和插件有什么区别？"><a href="#面试官：Vue中组件和插件有什么区别？" class="headerlink" title="面试官：Vue中组件和插件有什么区别？"></a>面试官：Vue中组件和插件有什么区别？</h2><img src="/posts/51138/image-20221019060916057.png" class="" title="image-20221019060916057">
-
-<h3 id="一、组件是什么"><a href="#一、组件是什么" class="headerlink" title="一、组件是什么"></a>一、组件是什么</h3><p>回顾以前对组件的定义：</p>
-<p>组件就是把图形、非图形的各种逻辑均抽象为一个统一的概念（组件）来实现开发的模式，在<code>Vue</code>中每一个<code>.vue</code>文件都可以视为一个组件</p>
-<span id="more"></span>
-
-<p>组件的优势</p>
-<ul>
-<li>降低整个系统的耦合度，在保持接口不变的情况下，我们可以替换不同的组件快速完成需求，例如输入框，可以替换为日历、时间、范围等组件作具体的实现</li>
-<li>调试方便，由于整个系统是通过组件组合起来的，在出现问题的时候，可以用排除法直接移除组件，或者根据报错的组件快速定位问题，之所以能够快速定位，是因为每个组件之间低耦合，职责单一，所以逻辑会比分析整个系统要简单</li>
-<li>提高可维护性，由于每个组件的职责单一，并且组件在系统中是被复用的，所以对代码进行优化可获得系统的整体升级</li>
-</ul>
-<h3 id="二、插件是什么"><a href="#二、插件是什么" class="headerlink" title="二、插件是什么"></a>二、插件是什么</h3><p>插件通常用来为 <code>Vue</code> 添加全局功能。插件的功能范围没有严格的限制——一般有下面几种：</p>
-<ul>
-<li>添加全局方法或者属性。如: <code>vue-custom-element</code></li>
-<li>添加全局资源：指令/过滤器/过渡等。如 <code>vue-touch</code></li>
-<li>通过全局混入来添加一些组件选项。如<code>vue-router</code></li>
-<li>添加 <code>Vue</code> 实例方法，通过把它们添加到 <code>Vue.prototype</code> 上实现。</li>
-<li>一个库，提供自己的 <code>API</code>，同时提供上面提到的一个或多个功能。如<code>vue-router</code></li>
-</ul>
-<h3 id="三、两者的区别"><a href="#三、两者的区别" class="headerlink" title="三、两者的区别"></a>三、两者的区别</h3><p>两者的区别主要表现在以下几个方面：</p>
-<ul>
-<li>编写形式</li>
-<li>注册形式</li>
-<li>使用场景</li>
-</ul>
-<h4 id="编写形式"><a href="#编写形式" class="headerlink" title="编写形式"></a>编写形式</h4><h5 id="编写组件"><a href="#编写组件" class="headerlink" title="编写组件"></a>编写组件</h5><p>编写一个组件，可以有很多方式，我们最常见的就是<code>vue</code>单文件的这种格式，每一个<code>.vue</code>文件我们都可以看成是一个组件</p>
-<p><code>vue</code>文件标准格式</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span>&#123; </span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    ...</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>我们还可以通过<code>template</code>属性来编写一个组件，如果组件内容多，我们可以在外部定义<code>template</code>组件内容，如果组件内容并不多，我们可直接写在<code>template</code>属性上</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;template id=<span class="string">&quot;testComponent&quot;</span>&gt;     <span class="comment">// 组件显示的内容</span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>component!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>   </span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;componentA&#x27;</span>,&#123; </span><br><span class="line">    <span class="attr">template</span>: <span class="string">&#x27;#testComponent&#x27;</span>  </span><br><span class="line">    <span class="attr">template</span>: <span class="string">`&lt;div&gt;component&lt;/div&gt;`</span>  <span class="comment">// 组件内容少可以通过这种形式</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h5 id="编写插件"><a href="#编写插件" class="headerlink" title="编写插件"></a>编写插件</h5><p><code>vue</code>插件的实现应该暴露一个 <code>install</code> 方法。这个方法的第一个参数是 <code>Vue</code> 构造器，第二个参数是一个可选的选项对象</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">MyPlugin</span>.<span class="property">install</span> = <span class="keyword">function</span> (<span class="params">Vue, options</span>) &#123;</span><br><span class="line">  <span class="comment">// 1. 添加全局方法或 property</span></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property">myGlobalMethod</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2. 添加全局资源</span></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="title function_">directive</span>(<span class="string">&#x27;my-directive&#x27;</span>, &#123;</span><br><span class="line">    bind (el, binding, vnode, oldVnode) &#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 3. 注入组件选项</span></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="title function_">mixin</span>(&#123;</span><br><span class="line">    <span class="attr">created</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 逻辑...</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 4. 添加实例方法</span></span><br><span class="line">  <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$myMethod</span> = <span class="keyword">function</span> (<span class="params">methodOptions</span>) &#123;</span><br><span class="line">    <span class="comment">// 逻辑...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="注册形式"><a href="#注册形式" class="headerlink" title="注册形式"></a>注册形式</h4><h5 id="组件注册"><a href="#组件注册" class="headerlink" title="组件注册"></a>组件注册</h5><p><code>vue</code>组件注册主要分为全局注册与局部注册</p>
-<p>全局注册通过<code>Vue.component</code>方法，第一个参数为组件的名称，第二个参数为传入的配置项</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;my-component-name&#x27;</span>, &#123; <span class="comment">/* ... */</span> &#125;)</span><br></pre></td></tr></table></figure>
-
-<p>局部注册只需在用到的地方通过<code>components</code>属性注册一个组件</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> component1 = &#123;...&#125; <span class="comment">// 定义一个组件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">	<span class="attr">components</span>:&#123;</span><br><span class="line">		component1   <span class="comment">// 局部注册</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="插件注册"><a href="#插件注册" class="headerlink" title="插件注册"></a>插件注册</h5><p>插件的注册通过<code>Vue.use()</code>的方式进行注册（安装），第一个参数为插件的名字，第二个参数是可选择的配置项</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(插件名字,&#123; <span class="comment">/* ... */</span>&#125; )</span><br></pre></td></tr></table></figure>
-
-<p>注意的是：</p>
-<p>注册插件的时候，需要在调用 <code>new Vue()</code> 启动应用之前完成</p>
-<p><code>Vue.use</code>会自动阻止多次注册相同插件，只会注册一次</p>
-<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>具体的其实在插件是什么章节已经表述了，这里在总结一下</p>
-<p>组件 <code>(Component)</code> 是用来构成你的 <code>App</code> 的业务模块，它的目标是 <code>App.vue</code></p>
-<p>插件 <code>(Plugin)</code> 是用来增强你的技术栈的功能模块，它的目标是 <code>Vue</code> 本身</p>
-<p>简单来说，插件就是指对<code>Vue</code>的功能的增强或补充</p>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
-<li><a href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
-<li>@js语音答题社区</li>
-</ul>
-]]></content>
-      <categories>
-        <category>vue面试题</category>
-      </categories>
-      <tags>
-        <tag>组件和插件</tag>
       </tags>
   </entry>
   <entry>
@@ -3138,50 +3138,6 @@
       </tags>
   </entry>
   <entry>
-    <title>世界上最贵的bug</title>
-    <url>/posts/58853.html</url>
-    <content><![CDATA[<h1 id="世界上最贵的bug"><a href="#世界上最贵的bug" class="headerlink" title="世界上最贵的bug"></a>世界上最贵的bug</h1><h2 id="一个价值8-7亿美元的bug"><a href="#一个价值8-7亿美元的bug" class="headerlink" title="一个价值8.7亿美元的bug"></a>一个价值8.7亿美元的bug</h2><img src="/posts/58853/image-20221012160903562.png" class="" title="image-20221012160903562">
-
-<p>一位资深程序员曾经说过:</p>
-<p>没有经历过 P0级错误的职业生涯</p>
-<span id="more"></span>
-
-<p>上面这句话是我编的，但是作为一个程序员，bug 绝对不足为奇。</p>
-<p>你的bug给公司造成了多大的损失？在这篇文章中，我们来看一个导致8.7亿美元损失的错误。</p>
-<h3 id="整个事故"><a href="#整个事故" class="headerlink" title="整个事故:"></a>整个事故:</h3><p>1996年6月4日，第一枚阿丽亚娜5号火箭在法属圭亚那沿海发射。</p>
-<p>这次发射耗资3.7亿美元，火箭搭载了一颗价值5亿美元的通信卫星，总投资为8.7亿美元。</p>
-<img src="/posts/58853/image-20221012161206893.png" class="" title="image-20221012161206893">
-
-<p>起飞后37秒，火箭朝错误的方向转了90度，助推器在空中撕裂，飞船被一个巨大的液态氢火球吞没。</p>
-<img src="/posts/58853/image-20221012161237177.png" class="" title="image-20221012161237177">
-
-<p>爆炸发生时，工程师甚至用法语报告说: “一切设置正常，轨道正常。”</p>
-<p>主控室里威严的工程师和人群后面的骚动表明这一切发生得太突然了。</p>
-<img src="/posts/58853/image-20221012161335828.png" class="" title="image-20221012161335828">
-
-<p>这场灾难性的事故引发了公众的调查，由于火箭携带的卫星受损，关于地球磁层运行的科学研究被推迟了近4年。</p>
-<p>阿丽亚娜5号事故被广泛认为是最昂贵的历史bug之一。</p>
-<img src="/posts/58853/image-20221012161438048.png" class="" title="image-20221012161438048">
-
-<h3 id="事故原因"><a href="#事故原因" class="headerlink" title="事故原因"></a>事故原因</h3><p>此事故的原因是浮点溢出。</p>
-<p>用于应用的阿丽亚娜火箭包含一个决定火箭向上或向下的变量，称为水平偏差，以下简称为 BH。</p>
-<p>在设计阿丽亚娜5号上一代火箭阿丽亚娜4号时，工程师分析了 BH 的边界条件，以确定哪一个永远不会超过16位整数表示范围(- 32768到32767) ，这个变量被定义为16位整数类型。</p>
-<p>但是，由于阿丽亚娜5号火箭性能的改善，在大多数应用中，BH 被定义为64位浮点数，有些部分由于阿丽亚娜4号16位整数的疏忽仍在使用。</p>
-<p>当这两部分代码组合使用时，它将尝试将一个64位浮点数赋给16位整数。</p>
-<p>在火箭上升的头几秒钟，火箭的加速度非常低，所以这两个值之间的转换是成功的。</p>
-<p>令人绝望的是，随着火箭加速度越来越高，当值超过16位整数时，就会发生溢出。</p>
-<p>在正常情况下，火箭发动机喷管会接收飞行控制信息。但溢流发生后，接收到一个诊断位模式(表明溢流发生) ，导致喷嘴产生错误行为，最终发生悲剧..。</p>
-<h3 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h3><p>最后，欧洲航天局成立了一个小组，从散落在约12平方公里的火箭残骸中寻找线索，并恢复了事故发生时的数据</p>
-<p>这次事故可以说是令人印象深刻。给你留下深刻印象的 bug，欢迎在评论部分进行讨论。</p>
-]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>世界上最贵的bug</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>深入了解eslint</title>
     <url>/posts/24305.html</url>
     <content><![CDATA[<h1 id="深入了解eslint"><a href="#深入了解eslint" class="headerlink" title="深入了解eslint"></a>深入了解eslint</h1><p>我们在学一个东西之前， 必须清楚的知道它是干什么的， 怎么用？ 之后我们才能将它融会贯通，学以致用</p>
@@ -3224,24 +3180,47 @@
       </tags>
   </entry>
   <entry>
-    <title>人类是一个技术性的物种</title>
-    <url>/posts/6574.html</url>
-    <content><![CDATA[<h1 id="人类是一个技术性的物种"><a href="#人类是一个技术性的物种" class="headerlink" title="人类是一个技术性的物种"></a>人类是一个技术性的物种</h1><p>在这个社会， 要想生存下去， 就需要一门技术</p>
-<p>​        ⼈类是地球上最聪明的物种。⽤技术来武装⾃⼰，就是聪明的表现。 在发展出较为复杂的技术之前，⼈类所赖以⽣存的优势，⼤约是善于⻓跑，通过漫⻓的追踪，让那些有散热缺陷的猎物热得跑不动， 然后围⽽杀之。从⾏为来看，原始狩猎的⼈类像是体型更⼤的狼群。 我不知道这种颇为有趣的说法是否得到了科学的验证，但狩猎曾经⻓期是⼈类的⽣存法⻔之⼀，和采集果实⼀道成为获取⻝物的主要⼿段，这倒是⼈类学家的共识。</p>
+    <title>世界上最贵的bug</title>
+    <url>/posts/58853.html</url>
+    <content><![CDATA[<h1 id="世界上最贵的bug"><a href="#世界上最贵的bug" class="headerlink" title="世界上最贵的bug"></a>世界上最贵的bug</h1><h2 id="一个价值8-7亿美元的bug"><a href="#一个价值8-7亿美元的bug" class="headerlink" title="一个价值8.7亿美元的bug"></a>一个价值8.7亿美元的bug</h2><img src="/posts/58853/image-20221012160903562.png" class="" title="image-20221012160903562">
+
+<p>一位资深程序员曾经说过:</p>
+<p>没有经历过 P0级错误的职业生涯</p>
 <span id="more"></span>
 
-<p>​        在那个⻓跑狩猎的时代，⼈类就已经开始依赖技术了。那时的技术，是打磨⽯块、制造梭镖、削制⽊⽭，代替并不锋利的⽖⽛；是制造⼸箭，拥有远程攻击的独特能⼒……原始部落往往都有⼸箭设备， 都能制造⼀些简单但巧妙的狩猎武器。狩猎采集是⼀种⽣活⽅式，需 要配套的技术，⽽这⼀整套技术在⽂明起源之前就已经和⼈类相伴， 并决定了⼈类相对其他物种的优势。</p>
-<p>​        然后是农业技术。世界上最早发展出农耕⽂明的地⽅，就是四⼤⽂明古国。古代埃及、古代巴⽐伦、古代印度和中国，这些地⽅的古 ⼈类了解四季的更替，分离出了最适合耕种的植物，并且不断地将它们培育成⾼产作物；驯化了适合与⼈类⼀起⽣活的动物，建⽴起了各具特⾊的农业技术。农业技术把⼈类推⼊了⽂明时代，因为农业可以 养活更多的⼈⼝，积累更多的财富，从⽽为复杂的社会上层建筑提供 物质保障。可以说，农业技术是⼈类⽂明的根基。</p>
-<p>​        拥有了农业技术之后，⼈类社会变得更加复杂。随着时间流逝， 更多的技术被发明出来，它们或⽤于提⾼⽣产能⼒，⽐如各种农具和运输⼯具，或⽤于提⾼战⽃能⼒，⽐如各类兵器。⼈类通过技术进步和技术扩散，更⼴泛、更⾼效地从⾃然界获取了各类资源，并在⼈类社会内部的不同团体间进⾏竞争。这⼀过程贯穿了整个古代⽂明史。</p>
-<p>​        第⼆次世界⼤战之后，计算机和互联⽹的发展引发了第三次⼯业⾰命——信息⾰命。信息的产⽣、收集和处理达到了⼀个前所未有的 ⾼度。信息化带给⼈类社会的好处不仅仅停留在信息技术本身。计算机能够进⾏⼤量的计算，代替⼤量⼈类脑⼒，提⾼⽣产效率，这只是信息技术的初级效应。信息技术更重要的作⽤，是让全⼈类以前所未 有的深度和⼴度结合在⼀起，提供了⼤量的有效市场机会，从⽽极⼤地促进了经济的发展。</p>
-<p>​        眼下的世界到了另⼀个节骨眼上，那就是⼈⼯智能的发展。世界正在进⼊第四次⼯业⾰命。在这场⾰命中，⼈们所⾯临的技术选择很 多，可控核聚变、⾼效的太阳能、基因技术……然⽽所有这些，都可以认为是信息时代的进⼀步深化，并不会带来社会本质的改变，只有⼀种技术除外——⼈⼯智能。</p>
-<p>​        由此可见， 拥有一门独到的技术可以使自己始终立于不败之地</p>
+<p>上面这句话是我编的，但是作为一个程序员，bug 绝对不足为奇。</p>
+<p>你的bug给公司造成了多大的损失？在这篇文章中，我们来看一个导致8.7亿美元损失的错误。</p>
+<h3 id="整个事故"><a href="#整个事故" class="headerlink" title="整个事故:"></a>整个事故:</h3><p>1996年6月4日，第一枚阿丽亚娜5号火箭在法属圭亚那沿海发射。</p>
+<p>这次发射耗资3.7亿美元，火箭搭载了一颗价值5亿美元的通信卫星，总投资为8.7亿美元。</p>
+<img src="/posts/58853/image-20221012161206893.png" class="" title="image-20221012161206893">
+
+<p>起飞后37秒，火箭朝错误的方向转了90度，助推器在空中撕裂，飞船被一个巨大的液态氢火球吞没。</p>
+<img src="/posts/58853/image-20221012161237177.png" class="" title="image-20221012161237177">
+
+<p>爆炸发生时，工程师甚至用法语报告说: “一切设置正常，轨道正常。”</p>
+<p>主控室里威严的工程师和人群后面的骚动表明这一切发生得太突然了。</p>
+<img src="/posts/58853/image-20221012161335828.png" class="" title="image-20221012161335828">
+
+<p>这场灾难性的事故引发了公众的调查，由于火箭携带的卫星受损，关于地球磁层运行的科学研究被推迟了近4年。</p>
+<p>阿丽亚娜5号事故被广泛认为是最昂贵的历史bug之一。</p>
+<img src="/posts/58853/image-20221012161438048.png" class="" title="image-20221012161438048">
+
+<h3 id="事故原因"><a href="#事故原因" class="headerlink" title="事故原因"></a>事故原因</h3><p>此事故的原因是浮点溢出。</p>
+<p>用于应用的阿丽亚娜火箭包含一个决定火箭向上或向下的变量，称为水平偏差，以下简称为 BH。</p>
+<p>在设计阿丽亚娜5号上一代火箭阿丽亚娜4号时，工程师分析了 BH 的边界条件，以确定哪一个永远不会超过16位整数表示范围(- 32768到32767) ，这个变量被定义为16位整数类型。</p>
+<p>但是，由于阿丽亚娜5号火箭性能的改善，在大多数应用中，BH 被定义为64位浮点数，有些部分由于阿丽亚娜4号16位整数的疏忽仍在使用。</p>
+<p>当这两部分代码组合使用时，它将尝试将一个64位浮点数赋给16位整数。</p>
+<p>在火箭上升的头几秒钟，火箭的加速度非常低，所以这两个值之间的转换是成功的。</p>
+<p>令人绝望的是，随着火箭加速度越来越高，当值超过16位整数时，就会发生溢出。</p>
+<p>在正常情况下，火箭发动机喷管会接收飞行控制信息。但溢流发生后，接收到一个诊断位模式(表明溢流发生) ，导致喷嘴产生错误行为，最终发生悲剧..。</p>
+<h3 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h3><p>最后，欧洲航天局成立了一个小组，从散落在约12平方公里的火箭残骸中寻找线索，并恢复了事故发生时的数据</p>
+<p>这次事故可以说是令人印象深刻。给你留下深刻印象的 bug，欢迎在评论部分进行讨论。</p>
 ]]></content>
       <categories>
         <category>读书</category>
       </categories>
       <tags>
-        <tag>技术</tag>
+        <tag>世界上最贵的bug</tag>
       </tags>
   </entry>
   <entry>
@@ -3318,6 +3297,27 @@
       </categories>
       <tags>
         <tag>meta标签</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人类是一个技术性的物种</title>
+    <url>/posts/6574.html</url>
+    <content><![CDATA[<h1 id="人类是一个技术性的物种"><a href="#人类是一个技术性的物种" class="headerlink" title="人类是一个技术性的物种"></a>人类是一个技术性的物种</h1><p>在这个社会， 要想生存下去， 就需要一门技术</p>
+<p>​        ⼈类是地球上最聪明的物种。⽤技术来武装⾃⼰，就是聪明的表现。 在发展出较为复杂的技术之前，⼈类所赖以⽣存的优势，⼤约是善于⻓跑，通过漫⻓的追踪，让那些有散热缺陷的猎物热得跑不动， 然后围⽽杀之。从⾏为来看，原始狩猎的⼈类像是体型更⼤的狼群。 我不知道这种颇为有趣的说法是否得到了科学的验证，但狩猎曾经⻓期是⼈类的⽣存法⻔之⼀，和采集果实⼀道成为获取⻝物的主要⼿段，这倒是⼈类学家的共识。</p>
+<span id="more"></span>
+
+<p>​        在那个⻓跑狩猎的时代，⼈类就已经开始依赖技术了。那时的技术，是打磨⽯块、制造梭镖、削制⽊⽭，代替并不锋利的⽖⽛；是制造⼸箭，拥有远程攻击的独特能⼒……原始部落往往都有⼸箭设备， 都能制造⼀些简单但巧妙的狩猎武器。狩猎采集是⼀种⽣活⽅式，需 要配套的技术，⽽这⼀整套技术在⽂明起源之前就已经和⼈类相伴， 并决定了⼈类相对其他物种的优势。</p>
+<p>​        然后是农业技术。世界上最早发展出农耕⽂明的地⽅，就是四⼤⽂明古国。古代埃及、古代巴⽐伦、古代印度和中国，这些地⽅的古 ⼈类了解四季的更替，分离出了最适合耕种的植物，并且不断地将它们培育成⾼产作物；驯化了适合与⼈类⼀起⽣活的动物，建⽴起了各具特⾊的农业技术。农业技术把⼈类推⼊了⽂明时代，因为农业可以 养活更多的⼈⼝，积累更多的财富，从⽽为复杂的社会上层建筑提供 物质保障。可以说，农业技术是⼈类⽂明的根基。</p>
+<p>​        拥有了农业技术之后，⼈类社会变得更加复杂。随着时间流逝， 更多的技术被发明出来，它们或⽤于提⾼⽣产能⼒，⽐如各种农具和运输⼯具，或⽤于提⾼战⽃能⼒，⽐如各类兵器。⼈类通过技术进步和技术扩散，更⼴泛、更⾼效地从⾃然界获取了各类资源，并在⼈类社会内部的不同团体间进⾏竞争。这⼀过程贯穿了整个古代⽂明史。</p>
+<p>​        第⼆次世界⼤战之后，计算机和互联⽹的发展引发了第三次⼯业⾰命——信息⾰命。信息的产⽣、收集和处理达到了⼀个前所未有的 ⾼度。信息化带给⼈类社会的好处不仅仅停留在信息技术本身。计算机能够进⾏⼤量的计算，代替⼤量⼈类脑⼒，提⾼⽣产效率，这只是信息技术的初级效应。信息技术更重要的作⽤，是让全⼈类以前所未 有的深度和⼴度结合在⼀起，提供了⼤量的有效市场机会，从⽽极⼤地促进了经济的发展。</p>
+<p>​        眼下的世界到了另⼀个节骨眼上，那就是⼈⼯智能的发展。世界正在进⼊第四次⼯业⾰命。在这场⾰命中，⼈们所⾯临的技术选择很 多，可控核聚变、⾼效的太阳能、基因技术……然⽽所有这些，都可以认为是信息时代的进⼀步深化，并不会带来社会本质的改变，只有⼀种技术除外——⼈⼯智能。</p>
+<p>​        由此可见， 拥有一门独到的技术可以使自己始终立于不败之地</p>
+]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -5122,6 +5122,109 @@
       </tags>
   </entry>
   <entry>
+    <title>说说你对slot的理解</title>
+    <url>/posts/3047.html</url>
+    <content><![CDATA[<h1 id="说说你对slot的理解"><a href="#说说你对slot的理解" class="headerlink" title="说说你对slot的理解"></a>说说你对slot的理解</h1><h2 id="面试官：说说你对slot的理解？slot使用场景有哪些？"><a href="#面试官：说说你对slot的理解？slot使用场景有哪些？" class="headerlink" title="面试官：说说你对slot的理解？slot使用场景有哪些？"></a>面试官：说说你对slot的理解？slot使用场景有哪些？</h2><img src="/posts/3047/image-20221024062845179.png" class="" title="image-20221024062845179">
+
+<h3 id="一、slot是什么"><a href="#一、slot是什么" class="headerlink" title="一、slot是什么"></a>一、slot是什么</h3><p>在HTML中 <code>slot</code> 元素 ，作为 <code>Web Components</code> 技术套件的一部分，是Web组件内的一个占位符</p>
+<p>该占位符可以在后期使用自己的标记语言填充</p>
+<span id="more"></span>
+
+<p>举个栗子</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;element-details-template&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;element-name&quot;</span>&gt;</span>Slot template<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">element-details</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">&quot;element-name&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">element-details</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">element-details</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">&quot;element-name&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">element-details</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>template</code>不会展示到页面中，需要用先获取它的引用，然后添加到<code>DOM</code>中，</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">customElements.<span class="title function_">define</span>(<span class="string">&#x27;element-details&#x27;</span>,</span><br><span class="line">  <span class="keyword">class</span> <span class="title class_">extends</span> <span class="title class_">HTMLElement</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">super</span>();</span><br><span class="line">      <span class="keyword">const</span> template = <span class="variable language_">document</span></span><br><span class="line">        .<span class="title function_">getElementById</span>(<span class="string">&#x27;element-details-template&#x27;</span>)</span><br><span class="line">        .<span class="property">content</span>;</span><br><span class="line">      <span class="keyword">const</span> shadowRoot = <span class="variable language_">this</span>.<span class="title function_">attachShadow</span>(&#123;<span class="attr">mode</span>: <span class="string">&#x27;open&#x27;</span>&#125;)</span><br><span class="line">        .<span class="title function_">appendChild</span>(template.<span class="title function_">cloneNode</span>(<span class="literal">true</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在<code>Vue</code>中的概念也是如此</p>
+<p><code>Slot</code> 艺名插槽，花名“占坑”，我们可以理解为<code>solt</code>在组件模板中占好了位置，当使用该组件标签时候，组件标签里面的内容就会自动填坑（替换组件模板中<code>slot</code>位置），作为承载分发内容的出口</p>
+<p>可以将其类比为插卡式的FC游戏机，游戏机暴露卡槽（插槽）让用户插入不同的游戏磁条（自定义内容）</p>
+<p>放张图感受一下</p>
+<img src="/posts/3047/image-20221024063011755.png" class="" title="image-20221024063011755">
+
+<h3 id="二、使用场景"><a href="#二、使用场景" class="headerlink" title="二、使用场景"></a>二、使用场景</h3><p>通过插槽可以让用户可以拓展组件，去更好地复用组件和对其做定制化处理</p>
+<p>如果父组件在使用到一个复用组件的时候，获取这个组件在不同的地方有少量的更改，如果去重写组件是一件不明智的事情</p>
+<p>通过<code>slot</code>插槽向组件内部指定位置传递内容，完成这个复用组件在不同场景的应用</p>
+<p>比如布局组件、表格列、下拉选、弹框显示内容等</p>
+<h3 id="三、分类"><a href="#三、分类" class="headerlink" title="三、分类"></a>三、分类</h3><p><code>slot</code>可以分来以下三种：</p>
+<ul>
+<li>默认插槽</li>
+<li>具名插槽</li>
+<li>作用域插槽</li>
+</ul>
+<h4 id="默认插槽"><a href="#默认插槽" class="headerlink" title="默认插槽"></a>默认插槽</h4><p>子组件用<code>&lt;slot&gt;</code>标签来确定渲染的位置，标签里面可以放<code>DOM</code>结构，当父组件使用的时候没有往插槽传入内容，标签内<code>DOM</code>结构就会显示在页面</p>
+<p>父组件在使用的时候，直接在子组件的标签内写入内容即可</p>
+<p>子组件<code>Child.vue</code></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>插槽后备的内容<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>父组件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Child</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>默认插槽<span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">Child</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="具名插槽"><a href="#具名插槽" class="headerlink" title="具名插槽"></a>具名插槽</h4><p>子组件用<code>name</code>属性来表示插槽的名字，不传为默认插槽</p>
+<p>父组件中在使用时在默认插槽的基础上加上<code>slot</code>属性，值为子组件插槽<code>name</code>属性值</p>
+<p>子组件<code>Child.vue</code></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span>插槽后备的内容<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;content&quot;</span>&gt;</span>插槽后备的内容<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>父组件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:default</span>&gt;</span>具名插槽<span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 具名插槽⽤插槽名做参数 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:content</span>&gt;</span>内容...<span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h4><p>子组件在作用域上绑定属性来将子组件的信息传给父组件使用，这些属性会被挂在父组件<code>v-slot</code>接受的对象上</p>
+<p>父组件中在使用时通过<code>v-slot:</code>（简写：#）获取子组件的信息，在内容中使用</p>
+<p>子组件<code>Child.vue</code></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;footer&quot;</span> <span class="attr">testProps</span>=<span class="string">&quot;子组件的值&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">h3</span>&gt;</span>没传footer插槽<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>父组件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child</span>&gt;</span> </span><br><span class="line">    <span class="comment">&lt;!-- 把v-slot的值指定为作⽤域上下⽂对象 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:default</span>=<span class="string">&quot;slotProps&quot;</span>&gt;</span></span><br><span class="line">      来⾃⼦组件数据：&#123;&#123;slotProps.testProps&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> #<span class="attr">default</span>=<span class="string">&quot;slotProps&quot;</span>&gt;</span></span><br><span class="line">      来⾃⼦组件数据：&#123;&#123;slotProps.testProps&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><ul>
+<li><code>v-slot</code>属性只能在<code>&lt;template&gt;</code>上使用，但在只有默认插槽时可以在组件标签上使用</li>
+<li>默认插槽名为<code>default</code>，可以省略default直接写<code>v-slot</code></li>
+<li>缩写为<code>#</code>时不能不写参数，写成<code>#default</code></li>
+<li>可以通过解构获取<code>v-slot=&#123;user&#125;</code>，还可以重命名<code>v-slot=&quot;&#123;user: newName&#125;&quot;</code>和定义默认值<code>v-slot=&quot;&#123;user = &#39;默认值&#39;&#125;&quot;</code></li>
+</ul>
+<h3 id="四、原理分析"><a href="#四、原理分析" class="headerlink" title="四、原理分析"></a>四、原理分析</h3><p><code>slot</code>本质上是返回<code>VNode</code>的函数，一般情况下，<code>Vue</code>中的组件要渲染到页面上需要经过<code>template -&gt; render function -&gt; VNode -&gt; DOM</code> 过程，这里看看<code>slot</code>如何实现：</p>
+<p>编写一个<code>buttonCounter</code>组件，使用匿名插槽</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;button-counter&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">template</span>: <span class="string">&#x27;&lt;div&gt; &lt;slot&gt;我是默认内容&lt;/slot&gt;&lt;/div&gt;&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>使用该组件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">    <span class="attr">template</span>: <span class="string">&#x27;&lt;button-counter&gt;&lt;span&gt;我是slot传入内容&lt;/span&gt;&lt;/button-counter&gt;&#x27;</span>,</span><br><span class="line">    <span class="attr">components</span>:&#123;buttonCounter&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>获取<code>buttonCounter</code>组件渲染函数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="title function_">anonymous</span>(<span class="params"></span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line"><span class="title function_">with</span>(<span class="params"><span class="variable language_">this</span></span>)&#123;<span class="keyword">return</span> <span class="title function_">_c</span>(<span class="string">&#x27;div&#x27;</span>,[<span class="title function_">_t</span>(<span class="string">&quot;default&quot;</span>,[<span class="title function_">_v</span>(<span class="string">&quot;我是默认内容&quot;</span>)])],<span class="number">2</span>)&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>_v</code>表示穿件普通文本节点，<code>_t</code>表示渲染插槽的函数</p>
+<p>渲染插槽函数<code>renderSlot</code>（做了简化）</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">renderSlot</span> (</span><br><span class="line">  name,</span><br><span class="line">  fallback,</span><br><span class="line">  props,</span><br><span class="line">  bindObject</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="comment">// 得到渲染插槽内容的函数    </span></span><br><span class="line">  <span class="keyword">var</span> scopedSlotFn = <span class="variable language_">this</span>.<span class="property">$scopedSlots</span>[name];</span><br><span class="line">  <span class="keyword">var</span> nodes;</span><br><span class="line">  <span class="comment">// 如果存在插槽渲染函数，则执行插槽渲染函数，生成nodes节点返回</span></span><br><span class="line">  <span class="comment">// 否则使用默认值</span></span><br><span class="line">  nodes = <span class="title function_">scopedSlotFn</span>(props) || fallback;</span><br><span class="line">  <span class="keyword">return</span> nodes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>name</code>属性表示定义插槽的名字，默认值为<code>default</code>，<code>fallback</code>表示子组件中的<code>slot</code>节点的默认值</p>
+<p>关于<code>this.$scopredSlots</code>是什么，我们可以先看看<code>vm.slot</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">initRender</span> (vm) &#123;</span><br><span class="line">  ...</span><br><span class="line">  vm.<span class="property">$slots</span> = <span class="title function_">resolveSlots</span>(options.<span class="property">_renderChildren</span>, renderContext);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">resolveSlots`函数会对`children`节点做归类和过滤处理，返回`slots</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">resolveSlots</span> (</span><br><span class="line">    children,</span><br><span class="line">    context</span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!children || !children.<span class="property">length</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> slots = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = children.<span class="property">length</span>; i &lt; l; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> child = children[i];</span><br><span class="line">      <span class="keyword">var</span> data = child.<span class="property">data</span>;</span><br><span class="line">      <span class="comment">// remove slot attribute if the node is resolved as a Vue slot node</span></span><br><span class="line">      <span class="keyword">if</span> (data &amp;&amp; data.<span class="property">attrs</span> &amp;&amp; data.<span class="property">attrs</span>.<span class="property">slot</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> data.<span class="property">attrs</span>.<span class="property">slot</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// named slots should only be respected if the vnode was rendered in the</span></span><br><span class="line">      <span class="comment">// same context.</span></span><br><span class="line">      <span class="keyword">if</span> ((child.<span class="property">context</span> === context || child.<span class="property">fnContext</span> === context) &amp;&amp;</span><br><span class="line">        data &amp;&amp; data.<span class="property">slot</span> != <span class="literal">null</span></span><br><span class="line">      ) &#123;</span><br><span class="line">        <span class="comment">// 如果slot存在(slot=&quot;header&quot;) 则拿对应的值作为key</span></span><br><span class="line">        <span class="keyword">var</span> name = data.<span class="property">slot</span>;</span><br><span class="line">        <span class="keyword">var</span> slot = (slots[name] || (slots[name] = []));</span><br><span class="line">        <span class="comment">// 如果是tempalte元素 则把template的children添加进数组中，这也就是为什么你写的template标签并不会渲染成另一个标签到页面</span></span><br><span class="line">        <span class="keyword">if</span> (child.<span class="property">tag</span> === <span class="string">&#x27;template&#x27;</span>) &#123;</span><br><span class="line">          slot.<span class="property">push</span>.<span class="title function_">apply</span>(slot, child.<span class="property">children</span> || []);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          slot.<span class="title function_">push</span>(child);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果没有就默认是default</span></span><br><span class="line">        (slots.<span class="property">default</span> || (slots.<span class="property">default</span> = [])).<span class="title function_">push</span>(child);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ignore slots that contains only whitespace</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> name$1 <span class="keyword">in</span> slots) &#123;</span><br><span class="line">      <span class="keyword">if</span> (slots[name$1].<span class="title function_">every</span>(isWhitespace)) &#123;</span><br><span class="line">        <span class="keyword">delete</span> slots[name$1];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slots</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">_render`渲染函数通过`normalizeScopedSlots`得到`vm.$scopedSlots</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">vm.<span class="property">$scopedSlots</span> = <span class="title function_">normalizeScopedSlots</span>(</span><br><span class="line">  _parentVnode.<span class="property">data</span>.<span class="property">scopedSlots</span>,</span><br><span class="line">  vm.<span class="property">$slots</span>,</span><br><span class="line">  vm.<span class="property">$scopedSlots</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>作用域插槽中父组件能够得到子组件的值是因为在<code>renderSlot</code>的时候执行会传入<code>props</code>，也就是上述<code>_t</code>第三个参数，父组件则能够得到子组件传递过来的值</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a href="https://juejin.cn/post/6844903817746628615#heading-4">https://juejin.cn/post/6844903817746628615#heading-4</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots">https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots</a></li>
+<li><a href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
+<li><a href="https://segmentfault.com/a/1190000019492734?utm_source=tag-newest">https://segmentfault.com/a/1190000019492734?utm_source=tag-newest</a></li>
+<li>@js语音答题社区</li>
+</ul>
+]]></content>
+      <categories>
+        <category>vue面试题</category>
+      </categories>
+      <tags>
+        <tag>说说你对slot的理解</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>说说你对vue的mixin的理解</title>
     <url>/posts/11537.html</url>
     <content><![CDATA[<h1 id="说说你对vue的mixin的理解"><a href="#说说你对vue的mixin的理解" class="headerlink" title="说说你对vue的mixin的理解"></a>说说你对vue的mixin的理解</h1><h2 id="面试官：说说你对vue的mixin的理解，有什么应用场景？"><a href="#面试官：说说你对vue的mixin的理解，有什么应用场景？" class="headerlink" title="面试官：说说你对vue的mixin的理解，有什么应用场景？"></a>面试官：说说你对vue的mixin的理解，有什么应用场景？</h2><img src="/posts/11537/image-20221023131918749.png" class="" title="image-20221023131918749">
@@ -5799,109 +5902,6 @@
       </tags>
   </entry>
   <entry>
-    <title>说说你对slot的理解</title>
-    <url>/posts/3047.html</url>
-    <content><![CDATA[<h1 id="说说你对slot的理解"><a href="#说说你对slot的理解" class="headerlink" title="说说你对slot的理解"></a>说说你对slot的理解</h1><h2 id="面试官：说说你对slot的理解？slot使用场景有哪些？"><a href="#面试官：说说你对slot的理解？slot使用场景有哪些？" class="headerlink" title="面试官：说说你对slot的理解？slot使用场景有哪些？"></a>面试官：说说你对slot的理解？slot使用场景有哪些？</h2><img src="/posts/3047/image-20221024062845179.png" class="" title="image-20221024062845179">
-
-<h3 id="一、slot是什么"><a href="#一、slot是什么" class="headerlink" title="一、slot是什么"></a>一、slot是什么</h3><p>在HTML中 <code>slot</code> 元素 ，作为 <code>Web Components</code> 技术套件的一部分，是Web组件内的一个占位符</p>
-<p>该占位符可以在后期使用自己的标记语言填充</p>
-<span id="more"></span>
-
-<p>举个栗子</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;element-details-template&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;element-name&quot;</span>&gt;</span>Slot template<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">element-details</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">&quot;element-name&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">element-details</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">element-details</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">&quot;element-name&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">element-details</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>template</code>不会展示到页面中，需要用先获取它的引用，然后添加到<code>DOM</code>中，</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">customElements.<span class="title function_">define</span>(<span class="string">&#x27;element-details&#x27;</span>,</span><br><span class="line">  <span class="keyword">class</span> <span class="title class_">extends</span> <span class="title class_">HTMLElement</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">super</span>();</span><br><span class="line">      <span class="keyword">const</span> template = <span class="variable language_">document</span></span><br><span class="line">        .<span class="title function_">getElementById</span>(<span class="string">&#x27;element-details-template&#x27;</span>)</span><br><span class="line">        .<span class="property">content</span>;</span><br><span class="line">      <span class="keyword">const</span> shadowRoot = <span class="variable language_">this</span>.<span class="title function_">attachShadow</span>(&#123;<span class="attr">mode</span>: <span class="string">&#x27;open&#x27;</span>&#125;)</span><br><span class="line">        .<span class="title function_">appendChild</span>(template.<span class="title function_">cloneNode</span>(<span class="literal">true</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>在<code>Vue</code>中的概念也是如此</p>
-<p><code>Slot</code> 艺名插槽，花名“占坑”，我们可以理解为<code>solt</code>在组件模板中占好了位置，当使用该组件标签时候，组件标签里面的内容就会自动填坑（替换组件模板中<code>slot</code>位置），作为承载分发内容的出口</p>
-<p>可以将其类比为插卡式的FC游戏机，游戏机暴露卡槽（插槽）让用户插入不同的游戏磁条（自定义内容）</p>
-<p>放张图感受一下</p>
-<img src="/posts/3047/image-20221024063011755.png" class="" title="image-20221024063011755">
-
-<h3 id="二、使用场景"><a href="#二、使用场景" class="headerlink" title="二、使用场景"></a>二、使用场景</h3><p>通过插槽可以让用户可以拓展组件，去更好地复用组件和对其做定制化处理</p>
-<p>如果父组件在使用到一个复用组件的时候，获取这个组件在不同的地方有少量的更改，如果去重写组件是一件不明智的事情</p>
-<p>通过<code>slot</code>插槽向组件内部指定位置传递内容，完成这个复用组件在不同场景的应用</p>
-<p>比如布局组件、表格列、下拉选、弹框显示内容等</p>
-<h3 id="三、分类"><a href="#三、分类" class="headerlink" title="三、分类"></a>三、分类</h3><p><code>slot</code>可以分来以下三种：</p>
-<ul>
-<li>默认插槽</li>
-<li>具名插槽</li>
-<li>作用域插槽</li>
-</ul>
-<h4 id="默认插槽"><a href="#默认插槽" class="headerlink" title="默认插槽"></a>默认插槽</h4><p>子组件用<code>&lt;slot&gt;</code>标签来确定渲染的位置，标签里面可以放<code>DOM</code>结构，当父组件使用的时候没有往插槽传入内容，标签内<code>DOM</code>结构就会显示在页面</p>
-<p>父组件在使用的时候，直接在子组件的标签内写入内容即可</p>
-<p>子组件<code>Child.vue</code></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>插槽后备的内容<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>父组件</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Child</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>默认插槽<span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">Child</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="具名插槽"><a href="#具名插槽" class="headerlink" title="具名插槽"></a>具名插槽</h4><p>子组件用<code>name</code>属性来表示插槽的名字，不传为默认插槽</p>
-<p>父组件中在使用时在默认插槽的基础上加上<code>slot</code>属性，值为子组件插槽<code>name</code>属性值</p>
-<p>子组件<code>Child.vue</code></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span>插槽后备的内容<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;content&quot;</span>&gt;</span>插槽后备的内容<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>父组件</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:default</span>&gt;</span>具名插槽<span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 具名插槽⽤插槽名做参数 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:content</span>&gt;</span>内容...<span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h4><p>子组件在作用域上绑定属性来将子组件的信息传给父组件使用，这些属性会被挂在父组件<code>v-slot</code>接受的对象上</p>
-<p>父组件中在使用时通过<code>v-slot:</code>（简写：#）获取子组件的信息，在内容中使用</p>
-<p>子组件<code>Child.vue</code></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;footer&quot;</span> <span class="attr">testProps</span>=<span class="string">&quot;子组件的值&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">h3</span>&gt;</span>没传footer插槽<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>父组件</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child</span>&gt;</span> </span><br><span class="line">    <span class="comment">&lt;!-- 把v-slot的值指定为作⽤域上下⽂对象 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:default</span>=<span class="string">&quot;slotProps&quot;</span>&gt;</span></span><br><span class="line">      来⾃⼦组件数据：&#123;&#123;slotProps.testProps&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> #<span class="attr">default</span>=<span class="string">&quot;slotProps&quot;</span>&gt;</span></span><br><span class="line">      来⾃⼦组件数据：&#123;&#123;slotProps.testProps&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><ul>
-<li><code>v-slot</code>属性只能在<code>&lt;template&gt;</code>上使用，但在只有默认插槽时可以在组件标签上使用</li>
-<li>默认插槽名为<code>default</code>，可以省略default直接写<code>v-slot</code></li>
-<li>缩写为<code>#</code>时不能不写参数，写成<code>#default</code></li>
-<li>可以通过解构获取<code>v-slot=&#123;user&#125;</code>，还可以重命名<code>v-slot=&quot;&#123;user: newName&#125;&quot;</code>和定义默认值<code>v-slot=&quot;&#123;user = &#39;默认值&#39;&#125;&quot;</code></li>
-</ul>
-<h3 id="四、原理分析"><a href="#四、原理分析" class="headerlink" title="四、原理分析"></a>四、原理分析</h3><p><code>slot</code>本质上是返回<code>VNode</code>的函数，一般情况下，<code>Vue</code>中的组件要渲染到页面上需要经过<code>template -&gt; render function -&gt; VNode -&gt; DOM</code> 过程，这里看看<code>slot</code>如何实现：</p>
-<p>编写一个<code>buttonCounter</code>组件，使用匿名插槽</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;button-counter&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">template</span>: <span class="string">&#x27;&lt;div&gt; &lt;slot&gt;我是默认内容&lt;/slot&gt;&lt;/div&gt;&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>使用该组件</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">    <span class="attr">template</span>: <span class="string">&#x27;&lt;button-counter&gt;&lt;span&gt;我是slot传入内容&lt;/span&gt;&lt;/button-counter&gt;&#x27;</span>,</span><br><span class="line">    <span class="attr">components</span>:&#123;buttonCounter&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>获取<code>buttonCounter</code>组件渲染函数</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="title function_">anonymous</span>(<span class="params"></span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line"><span class="title function_">with</span>(<span class="params"><span class="variable language_">this</span></span>)&#123;<span class="keyword">return</span> <span class="title function_">_c</span>(<span class="string">&#x27;div&#x27;</span>,[<span class="title function_">_t</span>(<span class="string">&quot;default&quot;</span>,[<span class="title function_">_v</span>(<span class="string">&quot;我是默认内容&quot;</span>)])],<span class="number">2</span>)&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><code>_v</code>表示穿件普通文本节点，<code>_t</code>表示渲染插槽的函数</p>
-<p>渲染插槽函数<code>renderSlot</code>（做了简化）</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">renderSlot</span> (</span><br><span class="line">  name,</span><br><span class="line">  fallback,</span><br><span class="line">  props,</span><br><span class="line">  bindObject</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="comment">// 得到渲染插槽内容的函数    </span></span><br><span class="line">  <span class="keyword">var</span> scopedSlotFn = <span class="variable language_">this</span>.<span class="property">$scopedSlots</span>[name];</span><br><span class="line">  <span class="keyword">var</span> nodes;</span><br><span class="line">  <span class="comment">// 如果存在插槽渲染函数，则执行插槽渲染函数，生成nodes节点返回</span></span><br><span class="line">  <span class="comment">// 否则使用默认值</span></span><br><span class="line">  nodes = <span class="title function_">scopedSlotFn</span>(props) || fallback;</span><br><span class="line">  <span class="keyword">return</span> nodes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>name</code>属性表示定义插槽的名字，默认值为<code>default</code>，<code>fallback</code>表示子组件中的<code>slot</code>节点的默认值</p>
-<p>关于<code>this.$scopredSlots</code>是什么，我们可以先看看<code>vm.slot</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">initRender</span> (vm) &#123;</span><br><span class="line">  ...</span><br><span class="line">  vm.<span class="property">$slots</span> = <span class="title function_">resolveSlots</span>(options.<span class="property">_renderChildren</span>, renderContext);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">resolveSlots`函数会对`children`节点做归类和过滤处理，返回`slots</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">resolveSlots</span> (</span><br><span class="line">    children,</span><br><span class="line">    context</span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!children || !children.<span class="property">length</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> slots = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = children.<span class="property">length</span>; i &lt; l; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> child = children[i];</span><br><span class="line">      <span class="keyword">var</span> data = child.<span class="property">data</span>;</span><br><span class="line">      <span class="comment">// remove slot attribute if the node is resolved as a Vue slot node</span></span><br><span class="line">      <span class="keyword">if</span> (data &amp;&amp; data.<span class="property">attrs</span> &amp;&amp; data.<span class="property">attrs</span>.<span class="property">slot</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> data.<span class="property">attrs</span>.<span class="property">slot</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// named slots should only be respected if the vnode was rendered in the</span></span><br><span class="line">      <span class="comment">// same context.</span></span><br><span class="line">      <span class="keyword">if</span> ((child.<span class="property">context</span> === context || child.<span class="property">fnContext</span> === context) &amp;&amp;</span><br><span class="line">        data &amp;&amp; data.<span class="property">slot</span> != <span class="literal">null</span></span><br><span class="line">      ) &#123;</span><br><span class="line">        <span class="comment">// 如果slot存在(slot=&quot;header&quot;) 则拿对应的值作为key</span></span><br><span class="line">        <span class="keyword">var</span> name = data.<span class="property">slot</span>;</span><br><span class="line">        <span class="keyword">var</span> slot = (slots[name] || (slots[name] = []));</span><br><span class="line">        <span class="comment">// 如果是tempalte元素 则把template的children添加进数组中，这也就是为什么你写的template标签并不会渲染成另一个标签到页面</span></span><br><span class="line">        <span class="keyword">if</span> (child.<span class="property">tag</span> === <span class="string">&#x27;template&#x27;</span>) &#123;</span><br><span class="line">          slot.<span class="property">push</span>.<span class="title function_">apply</span>(slot, child.<span class="property">children</span> || []);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          slot.<span class="title function_">push</span>(child);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果没有就默认是default</span></span><br><span class="line">        (slots.<span class="property">default</span> || (slots.<span class="property">default</span> = [])).<span class="title function_">push</span>(child);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ignore slots that contains only whitespace</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> name$1 <span class="keyword">in</span> slots) &#123;</span><br><span class="line">      <span class="keyword">if</span> (slots[name$1].<span class="title function_">every</span>(isWhitespace)) &#123;</span><br><span class="line">        <span class="keyword">delete</span> slots[name$1];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slots</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">_render`渲染函数通过`normalizeScopedSlots`得到`vm.$scopedSlots</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">vm.<span class="property">$scopedSlots</span> = <span class="title function_">normalizeScopedSlots</span>(</span><br><span class="line">  _parentVnode.<span class="property">data</span>.<span class="property">scopedSlots</span>,</span><br><span class="line">  vm.<span class="property">$slots</span>,</span><br><span class="line">  vm.<span class="property">$scopedSlots</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>作用域插槽中父组件能够得到子组件的值是因为在<code>renderSlot</code>的时候执行会传入<code>props</code>，也就是上述<code>_t</code>第三个参数，父组件则能够得到子组件传递过来的值</p>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
-<li><a href="https://juejin.cn/post/6844903817746628615#heading-4">https://juejin.cn/post/6844903817746628615#heading-4</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots">https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots</a></li>
-<li><a href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
-<li><a href="https://segmentfault.com/a/1190000019492734?utm_source=tag-newest">https://segmentfault.com/a/1190000019492734?utm_source=tag-newest</a></li>
-<li>@js语音答题社区</li>
-</ul>
-]]></content>
-      <categories>
-        <category>vue面试题</category>
-      </categories>
-      <tags>
-        <tag>说说你对slot的理解</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>谈谈你对axios封装的理解</title>
     <url>/posts/5373.html</url>
     <content><![CDATA[<h1 id="谈谈你对axios封装的理解"><a href="#谈谈你对axios封装的理解" class="headerlink" title="谈谈你对axios封装的理解"></a>谈谈你对axios封装的理解</h1><h2 id="面试官：Vue项目中有封装过axios吗？主要是封装哪方面的？"><a href="#面试官：Vue项目中有封装过axios吗？主要是封装哪方面的？" class="headerlink" title="面试官：Vue项目中有封装过axios吗？主要是封装哪方面的？"></a>面试官：Vue项目中有封装过axios吗？主要是封装哪方面的？</h2><img src="/posts/5373/image-20221103055626680.png" class="" title="image-20221103055626680">
@@ -5989,6 +5989,105 @@
       </categories>
       <tags>
         <tag>对axios封装的理解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>谈谈虚拟dom</title>
+    <url>/posts/37478.html</url>
+    <content><![CDATA[<h1 id="谈谈虚拟dom"><a href="#谈谈虚拟dom" class="headerlink" title="谈谈虚拟dom"></a>谈谈虚拟dom</h1><h2 id="面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路"><a href="#面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路" class="headerlink" title="面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路"></a>面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路</h2><img src="/posts/37478/image-20221101055808458.png" class="" title="image-20221101055808458">
+
+<h3 id="一、什么是虚拟DOM"><a href="#一、什么是虚拟DOM" class="headerlink" title="一、什么是虚拟DOM"></a>一、什么是虚拟DOM</h3><p>虚拟 DOM （<code>Virtual DOM</code> ）这个概念相信大家都不陌生，从 <code>React</code> 到 <code>Vue</code> ，虚拟 <code>DOM</code> 为这两个框架都带来了跨平台的能力（<code>React-Native</code> 和 <code>Weex</code>）</p>
+<span id="more"></span>
+
+<p>实际上它只是一层对真实<code>DOM</code>的抽象，以<code>JavaScript</code> 对象 (<code>VNode</code> 节点) 作为基础的树，用对象的属性来描述节点，最终可以通过一系列操作使这棵树映射到真实环境上</p>
+<p>在<code>Javascript</code>对象中，虚拟<code>DOM</code> 表现为一个 <code>Object</code>对象。并且最少包含标签名 (<code>tag</code>)、属性 (<code>attrs</code>) 和子元素对象 (<code>children</code>) 三个属性，不同框架对这三个属性的名命可能会有差别</p>
+<p>创建虚拟<code>DOM</code>就是为了更好将虚拟的节点渲染到页面视图中，所以虚拟<code>DOM</code>对象的节点与真实<code>DOM</code>的属性一一照应</p>
+<p>在<code>vue</code>中同样使用到了虚拟<code>DOM</code>技术</p>
+<p>定义真实<code>DOM</code></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;p&quot;</span>&gt;</span>节点内容<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123; foo &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>实例化<code>vue</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>:<span class="string">&quot;#app&quot;</span>,</span><br><span class="line">    <span class="attr">data</span>:&#123;</span><br><span class="line">        <span class="attr">foo</span>:<span class="string">&quot;foo&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>观察<code>render</code>的<code>render</code>，我们能得到虚拟<code>DOM</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="title function_">anonymous</span>(<span class="params"></span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">	<span class="title function_">with</span>(<span class="params"><span class="variable language_">this</span></span>)&#123;<span class="keyword">return</span> <span class="title function_">_c</span>(<span class="string">&#x27;div&#x27;</span>,&#123;<span class="attr">attrs</span>:&#123;<span class="string">&quot;id&quot;</span>:<span class="string">&quot;app&quot;</span>&#125;&#125;,[<span class="title function_">_c</span>(<span class="string">&#x27;p&#x27;</span>,&#123;<span class="attr">staticClass</span>:<span class="string">&quot;p&quot;</span>&#125;,</span><br><span class="line">					  [<span class="title function_">_v</span>(<span class="string">&quot;节点内容&quot;</span>)]),<span class="title function_">_v</span>(<span class="string">&quot; &quot;</span>),<span class="title function_">_c</span>(<span class="string">&#x27;h3&#x27;</span>,[<span class="title function_">_v</span>(<span class="title function_">_s</span>(foo))])])&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>VNode</code>，<code>vue</code>可以对这颗抽象树进行创建节点,删除节点以及修改节点的操作， 经过<code>diff</code>算法得出一些需要修改的最小单位,再更新视图，减少了<code>dom</code>操作，提高了性能</p>
+<h3 id="二、为什么需要虚拟DOM"><a href="#二、为什么需要虚拟DOM" class="headerlink" title="二、为什么需要虚拟DOM"></a>二、为什么需要虚拟DOM</h3><p><code>DOM</code>是很慢的，其元素非常庞大，页面的性能问题，大部分都是由<code>DOM</code>操作引起的</p>
+<p>真实的<code>DOM</code>节点，哪怕一个最简单的<code>div</code>也包含着很多属性，可以打印出来直观感受一下：</p>
+<img src="/posts/37478/image-20221101055932532.png" class="" title="image-20221101055932532">
+
+<p>由此可见，操作<code>DOM</code>的代价仍旧是昂贵的，频繁操作还是会出现页面卡顿，影响用户的体验</p>
+<p><strong>举个例子：</strong></p>
+<p>你用传统的原生<code>api</code>或<code>jQuery</code>去操作<code>DOM</code>时，浏览器会从构建<code>DOM</code>树开始从头到尾执行一遍流程</p>
+<p>当你在一次操作时，需要更新10个<code>DOM</code>节点，浏览器没这么智能，收到第一个更新<code>DOM</code>请求后，并不知道后续还有9次更新操作，因此会马上执行流程，最终执行10次流程</p>
+<p>而通过<code>VNode</code>，同样更新10个<code>DOM</code>节点，虚拟<code>DOM</code>不会立即操作<code>DOM</code>，而是将这10次更新的<code>diff</code>内容保存到本地的一个<code>js</code>对象中，最终将这个<code>js</code>对象一次性<code>attach</code>到<code>DOM</code>树上，避免大量的无谓计算</p>
+<blockquote>
+<p>很多人认为虚拟 DOM 最大的优势是 diff 算法，减少 JavaScript 操作真实 DOM 的带来的性能消耗。虽然这一个虚拟 DOM 带来的一个优势，但并不是全部。虚拟 DOM 最大的优势在于抽象了原本的渲染过程，实现了跨平台的能力，而不仅仅局限于浏览器的 DOM，可以是安卓和 IOS 的原生组件，可以是近期很火热的小程序，也可以是各种GUI</p>
+</blockquote>
+<h3 id="三、如何实现虚拟DOM"><a href="#三、如何实现虚拟DOM" class="headerlink" title="三、如何实现虚拟DOM"></a>三、如何实现虚拟DOM</h3><p>首先可以看看<code>vue</code>中<code>VNode</code>的结构</p>
+<p>源码位置：src/core/vdom/vnode.js</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">VNode</span> &#123;</span><br><span class="line">  <span class="attr">tag</span>: string | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">data</span>: <span class="title class_">VNodeData</span> | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">children</span>: ?<span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt;;</span><br><span class="line">  <span class="attr">text</span>: string | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">elm</span>: <span class="title class_">Node</span> | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">ns</span>: string | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">context</span>: <span class="title class_">Component</span> | <span class="keyword">void</span>; <span class="comment">// rendered in this component&#x27;s scope</span></span><br><span class="line">  <span class="attr">functionalContext</span>: <span class="title class_">Component</span> | <span class="keyword">void</span>; <span class="comment">// only for functional component root nodes</span></span><br><span class="line">  <span class="attr">key</span>: string | number | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">componentOptions</span>: <span class="title class_">VNodeComponentOptions</span> | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">componentInstance</span>: <span class="title class_">Component</span> | <span class="keyword">void</span>; <span class="comment">// component instance</span></span><br><span class="line">  <span class="attr">parent</span>: <span class="title class_">VNode</span> | <span class="keyword">void</span>; <span class="comment">// component placeholder node</span></span><br><span class="line">  <span class="attr">raw</span>: boolean; <span class="comment">// contains raw HTML? (server only)</span></span><br><span class="line">  <span class="attr">isStatic</span>: boolean; <span class="comment">// hoisted static node</span></span><br><span class="line">  <span class="attr">isRootInsert</span>: boolean; <span class="comment">// necessary for enter transition check</span></span><br><span class="line">  <span class="attr">isComment</span>: boolean; <span class="comment">// empty comment placeholder?</span></span><br><span class="line">  <span class="attr">isCloned</span>: boolean; <span class="comment">// is a cloned node?</span></span><br><span class="line">  <span class="attr">isOnce</span>: boolean; <span class="comment">// is a v-once node?</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span> (</span><br><span class="line">    tag?: string,</span><br><span class="line">    data?: <span class="title class_">VNodeData</span>,</span><br><span class="line">    children?: ?<span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt;,</span><br><span class="line">    text?: string,</span><br><span class="line">    elm?: <span class="title class_">Node</span>,</span><br><span class="line">    context?: <span class="title class_">Component</span>,</span><br><span class="line">    componentOptions?: <span class="title class_">VNodeComponentOptions</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="comment">/*当前节点的标签名*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">tag</span> = tag</span><br><span class="line">    <span class="comment">/*当前节点对应的对象，包含了具体的一些数据信息，是一个VNodeData类型，可以参考VNodeData类型中的数据信息*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">data</span> = data</span><br><span class="line">    <span class="comment">/*当前节点的子节点，是一个数组*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">children</span> = children</span><br><span class="line">    <span class="comment">/*当前节点的文本*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">text</span> = text</span><br><span class="line">    <span class="comment">/*当前虚拟节点对应的真实dom节点*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">elm</span> = elm</span><br><span class="line">    <span class="comment">/*当前节点的名字空间*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ns</span> = <span class="literal">undefined</span></span><br><span class="line">    <span class="comment">/*编译作用域*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span> = context</span><br><span class="line">    <span class="comment">/*函数化组件作用域*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">functionalContext</span> = <span class="literal">undefined</span></span><br><span class="line">    <span class="comment">/*节点的key属性，被当作节点的标志，用以优化*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">key</span> = data &amp;&amp; data.<span class="property">key</span></span><br><span class="line">    <span class="comment">/*组件的option选项*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">componentOptions</span> = componentOptions</span><br><span class="line">    <span class="comment">/*当前节点对应的组件的实例*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">componentInstance</span> = <span class="literal">undefined</span></span><br><span class="line">    <span class="comment">/*当前节点的父节点*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parent</span> = <span class="literal">undefined</span></span><br><span class="line">    <span class="comment">/*简而言之就是是否为原生HTML或只是普通文本，innerHTML的时候为true，textContent的时候为false*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">raw</span> = <span class="literal">false</span></span><br><span class="line">    <span class="comment">/*静态节点标志*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isStatic</span> = <span class="literal">false</span></span><br><span class="line">    <span class="comment">/*是否作为跟节点插入*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isRootInsert</span> = <span class="literal">true</span></span><br><span class="line">    <span class="comment">/*是否为注释节点*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isComment</span> = <span class="literal">false</span></span><br><span class="line">    <span class="comment">/*是否为克隆节点*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isCloned</span> = <span class="literal">false</span></span><br><span class="line">    <span class="comment">/*是否有v-once指令*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isOnce</span> = <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// DEPRECATED: alias for componentInstance for backwards compat.</span></span><br><span class="line">  <span class="comment">/* istanbul ignore next https://github.com/answershuto/learnVue*/</span></span><br><span class="line">  get child (): <span class="title class_">Component</span> | <span class="keyword">void</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">componentInstance</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里对<code>VNode</code>进行稍微的说明：</p>
+<ul>
+<li>所有对象的 <code>context</code> 选项都指向了 <code>Vue</code> 实例</li>
+<li><code>elm</code> 属性则指向了其相对应的真实 <code>DOM</code> 节点</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vue`是通过`createElement`生成`VNode</span><br></pre></td></tr></table></figure>
+
+<p>源码位置：src/core/vdom/create-element.js</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createElement</span> (</span><br><span class="line">  <span class="attr">context</span>: <span class="title class_">Component</span>,</span><br><span class="line">  <span class="attr">tag</span>: any,</span><br><span class="line">  <span class="attr">data</span>: any,</span><br><span class="line">  <span class="attr">children</span>: any,</span><br><span class="line">  <span class="attr">normalizationType</span>: any,</span><br><span class="line">  <span class="attr">alwaysNormalize</span>: boolean</span><br><span class="line">): <span class="title class_">VNode</span> | <span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(data) || <span class="title function_">isPrimitive</span>(data)) &#123;</span><br><span class="line">    normalizationType = children</span><br><span class="line">    children = data</span><br><span class="line">    data = <span class="literal">undefined</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isTrue</span>(alwaysNormalize)) &#123;</span><br><span class="line">    normalizationType = <span class="variable constant_">ALWAYS_NORMALIZE</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">_createElement</span>(context, tag, data, children, normalizationType)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面可以看到<code>createElement</code> 方法实际上是对 <code>_createElement</code> 方法的封装，对参数的传入进行了判断</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">_createElement</span>(<span class="params"></span></span><br><span class="line"><span class="params">    context: Component,</span></span><br><span class="line"><span class="params">    tag?: string | Class&lt;Component&gt; | <span class="built_in">Function</span> | <span class="built_in">Object</span>,</span></span><br><span class="line"><span class="params">    data?: VNodeData,</span></span><br><span class="line"><span class="params">    children?: any,</span></span><br><span class="line"><span class="params">    normalizationType?: number</span></span><br><span class="line"><span class="params"></span>): <span class="title class_">VNode</span> | <span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isDef</span>(data) &amp;&amp; <span class="title function_">isDef</span>((<span class="attr">data</span>: any).<span class="property">__ob__</span>)) &#123;</span><br><span class="line">        process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;production&#x27;</span> &amp;&amp; <span class="title function_">warn</span>(</span><br><span class="line">            <span class="string">`Avoid using observed data object as vnode data: <span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(data)&#125;</span>\n`</span> +</span><br><span class="line">            <span class="string">&#x27;Always create fresh vnode data objects in each render!&#x27;</span>,</span><br><span class="line">            context<span class="string">`</span></span><br><span class="line"><span class="string">        )</span></span><br><span class="line"><span class="string">        return createEmptyVNode()</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    // object syntax in v-bind</span></span><br><span class="line"><span class="string">    if (isDef(data) &amp;&amp; isDef(data.is)) &#123;</span></span><br><span class="line"><span class="string">        tag = data.is</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    if (!tag) &#123;</span></span><br><span class="line"><span class="string">        // in case of component :is set to falsy value</span></span><br><span class="line"><span class="string">        return createEmptyVNode()</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    ... </span></span><br><span class="line"><span class="string">    // support single function children as default scoped slot</span></span><br><span class="line"><span class="string">    if (Array.isArray(children) &amp;&amp;</span></span><br><span class="line"><span class="string">        typeof children[0] === &#x27;function&#x27;</span></span><br><span class="line"><span class="string">    ) &#123;</span></span><br><span class="line"><span class="string">        data = data || &#123;&#125;</span></span><br><span class="line"><span class="string">        data.scopedSlots = &#123; default: children[0] &#125;</span></span><br><span class="line"><span class="string">        children.length = 0</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    if (normalizationType === ALWAYS_NORMALIZE) &#123;</span></span><br><span class="line"><span class="string">        children = normalizeChildren(children)</span></span><br><span class="line"><span class="string">    &#125; else if ( === SIMPLE_NORMALIZE) &#123;</span></span><br><span class="line"><span class="string">        children = simpleNormalizeChildren(children)</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">	// 创建VNode</span></span><br><span class="line"><span class="string">    ...</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>可以看到<code>_createElement</code>接收5个参数：</p>
+<ul>
+<li><code>context</code> 表示 <code>VNode</code> 的上下文环境，是 <code>Component</code> 类型</li>
+<li>tag 表示标签，它可以是一个字符串，也可以是一个 <code>Component</code></li>
+<li><code>data</code> 表示 <code>VNode</code> 的数据，它是一个 <code>VNodeData</code> 类型</li>
+<li><code>children</code> 表示当前 <code>VNode</code>的子节点，它是任意类型的</li>
+<li><code>normalizationType</code> 表示子节点规范的类型，类型不同规范的方法也就不一样，主要是参考 <code>render</code> 函数是编译生成的还是用户手写的</li>
+</ul>
+<p>根据<code>normalizationType</code> 的类型，<code>children</code>会有不同的定义</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (normalizationType === <span class="variable constant_">ALWAYS_NORMALIZE</span>) &#123;</span><br><span class="line">    children = <span class="title function_">normalizeChildren</span>(children)</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ( === <span class="variable constant_">SIMPLE_NORMALIZE</span>) &#123;</span><br><span class="line">    children = <span class="title function_">simpleNormalizeChildren</span>(children)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>simpleNormalizeChildren</code>方法调用场景是 <code>render</code> 函数是编译生成的</p>
+<p><code>normalizeChildren</code>方法调用场景分为下面两种：</p>
+<ul>
+<li><code>render</code> 函数是用户手写的</li>
+<li>编译 <code>slot</code>、<code>v-for</code> 的时候会产生嵌套数组</li>
+</ul>
+<p>无论是<code>simpleNormalizeChildren</code>还是<code>normalizeChildren</code>都是对<code>children</code>进行规范（使<code>children</code> 变成了一个类型为 <code>VNode</code> 的 <code>Array</code>），这里就不展开说了</p>
+<p>规范化<code>children</code>的源码位置在：src/core/vdom/helpers/normalzie-children.js</p>
+<p>在规范化<code>children</code>后，就去创建<code>VNode</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> vnode, ns</span><br><span class="line"><span class="comment">// 对tag进行判断</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> tag === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> <span class="title class_">Ctor</span></span><br><span class="line">  ns = (context.<span class="property">$vnode</span> &amp;&amp; context.<span class="property">$vnode</span>.<span class="property">ns</span>) || config.<span class="title function_">getTagNamespace</span>(tag)</span><br><span class="line">  <span class="keyword">if</span> (config.<span class="title function_">isReservedTag</span>(tag)) &#123;</span><br><span class="line">    <span class="comment">// 如果是内置的节点，则直接创建一个普通VNode</span></span><br><span class="line">    vnode = <span class="keyword">new</span> <span class="title class_">VNode</span>(</span><br><span class="line">      config.<span class="title function_">parsePlatformTagName</span>(tag), data, children,</span><br><span class="line">      <span class="literal">undefined</span>, <span class="literal">undefined</span>, context</span><br><span class="line">    )</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="title function_">isDef</span>(<span class="title class_">Ctor</span> = <span class="title function_">resolveAsset</span>(context.<span class="property">$options</span>, <span class="string">&#x27;components&#x27;</span>, tag))) &#123;</span><br><span class="line">    <span class="comment">// component</span></span><br><span class="line">    <span class="comment">// 如果是component类型，则会通过createComponent创建VNode节点</span></span><br><span class="line">    vnode = <span class="title function_">createComponent</span>(<span class="title class_">Ctor</span>, data, context, children, tag)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    vnode = <span class="keyword">new</span> <span class="title class_">VNode</span>(</span><br><span class="line">      tag, data, children,</span><br><span class="line">      <span class="literal">undefined</span>, <span class="literal">undefined</span>, context</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// direct component options / constructor</span></span><br><span class="line">  vnode = <span class="title function_">createComponent</span>(tag, data, context, children)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">createComponent`同样是创建`VNode</span><br></pre></td></tr></table></figure>
+
+<p>源码位置：src/core/vdom/create-component.js</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createComponent</span> (</span><br><span class="line">  <span class="title class_">Ctor</span>: <span class="title class_">Class</span>&lt;<span class="title class_">Component</span>&gt; | <span class="title class_">Function</span> | <span class="title class_">Object</span> | <span class="keyword">void</span>,</span><br><span class="line">  <span class="attr">data</span>: ?<span class="title class_">VNodeData</span>,</span><br><span class="line">  <span class="attr">context</span>: <span class="title class_">Component</span>,</span><br><span class="line">  <span class="attr">children</span>: ?<span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt;,</span><br><span class="line">  tag?: string</span><br><span class="line">): <span class="title class_">VNode</span> | <span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt; | <span class="keyword">void</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isUndef</span>(<span class="title class_">Ctor</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"> <span class="comment">// 构建子类构造函数 </span></span><br><span class="line">  <span class="keyword">const</span> baseCtor = context.<span class="property">$options</span>.<span class="property">_base</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// plain options object: turn it into a constructor</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isObject</span>(<span class="title class_">Ctor</span>)) &#123;</span><br><span class="line">    <span class="title class_">Ctor</span> = baseCtor.<span class="title function_">extend</span>(<span class="title class_">Ctor</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// if at this stage it&#x27;s not a constructor or an async component factory,</span></span><br><span class="line">  <span class="comment">// reject.</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="title class_">Ctor</span> !== <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">      <span class="title function_">warn</span>(<span class="string">`Invalid Component definition: <span class="subst">$&#123;<span class="built_in">String</span>(Ctor)&#125;</span>`</span>, context)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// async component</span></span><br><span class="line">  <span class="keyword">let</span> asyncFactory</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isUndef</span>(<span class="title class_">Ctor</span>.<span class="property">cid</span>)) &#123;</span><br><span class="line">    asyncFactory = <span class="title class_">Ctor</span></span><br><span class="line">    <span class="title class_">Ctor</span> = <span class="title function_">resolveAsyncComponent</span>(asyncFactory, baseCtor, context)</span><br><span class="line">    <span class="keyword">if</span> (<span class="title class_">Ctor</span> === <span class="literal">undefined</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">createAsyncPlaceholder</span>(</span><br><span class="line">        asyncFactory,</span><br><span class="line">        data,</span><br><span class="line">        context,</span><br><span class="line">        children,</span><br><span class="line">        tag</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  data = data || &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// resolve constructor options in case global mixins are applied after</span></span><br><span class="line">  <span class="comment">// component constructor creation</span></span><br><span class="line">  <span class="title function_">resolveConstructorOptions</span>(<span class="title class_">Ctor</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// transform component v-model data into props &amp; events</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isDef</span>(data.<span class="property">model</span>)) &#123;</span><br><span class="line">    <span class="title function_">transformModel</span>(<span class="title class_">Ctor</span>.<span class="property">options</span>, data)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// extract props</span></span><br><span class="line">  <span class="keyword">const</span> propsData = <span class="title function_">extractPropsFromVNodeData</span>(data, <span class="title class_">Ctor</span>, tag)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// functional component</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isTrue</span>(<span class="title class_">Ctor</span>.<span class="property">options</span>.<span class="property">functional</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">createFunctionalComponent</span>(<span class="title class_">Ctor</span>, propsData, data, context, children)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// extract listeners, since these needs to be treated as</span></span><br><span class="line">  <span class="comment">// child component listeners instead of DOM listeners</span></span><br><span class="line">  <span class="keyword">const</span> listeners = data.<span class="property">on</span></span><br><span class="line">  <span class="comment">// replace with listeners with .native modifier</span></span><br><span class="line">  <span class="comment">// so it gets processed during parent component patch.</span></span><br><span class="line">  data.<span class="property">on</span> = data.<span class="property">nativeOn</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isTrue</span>(<span class="title class_">Ctor</span>.<span class="property">options</span>.<span class="property">abstract</span>)) &#123;</span><br><span class="line">    <span class="keyword">const</span> slot = data.<span class="property">slot</span></span><br><span class="line">    data = &#123;&#125;</span><br><span class="line">    <span class="keyword">if</span> (slot) &#123;</span><br><span class="line">      data.<span class="property">slot</span> = slot</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 安装组件钩子函数，把钩子函数合并到data.hook中</span></span><br><span class="line">  <span class="title function_">installComponentHooks</span>(data)</span><br><span class="line"></span><br><span class="line">  <span class="comment">//实例化一个VNode返回。组件的VNode是没有children的</span></span><br><span class="line">  <span class="keyword">const</span> name = <span class="title class_">Ctor</span>.<span class="property">options</span>.<span class="property">name</span> || tag</span><br><span class="line">  <span class="keyword">const</span> vnode = <span class="keyword">new</span> <span class="title class_">VNode</span>(</span><br><span class="line">    <span class="string">`vue-component-<span class="subst">$&#123;Ctor.cid&#125;</span><span class="subst">$&#123;name ? <span class="string">`-<span class="subst">$&#123;name&#125;</span>`</span> : <span class="string">&#x27;&#x27;</span>&#125;</span>`</span>,</span><br><span class="line">    data, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, context,</span><br><span class="line">    &#123; <span class="title class_">Ctor</span>, propsData, listeners, tag, children &#125;,</span><br><span class="line">    asyncFactory</span><br><span class="line">  )</span><br><span class="line">  <span class="keyword">if</span> (__WEEX__ &amp;&amp; <span class="title function_">isRecyclableComponent</span>(vnode)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">renderRecyclableComponentTemplate</span>(vnode)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> vnode</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>稍微提下<code>createComponent</code>生成<code>VNode</code>的三个关键流程：</p>
+<ul>
+<li>构造子类构造函数<code>Ctor</code></li>
+<li><code>installComponentHooks</code>安装组件钩子函数</li>
+<li>实例化 <code>vnode</code></li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p><code>createElement</code> 创建 <code>VNode</code> 的过程，每个 <code>VNode</code> 有 <code>children</code>，<code>children</code> 每个元素也是一个<code>VNode</code>，这样就形成了一个虚拟树结构，用于描述真实的<code>DOM</code>树结构</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a href="https://ustbhuangyi.github.io/vue-analysis/v2/data-driven/create-element.html#children-%E7%9A%84%E8%A7%84%E8%8C%83%E5%8C%96">https://ustbhuangyi.github.io/vue-analysis/v2/data-driven/create-element.html#children-%E7%9A%84%E8%A7%84%E8%8C%83%E5%8C%96</a></li>
+<li><a href="https://juejin.cn/post/6876711874050818061">https://juejin.cn/post/6876711874050818061</a></li>
+<li>@js语音答题社区</li>
+</ul>
+]]></content>
+      <categories>
+        <category>vue面试题</category>
+      </categories>
+      <tags>
+        <tag>虚拟dom</tag>
       </tags>
   </entry>
   <entry>
@@ -6400,105 +6499,6 @@
       </categories>
       <tags>
         <tag>配置文件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>谈谈虚拟dom</title>
-    <url>/posts/37478.html</url>
-    <content><![CDATA[<h1 id="谈谈虚拟dom"><a href="#谈谈虚拟dom" class="headerlink" title="谈谈虚拟dom"></a>谈谈虚拟dom</h1><h2 id="面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路"><a href="#面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路" class="headerlink" title="面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路"></a>面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路</h2><img src="/posts/37478/image-20221101055808458.png" class="" title="image-20221101055808458">
-
-<h3 id="一、什么是虚拟DOM"><a href="#一、什么是虚拟DOM" class="headerlink" title="一、什么是虚拟DOM"></a>一、什么是虚拟DOM</h3><p>虚拟 DOM （<code>Virtual DOM</code> ）这个概念相信大家都不陌生，从 <code>React</code> 到 <code>Vue</code> ，虚拟 <code>DOM</code> 为这两个框架都带来了跨平台的能力（<code>React-Native</code> 和 <code>Weex</code>）</p>
-<span id="more"></span>
-
-<p>实际上它只是一层对真实<code>DOM</code>的抽象，以<code>JavaScript</code> 对象 (<code>VNode</code> 节点) 作为基础的树，用对象的属性来描述节点，最终可以通过一系列操作使这棵树映射到真实环境上</p>
-<p>在<code>Javascript</code>对象中，虚拟<code>DOM</code> 表现为一个 <code>Object</code>对象。并且最少包含标签名 (<code>tag</code>)、属性 (<code>attrs</code>) 和子元素对象 (<code>children</code>) 三个属性，不同框架对这三个属性的名命可能会有差别</p>
-<p>创建虚拟<code>DOM</code>就是为了更好将虚拟的节点渲染到页面视图中，所以虚拟<code>DOM</code>对象的节点与真实<code>DOM</code>的属性一一照应</p>
-<p>在<code>vue</code>中同样使用到了虚拟<code>DOM</code>技术</p>
-<p>定义真实<code>DOM</code></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;p&quot;</span>&gt;</span>节点内容<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123; foo &#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>实例化<code>vue</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>:<span class="string">&quot;#app&quot;</span>,</span><br><span class="line">    <span class="attr">data</span>:&#123;</span><br><span class="line">        <span class="attr">foo</span>:<span class="string">&quot;foo&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>观察<code>render</code>的<code>render</code>，我们能得到虚拟<code>DOM</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="title function_">anonymous</span>(<span class="params"></span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">	<span class="title function_">with</span>(<span class="params"><span class="variable language_">this</span></span>)&#123;<span class="keyword">return</span> <span class="title function_">_c</span>(<span class="string">&#x27;div&#x27;</span>,&#123;<span class="attr">attrs</span>:&#123;<span class="string">&quot;id&quot;</span>:<span class="string">&quot;app&quot;</span>&#125;&#125;,[<span class="title function_">_c</span>(<span class="string">&#x27;p&#x27;</span>,&#123;<span class="attr">staticClass</span>:<span class="string">&quot;p&quot;</span>&#125;,</span><br><span class="line">					  [<span class="title function_">_v</span>(<span class="string">&quot;节点内容&quot;</span>)]),<span class="title function_">_v</span>(<span class="string">&quot; &quot;</span>),<span class="title function_">_c</span>(<span class="string">&#x27;h3&#x27;</span>,[<span class="title function_">_v</span>(<span class="title function_">_s</span>(foo))])])&#125;&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>通过<code>VNode</code>，<code>vue</code>可以对这颗抽象树进行创建节点,删除节点以及修改节点的操作， 经过<code>diff</code>算法得出一些需要修改的最小单位,再更新视图，减少了<code>dom</code>操作，提高了性能</p>
-<h3 id="二、为什么需要虚拟DOM"><a href="#二、为什么需要虚拟DOM" class="headerlink" title="二、为什么需要虚拟DOM"></a>二、为什么需要虚拟DOM</h3><p><code>DOM</code>是很慢的，其元素非常庞大，页面的性能问题，大部分都是由<code>DOM</code>操作引起的</p>
-<p>真实的<code>DOM</code>节点，哪怕一个最简单的<code>div</code>也包含着很多属性，可以打印出来直观感受一下：</p>
-<img src="/posts/37478/image-20221101055932532.png" class="" title="image-20221101055932532">
-
-<p>由此可见，操作<code>DOM</code>的代价仍旧是昂贵的，频繁操作还是会出现页面卡顿，影响用户的体验</p>
-<p><strong>举个例子：</strong></p>
-<p>你用传统的原生<code>api</code>或<code>jQuery</code>去操作<code>DOM</code>时，浏览器会从构建<code>DOM</code>树开始从头到尾执行一遍流程</p>
-<p>当你在一次操作时，需要更新10个<code>DOM</code>节点，浏览器没这么智能，收到第一个更新<code>DOM</code>请求后，并不知道后续还有9次更新操作，因此会马上执行流程，最终执行10次流程</p>
-<p>而通过<code>VNode</code>，同样更新10个<code>DOM</code>节点，虚拟<code>DOM</code>不会立即操作<code>DOM</code>，而是将这10次更新的<code>diff</code>内容保存到本地的一个<code>js</code>对象中，最终将这个<code>js</code>对象一次性<code>attach</code>到<code>DOM</code>树上，避免大量的无谓计算</p>
-<blockquote>
-<p>很多人认为虚拟 DOM 最大的优势是 diff 算法，减少 JavaScript 操作真实 DOM 的带来的性能消耗。虽然这一个虚拟 DOM 带来的一个优势，但并不是全部。虚拟 DOM 最大的优势在于抽象了原本的渲染过程，实现了跨平台的能力，而不仅仅局限于浏览器的 DOM，可以是安卓和 IOS 的原生组件，可以是近期很火热的小程序，也可以是各种GUI</p>
-</blockquote>
-<h3 id="三、如何实现虚拟DOM"><a href="#三、如何实现虚拟DOM" class="headerlink" title="三、如何实现虚拟DOM"></a>三、如何实现虚拟DOM</h3><p>首先可以看看<code>vue</code>中<code>VNode</code>的结构</p>
-<p>源码位置：src/core/vdom/vnode.js</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">VNode</span> &#123;</span><br><span class="line">  <span class="attr">tag</span>: string | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">data</span>: <span class="title class_">VNodeData</span> | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">children</span>: ?<span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt;;</span><br><span class="line">  <span class="attr">text</span>: string | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">elm</span>: <span class="title class_">Node</span> | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">ns</span>: string | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">context</span>: <span class="title class_">Component</span> | <span class="keyword">void</span>; <span class="comment">// rendered in this component&#x27;s scope</span></span><br><span class="line">  <span class="attr">functionalContext</span>: <span class="title class_">Component</span> | <span class="keyword">void</span>; <span class="comment">// only for functional component root nodes</span></span><br><span class="line">  <span class="attr">key</span>: string | number | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">componentOptions</span>: <span class="title class_">VNodeComponentOptions</span> | <span class="keyword">void</span>;</span><br><span class="line">  <span class="attr">componentInstance</span>: <span class="title class_">Component</span> | <span class="keyword">void</span>; <span class="comment">// component instance</span></span><br><span class="line">  <span class="attr">parent</span>: <span class="title class_">VNode</span> | <span class="keyword">void</span>; <span class="comment">// component placeholder node</span></span><br><span class="line">  <span class="attr">raw</span>: boolean; <span class="comment">// contains raw HTML? (server only)</span></span><br><span class="line">  <span class="attr">isStatic</span>: boolean; <span class="comment">// hoisted static node</span></span><br><span class="line">  <span class="attr">isRootInsert</span>: boolean; <span class="comment">// necessary for enter transition check</span></span><br><span class="line">  <span class="attr">isComment</span>: boolean; <span class="comment">// empty comment placeholder?</span></span><br><span class="line">  <span class="attr">isCloned</span>: boolean; <span class="comment">// is a cloned node?</span></span><br><span class="line">  <span class="attr">isOnce</span>: boolean; <span class="comment">// is a v-once node?</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span> (</span><br><span class="line">    tag?: string,</span><br><span class="line">    data?: <span class="title class_">VNodeData</span>,</span><br><span class="line">    children?: ?<span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt;,</span><br><span class="line">    text?: string,</span><br><span class="line">    elm?: <span class="title class_">Node</span>,</span><br><span class="line">    context?: <span class="title class_">Component</span>,</span><br><span class="line">    componentOptions?: <span class="title class_">VNodeComponentOptions</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="comment">/*当前节点的标签名*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">tag</span> = tag</span><br><span class="line">    <span class="comment">/*当前节点对应的对象，包含了具体的一些数据信息，是一个VNodeData类型，可以参考VNodeData类型中的数据信息*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">data</span> = data</span><br><span class="line">    <span class="comment">/*当前节点的子节点，是一个数组*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">children</span> = children</span><br><span class="line">    <span class="comment">/*当前节点的文本*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">text</span> = text</span><br><span class="line">    <span class="comment">/*当前虚拟节点对应的真实dom节点*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">elm</span> = elm</span><br><span class="line">    <span class="comment">/*当前节点的名字空间*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ns</span> = <span class="literal">undefined</span></span><br><span class="line">    <span class="comment">/*编译作用域*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">context</span> = context</span><br><span class="line">    <span class="comment">/*函数化组件作用域*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">functionalContext</span> = <span class="literal">undefined</span></span><br><span class="line">    <span class="comment">/*节点的key属性，被当作节点的标志，用以优化*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">key</span> = data &amp;&amp; data.<span class="property">key</span></span><br><span class="line">    <span class="comment">/*组件的option选项*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">componentOptions</span> = componentOptions</span><br><span class="line">    <span class="comment">/*当前节点对应的组件的实例*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">componentInstance</span> = <span class="literal">undefined</span></span><br><span class="line">    <span class="comment">/*当前节点的父节点*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parent</span> = <span class="literal">undefined</span></span><br><span class="line">    <span class="comment">/*简而言之就是是否为原生HTML或只是普通文本，innerHTML的时候为true，textContent的时候为false*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">raw</span> = <span class="literal">false</span></span><br><span class="line">    <span class="comment">/*静态节点标志*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isStatic</span> = <span class="literal">false</span></span><br><span class="line">    <span class="comment">/*是否作为跟节点插入*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isRootInsert</span> = <span class="literal">true</span></span><br><span class="line">    <span class="comment">/*是否为注释节点*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isComment</span> = <span class="literal">false</span></span><br><span class="line">    <span class="comment">/*是否为克隆节点*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isCloned</span> = <span class="literal">false</span></span><br><span class="line">    <span class="comment">/*是否有v-once指令*/</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isOnce</span> = <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// DEPRECATED: alias for componentInstance for backwards compat.</span></span><br><span class="line">  <span class="comment">/* istanbul ignore next https://github.com/answershuto/learnVue*/</span></span><br><span class="line">  get child (): <span class="title class_">Component</span> | <span class="keyword">void</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">componentInstance</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里对<code>VNode</code>进行稍微的说明：</p>
-<ul>
-<li>所有对象的 <code>context</code> 选项都指向了 <code>Vue</code> 实例</li>
-<li><code>elm</code> 属性则指向了其相对应的真实 <code>DOM</code> 节点</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vue`是通过`createElement`生成`VNode</span><br></pre></td></tr></table></figure>
-
-<p>源码位置：src/core/vdom/create-element.js</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createElement</span> (</span><br><span class="line">  <span class="attr">context</span>: <span class="title class_">Component</span>,</span><br><span class="line">  <span class="attr">tag</span>: any,</span><br><span class="line">  <span class="attr">data</span>: any,</span><br><span class="line">  <span class="attr">children</span>: any,</span><br><span class="line">  <span class="attr">normalizationType</span>: any,</span><br><span class="line">  <span class="attr">alwaysNormalize</span>: boolean</span><br><span class="line">): <span class="title class_">VNode</span> | <span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(data) || <span class="title function_">isPrimitive</span>(data)) &#123;</span><br><span class="line">    normalizationType = children</span><br><span class="line">    children = data</span><br><span class="line">    data = <span class="literal">undefined</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isTrue</span>(alwaysNormalize)) &#123;</span><br><span class="line">    normalizationType = <span class="variable constant_">ALWAYS_NORMALIZE</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">_createElement</span>(context, tag, data, children, normalizationType)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面可以看到<code>createElement</code> 方法实际上是对 <code>_createElement</code> 方法的封装，对参数的传入进行了判断</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">_createElement</span>(<span class="params"></span></span><br><span class="line"><span class="params">    context: Component,</span></span><br><span class="line"><span class="params">    tag?: string | Class&lt;Component&gt; | <span class="built_in">Function</span> | <span class="built_in">Object</span>,</span></span><br><span class="line"><span class="params">    data?: VNodeData,</span></span><br><span class="line"><span class="params">    children?: any,</span></span><br><span class="line"><span class="params">    normalizationType?: number</span></span><br><span class="line"><span class="params"></span>): <span class="title class_">VNode</span> | <span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isDef</span>(data) &amp;&amp; <span class="title function_">isDef</span>((<span class="attr">data</span>: any).<span class="property">__ob__</span>)) &#123;</span><br><span class="line">        process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;production&#x27;</span> &amp;&amp; <span class="title function_">warn</span>(</span><br><span class="line">            <span class="string">`Avoid using observed data object as vnode data: <span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(data)&#125;</span>\n`</span> +</span><br><span class="line">            <span class="string">&#x27;Always create fresh vnode data objects in each render!&#x27;</span>,</span><br><span class="line">            context<span class="string">`</span></span><br><span class="line"><span class="string">        )</span></span><br><span class="line"><span class="string">        return createEmptyVNode()</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    // object syntax in v-bind</span></span><br><span class="line"><span class="string">    if (isDef(data) &amp;&amp; isDef(data.is)) &#123;</span></span><br><span class="line"><span class="string">        tag = data.is</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    if (!tag) &#123;</span></span><br><span class="line"><span class="string">        // in case of component :is set to falsy value</span></span><br><span class="line"><span class="string">        return createEmptyVNode()</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    ... </span></span><br><span class="line"><span class="string">    // support single function children as default scoped slot</span></span><br><span class="line"><span class="string">    if (Array.isArray(children) &amp;&amp;</span></span><br><span class="line"><span class="string">        typeof children[0] === &#x27;function&#x27;</span></span><br><span class="line"><span class="string">    ) &#123;</span></span><br><span class="line"><span class="string">        data = data || &#123;&#125;</span></span><br><span class="line"><span class="string">        data.scopedSlots = &#123; default: children[0] &#125;</span></span><br><span class="line"><span class="string">        children.length = 0</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    if (normalizationType === ALWAYS_NORMALIZE) &#123;</span></span><br><span class="line"><span class="string">        children = normalizeChildren(children)</span></span><br><span class="line"><span class="string">    &#125; else if ( === SIMPLE_NORMALIZE) &#123;</span></span><br><span class="line"><span class="string">        children = simpleNormalizeChildren(children)</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">	// 创建VNode</span></span><br><span class="line"><span class="string">    ...</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-
-<p>可以看到<code>_createElement</code>接收5个参数：</p>
-<ul>
-<li><code>context</code> 表示 <code>VNode</code> 的上下文环境，是 <code>Component</code> 类型</li>
-<li>tag 表示标签，它可以是一个字符串，也可以是一个 <code>Component</code></li>
-<li><code>data</code> 表示 <code>VNode</code> 的数据，它是一个 <code>VNodeData</code> 类型</li>
-<li><code>children</code> 表示当前 <code>VNode</code>的子节点，它是任意类型的</li>
-<li><code>normalizationType</code> 表示子节点规范的类型，类型不同规范的方法也就不一样，主要是参考 <code>render</code> 函数是编译生成的还是用户手写的</li>
-</ul>
-<p>根据<code>normalizationType</code> 的类型，<code>children</code>会有不同的定义</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (normalizationType === <span class="variable constant_">ALWAYS_NORMALIZE</span>) &#123;</span><br><span class="line">    children = <span class="title function_">normalizeChildren</span>(children)</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ( === <span class="variable constant_">SIMPLE_NORMALIZE</span>) &#123;</span><br><span class="line">    children = <span class="title function_">simpleNormalizeChildren</span>(children)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>simpleNormalizeChildren</code>方法调用场景是 <code>render</code> 函数是编译生成的</p>
-<p><code>normalizeChildren</code>方法调用场景分为下面两种：</p>
-<ul>
-<li><code>render</code> 函数是用户手写的</li>
-<li>编译 <code>slot</code>、<code>v-for</code> 的时候会产生嵌套数组</li>
-</ul>
-<p>无论是<code>simpleNormalizeChildren</code>还是<code>normalizeChildren</code>都是对<code>children</code>进行规范（使<code>children</code> 变成了一个类型为 <code>VNode</code> 的 <code>Array</code>），这里就不展开说了</p>
-<p>规范化<code>children</code>的源码位置在：src/core/vdom/helpers/normalzie-children.js</p>
-<p>在规范化<code>children</code>后，就去创建<code>VNode</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> vnode, ns</span><br><span class="line"><span class="comment">// 对tag进行判断</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> tag === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> <span class="title class_">Ctor</span></span><br><span class="line">  ns = (context.<span class="property">$vnode</span> &amp;&amp; context.<span class="property">$vnode</span>.<span class="property">ns</span>) || config.<span class="title function_">getTagNamespace</span>(tag)</span><br><span class="line">  <span class="keyword">if</span> (config.<span class="title function_">isReservedTag</span>(tag)) &#123;</span><br><span class="line">    <span class="comment">// 如果是内置的节点，则直接创建一个普通VNode</span></span><br><span class="line">    vnode = <span class="keyword">new</span> <span class="title class_">VNode</span>(</span><br><span class="line">      config.<span class="title function_">parsePlatformTagName</span>(tag), data, children,</span><br><span class="line">      <span class="literal">undefined</span>, <span class="literal">undefined</span>, context</span><br><span class="line">    )</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="title function_">isDef</span>(<span class="title class_">Ctor</span> = <span class="title function_">resolveAsset</span>(context.<span class="property">$options</span>, <span class="string">&#x27;components&#x27;</span>, tag))) &#123;</span><br><span class="line">    <span class="comment">// component</span></span><br><span class="line">    <span class="comment">// 如果是component类型，则会通过createComponent创建VNode节点</span></span><br><span class="line">    vnode = <span class="title function_">createComponent</span>(<span class="title class_">Ctor</span>, data, context, children, tag)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    vnode = <span class="keyword">new</span> <span class="title class_">VNode</span>(</span><br><span class="line">      tag, data, children,</span><br><span class="line">      <span class="literal">undefined</span>, <span class="literal">undefined</span>, context</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// direct component options / constructor</span></span><br><span class="line">  vnode = <span class="title function_">createComponent</span>(tag, data, context, children)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">createComponent`同样是创建`VNode</span><br></pre></td></tr></table></figure>
-
-<p>源码位置：src/core/vdom/create-component.js</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createComponent</span> (</span><br><span class="line">  <span class="title class_">Ctor</span>: <span class="title class_">Class</span>&lt;<span class="title class_">Component</span>&gt; | <span class="title class_">Function</span> | <span class="title class_">Object</span> | <span class="keyword">void</span>,</span><br><span class="line">  <span class="attr">data</span>: ?<span class="title class_">VNodeData</span>,</span><br><span class="line">  <span class="attr">context</span>: <span class="title class_">Component</span>,</span><br><span class="line">  <span class="attr">children</span>: ?<span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt;,</span><br><span class="line">  tag?: string</span><br><span class="line">): <span class="title class_">VNode</span> | <span class="title class_">Array</span>&lt;<span class="title class_">VNode</span>&gt; | <span class="keyword">void</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isUndef</span>(<span class="title class_">Ctor</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"> <span class="comment">// 构建子类构造函数 </span></span><br><span class="line">  <span class="keyword">const</span> baseCtor = context.<span class="property">$options</span>.<span class="property">_base</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// plain options object: turn it into a constructor</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isObject</span>(<span class="title class_">Ctor</span>)) &#123;</span><br><span class="line">    <span class="title class_">Ctor</span> = baseCtor.<span class="title function_">extend</span>(<span class="title class_">Ctor</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// if at this stage it&#x27;s not a constructor or an async component factory,</span></span><br><span class="line">  <span class="comment">// reject.</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="title class_">Ctor</span> !== <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">      <span class="title function_">warn</span>(<span class="string">`Invalid Component definition: <span class="subst">$&#123;<span class="built_in">String</span>(Ctor)&#125;</span>`</span>, context)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// async component</span></span><br><span class="line">  <span class="keyword">let</span> asyncFactory</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isUndef</span>(<span class="title class_">Ctor</span>.<span class="property">cid</span>)) &#123;</span><br><span class="line">    asyncFactory = <span class="title class_">Ctor</span></span><br><span class="line">    <span class="title class_">Ctor</span> = <span class="title function_">resolveAsyncComponent</span>(asyncFactory, baseCtor, context)</span><br><span class="line">    <span class="keyword">if</span> (<span class="title class_">Ctor</span> === <span class="literal">undefined</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">createAsyncPlaceholder</span>(</span><br><span class="line">        asyncFactory,</span><br><span class="line">        data,</span><br><span class="line">        context,</span><br><span class="line">        children,</span><br><span class="line">        tag</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  data = data || &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// resolve constructor options in case global mixins are applied after</span></span><br><span class="line">  <span class="comment">// component constructor creation</span></span><br><span class="line">  <span class="title function_">resolveConstructorOptions</span>(<span class="title class_">Ctor</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// transform component v-model data into props &amp; events</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isDef</span>(data.<span class="property">model</span>)) &#123;</span><br><span class="line">    <span class="title function_">transformModel</span>(<span class="title class_">Ctor</span>.<span class="property">options</span>, data)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// extract props</span></span><br><span class="line">  <span class="keyword">const</span> propsData = <span class="title function_">extractPropsFromVNodeData</span>(data, <span class="title class_">Ctor</span>, tag)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// functional component</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isTrue</span>(<span class="title class_">Ctor</span>.<span class="property">options</span>.<span class="property">functional</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">createFunctionalComponent</span>(<span class="title class_">Ctor</span>, propsData, data, context, children)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// extract listeners, since these needs to be treated as</span></span><br><span class="line">  <span class="comment">// child component listeners instead of DOM listeners</span></span><br><span class="line">  <span class="keyword">const</span> listeners = data.<span class="property">on</span></span><br><span class="line">  <span class="comment">// replace with listeners with .native modifier</span></span><br><span class="line">  <span class="comment">// so it gets processed during parent component patch.</span></span><br><span class="line">  data.<span class="property">on</span> = data.<span class="property">nativeOn</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isTrue</span>(<span class="title class_">Ctor</span>.<span class="property">options</span>.<span class="property">abstract</span>)) &#123;</span><br><span class="line">    <span class="keyword">const</span> slot = data.<span class="property">slot</span></span><br><span class="line">    data = &#123;&#125;</span><br><span class="line">    <span class="keyword">if</span> (slot) &#123;</span><br><span class="line">      data.<span class="property">slot</span> = slot</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 安装组件钩子函数，把钩子函数合并到data.hook中</span></span><br><span class="line">  <span class="title function_">installComponentHooks</span>(data)</span><br><span class="line"></span><br><span class="line">  <span class="comment">//实例化一个VNode返回。组件的VNode是没有children的</span></span><br><span class="line">  <span class="keyword">const</span> name = <span class="title class_">Ctor</span>.<span class="property">options</span>.<span class="property">name</span> || tag</span><br><span class="line">  <span class="keyword">const</span> vnode = <span class="keyword">new</span> <span class="title class_">VNode</span>(</span><br><span class="line">    <span class="string">`vue-component-<span class="subst">$&#123;Ctor.cid&#125;</span><span class="subst">$&#123;name ? <span class="string">`-<span class="subst">$&#123;name&#125;</span>`</span> : <span class="string">&#x27;&#x27;</span>&#125;</span>`</span>,</span><br><span class="line">    data, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, context,</span><br><span class="line">    &#123; <span class="title class_">Ctor</span>, propsData, listeners, tag, children &#125;,</span><br><span class="line">    asyncFactory</span><br><span class="line">  )</span><br><span class="line">  <span class="keyword">if</span> (__WEEX__ &amp;&amp; <span class="title function_">isRecyclableComponent</span>(vnode)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">renderRecyclableComponentTemplate</span>(vnode)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> vnode</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>稍微提下<code>createComponent</code>生成<code>VNode</code>的三个关键流程：</p>
-<ul>
-<li>构造子类构造函数<code>Ctor</code></li>
-<li><code>installComponentHooks</code>安装组件钩子函数</li>
-<li>实例化 <code>vnode</code></li>
-</ul>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p><code>createElement</code> 创建 <code>VNode</code> 的过程，每个 <code>VNode</code> 有 <code>children</code>，<code>children</code> 每个元素也是一个<code>VNode</code>，这样就形成了一个虚拟树结构，用于描述真实的<code>DOM</code>树结构</p>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
-<li><a href="https://ustbhuangyi.github.io/vue-analysis/v2/data-driven/create-element.html#children-%E7%9A%84%E8%A7%84%E8%8C%83%E5%8C%96">https://ustbhuangyi.github.io/vue-analysis/v2/data-driven/create-element.html#children-%E7%9A%84%E8%A7%84%E8%8C%83%E5%8C%96</a></li>
-<li><a href="https://juejin.cn/post/6876711874050818061">https://juejin.cn/post/6876711874050818061</a></li>
-<li>@js语音答题社区</li>
-</ul>
-]]></content>
-      <categories>
-        <category>vue面试题</category>
-      </categories>
-      <tags>
-        <tag>虚拟dom</tag>
       </tags>
   </entry>
 </search>
