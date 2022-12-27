@@ -251,7 +251,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="谈谈虚拟dom"><a href="#谈谈虚拟dom" class="headerlink" title="谈谈虚拟dom"></a>谈谈虚拟dom</h1><h2 id="面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路"><a href="#面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路" class="headerlink" title="面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路"></a>面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路</h2><img src="/posts/37478/image-20221101055808458.png" class="" title="image-20221101055808458">
+        <h1 id="谈谈虚拟dom"><a href="#谈谈虚拟dom" class="headerlink" title="谈谈虚拟dom"></a>谈谈虚拟dom</h1><h2 id="面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路"><a href="#面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路" class="headerlink" title="面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路"></a>面试官：什么是虚拟DOM？如何实现一个虚拟DOM？说说你的思路</h2><img src="/posts/37478/image-20221101055808458.png" class title="image-20221101055808458">
 
 <h3 id="一、什么是虚拟DOM"><a href="#一、什么是虚拟DOM" class="headerlink" title="一、什么是虚拟DOM"></a>一、什么是虚拟DOM</h3><p>虚拟 DOM （<code>Virtual DOM</code> ）这个概念相信大家都不陌生，从 <code>React</code> 到 <code>Vue</code> ，虚拟 <code>DOM</code> 为这两个框架都带来了跨平台的能力（<code>React-Native</code> 和 <code>Weex</code>）</p>
 <span id="more"></span>
@@ -272,7 +272,7 @@
 <p>通过<code>VNode</code>，<code>vue</code>可以对这颗抽象树进行创建节点,删除节点以及修改节点的操作， 经过<code>diff</code>算法得出一些需要修改的最小单位,再更新视图，减少了<code>dom</code>操作，提高了性能</p>
 <h3 id="二、为什么需要虚拟DOM"><a href="#二、为什么需要虚拟DOM" class="headerlink" title="二、为什么需要虚拟DOM"></a>二、为什么需要虚拟DOM</h3><p><code>DOM</code>是很慢的，其元素非常庞大，页面的性能问题，大部分都是由<code>DOM</code>操作引起的</p>
 <p>真实的<code>DOM</code>节点，哪怕一个最简单的<code>div</code>也包含着很多属性，可以打印出来直观感受一下：</p>
-<img src="/posts/37478/image-20221101055932532.png" class="" title="image-20221101055932532">
+<img src="/posts/37478/image-20221101055932532.png" class title="image-20221101055932532">
 
 <p>由此可见，操作<code>DOM</code>的代价仍旧是昂贵的，频繁操作还是会出现页面卡顿，影响用户的体验</p>
 <p><strong>举个例子：</strong></p>

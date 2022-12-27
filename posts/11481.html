@@ -259,7 +259,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="说说vue中的diff算法"><a href="#说说vue中的diff算法" class="headerlink" title="说说vue中的diff算法"></a>说说vue中的diff算法</h1><h2 id="面试官：你了解vue的diff算法吗？说说看"><a href="#面试官：你了解vue的diff算法吗？说说看" class="headerlink" title="面试官：你了解vue的diff算法吗？说说看"></a>面试官：你了解vue的diff算法吗？说说看</h2><img src="/posts/11481/image-20221102070413262.png" class="" title="image-20221102070413262">
+        <h1 id="说说vue中的diff算法"><a href="#说说vue中的diff算法" class="headerlink" title="说说vue中的diff算法"></a>说说vue中的diff算法</h1><h2 id="面试官：你了解vue的diff算法吗？说说看"><a href="#面试官：你了解vue的diff算法吗？说说看" class="headerlink" title="面试官：你了解vue的diff算法吗？说说看"></a>面试官：你了解vue的diff算法吗？说说看</h2><img src="/posts/11481/image-20221102070413262.png" class title="image-20221102070413262">
 
 <h3 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h3><p><code>diff</code> 算法是一种通过同层的树节点进行比较的高效算法</p>
 <p>其有两个特点：</p>
@@ -274,34 +274,34 @@
 <ol>
 <li>比较只会在同层级进行, 不会跨层级比较</li>
 </ol>
-<img src="/posts/11481/image-20221102070430931.png" class="" title="image-20221102070430931">
+<img src="/posts/11481/image-20221102070430931.png" class title="image-20221102070430931">
 
 <ol start="2">
 <li>比较的过程中，循环从两边向中间收拢</li>
 </ol>
-<img src="/posts/11481/image-20221102070456398.png" class="" title="image-20221102070456398">
+<img src="/posts/11481/image-20221102070456398.png" class title="image-20221102070456398">
 
 <p>下面举个<code>vue</code>通过<code>diff</code>算法更新的例子：</p>
 <p>新旧<code>VNode</code>节点如下图所示：</p>
-<img src="/posts/11481/image-20221102070512895.png" class="" title="image-20221102070512895">
+<img src="/posts/11481/image-20221102070512895.png" class title="image-20221102070512895">
 
 <p>第一次循环后，发现旧节点D与新节点D相同，直接复用旧节点D作为<code>diff</code>后的第一个真实节点，同时旧节点<code>endIndex</code>移动到C，新节点的 <code>startIndex</code> 移动到了 C</p>
-<img src="/posts/11481/image-20221102070534981.png" class="" title="image-20221102070534981">
+<img src="/posts/11481/image-20221102070534981.png" class title="image-20221102070534981">
 
 <p>第二次循环后，同样是旧节点的末尾和新节点的开头(都是 C)相同，同理，<code>diff</code> 后创建了 C 的真实节点插入到第一次创建的 D 节点后面。同时旧节点的 <code>endIndex</code> 移动到了 B，新节点的 <code>startIndex</code> 移动到了 E</p>
-<img src="/posts/11481/image-20221102070553310.png" class="" title="image-20221102070553310">
+<img src="/posts/11481/image-20221102070553310.png" class title="image-20221102070553310">
 
 <p>第三次循环中，发现E没有找到，这时候只能直接创建新的真实节点 E，插入到第二次创建的 C 节点之后。同时新节点的 <code>startIndex</code> 移动到了 A。旧节点的 <code>startIndex</code> 和 <code>endIndex</code> 都保持不动</p>
-<img src="/posts/11481/image-20221102070612116.png" class="" title="image-20221102070612116">
+<img src="/posts/11481/image-20221102070612116.png" class title="image-20221102070612116">
 
 <p>第四次循环中，发现了新旧节点的开头(都是 A)相同，于是 <code>diff</code> 后创建了 A 的真实节点，插入到前一次创建的 E 节点后面。同时旧节点的 <code>startIndex</code> 移动到了 B，新节点的<code>startIndex</code> 移动到了 B</p>
-<img src="/posts/11481/image-20221102070631461.png" class="" title="image-20221102070631461">
+<img src="/posts/11481/image-20221102070631461.png" class title="image-20221102070631461">
 
 <p>第五次循环中，情形同第四次循环一样，因此 <code>diff</code> 后创建了 B 真实节点 插入到前一次创建的 A 节点后面。同时旧节点的 <code>startIndex</code>移动到了 C，新节点的 startIndex 移动到了 F</p>
-<img src="/posts/11481/image-20221102070649216.png" class="" title="image-20221102070649216">
+<img src="/posts/11481/image-20221102070649216.png" class title="image-20221102070649216">
 
 <p>新节点的 <code>startIndex</code> 已经大于 <code>endIndex</code> 了，需要创建 <code>newStartIdx</code> 和 <code>newEndIdx</code> 之间的所有节点，也就是节点F，直接创建 F 节点对应的真实节点放到 B 节点后面</p>
-<img src="/posts/11481/image-20221102070706588.png" class="" title="image-20221102070706588">
+<img src="/posts/11481/image-20221102070706588.png" class title="image-20221102070706588">
 
 <h3 id="三、原理分析"><a href="#三、原理分析" class="headerlink" title="三、原理分析"></a>三、原理分析</h3><p>当数据发生改变时，<code>set</code>方法会调用<code>Dep.notify</code>通知所有订阅者<code>Watcher</code>，订阅者就会调用<code>patch</code>给真实的<code>DOM</code>打补丁，更新相应的视图</p>
 <p>源码位置：src/core/vdom/patch.js</p>

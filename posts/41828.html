@@ -262,28 +262,28 @@
 <p>我们还是按照之前创建的本地服务作为例子来进行一个说明，下面这幅图是返回的结果：</p>
 <span id="more"></span>
 
-<img src="/posts/41828/image-20221004070833641.png" class="" title="image-20221004070833641">
+<img src="/posts/41828/image-20221004070833641.png" class title="image-20221004070833641">
 
 <p>我们知道axios的创建过程， axios是由Axios.prototype.request这个函数通过bind创建而来的，所以说axios和request的功能都是一样的， 都是函数，这里用axios调用在一定程度上就像是request函数在调用，我们来演示一下这个过程：</p>
 <p>在Axios.js中：</p>
-<img src="/posts/41828/image-20221004071633706.png" class="" title="image-20221004071633706">
+<img src="/posts/41828/image-20221004071633706.png" class title="image-20221004071633706">
 
 <p>我们可以看到30行有一个config参数，这个参数就是我们在调用axios的时候传进来的：</p>
-<img src="/posts/41828/image-20221004071839656.png" class="" title="image-20221004071839656">
+<img src="/posts/41828/image-20221004071839656.png" class title="image-20221004071839656">
 
 <p>按照逻辑往下走， 它会判断这个config的值是不是空， 为啥有两个参数， configOrUrl和config呢， 这个axios内部的一种原理， 允许你第一个参数可以传字符串， 第二个参数传config，实现的就是如果你的第一个参数是字符串的话，他就把第二个参数作为config</p>
-<img src="/posts/41828/image-20221004072332665.png" class="" title="image-20221004072332665">
+<img src="/posts/41828/image-20221004072332665.png" class title="image-20221004072332665">
 
 <p>40行this.defaults是axios默认的配置对象，而mergeconfig是作对象合并的一个方法， 这行代码就是将默认的配置对象和传进来的配置对象合并，我们配置的如果在默认中已经有了， 这个时候是会覆盖的</p>
-<img src="/posts/41828/image-20221004073021591.png" class="" title="image-20221004073021591">
+<img src="/posts/41828/image-20221004073021591.png" class title="image-20221004073021591">
 
 <p>这个是请求方法的判断， 如果你没传的话 ，axios会默认设置为get请求</p>
-<img src="/posts/41828/image-20221004073509024.png" class="" title="image-20221004073509024">
+<img src="/posts/41828/image-20221004073509024.png" class title="image-20221004073509024">
 
 <p>看看81行， 如果没有涉及到拦截器的话， 会执行下面的逻辑， 先会创建一个chain，是由dispatchRequest创建的，dispatchRequest是会发送请求的，它会调用http和xhr这两个适配器</p>
 <p>然后用promise.resolve带着传进来的config创建了一个promise对象，由于config是一个普通对象， 并不是promise对象，所以说这个时候的promise是一个成功的promise ，即它的状态就是fulfilled</p>
 <p>接着到了一个循环当中， chain有两个元素， length就为2， 由于此时promise是一个成功的promise ， 然后promise.then就是会执行它的第一个回调函数的， 而不是执行第二个</p>
-<img src="/posts/41828/image-20221004074310401.png" class="" title="image-20221004074310401">
+<img src="/posts/41828/image-20221004074310401.png" class title="image-20221004074310401">
 
 <p>chain.shift 得到的就是dispatchRequest函数，这个函数的执行结果决定着promise</p>
 <p>整个过程就是request 调用dispatch 之后调用xhr， 最终在返回给request</p>

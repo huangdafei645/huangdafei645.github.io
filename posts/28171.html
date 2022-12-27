@@ -257,16 +257,16 @@
 <h2 id="1-传值"><a href="#1-传值" class="headerlink" title="1. 传值"></a>1. 传值</h2><p> reactive只能传引用类型的值， 比如Array， Object， Map，Set。 那么如果你用到了原始值的话：就会出现以下的报错：</p>
 <span id="more"></span>
 
-<img src="/posts/28171/image-20221015171147671.png" class="" title="image-20221015171147671">
+<img src="/posts/28171/image-20221015171147671.png" class title="image-20221015171147671">
 
 <p>我们来看看原因：</p>
-<img src="/posts/28171/image-20221015171228024.png" class="" title="image-20221015171228024">
+<img src="/posts/28171/image-20221015171228024.png" class title="image-20221015171228024">
 
 <p>reactive在被定义的时候就已经指明了它的类型是个对象；那么你传个对象就不会报错了；</p>
-<h2 id="2-修改的时候不需要-value"><a href="#2-修改的时候不需要-value" class="headerlink" title="2. 修改的时候不需要.value"></a>2. 修改的时候不需要.value</h2><img src="/posts/28171/image-20221015171712071.png" class="" title="image-20221015171712071">
+<h2 id="2-修改的时候不需要-value"><a href="#2-修改的时候不需要-value" class="headerlink" title="2. 修改的时候不需要.value"></a>2. 修改的时候不需要.value</h2><img src="/posts/28171/image-20221015171712071.png" class title="image-20221015171712071">
 
 <p>看看页面效果：</p>
-<img src="/posts/28171/image-20221015171734668.png" class="" title="image-20221015171734668">
+<img src="/posts/28171/image-20221015171734668.png" class title="image-20221015171734668">
     </div>
 
     
