@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="说说你对slot的理解面试官：说说你对slot的理解？slot使用场景有哪些？  一、slot是什么在HTML中 slot 元素 ，作为 Web Components 技术套件的一部分，是Web组件内的一个占位符 该占位符可以在后期使用自己的标记语言填充">
+<meta property="og:type" content="article">
+<meta property="og:title" content="说说你对slot的理解">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/3047.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="说说你对slot的理解面试官：说说你对slot的理解？slot使用场景有哪些？  一、slot是什么在HTML中 slot 元素 ，作为 Web Components 技术套件的一部分，是Web组件内的一个占位符 该占位符可以在后期使用自己的标记语言填充">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/3047/image-20221024062845179.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/3047/image-20221024063011755.png">
+<meta property="article:published_time" content="2022-10-23T22:27:07.000Z">
+<meta property="article:modified_time" content="2022-12-09T08:22:13.884Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="说说你对slot的理解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/3047/image-20221024062845179.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/3047.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>说说你对slot的理解 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/3047.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          说说你对slot的理解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-24 06:27:07" itemprop="dateCreated datePublished" datetime="2022-10-24T06:27:07+08:00">2022-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 16:22:13" itemprop="dateModified" datetime="2022-12-09T16:22:13+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="说说你对slot的理解"><a href="#说说你对slot的理解" class="headerlink" title="说说你对slot的理解"></a>说说你对slot的理解</h1><h2 id="面试官：说说你对slot的理解？slot使用场景有哪些？"><a href="#面试官：说说你对slot的理解？slot使用场景有哪些？" class="headerlink" title="面试官：说说你对slot的理解？slot使用场景有哪些？"></a>面试官：说说你对slot的理解？slot使用场景有哪些？</h2><img src="/posts/3047/image-20221024062845179.png" class title="image-20221024062845179">
+
+<h3 id="一、slot是什么"><a href="#一、slot是什么" class="headerlink" title="一、slot是什么"></a>一、slot是什么</h3><p>在HTML中 <code>slot</code> 元素 ，作为 <code>Web Components</code> 技术套件的一部分，是Web组件内的一个占位符</p>
+<p>该占位符可以在后期使用自己的标记语言填充</p>
+<span id="more"></span>
+
+<p>举个栗子</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;element-details-template&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;element-name&quot;</span>&gt;</span>Slot template<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">element-details</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">&quot;element-name&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">element-details</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">element-details</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot</span>=<span class="string">&quot;element-name&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">element-details</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>template</code>不会展示到页面中，需要用先获取它的引用，然后添加到<code>DOM</code>中，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">customElements.<span class="title function_">define</span>(<span class="string">&#x27;element-details&#x27;</span>,</span><br><span class="line">  <span class="keyword">class</span> <span class="title class_">extends</span> <span class="title class_">HTMLElement</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">super</span>();</span><br><span class="line">      <span class="keyword">const</span> template = <span class="variable language_">document</span></span><br><span class="line">        .<span class="title function_">getElementById</span>(<span class="string">&#x27;element-details-template&#x27;</span>)</span><br><span class="line">        .<span class="property">content</span>;</span><br><span class="line">      <span class="keyword">const</span> shadowRoot = <span class="variable language_">this</span>.<span class="title function_">attachShadow</span>(&#123;<span class="attr">mode</span>: <span class="string">&#x27;open&#x27;</span>&#125;)</span><br><span class="line">        .<span class="title function_">appendChild</span>(template.<span class="title function_">cloneNode</span>(<span class="literal">true</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在<code>Vue</code>中的概念也是如此</p>
+<p><code>Slot</code> 艺名插槽，花名“占坑”，我们可以理解为<code>solt</code>在组件模板中占好了位置，当使用该组件标签时候，组件标签里面的内容就会自动填坑（替换组件模板中<code>slot</code>位置），作为承载分发内容的出口</p>
+<p>可以将其类比为插卡式的FC游戏机，游戏机暴露卡槽（插槽）让用户插入不同的游戏磁条（自定义内容）</p>
+<p>放张图感受一下</p>
+<img src="/posts/3047/image-20221024063011755.png" class title="image-20221024063011755">
+
+<h3 id="二、使用场景"><a href="#二、使用场景" class="headerlink" title="二、使用场景"></a>二、使用场景</h3><p>通过插槽可以让用户可以拓展组件，去更好地复用组件和对其做定制化处理</p>
+<p>如果父组件在使用到一个复用组件的时候，获取这个组件在不同的地方有少量的更改，如果去重写组件是一件不明智的事情</p>
+<p>通过<code>slot</code>插槽向组件内部指定位置传递内容，完成这个复用组件在不同场景的应用</p>
+<p>比如布局组件、表格列、下拉选、弹框显示内容等</p>
+<h3 id="三、分类"><a href="#三、分类" class="headerlink" title="三、分类"></a>三、分类</h3><p><code>slot</code>可以分来以下三种：</p>
+<ul>
+<li>默认插槽</li>
+<li>具名插槽</li>
+<li>作用域插槽</li>
+</ul>
+<h4 id="默认插槽"><a href="#默认插槽" class="headerlink" title="默认插槽"></a>默认插槽</h4><p>子组件用<code>&lt;slot&gt;</code>标签来确定渲染的位置，标签里面可以放<code>DOM</code>结构，当父组件使用的时候没有往插槽传入内容，标签内<code>DOM</code>结构就会显示在页面</p>
+<p>父组件在使用的时候，直接在子组件的标签内写入内容即可</p>
+<p>子组件<code>Child.vue</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>插槽后备的内容<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>父组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Child</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>默认插槽<span class="tag">&lt;/<span class="name">div</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">Child</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="具名插槽"><a href="#具名插槽" class="headerlink" title="具名插槽"></a>具名插槽</h4><p>子组件用<code>name</code>属性来表示插槽的名字，不传为默认插槽</p>
+<p>父组件中在使用时在默认插槽的基础上加上<code>slot</code>属性，值为子组件插槽<code>name</code>属性值</p>
+<p>子组件<code>Child.vue</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span>插槽后备的内容<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;content&quot;</span>&gt;</span>插槽后备的内容<span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>父组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:default</span>&gt;</span>具名插槽<span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 具名插槽⽤插槽名做参数 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:content</span>&gt;</span>内容...<span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h4><p>子组件在作用域上绑定属性来将子组件的信息传给父组件使用，这些属性会被挂在父组件<code>v-slot</code>接受的对象上</p>
+<p>父组件中在使用时通过<code>v-slot:</code>（简写：#）获取子组件的信息，在内容中使用</p>
+<p>子组件<code>Child.vue</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;footer&quot;</span> <span class="attr">testProps</span>=<span class="string">&quot;子组件的值&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">h3</span>&gt;</span>没传footer插槽<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>父组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child</span>&gt;</span> </span><br><span class="line">    <span class="comment">&lt;!-- 把v-slot的值指定为作⽤域上下⽂对象 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:default</span>=<span class="string">&quot;slotProps&quot;</span>&gt;</span></span><br><span class="line">      来⾃⼦组件数据：&#123;&#123;slotProps.testProps&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> #<span class="attr">default</span>=<span class="string">&quot;slotProps&quot;</span>&gt;</span></span><br><span class="line">      来⾃⼦组件数据：&#123;&#123;slotProps.testProps&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><ul>
+<li><code>v-slot</code>属性只能在<code>&lt;template&gt;</code>上使用，但在只有默认插槽时可以在组件标签上使用</li>
+<li>默认插槽名为<code>default</code>，可以省略default直接写<code>v-slot</code></li>
+<li>缩写为<code>#</code>时不能不写参数，写成<code>#default</code></li>
+<li>可以通过解构获取<code>v-slot=&#123;user&#125;</code>，还可以重命名<code>v-slot=&quot;&#123;user: newName&#125;&quot;</code>和定义默认值<code>v-slot=&quot;&#123;user = &#39;默认值&#39;&#125;&quot;</code></li>
+</ul>
+<h3 id="四、原理分析"><a href="#四、原理分析" class="headerlink" title="四、原理分析"></a>四、原理分析</h3><p><code>slot</code>本质上是返回<code>VNode</code>的函数，一般情况下，<code>Vue</code>中的组件要渲染到页面上需要经过<code>template -&gt; render function -&gt; VNode -&gt; DOM</code> 过程，这里看看<code>slot</code>如何实现：</p>
+<p>编写一个<code>buttonCounter</code>组件，使用匿名插槽</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;button-counter&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">template</span>: <span class="string">&#x27;&lt;div&gt; &lt;slot&gt;我是默认内容&lt;/slot&gt;&lt;/div&gt;&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>使用该组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">    <span class="attr">template</span>: <span class="string">&#x27;&lt;button-counter&gt;&lt;span&gt;我是slot传入内容&lt;/span&gt;&lt;/button-counter&gt;&#x27;</span>,</span><br><span class="line">    <span class="attr">components</span>:&#123;buttonCounter&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>获取<code>buttonCounter</code>组件渲染函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="title function_">anonymous</span>(<span class="params"></span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line"><span class="title function_">with</span>(<span class="params"><span class="variable language_">this</span></span>)&#123;<span class="keyword">return</span> <span class="title function_">_c</span>(<span class="string">&#x27;div&#x27;</span>,[<span class="title function_">_t</span>(<span class="string">&quot;default&quot;</span>,[<span class="title function_">_v</span>(<span class="string">&quot;我是默认内容&quot;</span>)])],<span class="number">2</span>)&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>_v</code>表示穿件普通文本节点，<code>_t</code>表示渲染插槽的函数</p>
+<p>渲染插槽函数<code>renderSlot</code>（做了简化）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">renderSlot</span> (</span><br><span class="line">  name,</span><br><span class="line">  fallback,</span><br><span class="line">  props,</span><br><span class="line">  bindObject</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="comment">// 得到渲染插槽内容的函数    </span></span><br><span class="line">  <span class="keyword">var</span> scopedSlotFn = <span class="variable language_">this</span>.<span class="property">$scopedSlots</span>[name];</span><br><span class="line">  <span class="keyword">var</span> nodes;</span><br><span class="line">  <span class="comment">// 如果存在插槽渲染函数，则执行插槽渲染函数，生成nodes节点返回</span></span><br><span class="line">  <span class="comment">// 否则使用默认值</span></span><br><span class="line">  nodes = <span class="title function_">scopedSlotFn</span>(props) || fallback;</span><br><span class="line">  <span class="keyword">return</span> nodes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>name</code>属性表示定义插槽的名字，默认值为<code>default</code>，<code>fallback</code>表示子组件中的<code>slot</code>节点的默认值</p>
+<p>关于<code>this.$scopredSlots</code>是什么，我们可以先看看<code>vm.slot</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">initRender</span> (vm) &#123;</span><br><span class="line">  ...</span><br><span class="line">  vm.<span class="property">$slots</span> = <span class="title function_">resolveSlots</span>(options.<span class="property">_renderChildren</span>, renderContext);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resolveSlots`函数会对`children`节点做归类和过滤处理，返回`slots</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">resolveSlots</span> (</span><br><span class="line">    children,</span><br><span class="line">    context</span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!children || !children.<span class="property">length</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> slots = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = children.<span class="property">length</span>; i &lt; l; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> child = children[i];</span><br><span class="line">      <span class="keyword">var</span> data = child.<span class="property">data</span>;</span><br><span class="line">      <span class="comment">// remove slot attribute if the node is resolved as a Vue slot node</span></span><br><span class="line">      <span class="keyword">if</span> (data &amp;&amp; data.<span class="property">attrs</span> &amp;&amp; data.<span class="property">attrs</span>.<span class="property">slot</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> data.<span class="property">attrs</span>.<span class="property">slot</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// named slots should only be respected if the vnode was rendered in the</span></span><br><span class="line">      <span class="comment">// same context.</span></span><br><span class="line">      <span class="keyword">if</span> ((child.<span class="property">context</span> === context || child.<span class="property">fnContext</span> === context) &amp;&amp;</span><br><span class="line">        data &amp;&amp; data.<span class="property">slot</span> != <span class="literal">null</span></span><br><span class="line">      ) &#123;</span><br><span class="line">        <span class="comment">// 如果slot存在(slot=&quot;header&quot;) 则拿对应的值作为key</span></span><br><span class="line">        <span class="keyword">var</span> name = data.<span class="property">slot</span>;</span><br><span class="line">        <span class="keyword">var</span> slot = (slots[name] || (slots[name] = []));</span><br><span class="line">        <span class="comment">// 如果是tempalte元素 则把template的children添加进数组中，这也就是为什么你写的template标签并不会渲染成另一个标签到页面</span></span><br><span class="line">        <span class="keyword">if</span> (child.<span class="property">tag</span> === <span class="string">&#x27;template&#x27;</span>) &#123;</span><br><span class="line">          slot.<span class="property">push</span>.<span class="title function_">apply</span>(slot, child.<span class="property">children</span> || []);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          slot.<span class="title function_">push</span>(child);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果没有就默认是default</span></span><br><span class="line">        (slots.<span class="property">default</span> || (slots.<span class="property">default</span> = [])).<span class="title function_">push</span>(child);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ignore slots that contains only whitespace</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> name$1 <span class="keyword">in</span> slots) &#123;</span><br><span class="line">      <span class="keyword">if</span> (slots[name$1].<span class="title function_">every</span>(isWhitespace)) &#123;</span><br><span class="line">        <span class="keyword">delete</span> slots[name$1];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slots</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_render`渲染函数通过`normalizeScopedSlots`得到`vm.$scopedSlots</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vm.<span class="property">$scopedSlots</span> = <span class="title function_">normalizeScopedSlots</span>(</span><br><span class="line">  _parentVnode.<span class="property">data</span>.<span class="property">scopedSlots</span>,</span><br><span class="line">  vm.<span class="property">$slots</span>,</span><br><span class="line">  vm.<span class="property">$scopedSlots</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>作用域插槽中父组件能够得到子组件的值是因为在<code>renderSlot</code>的时候执行会传入<code>props</code>，也就是上述<code>_t</code>第三个参数，父组件则能够得到子组件传递过来的值</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903817746628615#heading-4">https://juejin.cn/post/6844903817746628615#heading-4</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots">https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots</a></li>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000019492734?utm_source=tag-newest">https://segmentfault.com/a/1190000019492734?utm_source=tag-newest</a></li>
+<li>@js语音答题社区</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9slot%E7%9A%84%E7%90%86%E8%A7%A3/" rel="tag"># 说说你对slot的理解</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/45331.html" rel="prev" title="css框架的选择">
+      <i class="fa fa-chevron-left"></i> css框架的选择
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/34079.html" rel="next" title="谈谈Vue.observable">
+      谈谈Vue.observable <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9slot%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">说说你对slot的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9A%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9slot%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9Fslot%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">面试官：说说你对slot的理解？slot使用场景有哪些？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81slot%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、slot是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E6%8F%92%E6%A7%BD"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">默认插槽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E5%90%8D%E6%8F%92%E6%A7%BD"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">具名插槽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">作用域插槽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">小结：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="nav-number">1.1.4.</span> <span class="nav-text">四、原理分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.1.5.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

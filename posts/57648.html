@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Vue常用的修饰符面试官：Vue常用的修饰符有哪些有什么应用场景  一、修饰符是什么在程序世界里，修饰符是用于限定类型以及类型成员的声明的一种符号 在Vue中，修饰符处理了许多DOM事件的细节，让我们不再需要花大量的时间去处理这些烦恼的事情，而能有更多的精力专注于程序的逻辑处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谈谈vue修饰符">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/57648.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="Vue常用的修饰符面试官：Vue常用的修饰符有哪些有什么应用场景  一、修饰符是什么在程序世界里，修饰符是用于限定类型以及类型成员的声明的一种符号 在Vue中，修饰符处理了许多DOM事件的细节，让我们不再需要花大量的时间去处理这些烦恼的事情，而能有更多的精力专注于程序的逻辑处理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/57648/image-20221028090853302.png">
+<meta property="article:published_time" content="2022-10-28T01:05:41.000Z">
+<meta property="article:modified_time" content="2022-12-09T08:27:53.700Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="vue修饰符">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/57648/image-20221028090853302.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/57648.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>谈谈vue修饰符 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/57648.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          谈谈vue修饰符
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-28 09:05:41" itemprop="dateCreated datePublished" datetime="2022-10-28T09:05:41+08:00">2022-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 16:27:53" itemprop="dateModified" datetime="2022-12-09T16:27:53+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Vue常用的修饰符"><a href="#Vue常用的修饰符" class="headerlink" title="Vue常用的修饰符"></a>Vue常用的修饰符</h1><h2 id="面试官：Vue常用的修饰符有哪些有什么应用场景"><a href="#面试官：Vue常用的修饰符有哪些有什么应用场景" class="headerlink" title="面试官：Vue常用的修饰符有哪些有什么应用场景"></a>面试官：Vue常用的修饰符有哪些有什么应用场景</h2><img src="/posts/57648/image-20221028090853302.png" class title="image-20221028090853302">
+
+<h3 id="一、修饰符是什么"><a href="#一、修饰符是什么" class="headerlink" title="一、修饰符是什么"></a>一、修饰符是什么</h3><p>在程序世界里，修饰符是用于限定类型以及类型成员的声明的一种符号</p>
+<p>在<code>Vue</code>中，修饰符处理了许多<code>DOM</code>事件的细节，让我们不再需要花大量的时间去处理这些烦恼的事情，而能有更多的精力专注于程序的逻辑处理</p>
+<span id="more"></span>
+
+<p><code>vue</code>中修饰符分为以下五种：</p>
+<ul>
+<li>表单修饰符</li>
+<li>事件修饰符</li>
+<li>鼠标按键修饰符</li>
+<li>键值修饰符</li>
+<li>v-bind修饰符</li>
+</ul>
+<h3 id="二、修饰符的作用"><a href="#二、修饰符的作用" class="headerlink" title="二、修饰符的作用"></a>二、修饰符的作用</h3><h4 id="表单修饰符"><a href="#表单修饰符" class="headerlink" title="表单修饰符"></a>表单修饰符</h4><p>在我们填写表单的时候用得最多的是<code>input</code>标签，指令用得最多的是<code>v-model</code></p>
+<p>关于表单的修饰符有如下：</p>
+<ul>
+<li>lazy</li>
+<li>trim</li>
+<li>number</li>
+</ul>
+<h5 id="lazy"><a href="#lazy" class="headerlink" title="lazy"></a>lazy</h5><p>在我们填完信息，光标离开标签的时候，才会将值赋予给<code>value</code>，也就是在<code>change</code>事件之后再进行信息同步</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> v-model.<span class="property">lazy</span>=<span class="string">&quot;value&quot;</span>&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;value&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="trim"><a href="#trim" class="headerlink" title="trim"></a>trim</h5><p>自动过滤用户输入的首空格字符，而中间的空格不会过滤</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> v-model.<span class="property">trim</span>=<span class="string">&quot;value&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="number"><a href="#number" class="headerlink" title="number"></a>number</h5><p>自动将用户的输入值转为数值类型，但如果这个值无法被<code>parseFloat</code>解析，则会返回原来的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input v-model.<span class="property">number</span>=<span class="string">&quot;age&quot;</span> type=<span class="string">&quot;number&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h4><p>事件修饰符是对事件捕获以及目标进行了处理，有如下修饰符：</p>
+<ul>
+<li>stop</li>
+<li>prevent</li>
+<li>self</li>
+<li>once</li>
+<li>capture</li>
+<li>passive</li>
+<li>native</li>
+</ul>
+<h5 id="stop"><a href="#stop" class="headerlink" title="stop"></a>stop</h5><p>阻止了事件冒泡，相当于调用了<code>event.stopPropagation</code>方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div @click=<span class="string">&quot;shout(2)&quot;</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.stop</span>=<span class="string">&quot;shout(1)&quot;</span>&gt;</span>ok<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/div&gt;</span><br><span class="line"><span class="comment">//只输出1</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="prevent"><a href="#prevent" class="headerlink" title="prevent"></a>prevent</h5><p>阻止了事件的默认行为，相当于调用了<code>event.preventDefault</code>方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;form v-<span class="attr">on</span>:submit.<span class="property">prevent</span>=<span class="string">&quot;onSubmit&quot;</span>&gt;&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="self"><a href="#self" class="headerlink" title="self"></a>self</h5><p>只当在 <code>event.target</code> 是当前元素自身时触发处理函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-<span class="attr">on</span>:click.<span class="property">self</span>=<span class="string">&quot;doThat&quot;</span>&gt;...&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用修饰符时，顺序很重要；相应的代码会以同样的顺序产生。因此，用 <code>v-on:click.prevent.self</code> 会阻止<strong>所有的点击</strong>，而 <code>v-on:click.self.prevent</code> 只会阻止对元素自身的点击</p>
+</blockquote>
+<h5 id="once"><a href="#once" class="headerlink" title="once"></a>once</h5><p>绑定了事件以后只能触发一次，第二次就不会触发</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button @click.<span class="property">once</span>=<span class="string">&quot;shout(1)&quot;</span>&gt;ok&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="capture"><a href="#capture" class="headerlink" title="capture"></a>capture</h5><p>使事件触发从包含这个元素的顶层开始往下触发</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div @click.<span class="property">capture</span>=<span class="string">&quot;shout(1)&quot;</span>&gt;</span><br><span class="line">    obj1</span><br><span class="line">&lt;div @click.<span class="property">capture</span>=<span class="string">&quot;shout(2)&quot;</span>&gt;</span><br><span class="line">    obj2</span><br><span class="line">&lt;div @click=<span class="string">&quot;shout(3)&quot;</span>&gt;</span><br><span class="line">    obj3</span><br><span class="line">&lt;div @click=<span class="string">&quot;shout(4)&quot;</span>&gt;</span><br><span class="line">    obj4</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"><span class="comment">// 输出结构: 1 2 4 3 </span></span><br></pre></td></tr></table></figure>
+
+<h5 id="passive"><a href="#passive" class="headerlink" title="passive"></a>passive</h5><p>在移动端，当我们在监听元素滚动事件的时候，会一直触发<code>onscroll</code>事件会让我们的网页变卡，因此我们使用这个修饰符的时候，相当于给<code>onscroll</code>事件整了一个<code>.lazy</code>修饰符</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 滚动事件的默认行为 (即滚动行为) 将会立即触发 --&gt;</span><br><span class="line">&lt;!-- 而不会等待 <span class="string">`onScroll`</span> 完成  --&gt;</span><br><span class="line">&lt;!-- 这其中包含 <span class="string">`event.preventDefault()`</span> 的情况 --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:scroll.passive</span>=<span class="string">&quot;onScroll&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>不要把 <code>.passive</code> 和 <code>.prevent</code> 一起使用,因为 <code>.prevent</code> 将会被忽略，同时浏览器可能会向你展示一个警告。</p>
+<p><code>passive</code> 会告诉浏览器你不想阻止事件的默认行为</p>
+</blockquote>
+<h5 id="native"><a href="#native" class="headerlink" title="native"></a>native</h5><p>让组件变成像<code>html</code>内置标签那样监听根元素的原生事件，否则组件上使用 <code>v-on</code> 只会监听自定义事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-component v-<span class="attr">on</span>:click.<span class="property">native</span>=<span class="string">&quot;doSomething&quot;</span>&gt;&lt;/my-component&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用.native修饰符来操作普通HTML标签是会令事件失效的</p>
+</blockquote>
+<h4 id="鼠标按钮修饰符"><a href="#鼠标按钮修饰符" class="headerlink" title="鼠标按钮修饰符"></a>鼠标按钮修饰符</h4><p>鼠标按钮修饰符针对的就是左键、右键、中键点击，有如下：</p>
+<ul>
+<li>left 左键点击</li>
+<li>right 右键点击</li>
+<li>middle 中键点击</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;button @click.<span class="property">left</span>=<span class="string">&quot;shout(1)&quot;</span>&gt;ok&lt;/button&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.right</span>=<span class="string">&quot;shout(1)&quot;</span>&gt;</span>ok<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.middle</span>=<span class="string">&quot;shout(1)&quot;</span>&gt;</span>ok<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="键盘修饰符"><a href="#键盘修饰符" class="headerlink" title="键盘修饰符"></a>键盘修饰符</h4><p>键盘修饰符是用来修饰键盘事件（<code>onkeyup</code>，<code>onkeydown</code>）的，有如下：</p>
+<p><code>keyCode</code>存在很多，但<code>vue</code>为我们提供了别名，分为以下两种：</p>
+<ul>
+<li>普通键（enter、tab、delete、space、esc、up…）</li>
+<li>系统修饰键（ctrl、alt、meta、shift…）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只有按键为keyCode的时候才触发</span></span><br><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> @keyup.<span class="property">keyCode</span>=<span class="string">&quot;shout()&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>还可以通过以下方式自定义一些全局的键盘码别名</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="property">config</span>.<span class="property">keyCodes</span>.<span class="property">f2</span> = <span class="number">113</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="v-bind修饰符"><a href="#v-bind修饰符" class="headerlink" title="v-bind修饰符"></a>v-bind修饰符</h5><p>v-bind修饰符主要是为属性进行操作，用来分别有如下：</p>
+<ul>
+<li>async</li>
+<li>prop</li>
+<li>camel</li>
+</ul>
+<h5 id="async"><a href="#async" class="headerlink" title="async"></a>async</h5><p>能对<code>props</code>进行一个双向绑定</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//父组件</span></span><br><span class="line">&lt;comp :myMessage.<span class="property">sync</span>=<span class="string">&quot;bar&quot;</span>&gt;&lt;/comp&gt; </span><br><span class="line"><span class="comment">//子组件</span></span><br><span class="line"><span class="variable language_">this</span>.$emit(<span class="string">&#x27;update:myMessage&#x27;</span>,params);</span><br></pre></td></tr></table></figure>
+
+<p>以上这种方法相当于以下的简写</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//父亲组件</span></span><br><span class="line">&lt;comp :myMessage=<span class="string">&quot;bar&quot;</span> @<span class="attr">update</span>:myMessage=<span class="string">&quot;func&quot;</span>&gt;&lt;/comp&gt;</span><br><span class="line"><span class="title function_">func</span>(<span class="params">e</span>)&#123;</span><br><span class="line"> <span class="variable language_">this</span>.<span class="property">bar</span> = e;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//子组件js</span></span><br><span class="line"><span class="title function_">func2</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">this</span>.$emit(<span class="string">&#x27;update:myMessage&#x27;</span>,params);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>async</code>需要注意以下两点：</p>
+<ul>
+<li>使用<code>sync</code>的时候，子组件传递的事件名格式必须为<code>update:value</code>，其中<code>value</code>必须与子组件中<code>props</code>中声明的名称完全一致</li>
+<li>注意带有 <code>.sync</code> 修饰符的 <code>v-bind</code> 不能和表达式一起使用</li>
+<li>将 <code>v-bind.sync</code> 用在一个字面量的对象上，例如 <code>v-bind.sync=”&#123; title: doc.title &#125;”</code>，是无法正常工作的</li>
+</ul>
+<h5 id="props"><a href="#props" class="headerlink" title="props"></a>props</h5><p>设置自定义标签属性，避免暴露数据，防止污染HTML结构</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">&quot;uid&quot;</span> title=<span class="string">&quot;title1&quot;</span> value=<span class="string">&quot;1&quot;</span> :index.<span class="property">prop</span>=<span class="string">&quot;index&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="camel"><a href="#camel" class="headerlink" title="camel"></a>camel</h5><p>将命名变为驼峰命名法，如将<code>view-Box</code>属性名转换为 <code>viewBox</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg :viewBox=<span class="string">&quot;viewBox&quot;</span>&gt;&lt;/svg&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、应用场景"><a href="#三、应用场景" class="headerlink" title="三、应用场景"></a>三、应用场景</h3><p>根据每一个修饰符的功能，我们可以得到以下修饰符的应用场景：</p>
+<ul>
+<li>.stop：阻止事件冒泡</li>
+<li>.native：绑定原生事件</li>
+<li>.once：事件只执行一次</li>
+<li>.self ：将事件绑定在自身身上，相当于阻止事件冒泡</li>
+<li>.prevent：阻止默认事件</li>
+<li>.caption：用于事件捕获</li>
+<li>.once：只触发一次</li>
+<li>.keyCode：监听特定键盘按下</li>
+<li>.right：右键</li>
+</ul>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000016786254">https://segmentfault.com/a/1190000016786254</a></li>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/docs/zh%E3%80%81">https://vue3js.cn/docs/zh、</a></li>
+<li>@js语音答题社区</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue%E4%BF%AE%E9%A5%B0%E7%AC%A6/" rel="tag"># vue修饰符</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/31936.html" rel="prev" title="vue响应式">
+      <i class="fa fa-chevron-left"></i> vue响应式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/58461.html" rel="next" title="自定义指令">
+      自定义指令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue%E5%B8%B8%E7%94%A8%E7%9A%84%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.</span> <span class="nav-text">Vue常用的修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9AVue%E5%B8%B8%E7%94%A8%E7%9A%84%E4%BF%AE%E9%A5%B0%E7%AC%A6%E6%9C%89%E5%93%AA%E4%BA%9B%E6%9C%89%E4%BB%80%E4%B9%88%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">面试官：Vue常用的修饰符有哪些有什么应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BF%AE%E9%A5%B0%E7%AC%A6%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、修饰符是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、修饰符的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">表单修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#lazy"><span class="nav-number">1.1.2.1.1.</span> <span class="nav-text">lazy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#trim"><span class="nav-number">1.1.2.1.2.</span> <span class="nav-text">trim</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#number"><span class="nav-number">1.1.2.1.3.</span> <span class="nav-text">number</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">事件修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#stop"><span class="nav-number">1.1.2.2.1.</span> <span class="nav-text">stop</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#prevent"><span class="nav-number">1.1.2.2.2.</span> <span class="nav-text">prevent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#self"><span class="nav-number">1.1.2.2.3.</span> <span class="nav-text">self</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#once"><span class="nav-number">1.1.2.2.4.</span> <span class="nav-text">once</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#capture"><span class="nav-number">1.1.2.2.5.</span> <span class="nav-text">capture</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#passive"><span class="nav-number">1.1.2.2.6.</span> <span class="nav-text">passive</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#native"><span class="nav-number">1.1.2.2.7.</span> <span class="nav-text">native</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E6%8C%89%E9%92%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">鼠标按钮修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">键盘修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#v-bind%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.1.2.4.1.</span> <span class="nav-text">v-bind修饰符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#async"><span class="nav-number">1.1.2.4.2.</span> <span class="nav-text">async</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#props"><span class="nav-number">1.1.2.4.3.</span> <span class="nav-text">props</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#camel"><span class="nav-number">1.1.2.4.4.</span> <span class="nav-text">camel</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.1.4.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

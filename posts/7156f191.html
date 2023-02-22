@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="如何才能远离信息污染？午夜的火车或长途汽车上， 你和其他乘客正在昏昏欲睡，突然传来嘶哑而又亢奋的声音， “某某某地特产， 买不了吃亏， 买不了上当”， 顿时所有乘客睡意全无， 带着赞美的目光看向这个人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何应对信息污染">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/7156f191.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="如何才能远离信息污染？午夜的火车或长途汽车上， 你和其他乘客正在昏昏欲睡，突然传来嘶哑而又亢奋的声音， “某某某地特产， 买不了吃亏， 买不了上当”， 顿时所有乘客睡意全无， 带着赞美的目光看向这个人">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/7156f191/image-20221214083647596.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/7156f191/image-20221214083733672.png">
+<meta property="article:published_time" content="2022-12-14T02:42:25.000Z">
+<meta property="article:modified_time" content="2022-12-14T03:03:12.477Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="如何应对信息污染">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/7156f191/image-20221214083647596.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/7156f191.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>如何应对信息污染 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/7156f191.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何应对信息污染
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-14 10:42:25 / 修改时间：11:03:12" itemprop="dateCreated datePublished" datetime="2022-12-14T10:42:25+08:00">2022-12-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="如何才能远离信息污染？"><a href="#如何才能远离信息污染？" class="headerlink" title="如何才能远离信息污染？"></a>如何才能远离信息污染？</h3><p>午夜的火车或长途汽车上， 你和其他乘客正在昏昏欲睡，突然传来嘶哑而又亢奋的声音， “某某某地特产， 买不了吃亏， 买不了上当”， 顿时所有乘客睡意全无， 带着赞美的目光看向这个人</p>
+<span id="more"></span>
+
+<p>这类信息对你有用吗？我想对于大部分人来说是没有任何作用的， 对你有用的信息，比如乘务员通知大家下一站叫什么，前方要过隧道等等。</p>
+<p>我的爷爷70多岁， 他很少玩手机，每天最多半小时，都是晚上睡觉前和子女聊天， 平时他获取信息的主要方式就是和朋友在下棋的过程中聊天。</p>
+<p>到我们这一代的信息获取方式发生了截然不同的变化</p>
+<p>现代的互联网传播信息的速度远远高于传统的纸质的信息传送方式，现代人每天都要接触和处理大量信息， 这些信息对我们都是有用的吗？</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们在粪便般的信息环境里生存                 -----宾斯法尼亚大学的传播学博士方可成</span><br></pre></td></tr></table></figure>
+
+<p>信息污染是指无用信息、劣质信息或有害信息渗透到信息资源中，对信息资源的收集、开发和利用造成干扰，影响信息传播的速度与效率，增加信息筛选、甄别的难度，信息污染中的有些信息还会对用户和国家产生危害</p>
+<p>前一段时间， 我在下载软件的时候， 被流氓软件给支配了， 看似我打开了官网， 但那个就不是官网，于是我花了很长时间才解决掉了流氓软件</p>
+<p>信息过载是指人们接受了过多信息，但却无法有效整合、组织及内化成自己需要的信息，以致影响到工作、学习和人际关系，我们每天都会在社交平台或短视频平台花费大量的时间来获取信息， 这些信息对我们有用吗？这些信息充斥着我们的大脑使我们无法专注， 注意力下降，到头来还是一种自嗨</p>
+<p>随着 5G 技术的推广应用，我国行将进入“人 － 事 － 物”全面互联的万联时代。万联时代的网络信息环境有着更为混浊化的可能性。万联时代的网络更加智能化，智能化不仅能给社会成员带来诸多福祉，而且可能促长网络失范行为的智能性、隐秘性、多样性和严重性等</p>
+<p>所以看来， 这种信息污染将来只会更严重</p>
+<p>确实是这样，写出十篇研究不足的通用文章要比一篇深思熟虑的文章容易得多。比起分享一个链接或者编造一些东西，我们需要花费更多的工作和时间去核实错误的信息或者证明一个谎言是错误的。此外，自动化的工具和机器人使得生成垃圾邮件/劣质内容变得更加容易，搜索引擎很难区分哪些内容是丰富的、有用的。互联网的广告模式说到底还是一个错误。</p>
+<p>参差不齐的内容水平， 眼花缭乱的排版， 发自内心地问一句： 编辑你写这些真的想要我看吗？他可能只是想要拿几块钱一篇地工资而已吧</p>
+<p>中国网信网“执法督查”栏目自 2015 年 2 月 2 日到 2020 年 4 月 24 日公开发布多条对网站的执 法督查新闻，其中具有明确查处原因和执行方式 的新闻 38 条。从中可以看出，我国的网络信息环境即使在管控甚严的情况下仍然存在着某些污浊化现象。从网站角度讲，这些执法督查对象有门户网站、商业网站、娱乐网站以及搜索引擎、微博、 APP 等，涉及网站数量不少。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们已经把信息变成了某种形式的垃圾          ------美国学者尼尔·波斯特曼</span><br></pre></td></tr></table></figure>
+
+<p>同样， 我们最常使用的微信也存在着信息污染。</p>
+<p>随着微信功能的不断完善，它已经建构起多 节点的信息传播系统，每一个节点都是信息生产 者、传播者和接收者的随机切换，信息在这个场域能够实现大批量生产和病毒式传播，这些信息如潮水一般涌向用户，超出了他们的信息接受能力， 变成无用信息，造成信息污染。研究结果表明，即时通信、朋友圈和微信公众号是微信信息污染最严重的三个领域，且每个功能领域的污染形势各有不同。</p>
+<p>即时通讯是微信最基础的功能，通过点对点的个人对话或者点对面的微信群交流，支持文字、 图片、语音、视频等多种形式的信息传递，是用户使用最多的微信功能，也是用户最易遭受信息污染的地方。微信群发功能将广告信息、节日祝福、 点赞邀请、诱导分享链接等信息发送给微信上的每一个好友，完成一次精准的点对面的传播；微信群更是让人不胜其烦，无关紧要的垃圾资讯，集体狂欢的表情包大战，低俗的搞笑视频，让微信群中有价值的通知、公告淹没在信息的洪流中，增加了群成员获取信息的难度</p>
+<p>此外，著名的“150 定律”认为，人类智力将允许人类拥有稳定社交网络的人数是150左右，一 旦圈子超过这个理想模式，人们大脑处理信息的能力就会下降，会感到无所适从，成员之间的关系就会淡化。调查结果显示，有 67.3%的用户好友超过200人，也就是说多数用户微信好友事实上超过了自己能够维持经常互动的能力范围。社交媒体只是在技术层面消灭了时空观念，实现同时与多人在线，但并没有带来深度和广度的延伸，更多时候那些关系淡化的好友推送的内容往往并非用户所需要的，这部分信息就成了无用的污染信息。</p>
+<p>其实全世界都存在信息污染，但中文世界信息污染严重的一大原因，是我们和世界不是连通的，事实上我们得到的信息是二手的，是经过一遍筛查再让我们看到的。</p>
+<p>我们的互联网如此，我们的电影如此，我们的书籍也是如此。</p>
+<p>比如说如果不会英语，你首先要面对的是中文互联网中大批量的信息错误。</p>
+<p>就拿最近的新西兰枪击案来说吧，3月15日，举世震惊的新西兰枪击案发生后，国内不少主流媒体的报道中不约而同地提到一点，注意是主流媒体。</p>
+<p>在行凶过程中，枪手在腿上绑着很多本杂志。</p>
+<img src="/posts/7156f191/image-20221214083647596.png" class title="image-20221214083647596">
+
+<p>继而很多媒体开始进行一些匪夷所思的猜测，说杂志中可能包含着行凶者的动机、信仰等，让很多国内的读者摸不着头脑。</p>
+<p>实际上，magazine不仅仅是指杂志的意思，他还有另一个意思是“弹匣”，但是翻译成杂志这个风马牛不相及的意思就很是典型的信息错误了。</p>
+<img src="/posts/7156f191/image-20221214083733672.png" class title="image-20221214083733672">
+
+
+
+
+
+
+
+
+
+<p>再比如：</p>
+<p>女大学生从直升机上跳下</p>
+<p>这几个字极具冲击力。</p>
+<p>看了以后，</p>
+<p>是不是以为这个女大学生遇到了什么人生困难想自杀？</p>
+<p>是不是疑惑为什么直升机上没人阻拦？</p>
+<p>是不是立马脑补了一出大戏？</p>
+<p>我是的。</p>
+<p>然而，当我点开这则新闻以后，看到的内容却是：</p>
+<p>翼装飞行员从直升机上起跳，进行翼装飞行。</p>
+<p>这件事，初看只觉得可笑。</p>
+<p>但细想起来，又觉得可悲。</p>
+<p>信息污染真的太严重了，我们每天都要接受和处理那么多的信息， 到底多少是正确的呢？标题党把互联网环境弄得乌烟瘴气的</p>
+<p>Adobe之前宣布了一个新的 Photoshop 功能，可以让你合成任何人的声音，本来说是一个非常好的项目， 但是它也允许坏人为假新闻生成辅助文档，直到它与现实无法区分。如果我们不开发一个信息免疫系统，优先考虑科学的，基于事实的真相，即使它伤害了我们个人，那么我们的文明将死于信息污染，如细菌填满培养皿，然后死于自己的废物产品。</p>
+<p>有人说， 人类有一个天然的信息免疫系统， 叫做大脑， 自己会区分那种无用的信息， 我认为人类的大脑对无用， 错误信息的处理就好像是温水煮青蛙， 刚开始可能会排斥， 先是享受在舒服的温水中， 最后迷失在自己的幻想中</p>
+<p>有的人在网络空间大肆传播谬误信息、谎言信息、迷信信息、恐怖信息等，更有甚者，为谋取利益不惜出卖人格，或通过微博微信大肆传播这类信息信息。这些行为更是直接造成网络信息环境的混浊化。</p>
+<p>所以，我们获取信息的过程中要做到全面，所谓兼听则明， 偏听则暗，跳出自己的圈子，独立思考。掌握正确的信息获取方式，并教给我们的后代，避免大脑每天被那些无用的信息覆盖，在大量信息冲击你大脑之前设置一道防线，方能使得自己立于不败之地</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82993392">https://zhuanlan.zhihu.com/p/82993392</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/142187041">https://zhuanlan.zhihu.com/p/142187041</a></p>
+<p>[1] 西南民族大学学报：人文科学社会版</p>
+<p>[2] 微信信息污染及其影响因素研究</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%E4%BF%A1%E6%81%AF%E6%B1%A1%E6%9F%93/" rel="tag"># 如何应对信息污染</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/4dba0f11.html" rel="prev" title="vscode中八个封神的快捷键">
+      <i class="fa fa-chevron-left"></i> vscode中八个封神的快捷键
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/9bf59f17.html" rel="next" title="我们应该结交怎样的朋友">
+      我们应该结交怎样的朋友 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E8%BF%9C%E7%A6%BB%E4%BF%A1%E6%81%AF%E6%B1%A1%E6%9F%93%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">如何才能远离信息污染？</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

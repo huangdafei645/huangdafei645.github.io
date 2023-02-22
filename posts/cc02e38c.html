@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一个AI编程助手：  就个人使用体验来说， 我觉得完全可以和chatGPT一起使用， 互相参考：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2023第二期">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/cc02e38c.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="一个AI编程助手：  就个人使用体验来说， 我觉得完全可以和chatGPT一起使用， 互相参考：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/cc02e38c/image-20230107185702733.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/cc02e38c/image-20230115083900042.png">
+<meta property="article:published_time" content="2023-01-15T00:59:18.000Z">
+<meta property="article:modified_time" content="2023-01-15T01:15:19.386Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="2023第二期">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/cc02e38c/image-20230107185702733.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/cc02e38c.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>2023第二期 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/cc02e38c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2023第二期
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-01-15 08:59:18 / 修改时间：09:15:19" itemprop="dateCreated datePublished" datetime="2023-01-15T08:59:18+08:00">2023-01-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%9F%E5%88%8A/" itemprop="url" rel="index"><span itemprop="name">期刊</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ol>
+<li>一个<a target="_blank" rel="noopener" href="https://www.aicodehelper.com/">AI编程助手</a>：</li>
+</ol>
+<p>就个人使用体验来说， 我觉得完全可以和chatGPT一起使用， 互相参考：</p>
+<span id="more"></span>
+
+<img src="/posts/cc02e38c/image-20230107185702733.png" class title="image-20230107185702733">
+
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.aicodehelper.com/</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>一个前端优质资源<a target="_blank" rel="noopener" href="https://github.com/lxchuan12/awesome-front-end/issues/1">issue</a></li>
+</ol>
+<p>收集前端优质资料，文章、系列文章、博客等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/lxchuan12/awesome-front-end/issues/1</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li>一个收集全世界免费API的仓库：</li>
+</ol>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/public-apis/public-apis</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="4">
+<li>Lama Cleaner  </li>
+</ol>
+<p>这是一款完全免费开源，而且没有人分辨率限制的图片去水印、修复工具：Lama Cleaner，内置了多种AI 模型构建，功能相当的齐全。可用于快速去除图像中各种水印、物品、人物、字体、等对象，并支持老照片修复、文本替换图像内容等。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Sanster/lama-cleaner</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="5">
+<li>NBlog</li>
+</ol>
+<p>一个前后端分离的开源博客系统，基于 Spring Boot + Vue 技术栈开发，界面清新简洁，拥有多个丰富的博客组件，自带管理后台</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Naccl/NBlog</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="6">
+<li>Pake</li>
+</ol>
+<p>一个可将各种网页快速打包成 Mac App 的开源工具。相比 Electron 更加小巧易用，速度更快，同时实现了通用的快捷键透传、沉浸式窗口、拖动、打包样式兼容等特性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/tw93/Pake</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="7">
+<li>github一些优秀的中文项目</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/GrowingGit/GitHub-Chinese-Top-Charts</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="8">
+<li>一个可扩展的UI框架</li>
+</ol>
+<p>web版win10</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/yuri2peter/ylui</span><br></pre></td></tr></table></figure>
+
+<p>demo：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://demo.ylui.yuri2.cn/?load=ylui-storage</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="9">
+<li>AI模拟人声音</li>
+</ol>
+<p>如果你想了解 AI 生成人声已经发展到什么地步了，可以在这里试听最新的 Valle 的 demo，只需要3秒的人声输入作为 Prompt 就可以生成同样的人声、而且不光是人声，连背景噪音都能生成，能够模拟人的情绪， 模拟人说话的环境。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">valle-demo.github.io</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p><strong>中国开发者喜欢star和fork</strong></p>
+<p>在前10个国家触发的事件约占GitHub所有事件的23.27%。然而，来自这些国家的开发者的数量只有10%。<br>美国开发者最喜欢审查代码，PullRequestReviewEvent的份额为6.15%。<br>中国开发者喜欢给仓库加星，WatchEvent占17.23%，ForkEvent占2.7%。<br>德国开发者喜欢公开问题和评论，IssueEvent和CommentEvent分别占4.18%和12.66%。<br>韩国开发者喜欢直接推送到存储库（PushEvent）。<br>日本开发者最倾向于通过拉动请求提交代码，PullRequestEvent占10%。</p>
+<p><strong>微软计划推出基于ChatGPT的必应搜索 ,该技术还可能用于word，电子邮件中</strong></p>
+<p>有很多用户对chatGPT的搜索结果的准确性不太看好， 就是可能会先用chatGPT的答案进行一个参考， 得到答案后， 会去Google再核实一下， 机器人毕竟还是机器人。chatGPT的结果经常是一本正经的胡说八道， 这种情况下， chatGPT应该怎么应对呢？<br>chatGPT可能真的是人工智能界的一个里程碑， 因为这玩意儿从出来到现在热度是越来越高。微软把握这个机会肯定也是必然的。</p>
+<p>微软已经讨论在 Word、PowerPoint、Outlook 等应用程序中加入 OpenAI 的人工智能，以便客户能够使用简单的提示自动生成文本。这一举措可能会改变超过 10 亿人编写文档、演示文稿和电子邮件的方式。工程师们正在开发在客户数据上训练这些模型的方法，并保证这些数据不会泄露给其他客户或落入不良分子手中</p>
+<p><strong>我们该不该放烟花</strong></p>
+<p>走在街上，随便找个00后问问，中国的四大传统节日是什么？能答对的少之又少…….<br>春节的却是个值得庆祝的节日，但是换种思考方式，从宇宙的尺度来看，一颗行星绕他们的恒星转了一圈，一片版块像鸡的土地上，有一些人在外拼搏一年，回家过年。放烟花是他们的一种庆祝方式，和家人坐在一起，聊天庆祝。<br>多地禁止放烟花，临近春节又放开了，我们这种庆祝的方式如果不能得到妥善解决的话，烟花公司也没有存在的必要了<br>放烟花感觉是一种习俗了，如果提到过年，脑海中是不是就这几个画面，红包，团圆饭，烟花，缺少其中任何一个元素，节日便没了感觉。如果端午节没有了粽子，是不是也就没有存在的意义了？<br>期待烟花这类事能得到妥善解决，朋友们可以过一个开开心心的年</p>
+<p><strong>在hacker news听到”撞库“一词</strong></p>
+<p>撞库的意思是，很多人把密码设置一样，当拥有一份数据库后，把已知的密码库，去撞未知的密码库，就会得到该账号的密码。<br>比如，你的抖音账号密码泄漏后，不法分子会用你该账号信息，去撞你的其他社交账户。唯一的解决办法是，各大平台使用不同的密码</p>
+<p><strong>我们的学校到底是训练学生，还是在教育学生？</strong></p>
+<p>作者从“学棋”的角度， 过渡到了这个问题</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://mp.weixin.qq.com/s/ICjgDxw0hkrxAjWiNUEVYQ</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>华罗庚读书法</strong></p>
+<p>他认为，读一本书，读一本好书，读好一本书，大致需要经历两个过程，第一个过程叫作“把书读厚”，第二个过程叫作“把书读薄“<br>“把书读厚”在于读书的时候对每个章节旁征博引添加引用，对每一页做注释写笔记，这样一来，书自然而然就变厚了。<br>“把书读薄”在于逐渐掌握了书的实质内容，有了更透彻的理解，我们自然也就感觉到书变薄了。</p>
+<p><strong>视频网站的“蓝光”是怎么骗你的？——视频画质入门解析</strong></p>
+<p>在你斥巨资开通视频网站的会员之后，是不是发现自己终于可以享用“1080P蓝光”画质？然后又发现这个“蓝光”……好像也没有多清晰嘛！</p>
+<p>所谓的“1080P蓝光”究竟是怎么回事？为什么有些1080P视频还是那么糊？视频网站的蓝光是真蓝光吗？怎么判断视频画质的好坏？MP4和MKV谁更清晰？为了讲清这些问题，我们做了这期15分钟的视频，相信能和你一起搞清楚这些问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.bilibili.com/video/BV1nW4y1V7kR</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>一个农夫到城市来，不懂交通规则，他不是蠢，他只是不太理解什么叫交通规则。一个城里人到乡下，分不清麦子和稻子，你也不能说他蠢，他只是没有接触过。所以真心希望各位同学，遇到和自己观点不一样的，能够本着一颗求同存异的心，不要带有知识的优越感 ———罗翔</p>
+<p><strong>伦敦地铁无裤日</strong></p>
+<p>伦敦「地铁无裤日」（No Trousers Tube Ride），市民们穿着底裤搭乘地铁。1月8日，伦敦举行新冠疫情爆发以来的首次「地铁无裤日」，活动参与者上身需正常着装，下身只穿一件底裤和鞋子，但是禁止穿丁字裤和透视装。「地铁无裤日」2002年始于美国纽约，目的是鼓励人们打破保守思想、尝试自我突破。迄今该活动已在纽约、柏林、伦敦、里斯本、东京、多伦多等全球逾60座城市举办。所以，人类穿衣服还是保守了吗？</p>
+<img src="/posts/cc02e38c/image-20230115083900042.png" class title="image-20230115083900042">
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/2023%E7%AC%AC%E4%BA%8C%E6%9C%9F/" rel="tag"># 2023第二期</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/13d6646a.html" rel="prev" title="2023第一期">
+      <i class="fa fa-chevron-left"></i> 2023第一期
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/84866147.html" rel="next" title="如何让自己慢下来">
+      如何让自己慢下来 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

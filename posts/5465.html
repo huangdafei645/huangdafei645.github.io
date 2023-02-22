@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="用css打开《清明上河图》先看效果图：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用css打开《清明上河图》">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/5465.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="用css打开《清明上河图》先看效果图：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5465/image-20221009171254436.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5465/image-20221009171455394.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5465/image-20221009171601463.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5465/image-20221009171832686.png">
+<meta property="article:published_time" content="2022-10-09T09:10:36.000Z">
+<meta property="article:modified_time" content="2022-12-09T08:33:53.424Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/5465/image-20221009171254436.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/5465.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>用css打开《清明上河图》 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/5465.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用css打开《清明上河图》
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-09 17:10:36" itemprop="dateCreated datePublished" datetime="2022-10-09T17:10:36+08:00">2022-10-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 16:33:53" itemprop="dateModified" datetime="2022-12-09T16:33:53+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="用css打开《清明上河图》"><a href="#用css打开《清明上河图》" class="headerlink" title="用css打开《清明上河图》"></a>用css打开《清明上河图》</h1><p>先看效果图：</p>
+<img src="/posts/5465/image-20221009171254436.png" class title="image-20221009171254436">
+
+<span id="more"></span>
+
+<h2 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h2><h3 id="骨架："><a href="#骨架：" class="headerlink" title="骨架："></a>骨架：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;leftReelWrapper&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;leftTopHandleBorder&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;leftTopHandle&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;leftTopReel&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;leftBottomHandle&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;leftBottomHandleBorder&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;pic&quot;</span> <span class="attr">src</span>=<span class="string">&#x27;./qingming_content.png&#x27;</span> <span class="attr">width</span>=<span class="string">&quot;469px&quot;</span> <span class="attr">height</span>=<span class="string">&quot;261px&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;rightReelWrapper&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;rightTopHandleBorder&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;rightTopHandle&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;rightReel&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;rightBottomHandle&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;rightBottomHandleBorder&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="画轴："><a href="#画轴：" class="headerlink" title="画轴："></a>画轴：</h3><p>添加css代码：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">		<span class="attribute">background</span>: <span class="number">#888</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="selector-class">.container</span> &#123;</span><br><span class="line">		<span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">800px</span>;</span><br><span class="line">		<span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">	 	<span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">	 	<span class="attribute">position</span>: relative;</span><br><span class="line">	 	<span class="attribute">margin-top</span>: <span class="number">100px</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="selector-class">.leftReelWrapper</span> &#123;</span><br><span class="line">		<span class="attribute">position</span>: absolute;</span><br><span class="line">		<span class="attribute">left</span>: <span class="number">50px</span>;</span><br><span class="line">		<span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">		<span class="attribute">margin-top</span>: -<span class="number">180px</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="selector-class">.leftTopReel</span>&#123;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">20px</span>;</span><br><span class="line">		<span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">		<span class="attribute">margin-left</span>: <span class="number">3px</span>;</span><br><span class="line">		<span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">90deg</span>, <span class="number">#884433</span>, <span class="number">#FBBC62</span>, <span class="number">#CC5F3D</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="selector-class">.leftTopHandle</span>, <span class="selector-class">.leftBottomHandle</span>&#123;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">20px</span>;</span><br><span class="line">		<span class="attribute">height</span>: <span class="number">24px</span>;</span><br><span class="line">		<span class="attribute">margin-left</span>: <span class="number">3px</span>;</span><br><span class="line">		<span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">90deg</span>, <span class="number">#411C1D</span>, <span class="number">#832C29</span>, <span class="number">#411C1D</span>);</span><br><span class="line">	&#125;</span><br><span class="line">      <span class="comment">/*轴上柄的末端小边*/</span></span><br><span class="line">	<span class="selector-class">.leftTopHandleBorder</span>, <span class="selector-class">.leftBottomHandleBorder</span> &#123;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">26px</span>;</span><br><span class="line">		<span class="attribute">height</span>: <span class="number">6px</span>;</span><br><span class="line">		<span class="attribute">border-radius</span>: <span class="number">6px</span>;</span><br><span class="line">		<span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">90deg</span>, <span class="number">#411C1D</span>, <span class="number">#832C29</span>, <span class="number">#411C1D</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>效果图：</p>
+<img src="/posts/5465/image-20221009171455394.png" class title="image-20221009171455394">
+
+<p>接着画另外一根：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">	<span class="selector-tag">body</span> &#123;</span><br><span class="line">		<span class="attribute">background</span>: <span class="number">#888</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="selector-class">.container</span> &#123;</span><br><span class="line">		<span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">800px</span>;</span><br><span class="line">		<span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">	 	<span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">	 	<span class="attribute">position</span>: relative;</span><br><span class="line">	 	<span class="attribute">margin-top</span>: <span class="number">100px</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="selector-class">.leftReelWrapper</span> &#123;</span><br><span class="line">		<span class="attribute">position</span>: absolute;</span><br><span class="line">		<span class="attribute">left</span>: <span class="number">50px</span>;</span><br><span class="line">		<span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">		<span class="attribute">margin-top</span>: -<span class="number">180px</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*右轴定位*/</span></span><br><span class="line">	<span class="selector-class">.rightReelWrapper</span> &#123;</span><br><span class="line">		<span class="attribute">position</span>: absolute;</span><br><span class="line">		<span class="attribute">left</span>: <span class="number">76px</span>;</span><br><span class="line">		<span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">		<span class="attribute">margin-top</span>: -<span class="number">180px</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*添加类名 .rightReel*/</span></span><br><span class="line">	<span class="selector-class">.leftTopReel</span>, <span class="selector-class">.rightReel</span> &#123;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">20px</span>;</span><br><span class="line">		<span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">		<span class="attribute">margin-left</span>: <span class="number">3px</span>;</span><br><span class="line">		<span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">90deg</span>, <span class="number">#884433</span>, <span class="number">#FBBC62</span>, <span class="number">#CC5F3D</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*添加类名 .rightTopHandle .rightBottomHandle*/</span></span><br><span class="line">	<span class="selector-class">.leftTopHandle</span>, <span class="selector-class">.leftBottomHandle</span>, <span class="selector-class">.rightTopHandle</span>, <span class="selector-class">.rightBottomHandle</span> &#123;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">20px</span>;</span><br><span class="line">		<span class="attribute">height</span>: <span class="number">24px</span>;</span><br><span class="line">		<span class="attribute">margin-left</span>: <span class="number">3px</span>;</span><br><span class="line">		<span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">90deg</span>, <span class="number">#411C1D</span>, <span class="number">#832C29</span>, <span class="number">#411C1D</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*轴上柄的末端小边*/</span></span><br><span class="line">	<span class="comment">/*添加类名 .rightTopHandleBorder, .rightBottomHandleBorder*/</span></span><br><span class="line">	<span class="selector-class">.leftTopHandleBorder</span>, <span class="selector-class">.leftBottomHandleBorder</span>, <span class="selector-class">.rightTopHandleBorder</span>, <span class="selector-class">.rightBottomHandleBorder</span> &#123;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">26px</span>;</span><br><span class="line">		<span class="attribute">height</span>: <span class="number">6px</span>;</span><br><span class="line">		<span class="attribute">border-radius</span>: <span class="number">6px</span>;</span><br><span class="line">		<span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">90deg</span>, <span class="number">#411C1D</span>, <span class="number">#832C29</span>, <span class="number">#411C1D</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>两根画好之后：</p>
+<img src="/posts/5465/image-20221009171601463.png" class title="image-20221009171601463">
+
+<h3 id="展开："><a href="#展开：" class="headerlink" title="展开："></a>展开：</h3><p>展开分两部分，一个是右轴的水平移动，一个是画布内容展开。</p>
+<h4 id="右轴移动："><a href="#右轴移动：" class="headerlink" title="右轴移动："></a>右轴移动：</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> moveReel &#123;</span><br><span class="line">	<span class="selector-tag">to</span> &#123;</span><br><span class="line">		<span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">500px</span>);</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*右轴定位*/</span></span><br><span class="line"><span class="selector-class">.rightReelWrapper</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">        // 加上这行</span><br><span class="line">        <span class="attribute">animation</span>: moveReel <span class="number">5s</span> linear <span class="number">3s</span> forwards;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后添加下面的css代码：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> expandPainting &#123;</span><br><span class="line">	<span class="selector-tag">to</span> &#123;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">468px</span>;</span><br><span class="line">	    <span class="attribute">border</span>: <span class="number">20px</span> solid <span class="number">#E05717</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.content</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="comment">/*这里使用border作为内容画布的边框，两轴静止的时候填充到中间细缝，没有设 background, 也方便直接在content里放图片，达到一种透视效果*/</span></span><br><span class="line">    <span class="attribute">border-left</span>: <span class="number">20px</span> solid <span class="number">#E05717</span>;</span><br><span class="line">    <span class="attribute">border-top</span>: <span class="number">20px</span> solid <span class="number">#E05717</span>;</span><br><span class="line">    <span class="attribute">border-bottom</span>: <span class="number">20px</span> solid <span class="number">#E05717</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">261px</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">72px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">56%</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">180px</span>;</span><br><span class="line">    <span class="comment">/*这里添加动画*/</span></span><br><span class="line">    <span class="attribute">animation</span>: expandPainting <span class="number">5s</span> linear <span class="number">3s</span> forwards;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="放图："><a href="#放图：" class="headerlink" title="放图："></a>放图：</h3><p>记得加</p>
+<p>overflow： hidden</p>
+<img src="/posts/5465/image-20221009171832686.png" class title="image-20221009171832686">
+
+
+
+<p>文章参考链接：(<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@keyframes)(https://juejin.cn/post/7145798378247421960)">https://developer.mozilla.org/zh-CN/docs/Web/CSS/@keyframes)(https://juejin.cn/post/7145798378247421960)</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/css/" rel="tag"># css</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/17659.html" rel="prev" title="《云边有个小卖部》读后感">
+      <i class="fa fa-chevron-left"></i> 《云边有个小卖部》读后感
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/25539.html" rel="next" title="说说你对vue的理解">
+      说说你对vue的理解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8css%E6%89%93%E5%BC%80%E3%80%8A%E6%B8%85%E6%98%8E%E4%B8%8A%E6%B2%B3%E5%9B%BE%E3%80%8B"><span class="nav-number">1.</span> <span class="nav-text">用css打开《清明上河图》</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">代码实现：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%A8%E6%9E%B6%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">骨架：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E8%BD%B4%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">画轴：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%95%E5%BC%80%EF%BC%9A"><span class="nav-number">1.1.3.</span> <span class="nav-text">展开：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%B3%E8%BD%B4%E7%A7%BB%E5%8A%A8%EF%BC%9A"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">右轴移动：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BE%E5%9B%BE%EF%BC%9A"><span class="nav-number">1.1.4.</span> <span class="nav-text">放图：</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

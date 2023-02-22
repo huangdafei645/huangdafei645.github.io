@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="用vue3设计组件面试官：用Vue3.0 写过组件吗？如果想实现一个 Modal你会怎么设计？  一、组件设计组件就是把图形、非图形的各种逻辑均抽象为一个统一的概念（组件）来实现开发的模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用vue3.0设计组件">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/24089.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="用vue3设计组件面试官：用Vue3.0 写过组件吗？如果想实现一个 Modal你会怎么设计？  一、组件设计组件就是把图形、非图形的各种逻辑均抽象为一个统一的概念（组件）来实现开发的模式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/24089/image-20221120074112213.png">
+<meta property="article:published_time" content="2022-11-19T23:39:50.000Z">
+<meta property="article:modified_time" content="2022-12-09T08:35:59.298Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="用vue设计组件">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/24089/image-20221120074112213.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/24089.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>用vue3.0设计组件 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/24089.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用vue3.0设计组件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-20 07:39:50" itemprop="dateCreated datePublished" datetime="2022-11-20T07:39:50+08:00">2022-11-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 16:35:59" itemprop="dateModified" datetime="2022-12-09T16:35:59+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="用vue3设计组件"><a href="#用vue3设计组件" class="headerlink" title="用vue3设计组件"></a>用vue3设计组件</h1><h2 id="面试官：用Vue3-0-写过组件吗？如果想实现一个-Modal你会怎么设计？"><a href="#面试官：用Vue3-0-写过组件吗？如果想实现一个-Modal你会怎么设计？" class="headerlink" title="面试官：用Vue3.0 写过组件吗？如果想实现一个 Modal你会怎么设计？"></a>面试官：用Vue3.0 写过组件吗？如果想实现一个 Modal你会怎么设计？</h2><img src="/posts/24089/image-20221120074112213.png" class title="image-20221120074112213">
+
+<h3 id="一、组件设计"><a href="#一、组件设计" class="headerlink" title="一、组件设计"></a>一、组件设计</h3><p>组件就是把图形、非图形的各种逻辑均抽象为一个统一的概念（组件）来实现开发的模式</p>
+<span id="more"></span>
+
+<p>现在有一个场景，点击新增与编辑都弹框出来进行填写，功能上大同小异，可能只是标题内容或者是显示的主体内容稍微不同</p>
+<p>这时候就没必要写两个组件，只需要根据传入的参数不同，组件显示不同内容即可</p>
+<p>这样，下次开发相同界面程序时就可以写更少的代码，意义着更高的开发效率，更少的 <code>Bug</code>和更少的程序体积</p>
+<h3 id="二、需求分析"><a href="#二、需求分析" class="headerlink" title="二、需求分析"></a>二、需求分析</h3><p>实现一个<code>Modal</code>组件，首先确定需要完成的内容：</p>
+<ul>
+<li>遮罩层</li>
+<li>标题内容</li>
+<li>主体内容</li>
+<li>确定和取消按钮</li>
+</ul>
+<p>主体内容需要灵活，所以可以是字符串，也可以是一段 <code>html</code> 代码</p>
+<p>特点是它们在当前<code>vue</code>实例之外独立存在，通常挂载于<code>body</code>之上</p>
+<p>除了通过引入<code>import</code>的形式，我们还可通过<code>API</code>的形式进行组件的调用</p>
+<p>还可以包括配置全局样式、国际化、与<code>typeScript</code>结合</p>
+<h3 id="三、实现流程"><a href="#三、实现流程" class="headerlink" title="三、实现流程"></a>三、实现流程</h3><p>首先看看大致流程：</p>
+<ul>
+<li>目录结构</li>
+<li>组件内容</li>
+<li>实现 API 形式</li>
+<li>事件处理</li>
+<li>其他完善</li>
+</ul>
+<h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><p><code>Modal</code>组件相关的目录结构</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">├── plugins</span><br><span class="line">│   └── modal</span><br><span class="line">│       ├── Content.tsx // 维护 Modal 的内容，用于 h 函数和 jsx 语法</span><br><span class="line">│       ├── Modal.vue // 基础组件</span><br><span class="line">│       ├── config.ts // 全局默认配置</span><br><span class="line">│       ├── index.ts // 入口</span><br><span class="line">│       ├── locale // 国际化相关</span><br><span class="line">│       │   ├── index.ts</span><br><span class="line">│       │   └── lang</span><br><span class="line">│       │       ├── en-US.ts</span><br><span class="line">│       │       ├── zh-CN.ts</span><br><span class="line">│       │       └── zh-TW.ts</span><br><span class="line">│       └── modal.type.ts // ts类型声明相关</span><br></pre></td></tr></table></figure>
+
+<p>因为 Modal 会被 <code>app.use(Modal)</code> 调用作为一个插件，所以都放在<code>plugins</code>目录下</p>
+<h4 id="组件内容"><a href="#组件内容" class="headerlink" title="组件内容"></a>组件内容</h4><p>首先实现<code>modal.vue</code>的主体显示内容大致如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Teleport</span> <span class="attr">to</span>=<span class="string">&quot;body&quot;</span> <span class="attr">:disabled</span>=<span class="string">&quot;!isTeleport&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;modelValue&quot;</span> <span class="attr">class</span>=<span class="string">&quot;modal&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span></span></span><br><span class="line"><span class="tag">             <span class="attr">class</span>=<span class="string">&quot;mask&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">:style</span>=<span class="string">&quot;style&quot;</span></span></span><br><span class="line"><span class="tag">             @<span class="attr">click</span>=<span class="string">&quot;maskClose &amp;&amp; !loading &amp;&amp; handleCancel()&quot;</span></span></span><br><span class="line"><span class="tag">             &gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal__main&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal__title line line--b&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; title || t(&quot;r.title&quot;) &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span></span></span><br><span class="line"><span class="tag">                      <span class="attr">v-if</span>=<span class="string">&quot;close&quot;</span></span></span><br><span class="line"><span class="tag">                      <span class="attr">:title</span>=<span class="string">&quot;t(&#x27;r.close&#x27;)&quot;</span></span></span><br><span class="line"><span class="tag">                      <span class="attr">class</span>=<span class="string">&quot;close&quot;</span></span></span><br><span class="line"><span class="tag">                      @<span class="attr">click</span>=<span class="string">&quot;!loading &amp;&amp; handleCancel()&quot;</span></span></span><br><span class="line"><span class="tag">                      &gt;</span>✕&lt;/span</span><br><span class="line">                    &gt;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal__content&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">Content</span> <span class="attr">v-if</span>=<span class="string">&quot;typeof content === &#x27;function&#x27;&quot;</span> <span class="attr">:render</span>=<span class="string">&quot;content&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">slot</span> <span class="attr">v-else</span>&gt;</span></span><br><span class="line">                    &#123;&#123; content &#125;&#125;</span><br><span class="line">                <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal__btns line line--t&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">button</span> <span class="attr">:disabled</span>=<span class="string">&quot;loading&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;handleConfirm&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;loading&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;loading&quot;</span>&gt;</span> ❍ <span class="tag">&lt;/<span class="name">span</span>&gt;</span>&#123;&#123; t(&quot;r.confirm&quot;) &#125;&#125;</span><br><span class="line">                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;!loading &amp;&amp; handleCancel()&quot;</span>&gt;</span></span><br><span class="line">                    &#123;&#123; t(&quot;r.cancel&quot;) &#125;&#125;</span><br><span class="line">                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Teleport</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>最外层上通过Vue3 <code>Teleport</code> 内置组件进行包裹，其相当于传送门，将里面的内容传送至<code>body</code>之上</p>
+<p>并且从<code>DOM</code>结构上来看，把<code>modal</code>该有的内容（遮罩层、标题、内容、底部按钮）都实现了</p>
+<p>关于主体内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal__content&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Content</span> <span class="attr">v-if</span>=<span class="string">&quot;typeof content===&#x27;function&#x27;&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">:render</span>=<span class="string">&quot;content&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">v-else</span>&gt;</span></span><br><span class="line">        &#123;&#123;content&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到根据传入<code>content</code>的类型不同，对应显示不同得到内容</p>
+<p>最常见的则是通过调用字符串和默认插槽的形式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 默认插槽</span><br><span class="line"><span class="tag">&lt;<span class="name">Modal</span> <span class="attr">v-model</span>=<span class="string">&quot;show&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">title</span>=<span class="string">&quot;演示 slot&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>hello world~<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Modal</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// 字符串</span><br><span class="line"><span class="tag">&lt;<span class="name">Modal</span> <span class="attr">v-model</span>=<span class="string">&quot;show&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">title</span>=<span class="string">&quot;演示 content&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">content</span>=<span class="string">&quot;hello world~&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过 API 形式调用<code>Modal</code>组件的时候，<code>content</code>可以使用下面两种</p>
+<ul>
+<li>h 函数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$modal.<span class="title function_">show</span>(&#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&#x27;演示 h 函数&#x27;</span>,</span><br><span class="line">  <span class="title function_">content</span>(<span class="params">h</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">h</span>(</span><br><span class="line">      <span class="string">&#x27;div&#x27;</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">style</span>: <span class="string">&#x27;color:red;&#x27;</span>,</span><br><span class="line">        <span class="attr">onClick</span>: <span class="function">(<span class="params">$event: Event</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;clicked&#x27;</span>, $event.<span class="property">target</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">&#x27;hello world ~&#x27;</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>JSX</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$modal.<span class="title function_">show</span>(&#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&#x27;演示 jsx 语法&#x27;</span>,</span><br><span class="line">  <span class="title function_">content</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">div</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">onClick</span>=<span class="string">&#123;($event:</span> <span class="attr">Event</span>) =&gt;</span> console.log(&#x27;clicked&#x27;, $event.target)&#125;</span></span><br><span class="line"><span class="language-xml">      &gt;</span></span><br><span class="line"><span class="language-xml">        hello world ~</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="实现-API-形式"><a href="#实现-API-形式" class="headerlink" title="实现 API 形式"></a>实现 API 形式</h4><p>那么组件如何实现<code>API</code>形式调用<code>Modal</code>组件呢？</p>
+<p>在<code>Vue2</code>中，我们可以借助<code>Vue</code>实例以及<code>Vue.extend</code>的方式获得组件实例，然后挂载到<code>body</code>上</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Modal</span> <span class="keyword">from</span> <span class="string">&#x27;./Modal.vue&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">ComponentClass</span> = <span class="title class_">Vue</span>.<span class="title function_">extend</span>(<span class="title class_">Modal</span>);</span><br><span class="line"><span class="keyword">const</span> instance = <span class="keyword">new</span> <span class="title class_">ComponentClass</span>(&#123; <span class="attr">el</span>: <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>) &#125;);</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(instance.<span class="property">$el</span>);</span><br></pre></td></tr></table></figure>
+
+<p>虽然<code>Vue3</code>移除了<code>Vue.extend</code>方法，但可以通过<code>createVNode</code>实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Modal</span> <span class="keyword">from</span> <span class="string">&#x27;./Modal.vue&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> container = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> vnode = <span class="title function_">createVNode</span>(<span class="title class_">Modal</span>);</span><br><span class="line"><span class="title function_">render</span>(vnode, container);</span><br><span class="line"><span class="keyword">const</span> instance = vnode.<span class="property">component</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(container);</span><br></pre></td></tr></table></figure>
+
+<p>在<code>Vue2</code>中，可以通过<code>this</code>的形式调用全局 API</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="title function_">install</span>(<span class="params">vue</span>) &#123;</span><br><span class="line">       vue.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$create</span> = create</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而在 Vue3 的 <code>setup</code> 中已经没有 <code>this</code>概念了，需要调用<code>app.config.globalProperties</code>挂载到全局</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="title function_">install</span>(<span class="params">app</span>) &#123;</span><br><span class="line">        app.<span class="property">config</span>.<span class="property">globalProperties</span>.<span class="property">$create</span> = create</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h4><p>下面再看看看<code>Modal</code>组件内部是如何处理「确定」「取消」事件的，既然是<code>Vue3</code>，当然采用<code>Compositon API</code> 形式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Modal.vue</span></span><br><span class="line"><span class="title function_">setup</span>(<span class="params">props, ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> instance = <span class="title function_">getCurrentInstance</span>(); <span class="comment">// 获得当前组件实例</span></span><br><span class="line">  <span class="title function_">onBeforeMount</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    instance.<span class="property">_hub</span> = &#123;</span><br><span class="line">      <span class="string">&#x27;on-cancel&#x27;</span>: <span class="function">() =&gt;</span> &#123;&#125;,</span><br><span class="line">      <span class="string">&#x27;on-confirm&#x27;</span>: <span class="function">() =&gt;</span> &#123;&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handleConfirm</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    ctx.<span class="title function_">emit</span>(<span class="string">&#x27;on-confirm&#x27;</span>);</span><br><span class="line">    instance.<span class="property">_hub</span>[<span class="string">&#x27;on-confirm&#x27;</span>]();</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handleCancel</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    ctx.<span class="title function_">emit</span>(<span class="string">&#x27;on-cancel&#x27;</span>);</span><br><span class="line">    ctx.<span class="title function_">emit</span>(<span class="string">&#x27;update:modelValue&#x27;</span>, <span class="literal">false</span>);</span><br><span class="line">    instance.<span class="property">_hub</span>[<span class="string">&#x27;on-cancel&#x27;</span>]();</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    handleConfirm,</span><br><span class="line">    handleCancel</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面代码中，可以看得到除了使用传统<code>emit</code>的形式使父组件监听，还可通过<code>_hub</code>属性中添加 <code>on-cancel</code>，<code>on-confirm</code>方法实现在<code>API</code>中进行监听</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="property">config</span>.<span class="property">globalProperties</span>.<span class="property">$modal</span> = &#123;</span><br><span class="line">   <span class="title function_">show</span>(<span class="params">&#123;&#125;</span>) &#123;</span><br><span class="line">     <span class="comment">/* 监听 确定、取消 事件 */</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面再来目睹下<code>_hub</code>是如何实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.ts</span></span><br><span class="line">app.<span class="property">config</span>.<span class="property">globalProperties</span>.<span class="property">$modal</span> = &#123;</span><br><span class="line">    <span class="title function_">show</span>(<span class="params">&#123;</span></span><br><span class="line"><span class="params">        /* 其他选项 */</span></span><br><span class="line"><span class="params">        onConfirm,</span></span><br><span class="line"><span class="params">        onCancel</span></span><br><span class="line"><span class="params">    &#125;</span>) &#123;</span><br><span class="line">        <span class="comment">/* ... */</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> &#123; props, _hub &#125; = instance;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> <span class="title function_">_closeModal</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">            props.<span class="property">modelValue</span> = <span class="literal">false</span>;</span><br><span class="line">            container.<span class="property">parentNode</span>!.<span class="title function_">removeChild</span>(container);</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">// 往 _hub 新增事件的具体实现</span></span><br><span class="line">        <span class="title class_">Object</span>.<span class="title function_">assign</span>(_hub, &#123;</span><br><span class="line">            <span class="keyword">async</span> <span class="string">&#x27;on-confirm&#x27;</span>() &#123;</span><br><span class="line">            <span class="keyword">if</span> (onConfirm) &#123;</span><br><span class="line">                <span class="keyword">const</span> fn = <span class="title function_">onConfirm</span>();</span><br><span class="line">                <span class="comment">// 当方法返回为 Promise</span></span><br><span class="line">                <span class="keyword">if</span> (fn &amp;&amp; fn.<span class="property">then</span>) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        props.<span class="property">loading</span> = <span class="literal">true</span>;</span><br><span class="line">                        <span class="keyword">await</span> fn;</span><br><span class="line">                        props.<span class="property">loading</span> = <span class="literal">false</span>;</span><br><span class="line">                        <span class="title function_">_closeModal</span>();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">                        <span class="comment">// 发生错误时，不关闭弹框</span></span><br><span class="line">                        <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">                        props.<span class="property">loading</span> = <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="title function_">_closeModal</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">_closeModal</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">            <span class="string">&#x27;on-cancel&#x27;</span>() &#123;</span><br><span class="line">                onCancel &amp;&amp; <span class="title function_">onCancel</span>();</span><br><span class="line">                <span class="title function_">_closeModal</span>();</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="其他完善"><a href="#其他完善" class="headerlink" title="其他完善"></a>其他完善</h4><p>关于组件实现国际化、与<code>typsScript</code>结合，大家可以根据自身情况在此基础上进行更改</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000038928664">https://segmentfault.com/a/1190000038928664</a></li>
+<li>@js语音答题社区</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%A8vue%E8%AE%BE%E8%AE%A1%E7%BB%84%E4%BB%B6/" rel="tag"># 用vue设计组件</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/50738.html" rel="prev" title="treeshaking的特性">
+      <i class="fa fa-chevron-left"></i> treeshaking的特性
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/3185.html" rel="next" title="我的英语学习方法">
+      我的英语学习方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8vue3%E8%AE%BE%E8%AE%A1%E7%BB%84%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">用vue3设计组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9A%E7%94%A8Vue3-0-%E5%86%99%E8%BF%87%E7%BB%84%E4%BB%B6%E5%90%97%EF%BC%9F%E5%A6%82%E6%9E%9C%E6%83%B3%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-Modal%E4%BD%A0%E4%BC%9A%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">面试官：用Vue3.0 写过组件吗？如果想实现一个 Modal你会怎么设计？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、组件设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、实现流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">组件内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-API-%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">实现 API 形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">事件处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%AE%8C%E5%96%84"><span class="nav-number">1.1.3.5.</span> <span class="nav-text">其他完善</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.1.4.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

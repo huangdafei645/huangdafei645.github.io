@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="vue组件之间的通信方式有哪些？面试官：Vue组件之间的通信方式都有哪些？  一、组件间通信的概念开始之前，我们把组件间通信这个词进行拆分  组件 通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue组件之间的通信方式有哪些？">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/50684.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="vue组件之间的通信方式有哪些？面试官：Vue组件之间的通信方式都有哪些？  一、组件间通信的概念开始之前，我们把组件间通信这个词进行拆分  组件 通信">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/50684/image-20221020135724159.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/50684/image-20221020135747171.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/50684/image-20221020135804121.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/50684/image-20221020140206505.png">
+<meta property="article:published_time" content="2022-10-20T05:52:41.000Z">
+<meta property="article:modified_time" content="2022-12-09T08:05:27.995Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="vue组件之间的通信方式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/50684/image-20221020135724159.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/50684.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vue组件之间的通信方式有哪些？ | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/50684.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue组件之间的通信方式有哪些？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-20 13:52:41" itemprop="dateCreated datePublished" datetime="2022-10-20T13:52:41+08:00">2022-10-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 16:05:27" itemprop="dateModified" datetime="2022-12-09T16:05:27+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="vue组件之间的通信方式有哪些？"><a href="#vue组件之间的通信方式有哪些？" class="headerlink" title="vue组件之间的通信方式有哪些？"></a>vue组件之间的通信方式有哪些？</h1><h2 id="面试官：Vue组件之间的通信方式都有哪些？"><a href="#面试官：Vue组件之间的通信方式都有哪些？" class="headerlink" title="面试官：Vue组件之间的通信方式都有哪些？"></a>面试官：Vue组件之间的通信方式都有哪些？</h2><img src="/posts/50684/image-20221020135724159.png" class title="image-20221020135724159">
+
+<h3 id="一、组件间通信的概念"><a href="#一、组件间通信的概念" class="headerlink" title="一、组件间通信的概念"></a>一、组件间通信的概念</h3><p>开始之前，我们把<strong>组件间通信</strong>这个词进行拆分</p>
+<ul>
+<li>组件</li>
+<li>通信</li>
+</ul>
+<span id="more"></span>
+
+<p>都知道组件是<code>vue</code>最强大的功能之一，<code>vue</code>中每一个<code>.vue</code>我们都可以视之为一个组件通信指的是发送者通过某种媒体以某种格式来传递信息到收信者以达到某个目的。广义上，任何信息的交通都是通信<strong>组件间通信</strong>即指组件(<code>.vue</code>)通过某种方式来传递信息以达到某个目的举个栗子我们在使用<code>UI</code>框架中的<code>table</code>组件，可能会往<code>table</code>组件中传入某些数据，这个本质就形成了组件之间的通信</p>
+<h3 id="二、组件间通信解决了什么"><a href="#二、组件间通信解决了什么" class="headerlink" title="二、组件间通信解决了什么"></a>二、组件间通信解决了什么</h3><p>在古代，人们通过驿站、飞鸽传书、烽火报警、符号、语言、眼神、触碰等方式进行信息传递，到了今天，随着科技水平的飞速发展，通信基本完全利用有线或无线电完成，相继出现了有线电话、固定电话、无线电话、手机、互联网甚至视频电话等各种通信方式从上面这段话，我们可以看到通信的本质是信息同步，共享回到<code>vue</code>中，每个组件之间的都有独自的作用域，组件间的数据是无法共享的但实际开发工作中我们常常需要让组件之间共享数据，这也是组件通信的目的要让它们互相之间能进行通讯，这样才能构成一个有机的完整系统</p>
+<h3 id="三、组件间通信的分类"><a href="#三、组件间通信的分类" class="headerlink" title="三、组件间通信的分类"></a>三、组件间通信的分类</h3><p>组件间通信的分类可以分成以下</p>
+<ul>
+<li>父子组件之间的通信</li>
+<li>兄弟组件之间的通信</li>
+<li>祖孙与后代组件之间的通信</li>
+<li>非关系组件间之间的通信</li>
+</ul>
+<p>关系图:</p>
+<img src="/posts/50684/image-20221020135747171.png" class title="image-20221020135747171">
+
+<h3 id="四、组件间通信的方案"><a href="#四、组件间通信的方案" class="headerlink" title="四、组件间通信的方案"></a>四、组件间通信的方案</h3><p>整理<code>vue</code>中8种常规的通信方案</p>
+<ol>
+<li>通过 props 传递</li>
+<li>通过 $emit 触发自定义事件</li>
+<li>使用 ref</li>
+<li>EventBus</li>
+<li>$parent 或$root</li>
+<li>attrs 与 listeners</li>
+<li>Provide 与 Inject</li>
+<li>Vuex</li>
+</ol>
+<h4 id="props传递数据"><a href="#props传递数据" class="headerlink" title="props传递数据"></a>props传递数据</h4><img src="/posts/50684/image-20221020135804121.png" class title="image-20221020135804121">
+
+<ul>
+<li>适用场景：父组件传递数据给子组件</li>
+<li>子组件设置<code>props</code>属性，定义接收父组件传递过来的参数</li>
+<li>父组件在使用子组件标签中通过字面量来传递值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Children</span>.<span class="property">vue</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">props</span>:&#123;  </span><br><span class="line">    <span class="comment">// 字符串形式  </span></span><br><span class="line"> <span class="attr">name</span>:<span class="title class_">String</span> <span class="comment">// 接收的类型参数  </span></span><br><span class="line">    <span class="comment">// 对象形式  </span></span><br><span class="line">    <span class="attr">age</span>:&#123;    </span><br><span class="line">        <span class="attr">type</span>:<span class="title class_">Number</span>, <span class="comment">// 接收的类型为数值  </span></span><br><span class="line">        <span class="attr">defaule</span>:<span class="number">18</span>,  <span class="comment">// 默认值为18  </span></span><br><span class="line">       <span class="attr">require</span>:<span class="literal">true</span> <span class="comment">// age属性必须传递  </span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p><code>Father.vue</code>组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Children</span> name=<span class="string">&quot;jack&quot;</span> age=<span class="number">18</span> /&gt; </span><br></pre></td></tr></table></figure>
+
+<h4 id="emit-触发自定义事件"><a href="#emit-触发自定义事件" class="headerlink" title="$emit 触发自定义事件"></a>$emit 触发自定义事件</h4><ul>
+<li>适用场景：子组件传递数据给父组件</li>
+<li>子组件通过<code>$emit触发</code>自定义事件，<code>$emit</code>第二个参数为传递的数值</li>
+<li>父组件绑定监听器获取到子组件传递过来的参数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Chilfen.vue</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.$emit(<span class="string">&#x27;add&#x27;</span>, good) </span><br></pre></td></tr></table></figure>
+
+<p>Father.vue</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Children</span> @add=<span class="string">&quot;cartAdd($event)&quot;</span> /&gt;  </span><br></pre></td></tr></table></figure>
+
+<h4 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h4><ul>
+<li>父组件在使用子组件的时候设置<code>ref</code></li>
+<li>父组件通过设置子组件<code>ref</code>来获取数据</li>
+</ul>
+<p>父组件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Children</span> ref=<span class="string">&quot;foo&quot;</span> /&gt;  </span><br><span class="line">  </span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">foo</span>  <span class="comment">// 获取子组件实例，通过子组件实例我们就能拿到对应的数据 </span></span><br></pre></td></tr></table></figure>
+
+<h4 id="EventBus"><a href="#EventBus" class="headerlink" title="EventBus"></a>EventBus</h4><ul>
+<li>使用场景：兄弟组件传值</li>
+<li>创建一个中央事件总线<code>EventBus</code></li>
+<li>兄弟组件通过<code>$emit</code>触发自定义事件，<code>$emit</code>第二个参数为传递的数值</li>
+<li>另一个兄弟组件通过<code>$on</code>监听自定义事件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bus.js</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个中央时间总线类  </span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bus</span> &#123;  </span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;  </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">callbacks</span> = &#123;&#125;;   <span class="comment">// 存放事件的名字  </span></span><br><span class="line">  &#125;  </span><br><span class="line">  $on(name, fn) &#123;  </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">callbacks</span>[name] = <span class="variable language_">this</span>.<span class="property">callbacks</span>[name] || [];  </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">callbacks</span>[name].<span class="title function_">push</span>(fn);  </span><br><span class="line">  &#125;  </span><br><span class="line">  $emit(name, args) &#123;  </span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">callbacks</span>[name]) &#123;  </span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">callbacks</span>[name].<span class="title function_">forEach</span>(<span class="function">(<span class="params">cb</span>) =&gt;</span> <span class="title function_">cb</span>(args));  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// main.js  </span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$bus</span> = <span class="keyword">new</span> <span class="title class_">Bus</span>() <span class="comment">// 将$bus挂载到vue实例的原型上  </span></span><br><span class="line"><span class="comment">// 另一种方式  </span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$bus</span> = <span class="keyword">new</span> <span class="title class_">Vue</span>() <span class="comment">// Vue已经实现了Bus的功能  </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Children1.vue</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$bus</span>.$emit(<span class="string">&#x27;foo&#x27;</span>)  </span><br></pre></td></tr></table></figure>
+
+<p>Children2.vue</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$bus</span>.$on(<span class="string">&#x27;foo&#x27;</span>, <span class="variable language_">this</span>.<span class="property">handle</span>) </span><br></pre></td></tr></table></figure>
+
+<h4 id="parent-或-root"><a href="#parent-或-root" class="headerlink" title="$parent 或$ root"></a>$parent 或$ root</h4><ul>
+<li>通过共同祖辈<code>$parent</code>或者<code>$root</code>搭建通信桥连</li>
+</ul>
+<p>兄弟组件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$parent.on(&#x27;add&#x27;,this.add)</span><br></pre></td></tr></table></figure>
+
+<p>另一个兄弟组件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$parent.emit(&#x27;add&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="attrs-与-listeners"><a href="#attrs-与-listeners" class="headerlink" title="$attrs 与$ listeners"></a>$attrs 与$ listeners</h4><ul>
+<li>适用场景：祖先传递数据给子孙</li>
+<li>设置批量向下传属性<code>$attrs</code>和 <code>$listeners</code></li>
+<li>包含了父级作用域中不作为 <code>prop</code> 被识别 (且获取) 的特性绑定 ( class 和 style 除外)。</li>
+<li>可以通过 <code>v-bind=&quot;$attrs&quot;</code> 传⼊内部组件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// child：并未在props中声明foo  </span></span><br><span class="line">&lt;p&gt;&#123;&#123;$attrs.<span class="property">foo</span>&#125;&#125;&lt;/p&gt;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// parent  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">HelloWorld</span> <span class="attr">foo</span>=<span class="string">&quot;foo&quot;</span>/&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给Grandson隔代传值，communication/index.vue  </span></span><br><span class="line">&lt;<span class="title class_">Child2</span> msg=<span class="string">&quot;lalala&quot;</span> @some-event=<span class="string">&quot;onSomeEvent&quot;</span>&gt;&lt;/<span class="title class_">Child2</span>&gt;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Child2做展开  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">Grandson</span> <span class="attr">v-bind</span>=<span class="string">&quot;$attrs&quot;</span> <span class="attr">v-on</span>=<span class="string">&quot;$listeners&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Grandson</span>&gt;</span></span>  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Grandson使⽤  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">&quot;$emit(&#x27;some-event&#x27;, &#x27;msg from grandson&#x27;)&quot;</span>&gt;</span>  </span></span><br><span class="line"><span class="language-xml">&#123;&#123;msg&#125;&#125;  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>  </span><br></pre></td></tr></table></figure>
+
+<h4 id="provide-与-inject"><a href="#provide-与-inject" class="headerlink" title="provide 与 inject"></a>provide 与 inject</h4><ul>
+<li>在祖先组件定义<code>provide</code>属性，返回传递的值</li>
+<li>在后代组件通过<code>inject</code>接收组件传递过来的值</li>
+</ul>
+<p>祖先组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">provide</span>(<span class="params"></span>)&#123;  </span><br><span class="line">    <span class="keyword">return</span> &#123;  </span><br><span class="line">        <span class="attr">foo</span>:<span class="string">&#x27;foo&#x27;</span>  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>后代组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">inject</span>:[<span class="string">&#x27;foo&#x27;</span>] <span class="comment">// 获取到祖先组件传递过来的值</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a><code>vuex</code></h4><ul>
+<li>适用场景: 复杂关系的组件数据传递</li>
+<li><code>Vuex</code>作用相当于一个用来存储共享变量的容器</li>
+</ul>
+<img src="/posts/50684/image-20221020140206505.png" class title="image-20221020140206505">
+
+<ul>
+<li><code>state</code>用来存放共享变量的地方</li>
+<li><code>getter</code>，可以增加一个<code>getter</code>派生状态，(相当于<code>store</code>中的计算属性），用来获得共享变量的值</li>
+<li><code>mutations</code>用来存放修改<code>state</code>的方法。</li>
+<li><code>actions</code>也是用来存放修改state的方法，不过<code>action</code>是在<code>mutations</code>的基础上进行。常用来做一些异步操作</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
+<li>父子关系的组件数据传递选择 <code>props</code> 与 <code>$emit</code>进行传递，也可选择<code>ref</code></li>
+<li>兄弟关系的组件数据传递可选择<code>$bus</code>，其次可以选择<code>$parent</code>进行传递</li>
+<li>祖先与后代组件数据传递可选择<code>attrs</code>与<code>listeners</code>或者 <code>Provide</code>与 <code>Inject</code></li>
+<li>复杂关系的组件数据传递可以通过<code>vuex</code>存放共享的变量</li>
+</ul>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903990052782094#heading-0">https://juejin.cn/post/6844903990052782094#heading-0</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%80%9A%E4%BF%A1">https://zh.wikipedia.org/wiki/%E9%80%9A%E4%BF%A1</a></li>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
+<li>@js语音答题社区</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/" rel="tag"># vue组件之间的通信方式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/51138.html" rel="prev" title="vue中组件和插件的区别">
+      <i class="fa fa-chevron-left"></i> vue中组件和插件的区别
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/20922.html" rel="next" title="说说你对双向绑定的理解">
+      说说你对双向绑定的理解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">vue组件之间的通信方式有哪些？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9AVue%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">面试官：Vue组件之间的通信方式都有哪些？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BB%84%E4%BB%B6%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、组件间通信的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%BB%84%E4%BB%B6%E9%97%B4%E9%80%9A%E4%BF%A1%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、组件间通信解决了什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BB%84%E4%BB%B6%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、组件间通信的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%BB%84%E4%BB%B6%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number">1.1.4.</span> <span class="nav-text">四、组件间通信的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#props%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">props传递数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#emit-%E8%A7%A6%E5%8F%91%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">$emit 触发自定义事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ref"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">ref</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EventBus"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">EventBus</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#parent-%E6%88%96-root"><span class="nav-number">1.1.4.5.</span> <span class="nav-text">$parent 或$ root</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#attrs-%E4%B8%8E-listeners"><span class="nav-number">1.1.4.6.</span> <span class="nav-text">$attrs 与$ listeners</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#provide-%E4%B8%8E-inject"><span class="nav-number">1.1.4.7.</span> <span class="nav-text">provide 与 inject</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vuex"><span class="nav-number">1.1.4.8.</span> <span class="nav-text">vuex</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">1.1.4.9.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.1.5.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

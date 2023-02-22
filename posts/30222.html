@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="我爱上的 VSCode 扩展CodeSnap通过简单地突出显示项目中各自的代码段，可以快速创建代码的屏幕快照。就这么简单！不再需要打开新的选项卡、复制代码并保存照片。该图像将生成现场并排与选项，以剪切，复制和粘贴。相当于一种简化版的代码美化工具。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我喜欢的vscode插件">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/30222.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="我爱上的 VSCode 扩展CodeSnap通过简单地突出显示项目中各自的代码段，可以快速创建代码的屏幕快照。就这么简单！不再需要打开新的选项卡、复制代码并保存照片。该图像将生成现场并排与选项，以剪切，复制和粘贴。相当于一种简化版的代码美化工具。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30222/image-20221101191617644.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30222/image-20221101191752756.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30222/image-20221101191909371.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30222/image-20221101191948536.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30222/image-20221101192046974.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30222/image-20221101192157627.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30222/image-20221101192230364.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30222/image-20221101192257315.png">
+<meta property="article:published_time" content="2022-11-01T11:12:16.000Z">
+<meta property="article:modified_time" content="2022-12-09T08:31:22.423Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="vscode插件">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/30222/image-20221101191617644.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/30222.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>我喜欢的vscode插件 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/30222.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          我喜欢的vscode插件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-01 19:12:16" itemprop="dateCreated datePublished" datetime="2022-11-01T19:12:16+08:00">2022-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 16:31:22" itemprop="dateModified" datetime="2022-12-09T16:31:22+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="我爱上的-VSCode-扩展"><a href="#我爱上的-VSCode-扩展" class="headerlink" title="我爱上的 VSCode 扩展"></a>我爱上的 VSCode 扩展</h1><h2 id="CodeSnap"><a href="#CodeSnap" class="headerlink" title="CodeSnap"></a><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=adpyke.codesnap">CodeSnap</a></h2><p>通过简单地突出显示项目中各自的代码段，可以快速创建代码的屏幕快照。就这么简单！不再需要打开新的选项卡、复制代码并保存照片。该图像将生成现场并排与选项，以剪切，复制和粘贴。相当于一种简化版的代码美化工具。</p>
+<span id="more"></span>
+
+<img src="/posts/30222/image-20221101191617644.png" class title="image-20221101191617644">
+
+<h2 id="Colorize"><a href="#Colorize" class="headerlink" title="Colorize"></a><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=kamikillerto.vscode-colorize">Colorize</a></h2><p>通过突出显示颜色变量的颜色值，可视化颜色变量。这是一个方便的时间节省翻译十六进制代码和变量名称。</p>
+<img src="/posts/30222/image-20221101191752756.png" class title="image-20221101191752756">
+
+<h2 id="Beautify"><a href="#Beautify" class="headerlink" title="Beautify"></a><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify">Beautify</a></h2><p>Beautify 将很容易地帮助您解决代码可读性等方面的任何问题。您需要的所有东西是: 按 F1并选择“美化文件”。它会自动修复你想要的东西。</p>
+<img src="/posts/30222/image-20221101191909371.png" class title="image-20221101191909371">
+
+<h2 id="Live-Server"><a href="#Live-Server" class="headerlink" title="Live Server"></a><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Live Server</a></h2><p>当你写你的 HTML，CSS，或者 JavaScript 文件时，你可以在你的 VSCode 窗口的底部按下“ Go Live”，它会自动添加你在网页上的更改，而不需要重新加载，等等。</p>
+<img src="/posts/30222/image-20221101191948536.png" class title="image-20221101191948536">
+
+<p>autoDocstring</p>
+<p>文档字符串使用“’三重单引号”或“”三重双引号“”在类、方法或函数声明的下面声明。所有函数都应该有一个 docstring</p>
+<img src="/posts/30222/image-20221101192046974.png" class title="image-20221101192046974">
+
+<h2 id="GitLens"><a href="#GitLens" class="headerlink" title="GitLens"></a><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">GitLens</a></h2><p>GitLens 是 VisualStudio 代码的开源扩展。GitLens 只是帮助您更好地理解代码。快速了解行或代码块更改的对象、原因和时间。回顾历史，进一步了解代码是如何以及为什么发展的。</p>
+<p>.gitignore</p>
+<p>允许你从 <a target="_blank" rel="noopener" href="https://github.com/github/gitignore">https://github.com/github/gitignore</a> 库中提取.gitignore 模板。</p>
+<h2 id="Remote-SSH"><a href="#Remote-SSH" class="headerlink" title="Remote SSH"></a><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">Remote SSH</a></h2><p>Remote ー SSH 扩展允许您使用任何具有 SSH 服务器的远程计算机作为开发环境。这可以极大地简化各种情况下的开发和故障排除。</p>
+<img src="/posts/30222/image-20221101192157627.png" class title="image-20221101192157627">
+
+<h2 id="Auto-Rename-Tag"><a href="#Auto-Rename-Tag" class="headerlink" title="Auto Rename Tag"></a><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag">Auto Rename Tag</a></h2><p>自动重命名成对的 HTML/XML 标记</p>
+<img src="/posts/30222/image-20221101192230364.png" class title="image-20221101192230364">
+
+<h2 id="CSS-Peek"><a href="#CSS-Peek" class="headerlink" title="CSS Peek"></a><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=pranaygp.vscode-css-peek">CSS Peek</a></h2><p>允许查看 CSS ID 和类字符串作为从 html 文件到各自 CSS 的定义。允许偷看和定义。</p>
+<img src="/posts/30222/image-20221101192257315.png" class title="image-20221101192257315">
+
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>您最喜欢的 VSCode 扩展是什么？</p>
+<p>happy coding ！！！</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vscode%E6%8F%92%E4%BB%B6/" rel="tag"># vscode插件</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/37478.html" rel="prev" title="谈谈虚拟dom">
+      <i class="fa fa-chevron-left"></i> 谈谈虚拟dom
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/11481.html" rel="next" title="说说vue中的diff算法">
+      说说vue中的diff算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E7%88%B1%E4%B8%8A%E7%9A%84-VSCode-%E6%89%A9%E5%B1%95"><span class="nav-number">1.</span> <span class="nav-text">我爱上的 VSCode 扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CodeSnap"><span class="nav-number">1.1.</span> <span class="nav-text">CodeSnap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Colorize"><span class="nav-number">1.2.</span> <span class="nav-text">Colorize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Beautify"><span class="nav-number">1.3.</span> <span class="nav-text">Beautify</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Live-Server"><span class="nav-number">1.4.</span> <span class="nav-text">Live Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitLens"><span class="nav-number">1.5.</span> <span class="nav-text">GitLens</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remote-SSH"><span class="nav-number">1.6.</span> <span class="nav-text">Remote SSH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Auto-Rename-Tag"><span class="nav-number">1.7.</span> <span class="nav-text">Auto Rename Tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-Peek"><span class="nav-number">1.8.</span> <span class="nav-text">CSS Peek</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">1.9.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

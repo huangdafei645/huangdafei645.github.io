@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="vue3的性能提升体现在哪些方面面试官：Vue3.0性能提升主要是通过哪几方面体现的？  一、编译阶段回顾Vue2，我们知道每个组件实例都对应一个 watcher 实例，它会在组件渲染的过程中把用到的数据property记录为依赖，当依赖发生改变，触发setter，则会通知watcher，从而使关联的组件重新渲染">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3的性能提升体现在哪些方面">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/14509.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="vue3的性能提升体现在哪些方面面试官：Vue3.0性能提升主要是通过哪几方面体现的？  一、编译阶段回顾Vue2，我们知道每个组件实例都对应一个 watcher 实例，它会在组件渲染的过程中把用到的数据property记录为依赖，当依赖发生改变，触发setter，则会通知watcher，从而使关联的组件重新渲染">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/14509/image-20221114070332595.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/14509/image-20221114070349951.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/14509/image-20221114070426948.png">
+<meta property="article:published_time" content="2022-11-13T23:01:41.000Z">
+<meta property="article:modified_time" content="2022-12-09T07:51:35.319Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="vue3的性能提升">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/14509/image-20221114070332595.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/14509.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vue3的性能提升体现在哪些方面 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/14509.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue3的性能提升体现在哪些方面
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-14 07:01:41" itemprop="dateCreated datePublished" datetime="2022-11-14T07:01:41+08:00">2022-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 15:51:35" itemprop="dateModified" datetime="2022-12-09T15:51:35+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="vue3的性能提升体现在哪些方面"><a href="#vue3的性能提升体现在哪些方面" class="headerlink" title="vue3的性能提升体现在哪些方面"></a>vue3的性能提升体现在哪些方面</h1><h2 id="面试官：Vue3-0性能提升主要是通过哪几方面体现的？"><a href="#面试官：Vue3-0性能提升主要是通过哪几方面体现的？" class="headerlink" title="面试官：Vue3.0性能提升主要是通过哪几方面体现的？"></a>面试官：Vue3.0性能提升主要是通过哪几方面体现的？</h2><img src="/posts/14509/image-20221114070332595.png" class title="image-20221114070332595">
+
+<h3 id="一、编译阶段"><a href="#一、编译阶段" class="headerlink" title="一、编译阶段"></a>一、编译阶段</h3><p>回顾<code>Vue2</code>，我们知道每个组件实例都对应一个 <code>watcher</code> 实例，它会在组件渲染的过程中把用到的数据<code>property</code>记录为依赖，当依赖发生改变，触发<code>setter</code>，则会通知<code>watcher</code>，从而使关联的组件重新渲染</p>
+<span id="more"></span>
+
+<img src="/posts/14509/image-20221114070349951.png" class title="image-20221114070349951">
+
+<p>试想一下，一个组件结构如下图</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span>静态文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span>静态文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span>静态文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span>静态文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，组件内部只有一个动态节点，剩余一堆都是静态节点，所以这里很多 <code>diff</code> 和遍历其实都是不需要的，造成性能浪费</p>
+<p>因此，<code>Vue3</code>在编译阶段，做了进一步优化。主要有如下：</p>
+<ul>
+<li>diff算法优化</li>
+<li>静态提升</li>
+<li>事件监听缓存</li>
+<li>SSR优化</li>
+</ul>
+<h4 id="diff算法优化"><a href="#diff算法优化" class="headerlink" title="diff算法优化"></a>diff算法优化</h4><p><code>vue3</code>在<code>diff</code>算法中相比<code>vue2</code>增加了静态标记</p>
+<p>关于这个静态标记，其作用是为了会发生变化的地方添加一个<code>flag</code>标记，下次发生变化的时候直接找该地方进行比较</p>
+<p>下图这里，已经标记静态节点的<code>p</code>标签在<code>diff</code>过程中则不会比较，把性能进一步提高</p>
+<img src="/posts/14509/image-20221114070426948.png" class title="image-20221114070426948">
+
+<p>关于静态类型枚举如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> enum <span class="title class_">PatchFlags</span> &#123;</span><br><span class="line">  <span class="variable constant_">TEXT</span> = <span class="number">1</span>,<span class="comment">// 动态的文本节点</span></span><br><span class="line">  <span class="variable constant_">CLASS</span> = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,  <span class="comment">// 2 动态的 class</span></span><br><span class="line">  <span class="variable constant_">STYLE</span> = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,  <span class="comment">// 4 动态的 style</span></span><br><span class="line">  <span class="variable constant_">PROPS</span> = <span class="number">1</span> &lt;&lt; <span class="number">3</span>,  <span class="comment">// 8 动态属性，不包括类名和样式</span></span><br><span class="line">  <span class="variable constant_">FULL_PROPS</span> = <span class="number">1</span> &lt;&lt; <span class="number">4</span>,  <span class="comment">// 16 动态 key，当 key 变化时需要完整的 diff 算法做比较</span></span><br><span class="line">  <span class="variable constant_">HYDRATE_EVENTS</span> = <span class="number">1</span> &lt;&lt; <span class="number">5</span>,  <span class="comment">// 32 表示带有事件监听器的节点</span></span><br><span class="line">  <span class="variable constant_">STABLE_FRAGMENT</span> = <span class="number">1</span> &lt;&lt; <span class="number">6</span>,   <span class="comment">// 64 一个不会改变子节点顺序的 Fragment</span></span><br><span class="line">  <span class="variable constant_">KEYED_FRAGMENT</span> = <span class="number">1</span> &lt;&lt; <span class="number">7</span>, <span class="comment">// 128 带有 key 属性的 Fragment</span></span><br><span class="line">  <span class="variable constant_">UNKEYED_FRAGMENT</span> = <span class="number">1</span> &lt;&lt; <span class="number">8</span>, <span class="comment">// 256 子节点没有 key 的 Fragment</span></span><br><span class="line">  <span class="variable constant_">NEED_PATCH</span> = <span class="number">1</span> &lt;&lt; <span class="number">9</span>,   <span class="comment">// 512</span></span><br><span class="line">  <span class="variable constant_">DYNAMIC_SLOTS</span> = <span class="number">1</span> &lt;&lt; <span class="number">10</span>,  <span class="comment">// 动态 solt</span></span><br><span class="line">  <span class="variable constant_">HOISTED</span> = -<span class="number">1</span>,  <span class="comment">// 特殊标志是负整数表示永远不会用作 diff</span></span><br><span class="line">  <span class="variable constant_">BAIL</span> = -<span class="number">2</span> <span class="comment">// 一个特殊的标志，指代差异算法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="静态提升"><a href="#静态提升" class="headerlink" title="静态提升"></a>静态提升</h4><p><code>Vue3</code>中对不参与更新的元素，会做静态提升，只会被创建一次，在渲染时直接复用</p>
+<p>这样就免去了重复的创建节点，大型应用会受益于这个改动，免去了重复的创建操作，优化了运行时候的内存占用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;你好&lt;/span&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>没有做静态提升之前</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params">_ctx, _cache, $props, $setup, $data, $options</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="title function_">_openBlock</span>(), <span class="title function_">_createBlock</span>(_Fragment, <span class="literal">null</span>, [</span><br><span class="line">    <span class="title function_">_createVNode</span>(<span class="string">&quot;span&quot;</span>, <span class="literal">null</span>, <span class="string">&quot;你好&quot;</span>),</span><br><span class="line">    <span class="title function_">_createVNode</span>(<span class="string">&quot;div&quot;</span>, <span class="literal">null</span>, <span class="title function_">_toDisplayString</span>(_ctx.<span class="property">message</span>), <span class="number">1</span> <span class="comment">/* TEXT */</span>)</span><br><span class="line">  ], <span class="number">64</span> <span class="comment">/* STABLE_FRAGMENT */</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>做了静态提升之后</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> _hoisted_1 = <span class="comment">/*#__PURE__*/</span><span class="title function_">_createVNode</span>(<span class="string">&quot;span&quot;</span>, <span class="literal">null</span>, <span class="string">&quot;你好&quot;</span>, -<span class="number">1</span> <span class="comment">/* HOISTED */</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params">_ctx, _cache, $props, $setup, $data, $options</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="title function_">_openBlock</span>(), <span class="title function_">_createBlock</span>(_Fragment, <span class="literal">null</span>, [</span><br><span class="line">    _hoisted_1,</span><br><span class="line">    <span class="title function_">_createVNode</span>(<span class="string">&quot;div&quot;</span>, <span class="literal">null</span>, <span class="title function_">_toDisplayString</span>(_ctx.<span class="property">message</span>), <span class="number">1</span> <span class="comment">/* TEXT */</span>)</span><br><span class="line">  ], <span class="number">64</span> <span class="comment">/* STABLE_FRAGMENT */</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Check the console for the AST</span></span><br></pre></td></tr></table></figure>
+
+<p>静态内容<code>_hoisted_1</code>被放置在<code>render</code> 函数外，每次渲染的时候只要取 <code>_hoisted_1</code> 即可</p>
+<p>同时 <code>_hoisted_1</code> 被打上了 <code>PatchFlag</code> ，静态标记值为 -1 ，特殊标志是负整数表示永远不会用于 Diff</p>
+<h4 id="事件监听缓存"><a href="#事件监听缓存" class="headerlink" title="事件监听缓存"></a>事件监听缓存</h4><p>默认情况下绑定事件行为会被视为动态绑定，所以每次都会去追踪它的变化</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;button @click = &#x27;onClick&#x27;&gt;点我&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>没开启事件监听器缓存</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> render = <span class="comment">/*#__PURE__*/</span><span class="title function_">_withId</span>(<span class="keyword">function</span> <span class="title function_">render</span>(<span class="params">_ctx, _cache, $props, $setup, $data, $options</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="title function_">_openBlock</span>(), <span class="title function_">_createBlock</span>(<span class="string">&quot;div&quot;</span>, <span class="literal">null</span>, [</span><br><span class="line">    <span class="title function_">_createVNode</span>(<span class="string">&quot;button&quot;</span>, &#123; <span class="attr">onClick</span>: _ctx.<span class="property">onClick</span> &#125;, <span class="string">&quot;点我&quot;</span>, <span class="number">8</span> <span class="comment">/* PROPS */</span>, [<span class="string">&quot;onClick&quot;</span>])</span><br><span class="line">                                             <span class="comment">// PROPS=1&lt;&lt;3,// 8 //动态属性，但不包含类名和样式</span></span><br><span class="line">  ]))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>开启事件侦听器缓存后</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params">_ctx, _cache, $props, $setup, $data, $options</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="title function_">_openBlock</span>(), <span class="title function_">_createBlock</span>(<span class="string">&quot;div&quot;</span>, <span class="literal">null</span>, [</span><br><span class="line">    <span class="title function_">_createVNode</span>(<span class="string">&quot;button&quot;</span>, &#123;</span><br><span class="line">      <span class="attr">onClick</span>: _cache[<span class="number">1</span>] || (_cache[<span class="number">1</span>] = <span class="function">(<span class="params">...args</span>) =&gt;</span> (_ctx.<span class="title function_">onClick</span>(...args)))</span><br><span class="line">    &#125;, <span class="string">&quot;点我&quot;</span>)</span><br><span class="line">  ]))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述发现开启了缓存后，没有了静态标记。也就是说下次<code>diff</code>算法的时候直接使用</p>
+<h4 id="SSR优化"><a href="#SSR优化" class="headerlink" title="SSR优化"></a>SSR优化</h4><p>当静态内容大到一定量级时候，会用<code>createStaticVNode</code>方法在客户端去生成一个static node，这些静态<code>node</code>，会被直接<code>innerHtml</code>，就不需要创建对象，然后根据对象渲染</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">div&gt;</span><br><span class="line">	<span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">		<span class="tag">&lt;<span class="name">span</span>&gt;</span>你好<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">	...  <span class="comment">// 很多个静态属性</span></span><br><span class="line">	&lt;div&gt;</span><br><span class="line">		<span class="language-xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>编译后</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mergeProps <span class="keyword">as</span> _mergeProps &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span></span><br><span class="line"><span class="keyword">import</span> &#123; ssrRenderAttrs <span class="keyword">as</span> _ssrRenderAttrs, ssrInterpolate <span class="keyword">as</span> _ssrInterpolate &#125; <span class="keyword">from</span> <span class="string">&quot;@vue/server-renderer&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">ssrRender</span>(<span class="params">_ctx, _push, _parent, _attrs, $props, $setup, $data, $options</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> _cssVars = &#123; <span class="attr">style</span>: &#123; <span class="attr">color</span>: _ctx.<span class="property">color</span> &#125;&#125;</span><br><span class="line">  <span class="title function_">_push</span>(<span class="string">`&lt;div<span class="subst">$&#123;</span></span></span><br><span class="line"><span class="subst"><span class="string">    _ssrRenderAttrs(_mergeProps(_attrs, _cssVars))</span></span></span><br><span class="line"><span class="subst"><span class="string">  &#125;</span>&gt;&lt;div&gt;&lt;span&gt;你好&lt;/span&gt;...&lt;div&gt;&lt;span&gt;你好&lt;/span&gt;&lt;div&gt;&lt;span&gt;<span class="subst">$&#123;</span></span></span><br><span class="line"><span class="subst"><span class="string">    _ssrInterpolate(_ctx.message)</span></span></span><br><span class="line"><span class="subst"><span class="string">  &#125;</span>&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;`</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、源码体积"><a href="#二、源码体积" class="headerlink" title="二、源码体积"></a>二、源码体积</h3><p>相比<code>Vue2</code>，<code>Vue3</code>整体体积变小了，除了移出一些不常用的API，再重要的是<code>Tree shanking</code></p>
+<p>任何一个函数，如<code>ref</code>、<code>reavtived</code>、<code>computed</code>等，仅仅在用到的时候才打包，没用到的模块都被摇掉，打包的整体体积变小</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; computed, defineComponent, ref &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span><br><span class="line">    <span class="title function_">setup</span>(<span class="params">props, context</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> age = <span class="title function_">ref</span>(<span class="number">18</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> state = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;test&#x27;</span></span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> readOnlyAge = <span class="title function_">computed</span>(<span class="function">() =&gt;</span> age.<span class="property">value</span>++) <span class="comment">// 19</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            age,</span><br><span class="line">            state,</span><br><span class="line">            readOnlyAge</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、响应式系统"><a href="#三、响应式系统" class="headerlink" title="三、响应式系统"></a>三、响应式系统</h3><p><code>vue2</code>中采用 <code>defineProperty</code>来劫持整个对象，然后进行深度遍历所有属性，给每个属性添加<code>getter</code>和<code>setter</code>，实现响应式</p>
+<p><code>vue3</code>采用<code>proxy</code>重写了响应式系统，因为<code>proxy</code>可以对整个对象进行监听，所以不需要深度遍历</p>
+<ul>
+<li>可以监听动态属性的添加</li>
+<li>可以监听到数组的索引和数组<code>length</code>属性</li>
+<li>可以监听删除属性</li>
+</ul>
+<p>关于这两个 API 具体的不同，我们下篇文章会进行一个更加详细的介绍</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6903171037211557895%E3%80%81">https://juejin.cn/post/6903171037211557895、</a></li>
+<li>@js语音答题社区</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue3%E7%9A%84%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/" rel="tag"># vue3的性能提升</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3339.html" rel="prev" title="vue3设计目标与优化">
+      <i class="fa fa-chevron-left"></i> vue3设计目标与优化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/13466.html" rel="next" title="vue中proxy代替Object.defineProperty的好处">
+      vue中proxy代替Object.defineProperty的好处 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue3%E7%9A%84%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%BD%93%E7%8E%B0%E5%9C%A8%E5%93%AA%E4%BA%9B%E6%96%B9%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">vue3的性能提升体现在哪些方面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9AVue3-0%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87%E4%B8%BB%E8%A6%81%E6%98%AF%E9%80%9A%E8%BF%87%E5%93%AA%E5%87%A0%E6%96%B9%E9%9D%A2%E4%BD%93%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">面试官：Vue3.0性能提升主要是通过哪几方面体现的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BC%96%E8%AF%91%E9%98%B6%E6%AE%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、编译阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#diff%E7%AE%97%E6%B3%95%E4%BC%98%E5%8C%96"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">diff算法优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%8F%90%E5%8D%87"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">静态提升</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC%E7%BC%93%E5%AD%98"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">事件监听缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSR%E4%BC%98%E5%8C%96"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">SSR优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%BA%90%E7%A0%81%E4%BD%93%E7%A7%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、源码体积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%93%8D%E5%BA%94%E5%BC%8F%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、响应式系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.1.4.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

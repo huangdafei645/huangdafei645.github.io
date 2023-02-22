@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="不定期总结并发现一些好用的和值得分享的东西， 希望大家会喜欢，谢谢大家了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2023第一期">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/13d6646a.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="不定期总结并发现一些好用的和值得分享的东西， 希望大家会喜欢，谢谢大家了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230107125823807.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230107125903131.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/water-bearer-smooth-soft-skin-symmetrical-soft-lighting-detailed-face-concept-art-digital-pain-775658528.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230102184704062.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230103133217137.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230103134231150.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230105103557084.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230102184936072.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230103132046462.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230103132208008.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230103132628884.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230105105205945.png">
+<meta property="article:published_time" content="2023-01-07T04:13:47.000Z">
+<meta property="article:modified_time" content="2023-01-07T04:59:09.296Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="2023第一期">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/13d6646a/image-20230107125823807.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/13d6646a.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>2023第一期 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/13d6646a.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2023第一期
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-01-07 12:13:47 / 修改时间：12:59:09" itemprop="dateCreated datePublished" datetime="2023-01-07T12:13:47+08:00">2023-01-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%9F%E5%88%8A/" itemprop="url" rel="index"><span itemprop="name">期刊</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>不定期总结并发现一些好用的和值得分享的东西， 希望大家会喜欢，谢谢大家了</p>
+<span id="more"></span>
+
+<ol>
+<li>一个<a target="_blank" rel="noopener" href="https://uiverse.io/?ref=producthunt">UI工具库</a>，里面有各种各样的好看的一些UI设计</li>
+</ol>
+<img src="/posts/13d6646a/image-20230107125823807.png" class title="image-20230107125823807">
+
+<ol start="2">
+<li><a target="_blank" rel="noopener" href="https://github.com/timqian/chinese-independent-blogs">中文博客列表</a></li>
+</ol>
+<img src="/posts/13d6646a/image-20230107125903131.png" class title="image-20230107125903131">
+
+<ol start="3">
+<li><a target="_blank" rel="noopener" href="https://playgroundai.com/?ref=producthunt">playgroundAI</a>里面分享一些高质量的图片</li>
+</ol>
+<img src="/posts/13d6646a/water-bearer-smooth-soft-skin-symmetrical-soft-lighting-detailed-face-concept-art-digital-pain-775658528.png" class title="water-bearer-smooth-soft-skin-symmetrical-soft-lighting-detailed-face-concept-art-digital-pain-775658528">
+
+<ol start="4">
+<li><a target="_blank" rel="noopener" href="https://green-wall.vercel.app/">github贡献图生成器</a></li>
+</ol>
+<img src="/posts/13d6646a/image-20230102184704062.png" class title="image-20230102184704062">
+
+<ol start="5">
+<li><a target="_blank" rel="noopener" href="https://scrollex-docs.vercel.app/">一个超赞的滚动效果库</a></li>
+</ol>
+<p>​    Scrollex 可以很方便的实现各种滚动特效，React 生态。 </p>
+<img src="/posts/13d6646a/image-20230103133217137.png" class title="image-20230103133217137">
+
+
+
+<ol start="6">
+<li><a target="_blank" rel="noopener" href="https://windhawk.net/">风鹰</a>: 一个windows插件商店</li>
+</ol>
+<img src="/posts/13d6646a/image-20230103134231150.png" class title="image-20230103134231150">
+
+
+
+<ol start="7">
+<li><a target="_blank" rel="noopener" href="https://jsoncrack.com/editor">json转化工具</a></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://github.com/AykutSarac/jsoncrack.com">repo</a>一个json转化工具， 可以把繁琐的json文档转化成非常清晰的思维导图，目前在github已经有了2w多的stars</p>
+<img src="/posts/13d6646a/image-20230105103557084.png" class title="image-20230105103557084">
+
+
+
+<ol start="8">
+<li><a target="_blank" rel="noopener" href="https://www.chatbcg.com/">chatBCG</a>一个自动生成PPT的工具</li>
+</ol>
+<p>这个工具是两位来自斯坦福大学的学生开发的，是一款AI生成PPT的工具，对于简单的PPT， 做起来还是有效果的， 它自动生成的提纲可以进行参考</p>
+<p>满江红·和郭沫若同志（毛泽东，1963年）</p>
+<p>小小寰球，有几个苍蝇碰壁。<br>嗡嗡叫，几声凄厉，几声抽泣。<br>蚂蚁缘槐夸大国，蚍蜉撼树谈何易。<br>正西风落叶下长安，飞鸣镝。</p>
+<p>多少事，从来急；<br>天地转，光阴迫。<br>一万年太久，只争朝夕。<br>四海翻腾云水怒，五洲震荡风雷激。<br>要扫除一切害人虫，全无敌。</p>
+<img src="/posts/13d6646a/image-20230102184936072.png" class title="image-20230102184936072">
+
+
+
+
+
+
+
+<p>前几天看了刘润老师的一篇<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/s5wcbV3MjoIzFWGEA8HNNA?from=timeline&isappinstalled=0&scene=2&clicktime=1672722927&enterid=1672722927">文章</a>：</p>
+<p><strong>别轻易用自己的视角，断言别人的生活，尤其是初衷。</strong></p>
+<p>太远，会“无视”。太近，会“放大”。太窄，会“诛心”。</p>
+<p>也许这是为什么，大家经常在网络上说，理解万岁。</p>
+<p>更重要的，不是建议别人，是建议自己。自己在网络上的态度。</p>
+<p>也是站在他人的视角，尊重他人的立场和价值观。</p>
+<p><a target="_blank" rel="noopener" href="https://codechina.org/2023/01/chatgpt-ai-human-principle-and-limitation/">无线猴子定理与人工智能chatGPT</a></p>
+<p>让一只猴子在打字机上随机地按键，当按键时间达到无穷时，几乎必然能够打出任何给定的文字，比如莎士比亚的全套著作。</p>
+<img src="/posts/13d6646a/image-20230103132046462.png" class title="image-20230103132046462">
+
+<p>语言模型可以应用在生活的很多地方，比如：</p>
+<img src="/posts/13d6646a/image-20230103132208008.png" class title="image-20230103132208008">
+
+
+
+
+
+<p><a target="_blank" rel="noopener" href="https://b23.tv/F7NrLu5">鸡的头为什么这么稳定？</a></p>
+<p>这是自然选择的原因，因为鸡的眼球不能像人类那样转动，为了得到稳定的视野， 进化出来的功能。</p>
+<img src="/posts/13d6646a/image-20230103132628884.png" class title="image-20230103132628884">
+
+<p>有一款产品为帕金森病人设计的防抖勺子也是这个原理</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/cIMIvxQ8GouZcvXnrHR3uw">2022年中国新补充10343个物种</a></p>
+<p>与2021版对比，中国生物物种名录数据库2022年新增了10343个物种及种下单元，其中节肢动物门昆虫纲新增7498个物种，动物界脊索动物门的哺乳纲、爬行纲、两栖类共新增279个物种，蛛形纲新增119个物种；植物界新增794个物种。</p>
+<p>除此之外，我国作为生物多样性大国，每年还有大量新物种被发现和描述，根据《生物多样性杂志》2021年新物种专题统计结果，昆虫纲新物种发表占当年动物新物种发表总数的82%</p>
+<p>下面是不周哥的一段话， 我觉得写的很好：</p>
+<p>我 20 岁出头的时候，那会大家还在玩 QQ 空间，那会在 QQ 空间流行一些名人名言，但有一句直到今天我才都有印象：有些人 35 岁就死了，但 75 岁才埋。</p>
+<p>现在回头看，哪需要 35，25 就够了。</p>
+<p>现在认真看这句话，其实是太过于高傲，有一种从上而下的视角。</p>
+<p>一个 20 岁的年轻人，刚步入社会，不论是智力还是体力都是最好的阶段，也是最容易碰见新鲜事物，所以学习起来会非常轻松。所以面对比自己年龄大的人，说你们已经死了，不学习不进步，多少有点从上而下的骄傲、我现在看我以前的同学，还在每天学习、看书非常非常少。</p>
+<p>“不进步”本质上是人类基因的结果，没什么错。人类最消耗热量的器官是大脑，如果我们的老祖宗每天都在读书、进步，根本不足以支撑打猎的需求，大概率就灭绝了。</p>
+<p>老六在《35岁必死》里面，写到：</p>
+<p>三十五岁的死亡，有两层含义，一是施耐德老师所说的“心理死亡”，心智停滞，希望不再，知识更新和大脑活性陷于停顿，情感和心灵日趋凉薄，其后走向生理死亡的每一天，貌似虎虎生风，实则行尸走肉</p>
+<p>另一种死亡，则是蜕变重生，从旧我中挣脱出来，完成心理重塑和人生重构，哪怕外界和外貌依然故我，大脑和内心已经焕然一新</p>
+<p>无论哪种情况 ，横竖都是一个死</p>
+<p>欧空局公布一张哈勃望远镜拍摄的螺旋星系「ESO 415-19」的照片。这个星系位于南天星座天炉座，距离地球约4.5亿光年，由于拥有超长的星系旋臂结构而归类为「Arp 特殊星系」。「ESO 415-19」的星系旋臂由恒星和气体组成，推测是星系间引力作用而形成，<a target="_blank" rel="noopener" href="https://m.idai.ly/se/dfcln2">地址</a></p>
+<img src="/posts/13d6646a/image-20230105105205945.png" class title="image-20230105105205945">
+
+
+
+<p>如果大家有什么其他意见和看法，欢迎留言哦</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/2023%E7%AC%AC%E4%B8%80%E6%9C%9F/" rel="tag"># 2023第一期</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/7f6f288a.html" rel="prev" title="《三体》读后感">
+      <i class="fa fa-chevron-left"></i> 《三体》读后感
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/cc02e38c.html" rel="next" title="2023第二期">
+      2023第二期 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

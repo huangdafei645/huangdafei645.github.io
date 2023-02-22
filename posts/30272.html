@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="SPA首屏加载慢怎么办？面试官：SPA首屏加载速度慢的怎么解决？  一、什么是首屏加载首屏时间（First Contentful Paint），指的是浏览器从响应用户输入网址地址，到首屏内容渲染完成的时间，此时整个网页不一定要全部渲染完成，但需要展示当前视窗需要的内容 首屏加载可以说是用户体验中最重要的环节">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SPA首屏加载慢怎么办？">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/30272.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="SPA首屏加载慢怎么办？面试官：SPA首屏加载速度慢的怎么解决？  一、什么是首屏加载首屏时间（First Contentful Paint），指的是浏览器从响应用户输入网址地址，到首屏内容渲染完成的时间，此时整个网页不一定要全部渲染完成，但需要展示当前视窗需要的内容 首屏加载可以说是用户体验中最重要的环节">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30272/image-20221016063624694.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30272/image-20221016063716771.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30272/image-20221016063808361.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/30272/image-20221016064024827.png">
+<meta property="article:published_time" content="2022-10-15T22:33:33.000Z">
+<meta property="article:modified_time" content="2022-12-09T07:44:24.178Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="SPA首屏加载慢">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/30272/image-20221016063624694.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/30272.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SPA首屏加载慢怎么办？ | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/30272.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SPA首屏加载慢怎么办？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-16 06:33:33" itemprop="dateCreated datePublished" datetime="2022-10-16T06:33:33+08:00">2022-10-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 15:44:24" itemprop="dateModified" datetime="2022-12-09T15:44:24+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="SPA首屏加载慢怎么办？"><a href="#SPA首屏加载慢怎么办？" class="headerlink" title="SPA首屏加载慢怎么办？"></a>SPA首屏加载慢怎么办？</h1><h2 id="面试官：SPA首屏加载速度慢的怎么解决？"><a href="#面试官：SPA首屏加载速度慢的怎么解决？" class="headerlink" title="面试官：SPA首屏加载速度慢的怎么解决？"></a>面试官：SPA首屏加载速度慢的怎么解决？</h2><img src="/posts/30272/image-20221016063624694.png" class title="image-20221016063624694">
+
+<h3 id="一、什么是首屏加载"><a href="#一、什么是首屏加载" class="headerlink" title="一、什么是首屏加载"></a>一、什么是首屏加载</h3><p>首屏时间（First Contentful Paint），指的是浏览器从响应用户输入网址地址，到首屏内容渲染完成的时间，此时整个网页不一定要全部渲染完成，但需要展示当前视窗需要的内容</p>
+<p>首屏加载可以说是用户体验中<strong>最重要</strong>的环节</p>
+<span id="more"></span>
+
+<h4 id="关于计算首屏时间"><a href="#关于计算首屏时间" class="headerlink" title="关于计算首屏时间"></a>关于计算首屏时间</h4><p>利用<code>performance.timing</code>提供的数据：</p>
+<img src="/posts/30272/image-20221016063716771.png" class title="image-20221016063716771">
+
+<p>通过<code>DOMContentLoad</code>或者<code>performance</code>来计算出首屏时间</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方案一：</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;first contentful painting&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 方案二：</span></span><br><span class="line">performance.<span class="title function_">getEntriesByName</span>(<span class="string">&quot;first-contentful-paint&quot;</span>)[<span class="number">0</span>].<span class="property">startTime</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// performance.getEntriesByName(&quot;first-contentful-paint&quot;)[0]</span></span><br><span class="line"><span class="comment">// 会返回一个 PerformancePaintTiming的实例，结构如下：</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;first-contentful-paint&quot;</span>,</span><br><span class="line">  <span class="attr">entryType</span>: <span class="string">&quot;paint&quot;</span>,</span><br><span class="line">  <span class="attr">startTime</span>: <span class="number">507.80000002123415</span>,</span><br><span class="line">  <span class="attr">duration</span>: <span class="number">0</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、加载慢的原因"><a href="#二、加载慢的原因" class="headerlink" title="二、加载慢的原因"></a>二、加载慢的原因</h3><p>在页面渲染的过程，导致加载速度慢的因素可能如下：</p>
+<ul>
+<li>网络延时问题</li>
+<li>资源文件体积是否过大</li>
+<li>资源是否重复发送请求去加载了</li>
+<li>加载脚本的时候，渲染内容堵塞了</li>
+</ul>
+<h3 id="三、解决方案"><a href="#三、解决方案" class="headerlink" title="三、解决方案"></a>三、解决方案</h3><p>常见的几种SPA首屏优化方式</p>
+<ul>
+<li>减小入口文件积</li>
+<li>静态资源本地缓存</li>
+<li>UI框架按需加载</li>
+<li>图片资源的压缩</li>
+<li>组件重复打包</li>
+<li>开启GZip压缩</li>
+<li>使用SSR</li>
+</ul>
+<h4 id="减小入口文件体积"><a href="#减小入口文件体积" class="headerlink" title="减小入口文件体积"></a>减小入口文件体积</h4><p>常用的手段是路由懒加载，把不同路由对应的组件分割成不同的代码块，待路由被请求的时候会单独打包路由，使得入口文件变小，加载速度大大增加</p>
+<img src="/posts/30272/image-20221016063808361.png" class title="image-20221016063808361">
+
+<p>在<code>vue-router</code>配置路由的时候，采用动态加载路由的形式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">routes</span>:[ </span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;Blogs&#x27;</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;ShowBlogs&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;./components/ShowBlogs.vue&#x27;</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>以函数的形式加载路由，这样就可以把各自的路由文件分别打包，只有在解析给定的路由时，才会加载路由组件</p>
+<h4 id="静态资源本地缓存"><a href="#静态资源本地缓存" class="headerlink" title="静态资源本地缓存"></a>静态资源本地缓存</h4><p>后端返回资源问题：</p>
+<ul>
+<li>采用<code>HTTP</code>缓存，设置<code>Cache-Control</code>，<code>Last-Modified</code>，<code>Etag</code>等响应头</li>
+<li>采用<code>Service Worker</code>离线缓存</li>
+</ul>
+<p>前端合理利用<code>localStorage</code></p>
+<h4 id="UI框架按需加载"><a href="#UI框架按需加载" class="headerlink" title="UI框架按需加载"></a>UI框架按需加载</h4><p>在日常使用<code>UI</code>框架，例如<code>element-UI</code>、或者<code>antd</code>，我们经常性直接引用整个<code>UI</code>库</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">ElementUI</span> <span class="keyword">from</span> <span class="string">&#x27;element-ui&#x27;</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">ElementUI</span>)</span><br></pre></td></tr></table></figure>
+
+<p>但实际上我用到的组件只有按钮，分页，表格，输入与警告 所以我们要按需引用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Button</span>, <span class="title class_">Input</span>, <span class="title class_">Pagination</span>, <span class="title class_">Table</span>, <span class="title class_">TableColumn</span>, <span class="title class_">MessageBox</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;element-ui&#x27;</span>;</span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">Button</span>)</span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">Input</span>)</span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">Pagination</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="组件重复打包"><a href="#组件重复打包" class="headerlink" title="组件重复打包"></a>组件重复打包</h4><p>假设<code>A.js</code>文件是一个常用的库，现在有多个路由使用了<code>A.js</code>文件，这就造成了重复下载</p>
+<p>解决方案：在<code>webpack</code>的<code>config</code>文件中，修改<code>CommonsChunkPlugin</code>的配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">minChunks</span>: <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p><code>minChunks</code>为3表示会把使用3次及以上的包抽离出来，放进公共依赖文件，避免了重复加载组件</p>
+<h4 id="图片资源的压缩"><a href="#图片资源的压缩" class="headerlink" title="图片资源的压缩"></a>图片资源的压缩</h4><p>图片资源虽然不在编码过程中，但它却是对页面性能影响最大的因素</p>
+<p>对于所有的图片资源，我们可以进行适当的压缩</p>
+<p>对页面上使用到的<code>icon</code>，可以使用在线字体图标，或者雪碧图，将众多小图标合并到同一张图上，用以减轻<code>http</code>请求压力。</p>
+<h4 id="开启GZip压缩"><a href="#开启GZip压缩" class="headerlink" title="开启GZip压缩"></a>开启GZip压缩</h4><p>拆完包之后，我们再用<code>gzip</code>做一下压缩 安装<code>compression-webpack-plugin</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnmp i compression-webpack-plugin -D</span><br></pre></td></tr></table></figure>
+
+<p>在<code>vue.congig.js</code>中引入并修改<code>webpack</code>配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">CompressionPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;compression-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="attr">configureWebpack</span>: <span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">            <span class="comment">// 为生产环境修改配置...</span></span><br><span class="line">            config.<span class="property">mode</span> = <span class="string">&#x27;production&#x27;</span></span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                <span class="attr">plugins</span>: [<span class="keyword">new</span> <span class="title class_">CompressionPlugin</span>(&#123;</span><br><span class="line">                    <span class="attr">test</span>: <span class="regexp">/\.js$|\.html$|\.css/</span>, <span class="comment">//匹配文件名</span></span><br><span class="line">                    <span class="attr">threshold</span>: <span class="number">10240</span>, <span class="comment">//对超过10k的数据进行压缩</span></span><br><span class="line">                    <span class="attr">deleteOriginalAssets</span>: <span class="literal">false</span> <span class="comment">//是否删除原文件</span></span><br><span class="line">                &#125;)]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在服务器我们也要做相应的配置 如果发送请求的浏览器支持<code>gzip</code>，就发送给它<code>gzip</code>格式的文件 我的服务器是用<code>express</code>框架搭建的 只要安装一下<code>compression</code>就能使用</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const compression = require(&#x27;compression&#x27;)</span><br><span class="line">app.use(compression())  // 在其他中间件使用之前调用</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用SSR"><a href="#使用SSR" class="headerlink" title="使用SSR"></a>使用SSR</h4><p>SSR（Server side ），也就是服务端渲染，组件或页面通过服务器生成html字符串，再发送到浏览器</p>
+<p>从头搭建一个服务端渲染是很复杂的，<code>vue</code>应用建议使用<code>Nuxt.js</code>实现服务端渲染</p>
+<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><p>减少首屏渲染时间的方法有很多，总的来讲可以分成两大部分 ：资源加载优化 和 页面渲染优化</p>
+<p>下图是更为全面的首屏优化的方案</p>
+<img src="/posts/30272/image-20221016064024827.png" class title="image-20221016064024827">
+
+<p>大家可以根据自己项目的情况选择各种方式进行首屏渲染的优化</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/88639980?utm_source=wechat_session">https://zhuanlan.zhihu.com/p/88639980?utm_source=wechat_session</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.chengrang.com/how-browsers-work.html">https://www.chengrang.com/how-browsers-work.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904185264095246">https://juejin.cn/post/6844904185264095246</a></li>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
+<li>@js语音答题社区</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SPA%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E6%85%A2/" rel="tag"># SPA首屏加载慢</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/28171.html" rel="prev" title="vue3_reactive">
+      <i class="fa fa-chevron-left"></i> vue3_reactive
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/43499.html" rel="next" title="data属性为什么是一个函数并非对象">
+      data属性为什么是一个函数并非对象 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SPA%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E6%85%A2%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">SPA首屏加载慢怎么办？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9ASPA%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">面试官：SPA首屏加载速度慢的怎么解决？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、什么是首屏加载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E9%A6%96%E5%B1%8F%E6%97%B6%E9%97%B4"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">关于计算首屏时间</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%8A%A0%E8%BD%BD%E6%85%A2%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、加载慢的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%8F%E5%B0%8F%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E4%BD%93%E7%A7%AF"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">减小入口文件体积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">静态资源本地缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UI%E6%A1%86%E6%9E%B6%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">UI框架按需加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E9%87%8D%E5%A4%8D%E6%89%93%E5%8C%85"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">组件重复打包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90%E7%9A%84%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.1.3.5.</span> <span class="nav-text">图片资源的压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%90%AFGZip%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.1.3.6.</span> <span class="nav-text">开启GZip压缩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8SSR"><span class="nav-number">1.1.3.7.</span> <span class="nav-text">使用SSR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="nav-number">1.1.3.8.</span> <span class="nav-text">小结：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.1.4.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

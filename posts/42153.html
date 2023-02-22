@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="vue3和vue2 的区别面试官：vue3有了解过吗？能说说跟vue2的区别吗？  一、Vue3介绍关于vue3的重构背景，尤大是这样说的： 「Vue 新版本的理念成型于 2018 年末，当时 Vue 2 的代码库已经有两岁半了。比起通用软件的生命周期来这好像也没那么久，但在这段时期，前端世界已经今昔非比了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3和vue2的区别">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/42153.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="vue3和vue2 的区别面试官：vue3有了解过吗？能说说跟vue2的区别吗？  一、Vue3介绍关于vue3的重构背景，尤大是这样说的： 「Vue 新版本的理念成型于 2018 年末，当时 Vue 2 的代码库已经有两岁半了。比起通用软件的生命周期来这好像也没那么久，但在这段时期，前端世界已经今昔非比了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111064656149.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111064912675.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111064939926.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111065001628.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111065022816.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111065048307.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111065107531.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111065129306.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111065151147.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111065208559.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111065329107.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111065425141.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/42153/image-20221111065447880.png">
+<meta property="article:published_time" content="2022-11-10T22:45:00.000Z">
+<meta property="article:modified_time" content="2022-12-09T07:53:24.915Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="vue3和vue2的区别">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/42153/image-20221111064656149.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/42153.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vue3和vue2的区别 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/42153.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue3和vue2的区别
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-11 06:45:00" itemprop="dateCreated datePublished" datetime="2022-11-11T06:45:00+08:00">2022-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 15:53:24" itemprop="dateModified" datetime="2022-12-09T15:53:24+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="vue3和vue2-的区别"><a href="#vue3和vue2-的区别" class="headerlink" title="vue3和vue2 的区别"></a>vue3和vue2 的区别</h1><h2 id="面试官：vue3有了解过吗？能说说跟vue2的区别吗？"><a href="#面试官：vue3有了解过吗？能说说跟vue2的区别吗？" class="headerlink" title="面试官：vue3有了解过吗？能说说跟vue2的区别吗？"></a>面试官：vue3有了解过吗？能说说跟vue2的区别吗？</h2><img src="/posts/42153/image-20221111064656149.png" class title="image-20221111064656149">
+
+<h3 id="一、Vue3介绍"><a href="#一、Vue3介绍" class="headerlink" title="一、Vue3介绍"></a>一、Vue3介绍</h3><p>关于<code>vue3</code>的重构背景，尤大是这样说的：</p>
+<p>「Vue 新版本的理念成型于 2018 年末，当时 Vue 2 的代码库已经有两岁半了。比起通用软件的生命周期来这好像也没那么久，但在这段时期，前端世界已经今昔非比了</p>
+<span id="more"></span>
+
+<p>在我们更新（和重写）Vue 的主要版本时，主要考虑两点因素：首先是新的 JavaScript 语言特性在主流浏览器中的受支持水平；其次是当前代码库中随时间推移而逐渐暴露出来的一些设计和架构问题」</p>
+<p>简要就是：</p>
+<ul>
+<li>利用新的语言特性(es6)</li>
+<li>解决架构问题</li>
+</ul>
+<h4 id="哪些变化"><a href="#哪些变化" class="headerlink" title="哪些变化"></a>哪些变化</h4><img src="/posts/42153/image-20221111064912675.png" class title="image-20221111064912675">
+
+<p>从上图中，我们可以概览<code>Vue3</code>的新特性，如下：</p>
+<ul>
+<li>速度更快</li>
+<li>体积减少</li>
+<li>更易维护</li>
+<li>更接近原生</li>
+<li>更易使用</li>
+</ul>
+<h5 id="速度更快"><a href="#速度更快" class="headerlink" title="速度更快"></a>速度更快</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue3`相比`vue2</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重写了虚拟<code>Dom</code>实现</li>
+<li>编译模板的优化</li>
+<li>更高效的组件初始化</li>
+<li><code>undate</code>性能提高1.3~2倍</li>
+<li><code>SSR</code>速度提高了2~3倍</li>
+</ul>
+<img src="/posts/42153/image-20221111064939926.png" class title="image-20221111064939926">
+
+<h5 id="体积更小"><a href="#体积更小" class="headerlink" title="体积更小"></a>体积更小</h5><p>通过<code>webpack</code>的<code>tree-shaking</code>功能，可以将无用模块“剪辑”，仅打包需要的</p>
+<p>能够<code>tree-shaking</code>，有两大好处：</p>
+<ul>
+<li>对开发人员，能够对<code>vue</code>实现更多其他的功能，而不必担忧整体体积过大</li>
+<li>对使用者，打包出来的包体积变小了</li>
+</ul>
+<p><code>vue</code>可以开发出更多其他的功能，而不必担忧<code>vue</code>打包出来的整体体积过多</p>
+<img src="/posts/42153/image-20221111065001628.png" class title="image-20221111065001628">
+
+<h4 id="更易维护"><a href="#更易维护" class="headerlink" title="更易维护"></a>更易维护</h4><h5 id="compositon-Api"><a href="#compositon-Api" class="headerlink" title="compositon Api"></a>compositon Api</h5><ul>
+<li>可与现有的<code>Options API</code>一起使用</li>
+<li>灵活的逻辑组合与复用</li>
+<li><code>Vue3</code>模块可以和其他框架搭配使用</li>
+</ul>
+<img src="/posts/42153/image-20221111065022816.png" class title="image-20221111065022816">
+
+<h5 id="更好的Typescript支持"><a href="#更好的Typescript支持" class="headerlink" title="更好的Typescript支持"></a>更好的Typescript支持</h5><p><code>VUE3</code>是基于<code>typescipt</code>编写的，可以享受到自动的类型定义提示</p>
+<img src="/posts/42153/image-20221111065048307.png" class title="image-20221111065048307">
+
+<h5 id="编译器重写"><a href="#编译器重写" class="headerlink" title="编译器重写"></a>编译器重写</h5><img src="/posts/42153/image-20221111065107531.png" class title="image-20221111065107531">
+
+<h5 id="更接近原生"><a href="#更接近原生" class="headerlink" title="更接近原生"></a>更接近原生</h5><p>可以自定义渲染 API</p>
+<img src="/posts/42153/image-20221111065129306.png" class title="image-20221111065129306">
+
+<h5 id="更易使用"><a href="#更易使用" class="headerlink" title="更易使用"></a>更易使用</h5><p>响应式 <code>Api</code> 暴露出来</p>
+<img src="/posts/42153/image-20221111065151147.png" class title="image-20221111065151147">
+
+<p>轻松识别组件重新渲染原因</p>
+<img src="/posts/42153/image-20221111065208559.png" class title="image-20221111065208559">
+
+<h3 id="二、Vue3新增特性"><a href="#二、Vue3新增特性" class="headerlink" title="二、Vue3新增特性"></a>二、Vue3新增特性</h3><p>Vue 3 中需要关注的一些新功能包括：</p>
+<ul>
+<li>framents</li>
+<li>Teleport</li>
+<li>composition Api</li>
+<li>createRenderer</li>
+</ul>
+<h4 id="framents"><a href="#framents" class="headerlink" title="framents"></a>framents</h4><p>在 <code>Vue3.x</code> 中，组件现在支持有多个根节点</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- <span class="title class_">Layout</span>.<span class="property">vue</span> --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">header</span>&gt;</span>...<span class="tag">&lt;/<span class="name">header</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">main</span> <span class="attr">v-bind</span>=<span class="string">&quot;$attrs&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">main</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">footer</span>&gt;</span>...<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Teleport"><a href="#Teleport" class="headerlink" title="Teleport"></a>Teleport</h4><p><code>Teleport</code> 是一种能够将我们的模板移动到 <code>DOM</code> 中 <code>Vue app</code> 之外的其他位置的技术，就有点像哆啦A梦的“任意门”</p>
+<p>在<code>vue2</code>中，像 <code>modals</code>,<code>toast</code> 等这样的元素，如果我们嵌套在 <code>Vue</code> 的某个组件内部，那么处理嵌套组件的定位、<code>z-index</code> 和样式就会变得很困难</p>
+<p>通过<code>Teleport</code>，我们可以在组件的逻辑位置写模板代码，然后在 <code>Vue</code> 应用范围之外渲染它</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;showToast&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>打开 toast<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- to 属性就是目标位置 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">teleport</span> <span class="attr">to</span>=<span class="string">&quot;#teleport-target&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;visible&quot;</span> <span class="attr">class</span>=<span class="string">&quot;toast-wrap&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;toast-msg&quot;</span>&gt;</span>我是一个 Toast 文案<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">teleport</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="createRenderer"><a href="#createRenderer" class="headerlink" title="createRenderer"></a>createRenderer</h4><p>通过<code>createRenderer</code>，我们能够构建自定义渲染器，我们能够将 <code>vue</code> 的开发模型扩展到其他平台</p>
+<p>我们可以将其生成在<code>canvas</code>画布上</p>
+<img src="/posts/42153/image-20221111065329107.png" class title="image-20221111065329107">
+
+<p>关于<code>createRenderer</code>，我们了解下基本使用，就不展开讲述了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createRenderer &#125; <span class="keyword">from</span> <span class="string">&#x27;@vue/runtime-core&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; render, createApp &#125; = <span class="title function_">createRenderer</span>(&#123;</span><br><span class="line">  patchProp,</span><br><span class="line">  insert,</span><br><span class="line">  remove,</span><br><span class="line">  createElement,</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; render, createApp &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">from</span> <span class="string">&#x27;@vue/runtime-core&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="composition-Api"><a href="#composition-Api" class="headerlink" title="composition Api"></a>composition Api</h4><p>composition Api，也就是组合式<code>api</code>，通过这种形式，我们能够更加容易维护我们的代码，将相同功能的变量进行一个集中式的管理</p>
+<img src="/posts/42153/image-20221111065425141.png" class title="image-20221111065425141">
+
+<p>关于<code>compositon api</code>的使用，这里以下图展开</p>
+<img src="/posts/42153/image-20221111065447880.png" class title="image-20221111065447880">
+
+<p>简单使用:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="title function_">setup</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> count = <span class="title function_">ref</span>(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">const</span> double = <span class="title function_">computed</span>(<span class="function">() =&gt;</span> count.<span class="property">value</span> * <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">            count.<span class="property">value</span>++</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">onMounted</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;component mounted!&#x27;</span>))</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            count,</span><br><span class="line">            double,</span><br><span class="line">            increment</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、非兼容变更"><a href="#三、非兼容变更" class="headerlink" title="三、非兼容变更"></a>三、非兼容变更</h3><h4 id="Global-API"><a href="#Global-API" class="headerlink" title="Global API"></a>Global API</h4><ul>
+<li>全局 <code>Vue API</code> 已更改为使用应用程序实例</li>
+<li>全局和内部 <code>API</code> 已经被重构为可 <code>tree-shakable</code></li>
+</ul>
+<h4 id="模板指令"><a href="#模板指令" class="headerlink" title="模板指令"></a>模板指令</h4><ul>
+<li>组件上 <code>v-model</code> 用法已更改</li>
+<li><code>&lt;template v-for&gt;</code>和 非 <code>v-for</code>节点上<code>key</code>用法已更改</li>
+<li>在同一元素上使用的 <code>v-if</code> 和 <code>v-for</code> 优先级已更改</li>
+<li><code>v-bind=&quot;object&quot;</code> 现在排序敏感</li>
+<li><code>v-for</code> 中的 <code>ref</code> 不再注册 <code>ref</code> 数组</li>
+</ul>
+<h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><ul>
+<li>只能使用普通函数创建功能组件</li>
+<li><code>functional</code> 属性在单文件组件 <code>(SFC)</code></li>
+<li>异步组件现在需要 <code>defineAsyncComponent</code> 方法来创建</li>
+</ul>
+<h4 id="渲染函数"><a href="#渲染函数" class="headerlink" title="渲染函数"></a>渲染函数</h4><ul>
+<li><p>渲染函数<code>API</code>改变</p>
+</li>
+<li><p><code>$scopedSlots</code> property 已删除，所有插槽都通过 <code>$slots</code> 作为函数暴露</p>
+</li>
+<li><p>自定义指令 API 已更改为与组件生命周期一致</p>
+</li>
+<li><p>一些转换</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span></span><br></pre></td></tr></table></figure>
+
+<p>被重命名了：</p>
+<ul>
+<li><code>v-enter</code> -&gt; <code>v-enter-from</code></li>
+<li><code>v-leave</code> -&gt; <code>v-leave-from</code></li>
+</ul>
+</li>
+<li><p>组件 <code>watch</code> 选项和实例方法 <code>$watch</code>不再支持点分隔字符串路径，请改用计算函数作为参数</p>
+</li>
+<li><p>在 <code>Vue 2.x</code> 中，应用根容器的 <code>outerHTML</code> 将替换为根组件模板 (如果根组件没有模板/渲染选项，则最终编译为模板)。<code>VUE3.x</code> 现在使用应用程序容器的 <code>innerHTML</code>。</p>
+</li>
+</ul>
+<h4 id="其他小改变"><a href="#其他小改变" class="headerlink" title="其他小改变"></a>其他小改变</h4><ul>
+<li><code>destroyed</code> 生命周期选项被重命名为 <code>unmounted</code></li>
+<li><code>beforeDestroy</code> 生命周期选项被重命名为 <code>beforeUnmount</code></li>
+<li><code>[prop default</code>工厂函数不再有权访问 <code>this</code> 是上下文</li>
+<li>自定义指令 API 已更改为与组件生命周期一致</li>
+<li><code>data</code> 应始终声明为函数</li>
+<li>来自 <code>mixin</code> 的 <code>data</code> 选项现在可简单地合并</li>
+<li><code>attribute</code> 强制策略已更改</li>
+<li>一些过渡 <code>class</code> 被重命名</li>
+<li>组建 watch 选项和实例方法 <code>$watch</code>不再支持以点分隔的字符串路径。请改用计算属性函数作为参数。</li>
+<li><code>&lt;template&gt;</code> 没有特殊指令的标记 (<code>v-if/else-if/else</code>、<code>v-for</code> 或 <code>v-slot</code>) 现在被视为普通元素，并将生成原生的 <code>&lt;template&gt;</code> 元素，而不是渲染其内部内容。</li>
+<li>在<code>Vue 2.x</code> 中，应用根容器的 <code>outerHTML</code> 将替换为根组件模板 (如果根组件没有模板/渲染选项，则最终编译为模板)。<code>Vue 3.x</code> 现在使用应用容器的 <code>innerHTML</code>，这意味着容器本身不再被视为模板的一部分。</li>
+</ul>
+<h4 id="移除-API"><a href="#移除-API" class="headerlink" title="移除 API"></a>移除 API</h4><ul>
+<li><code>keyCode</code> 支持作为 <code>v-on</code> 的修饰符</li>
+<li><code>$on</code>，<code>$off</code>和<code>$once</code> 实例方法</li>
+<li>过滤<code>filter</code></li>
+<li>内联模板 <code>attribute</code></li>
+<li><code>$destroy</code> 实例方法。用户不应再手动管理单个<code>Vue</code> 组件的生命周期。</li>
+</ul>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/docs/zh/guide/migration/introduction.html#%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4">https://vue3js.cn/docs/zh/guide/migration/introduction.html#%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4</a></li>
+<li><a target="_blank" rel="noopener" href="https://composition-api.vuejs.org/zh/#api-%E4%BB%8B%E7%BB%8D">https://composition-api.vuejs.org/zh/#api-%E4%BB%8B%E7%BB%8D</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue3%E5%92%8Cvue2%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="tag"># vue3和vue2的区别</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/49172.html" rel="prev" title="vue项目错误处理">
+      <i class="fa fa-chevron-left"></i> vue项目错误处理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/3339.html" rel="next" title="vue3设计目标与优化">
+      vue3设计目标与优化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue3%E5%92%8Cvue2-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">vue3和vue2 的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9Avue3%E6%9C%89%E4%BA%86%E8%A7%A3%E8%BF%87%E5%90%97%EF%BC%9F%E8%83%BD%E8%AF%B4%E8%AF%B4%E8%B7%9Fvue2%E7%9A%84%E5%8C%BA%E5%88%AB%E5%90%97%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">面试官：vue3有了解过吗？能说说跟vue2的区别吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Vue3%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、Vue3介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%93%AA%E4%BA%9B%E5%8F%98%E5%8C%96"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">哪些变化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9F%E5%BA%A6%E6%9B%B4%E5%BF%AB"><span class="nav-number">1.1.1.1.1.</span> <span class="nav-text">速度更快</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%93%E7%A7%AF%E6%9B%B4%E5%B0%8F"><span class="nav-number">1.1.1.1.2.</span> <span class="nav-text">体积更小</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%98%93%E7%BB%B4%E6%8A%A4"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">更易维护</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#compositon-Api"><span class="nav-number">1.1.1.2.1.</span> <span class="nav-text">compositon Api</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9B%B4%E5%A5%BD%E7%9A%84Typescript%E6%94%AF%E6%8C%81"><span class="nav-number">1.1.1.2.2.</span> <span class="nav-text">更好的Typescript支持</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E9%87%8D%E5%86%99"><span class="nav-number">1.1.1.2.3.</span> <span class="nav-text">编译器重写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9B%B4%E6%8E%A5%E8%BF%91%E5%8E%9F%E7%94%9F"><span class="nav-number">1.1.1.2.4.</span> <span class="nav-text">更接近原生</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9B%B4%E6%98%93%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.1.2.5.</span> <span class="nav-text">更易使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Vue3%E6%96%B0%E5%A2%9E%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、Vue3新增特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#framents"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">framents</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Teleport"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Teleport</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#createRenderer"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">createRenderer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#composition-Api"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">composition Api</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%9D%9E%E5%85%BC%E5%AE%B9%E5%8F%98%E6%9B%B4"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、非兼容变更</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Global-API"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Global API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">模板指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">渲染函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%B0%8F%E6%94%B9%E5%8F%98"><span class="nav-number">1.1.3.5.</span> <span class="nav-text">其他小改变</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4-API"><span class="nav-number">1.1.3.6.</span> <span class="nav-text">移除 API</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.1.4.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

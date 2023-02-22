@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="说说你对对keep-alive的理解面试官：说说你对keep-alive的理解是什么？  一、Keep-alive 是什么1keep-alive&#96;是&#96;vue&#96;中的内置组件，能在组件切换过程中将状态保留在内存中，防止重复渲染&#96;DOM  keep-alive 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对keep-alive的理解">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/28754.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="说说你对对keep-alive的理解面试官：说说你对keep-alive的理解是什么？  一、Keep-alive 是什么1keep-alive&#96;是&#96;vue&#96;中的内置组件，能在组件切换过程中将状态保留在内存中，防止重复渲染&#96;DOM  keep-alive 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/28754/image-20221027065251281.png">
+<meta property="article:published_time" content="2022-10-26T22:49:29.000Z">
+<meta property="article:modified_time" content="2022-12-09T08:06:19.805Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="keep-alive">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/28754/image-20221027065251281.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/28754.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>对keep-alive的理解 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/28754.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          对keep-alive的理解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-27 06:49:29" itemprop="dateCreated datePublished" datetime="2022-10-27T06:49:29+08:00">2022-10-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 16:06:19" itemprop="dateModified" datetime="2022-12-09T16:06:19+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="说说你对对keep-alive的理解"><a href="#说说你对对keep-alive的理解" class="headerlink" title="说说你对对keep-alive的理解"></a>说说你对对keep-alive的理解</h1><h2 id="面试官：说说你对keep-alive的理解是什么？"><a href="#面试官：说说你对keep-alive的理解是什么？" class="headerlink" title="面试官：说说你对keep-alive的理解是什么？"></a>面试官：说说你对keep-alive的理解是什么？</h2><img src="/posts/28754/image-20221027065251281.png" class title="image-20221027065251281">
+
+<h3 id="一、Keep-alive-是什么"><a href="#一、Keep-alive-是什么" class="headerlink" title="一、Keep-alive 是什么"></a>一、Keep-alive 是什么</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keep-alive`是`vue`中的内置组件，能在组件切换过程中将状态保留在内存中，防止重复渲染`DOM</span><br></pre></td></tr></table></figure>
+
+<p><code>keep-alive</code> 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们</p>
+<span id="more"></span>
+
+<p><code>keep-alive</code>可以设置以下<code>props</code>属性：</p>
+<ul>
+<li><code>include</code> - 字符串或正则表达式。只有名称匹配的组件会被缓存</li>
+<li><code>exclude</code> - 字符串或正则表达式。任何名称匹配的组件都不会被缓存</li>
+<li><code>max</code> - 数字。最多可以缓存多少组件实例</li>
+</ul>
+<p>关于<code>keep-alive</code>的基本用法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;keep-alive&gt;</span><br><span class="line">  &lt;component :is=<span class="string">&quot;view&quot;</span>&gt;&lt;/component&gt;</span><br><span class="line">&lt;/keep-alive&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>includes</code>和<code>exclude</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;keep-alive include=<span class="string">&quot;a,b&quot;</span>&gt;</span><br><span class="line">  &lt;component :is=<span class="string">&quot;view&quot;</span>&gt;&lt;/component&gt;</span><br><span class="line">&lt;/keep-alive&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 正则表达式 (使用 <span class="string">`v-bind`</span>) --&gt;</span><br><span class="line">&lt;keep-alive :include=<span class="string">&quot;/a|b/&quot;</span>&gt;</span><br><span class="line">  &lt;component :is=<span class="string">&quot;view&quot;</span>&gt;&lt;/component&gt;</span><br><span class="line">&lt;/keep-alive&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 数组 (使用 <span class="string">`v-bind`</span>) --&gt;</span><br><span class="line">&lt;keep-alive :include=<span class="string">&quot;[&#x27;a&#x27;, &#x27;b&#x27;]&quot;</span>&gt;</span><br><span class="line">  &lt;component :is=<span class="string">&quot;view&quot;</span>&gt;&lt;/component&gt;</span><br><span class="line">&lt;/keep-alive&gt;</span><br></pre></td></tr></table></figure>
+
+<p>匹配首先检查组件自身的 <code>name</code> 选项，如果 <code>name</code> 选项不可用，则匹配它的局部注册名称 (父组件 <code>components</code> 选项的键值)，匿名组件不能被匹配</p>
+<p>设置了 keep-alive 缓存的组件，会多出两个生命周期钩子（<code>activated</code>与<code>deactivated</code>）：</p>
+<ul>
+<li>首次进入组件时：<code>beforeRouteEnter</code> &gt; <code>beforeCreate</code> &gt; <code>created</code>&gt; <code>mounted</code> &gt; <code>activated</code> &gt; … … &gt; <code>beforeRouteLeave</code> &gt; <code>deactivated</code></li>
+<li>再次进入组件时：<code>beforeRouteEnter</code> &gt;<code>activated</code> &gt; … … &gt; <code>beforeRouteLeave</code> &gt; <code>deactivated</code></li>
+</ul>
+<h3 id="二、使用场景"><a href="#二、使用场景" class="headerlink" title="二、使用场景"></a>二、使用场景</h3><p>使用原则：当我们在某些场景下不需要让页面重新加载时我们可以使用<code>keepalive</code></p>
+<p>举个栗子:</p>
+<p>当我们从<code>首页</code>–&gt;<code>列表页</code>–&gt;<code>商详页</code>–&gt;<code>再返回</code>，这时候列表页应该是需要<code>keep-alive</code></p>
+<p>从<code>首页</code>–&gt;<code>列表页</code>–&gt;<code>商详页</code>–&gt;<code>返回到列表页(需要缓存)</code>–&gt;<code>返回到首页(需要缓存)</code>–&gt;<code>再次进入列表页(不需要缓存)</code>，这时候可以按需来控制页面的<code>keep-alive</code></p>
+<p>在路由中设置<code>keepAlive</code>属性判断是否需要缓存</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">&#x27;list&#x27;</span>,</span><br><span class="line">  name: <span class="string">&#x27;itemList&#x27;</span>, <span class="comment">// 列表页</span></span><br><span class="line">  component (resolve) &#123;</span><br><span class="line">    require([<span class="string">&#x27;@/pages/item/list&#x27;</span>], resolve)</span><br><span class="line"> &#125;,</span><br><span class="line"> meta: &#123;</span><br><span class="line">  keepAlive: <span class="literal">true</span>,</span><br><span class="line">  title: <span class="string">&#x27;列表页&#x27;</span></span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>&lt;keep-alive&gt;</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;app&quot;</span> class=<span class="string">&#x27;wrapper&#x27;</span>&gt;</span><br><span class="line">    &lt;keep-alive&gt;</span><br><span class="line">        &lt;!-- 需要缓存的视图组件 --&gt; </span><br><span class="line">        &lt;router-view v-<span class="keyword">if</span>=<span class="string">&quot;$route.meta.keepAlive&quot;</span>&gt;&lt;/router-view&gt;</span><br><span class="line">     &lt;/keep-alive&gt;</span><br><span class="line">      &lt;!-- 不需要缓存的视图组件 --&gt;</span><br><span class="line">     &lt;router-view v-<span class="keyword">if</span>=<span class="string">&quot;!$route.meta.keepAlive&quot;</span>&gt;&lt;/router-view&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、原理分析"><a href="#三、原理分析" class="headerlink" title="三、原理分析"></a>三、原理分析</h3><p><code>keep-alive</code>是<code>vue</code>中内置的一个组件</p>
+<p>源码位置：src/core/components/keep-alive.js</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">export <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">&#x27;keep-alive&#x27;</span>,</span><br><span class="line">  abstract: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">  props: &#123;</span><br><span class="line">    include: [String, RegExp, Array],</span><br><span class="line">    exclude: [String, RegExp, Array],</span><br><span class="line">    max: [String, Number]</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  created () &#123;</span><br><span class="line">    this.cache = Object.create(null)</span><br><span class="line">    this.keys = []</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  destroyed () &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> key in this.cache) &#123;</span><br><span class="line">      pruneCacheEntry(this.cache, key, this.keys)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  mounted () &#123;</span><br><span class="line">    this.$watch(<span class="string">&#x27;include&#x27;</span>, val =&gt; &#123;</span><br><span class="line">      pruneCache(this, name =&gt; matches(val, name))</span><br><span class="line">    &#125;)</span><br><span class="line">    this.$watch(<span class="string">&#x27;exclude&#x27;</span>, val =&gt; &#123;</span><br><span class="line">      pruneCache(this, name =&gt; !matches(val, name))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">/* 获取默认插槽中的第一个组件节点 */</span></span><br><span class="line">    <span class="keyword">const</span> slot = this.$slots.<span class="keyword">default</span></span><br><span class="line">    <span class="keyword">const</span> vnode = getFirstComponentChild(slot)</span><br><span class="line">    <span class="comment">/* 获取该组件节点的componentOptions */</span></span><br><span class="line">    <span class="keyword">const</span> componentOptions = vnode &amp;&amp; vnode.componentOptions</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (componentOptions) &#123;</span><br><span class="line">      <span class="comment">/* 获取该组件节点的名称，优先获取组件的name字段，如果name不存在则获取组件的tag */</span></span><br><span class="line">      <span class="keyword">const</span> name = getComponentName(componentOptions)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> &#123; include, exclude &#125; = this</span><br><span class="line">      <span class="comment">/* 如果name不在inlcude中或者存在于exlude中则表示不缓存，直接返回vnode */</span></span><br><span class="line">      <span class="keyword">if</span> (</span><br><span class="line">        (include &amp;&amp; (!name || !matches(include, name))) ||</span><br><span class="line">        <span class="comment">// excluded</span></span><br><span class="line">        (exclude &amp;&amp; name &amp;&amp; matches(exclude, name))</span><br><span class="line">      ) &#123;</span><br><span class="line">        <span class="keyword">return</span> vnode</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> &#123; cache, keys &#125; = this</span><br><span class="line">      <span class="comment">/* 获取组件的key值 */</span></span><br><span class="line">      <span class="keyword">const</span> key = vnode.key == null</span><br><span class="line">        <span class="comment">// same constructor may get registered as different local components</span></span><br><span class="line">        <span class="comment">// so cid alone is not enough (#3269)</span></span><br><span class="line">        ? componentOptions.Ctor.cid + (componentOptions.tag ? <span class="string">`::$&#123;componentOptions.tag&#125;`</span> : <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        : vnode.key</span><br><span class="line">     <span class="comment">/*  拿到key值后去this.cache对象中去寻找是否有该值，如果有则表示该组件有缓存，即命中缓存 */</span></span><br><span class="line">      <span class="keyword">if</span> (cache[key]) &#123;</span><br><span class="line">        vnode.componentInstance = cache[key].componentInstance</span><br><span class="line">        <span class="comment">// make current key freshest</span></span><br><span class="line">        remove(keys, key)</span><br><span class="line">        keys.push(key)</span><br><span class="line">      &#125;</span><br><span class="line">        <span class="comment">/* 如果没有命中缓存，则将其设置进缓存 */</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">        cache[key] = vnode</span><br><span class="line">        keys.push(key)</span><br><span class="line">        <span class="comment">// prune oldest entry</span></span><br><span class="line">        <span class="comment">/* 如果配置了max并且缓存的长度超过了this.max，则从缓存中删除第一个 */</span></span><br><span class="line">        <span class="keyword">if</span> (this.max &amp;&amp; keys.length &gt; parseInt(this.max)) &#123;</span><br><span class="line">          pruneCacheEntry(cache, keys[<span class="number">0</span>], keys, this._vnode)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      vnode.data.keepAlive = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> vnode || (slot &amp;&amp; slot[<span class="number">0</span>])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>81</p>
+<p>可以看到该组件没有<code>template</code>，而是用了<code>render</code>，在组件渲染的时候会自动执行<code>render</code>函数</p>
+<p><code>this.cache</code>是一个对象，用来存储需要缓存的组件，它将以如下形式存储：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">this.cache = &#123;</span><br><span class="line">    <span class="string">&#x27;key1&#x27;</span>:<span class="string">&#x27;组件1&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;key2&#x27;</span>:<span class="string">&#x27;组件2&#x27;</span>,</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在组件销毁的时候执行<code>pruneCacheEntry</code>函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function pruneCacheEntry (</span><br><span class="line">  cache: VNodeCache,</span><br><span class="line">  key: <span class="type">string</span>,</span><br><span class="line">  keys: Array&lt;<span class="type">string</span>&gt;,</span><br><span class="line">  current?: VNode</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="keyword">const</span> cached = cache[key]</span><br><span class="line">  <span class="comment">/* 判断当前没有处于被渲染状态的组件，将其销毁*/</span></span><br><span class="line">  <span class="keyword">if</span> (cached &amp;&amp; (!current || cached.tag !== current.tag)) &#123;</span><br><span class="line">    cached.componentInstance.$destroy()</span><br><span class="line">  &#125;</span><br><span class="line">  cache[key] = null</span><br><span class="line">  remove(keys, key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>mounted</code>钩子函数中观测 <code>include</code> 和 <code>exclude</code> 的变化，如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mounted () &#123;</span><br><span class="line">    this.$watch(<span class="string">&#x27;include&#x27;</span>, val =&gt; &#123;</span><br><span class="line">        pruneCache(this, name =&gt; matches(val, name))</span><br><span class="line">    &#125;)</span><br><span class="line">    this.$watch(<span class="string">&#x27;exclude&#x27;</span>, val =&gt; &#123;</span><br><span class="line">        pruneCache(this, name =&gt; !matches(val, name))</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>include</code> 或<code>exclude</code> 发生了变化，即表示定义需要缓存的组件的规则或者不需要缓存的组件的规则发生了变化，那么就执行<code>pruneCache</code>函数，函数如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function pruneCache (keepAliveInstance, filter) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; cache, keys, _vnode &#125; = keepAliveInstance</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> key in cache) &#123;</span><br><span class="line">    <span class="keyword">const</span> cachedNode = cache[key]</span><br><span class="line">    <span class="keyword">if</span> (cachedNode) &#123;</span><br><span class="line">      <span class="keyword">const</span> name = getComponentName(cachedNode.componentOptions)</span><br><span class="line">      <span class="keyword">if</span> (name &amp;&amp; !filter(name)) &#123;</span><br><span class="line">        pruneCacheEntry(cache, key, keys, _vnode)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在该函数内对<code>this.cache</code>对象进行遍历，取出每一项的<code>name</code>值，用其与新的缓存规则进行匹配，如果匹配不上，则表示在新的缓存规则下该组件已经不需要被缓存，则调用<code>pruneCacheEntry</code>函数将其从<code>this.cache</code>对象剔除即可</p>
+<p>关于<code>keep-alive</code>的最强大缓存功能是在<code>render</code>函数中实现</p>
+<p>首先获取组件的<code>key</code>值：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> key = vnode.key == null? </span><br><span class="line">componentOptions.Ctor.cid + (componentOptions.tag ? <span class="string">`::$&#123;componentOptions.tag&#125;`</span> : <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">: vnode.key</span><br></pre></td></tr></table></figure>
+
+<p>拿到<code>key</code>值后去<code>this.cache</code>对象中去寻找是否有该值，如果有则表示该组件有缓存，即命中缓存，如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 如果命中缓存，则直接从缓存中拿 vnode 的组件实例 */</span></span><br><span class="line"><span class="keyword">if</span> (cache[key]) &#123;</span><br><span class="line">    vnode.componentInstance = cache[key].componentInstance</span><br><span class="line">    <span class="comment">/* 调整该组件key的顺序，将其从原来的地方删掉并重新放在最后一个 */</span></span><br><span class="line">    remove(keys, key)</span><br><span class="line">    keys.push(key)</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>直接从缓存中拿 <code>vnode</code> 的组件实例，此时重新调整该组件<code>key</code>的顺序，将其从原来的地方删掉并重新放在<code>this.keys</code>中最后一个</p>
+<p><code>this.cache</code>对象中没有该<code>key</code>值的情况，如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 如果没有命中缓存，则将其设置进缓存 */</span></span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    cache[key] = vnode</span><br><span class="line">    keys.push(key)</span><br><span class="line">    <span class="comment">/* 如果配置了max并且缓存的长度超过了this.max，则从缓存中删除第一个 */</span></span><br><span class="line">    <span class="keyword">if</span> (this.max &amp;&amp; keys.length &gt; parseInt(this.max)) &#123;</span><br><span class="line">        pruneCacheEntry(cache, keys[<span class="number">0</span>], keys, this._vnode)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表明该组件还没有被缓存过，则以该组件的<code>key</code>为键，组件<code>vnode</code>为值，将其存入<code>this.cache</code>中，并且把<code>key</code>存入<code>this.keys</code>中</p>
+<p>此时再判断<code>this.keys</code>中缓存组件的数量是否超过了设置的最大缓存数量值<code>this.max</code>，如果超过了，则把第一个缓存组件删掉</p>
+<h3 id="四、思考题：缓存后如何获取数据"><a href="#四、思考题：缓存后如何获取数据" class="headerlink" title="四、思考题：缓存后如何获取数据"></a>四、思考题：缓存后如何获取数据</h3><p>解决方案可以有以下两种：</p>
+<ul>
+<li>beforeRouteEnter</li>
+<li>actived</li>
+</ul>
+<h4 id="beforeRouteEnter"><a href="#beforeRouteEnter" class="headerlink" title="beforeRouteEnter"></a>beforeRouteEnter</h4><p>每次组件渲染的时候，都会执行<code>beforeRouteEnter</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteEnter(to, from, next)&#123;</span><br><span class="line">    next(vm=&gt;&#123;</span><br><span class="line">        console.log(vm)</span><br><span class="line">        <span class="comment">// 每次进入路由执行</span></span><br><span class="line">        vm.getData()  <span class="comment">// 获取数据</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="actived"><a href="#actived" class="headerlink" title="actived"></a>actived</h4><p>在<code>keep-alive</code>缓存的组件被激活的时候，都会执行<code>actived</code>钩子</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">activated()&#123;</span><br><span class="line">   this.getData() <span class="comment">// 获取数据</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>注意：服务器端渲染期间<code>avtived</code>不被调用</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dhui/p/13589401.html">https://www.cnblogs.com/dhui/p/13589401.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangjiachen666/p/11497200.html">https://www.cnblogs.com/wangjiachen666/p/11497200.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
+<li>@js语音答题社区</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/keep-alive/" rel="tag"># keep-alive</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/38979.html" rel="prev" title="项目中为什么有那么多配置文件？">
+      <i class="fa fa-chevron-left"></i> 项目中为什么有那么多配置文件？
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/31936.html" rel="next" title="vue响应式">
+      vue响应式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9%E5%AF%B9keep-alive%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">说说你对对keep-alive的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9A%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9keep-alive%E7%9A%84%E7%90%86%E8%A7%A3%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">面试官：说说你对keep-alive的理解是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Keep-alive-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、Keep-alive 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、原理分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%80%9D%E8%80%83%E9%A2%98%EF%BC%9A%E7%BC%93%E5%AD%98%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.4.</span> <span class="nav-text">四、思考题：缓存后如何获取数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeRouteEnter"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">beforeRouteEnter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#actived"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">actived</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.1.5.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

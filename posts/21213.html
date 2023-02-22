@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="你必须要知道的meta标签知识meta标签是html标记语言head区一个非常有用的一个辅助性标签，在所有网页中都可以看到以下代码： 123456&lt;head&gt;    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="作为前端， 你必须要知道的meta标签知识">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/21213.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="你必须要知道的meta标签知识meta标签是html标记语言head区一个非常有用的一个辅助性标签，在所有网页中都可以看到以下代码： 123456&lt;head&gt;    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-24T23:29:46.000Z">
+<meta property="article:modified_time" content="2022-12-09T08:38:47.188Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="meta标签">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/21213.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>作为前端， 你必须要知道的meta标签知识 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/21213.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          作为前端， 你必须要知道的meta标签知识
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-09-25 07:29:46" itemprop="dateCreated datePublished" datetime="2022-09-25T07:29:46+08:00">2022-09-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 16:38:47" itemprop="dateModified" datetime="2022-12-09T16:38:47+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="你必须要知道的meta标签知识"><a href="#你必须要知道的meta标签知识" class="headerlink" title="你必须要知道的meta标签知识"></a>你必须要知道的meta标签知识</h1><p><code>meta</code>标签是<code>html</code>标记语言<code>head</code>区一个非常有用的一个辅助性标签，在所有网页中都可以看到以下代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;ie=edge&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="meta标签的作用有："><a href="#meta标签的作用有：" class="headerlink" title="meta标签的作用有："></a>meta标签的作用有：</h2><ol>
+<li>搜索引擎优化（SEO）</li>
+<li>定义页面使用语言</li>
+<li>自动刷新并指向新的页面</li>
+<li>实现网页转换时的动态效果</li>
+<li>控制页面缓冲</li>
+<li>网页定级评价</li>
+<li>控制网页显示的窗口等</li>
+</ol>
+<p>什么？meta标签居然能有这么多的作用？ 我竟然还不知道？那就让我们来探讨一下吧</p>
+<h2 id="meta标签常见的属性："><a href="#meta标签常见的属性：" class="headerlink" title="meta标签常见的属性："></a>meta标签常见的属性：</h2><ol>
+<li><p>charset（<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=HTML5&spm=1001.2101.3001.7020">HTML5</a>新增）</p>
+</li>
+<li><p>http-equiv</p>
+</li>
+<li><p>name</p>
+</li>
+<li><p>content</p>
+</li>
+</ol>
+<p>下面我们就来简单的介绍一下这几个属性： </p>
+<h3 id="charset属性："><a href="#charset属性：" class="headerlink" title="charset属性："></a>charset属性：</h3><p>它用来定义当前文档的编码方式，告诉浏览器如何解析当前页面:</p>
+<meta charset=" utf-8">
+
+<p>此属性定义了页面的编码集。建议 UTF-8。</p>
+<h3 id="http-equiv属性："><a href="#http-equiv属性：" class="headerlink" title="http-equiv属性："></a>http-equiv属性：</h3><p>HTTP-EQUIV类似于HTTP的头部协议，它回应给浏览器一些有用的信息，以帮助正确和精确地显示网页内容。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">meta`标签的`http-equiv`属性语法格式是：</span><br><span class="line">`＜meta http-equiv=”参数” content=”参数变量值”＞</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>http-equiv</code>属性主要有以下几种参数：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">”Set-Cookie”</span> <span class="attr">content</span>=<span class="string">”cookievalue</span>=<span class="string">xxx;</span> <span class="attr">expires</span>=<span class="string">Friday,12-Jan-2001</span> <span class="attr">18:18:18</span> <span class="attr">GMT</span>; <span class="attr">path</span>=<span class="string">/”</span>&gt;</span>:如果网页过期，那么存盘的cookie将被删除。必须使用GMT的时间格式。</span><br><span class="line">2.<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&#x27;expires&#x27;</span> <span class="attr">content</span>=<span class="string">&#x27;时间&#x27;</span> &gt;</span>：用于设定网页的到期时间。一旦网页过期，必须到服务器上重新传输。</span><br><span class="line">3.<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">”Refresh”</span> <span class="attr">content</span>=<span class="string">”5;URL”</span>&gt;</span>：告诉浏览器在【数字】秒后跳转到【一个网址】</span><br><span class="line">4.<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">”content-Type”</span> <span class="attr">content</span>=<span class="string">”text/html;</span> <span class="attr">charset</span>=<span class="string">utf-8″</span>&gt;</span>：设定页面使用的字符集。</span><br><span class="line">5. <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">”utf-8″</span>&gt;</span>：在HTML5中设定字符集的简写写法。</span><br><span class="line">6.<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">”Pragma”</span> <span class="attr">content</span>=<span class="string">”no-cache”</span>&gt;</span>：禁止浏览器从本地计算机的缓存中访问页面内容。访问者将无法脱机浏览。</span><br><span class="line">7.<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">”Window-target”</span> <span class="attr">content</span>=<span class="string">”_top”</span>&gt;</span>：用来防止别人在iframe(框架)里调用自己的页面，这也算是一个非常实用的属性。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>当然也是有一些弃用的属性， 我就不多说了</p>
+<h3 id="name属性："><a href="#name属性：" class="headerlink" title="name属性："></a>name属性：</h3><p>此属性主要用于描述网页，与之对应的属性为content。</p>
+<p>content中的内容主要是便于搜索引擎机器人查找信息和分类信息用的。</p>
+<p>下面是name属性的语法：</p>
+<meta name="参数" content="具体的参数值">
+
+<p>我在这里列举几个常用的：</p>
+<ol>
+<li><p>keywords(关键字)</p>
+<p>用来告诉搜索引擎你网页的关键字是什么，代码实现： </p>
+<meta name="keywords" content="欢迎来和我一起学习前端"></li>
+<li><p>description(网站内容描述)</p>
+<p>description用来告诉搜索引擎你的页面主要内容，代码实现：</p>
+<meta name="兴趣部落是一个面向前端开发基础知识分享平台"></li>
+<li><p>author(作者)</p>
+<p>标注网页的作者，代码实现：</p>
+<meta name="author" content="蚂蚁部落"></li>
+<li><p>generator</p>
+<p>说明网站的采用的什么软件制作，代码实现：</p>
+<meta name="generator" content="信息参数"></li>
+<li><p>COPYRIGHT</p>
+<p>说明网站版权信息，代码实现：</p>
+<META name="COPYRIGHT" content="信息参数"></META></li>
+</ol>
+<p>更多的大家如果有需要， 可以去查官网</p>
+<h3 id="content属性"><a href="#content属性" class="headerlink" title="content属性"></a>content属性</h3><p>此属性包含 <strong>http-equiv</strong> 或者 <strong>name</strong> 属性的值，具体取决于所使用的值</p>
+<meta name="aaa" content="bbb">
+<meta http-equiv="xxx" content="yyy">
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/meta%E6%A0%87%E7%AD%BE/" rel="tag"># meta标签</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/24305.html" rel="prev" title="深入了解eslint">
+      <i class="fa fa-chevron-left"></i> 深入了解eslint
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/40065.html" rel="next" title="函数的防抖与节流">
+      函数的防抖与节流 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%A0%E5%BF%85%E9%A1%BB%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84meta%E6%A0%87%E7%AD%BE%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">你必须要知道的meta标签知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#meta%E6%A0%87%E7%AD%BE%E7%9A%84%E4%BD%9C%E7%94%A8%E6%9C%89%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">meta标签的作用有：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#meta%E6%A0%87%E7%AD%BE%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">meta标签常见的属性：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#charset%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">charset属性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http-equiv%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="nav-number">1.2.2.</span> <span class="nav-text">http-equiv属性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="nav-number">1.2.3.</span> <span class="nav-text">name属性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#content%E5%B1%9E%E6%80%A7"><span class="nav-number">1.2.4.</span> <span class="nav-text">content属性</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

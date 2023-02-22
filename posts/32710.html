@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="面试官：你对SPA单页面的理解，它的优缺点分别是什么？如何实现SPA应用呢  一、什么是SPASPA（single-page application），翻译过来就是单页应用SPA是一种网络应用程序或网站的模型，它通过动态重写当前页面来与用户交互，这种方法避免了页面之间切换打断用户体验在单页应用中，所有必要的代码（HTML、JavaScript和CSS）都通过单个页面的加载而检索，或者根据需要（通常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试官：你对SPA单页面的理解">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/32710.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="面试官：你对SPA单页面的理解，它的优缺点分别是什么？如何实现SPA应用呢  一、什么是SPASPA（single-page application），翻译过来就是单页应用SPA是一种网络应用程序或网站的模型，它通过动态重写当前页面来与用户交互，这种方法避免了页面之间切换打断用户体验在单页应用中，所有必要的代码（HTML、JavaScript和CSS）都通过单个页面的加载而检索，或者根据需要（通常">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/32710/image-20221011061141846.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/32710/image-20221011061213843.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/32710/image-20221011061312701.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/32710/image-20221011061336211.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/32710/image-20221011061432829.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221011061639950.png">
+<meta property="article:published_time" content="2022-10-10T22:09:47.000Z">
+<meta property="article:modified_time" content="2022-12-09T08:10:40.181Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="spa">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/32710/image-20221011061141846.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/32710.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>面试官：你对SPA单页面的理解 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/32710.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面试官：你对SPA单页面的理解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-11 06:09:47" itemprop="dateCreated datePublished" datetime="2022-10-11T06:09:47+08:00">2022-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 16:10:40" itemprop="dateModified" datetime="2022-12-09T16:10:40+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="面试官：你对SPA单页面的理解，它的优缺点分别是什么？如何实现SPA应用呢"><a href="#面试官：你对SPA单页面的理解，它的优缺点分别是什么？如何实现SPA应用呢" class="headerlink" title="面试官：你对SPA单页面的理解，它的优缺点分别是什么？如何实现SPA应用呢"></a>面试官：你对SPA单页面的理解，它的优缺点分别是什么？如何实现SPA应用呢</h1><img src="/posts/32710/image-20221011061141846.png" class title="image-20221011061141846">
+
+<h2 id="一、什么是SPA"><a href="#一、什么是SPA" class="headerlink" title="一、什么是SPA"></a>一、什么是SPA</h2><p>SPA（single-page application），翻译过来就是单页应用<code>SPA</code>是一种网络应用程序或网站的模型，它通过动态重写当前页面来与用户交互，这种方法避免了页面之间切换打断用户体验在单页应用中，所有必要的代码（<code>HTML</code>、<code>JavaScript</code>和<code>CSS</code>）都通过单个页面的加载而检索，或者根据需要（通常是为响应用户操作）动态装载适当的资源并添加到页面页面在任何时间点都不会重新加载，也不会将控制转移到其他页面举个例子来讲就是一个杯子，早上装的牛奶，中午装的是开水，晚上装的是茶，我们发现，变的始终是杯子里的内容，而杯子始终是那个杯子结构如下图：</p>
+<span id="more"></span>
+
+<img src="/posts/32710/image-20221011061213843.png" class title="image-20221011061213843">
+
+<p>我们熟知的JS框架如<code>react</code>,<code>vue</code>,<code>angular</code>,<code>ember</code>都属于<code>SPA</code></p>
+<h2 id="二、SPA和MPA的区别"><a href="#二、SPA和MPA的区别" class="headerlink" title="二、SPA和MPA的区别"></a>二、SPA和MPA的区别</h2><p>上面大家已经对单页面有所了解了，下面来讲讲多页应用MPA（MultiPage-page application），翻译过来就是多页应用在<code>MPA</code>中，每个页面都是一个主页面，都是独立的当我们在访问另一个页面的时候，都需要重新加载<code>html</code>、<code>css</code>、<code>js</code>文件，公共文件则根据需求按需加载如下图</p>
+<img src="/posts/32710/image-20221011061312701.png" class title="image-20221011061312701">
+
+<h4 id="单页应用与多页应用的区别："><a href="#单页应用与多页应用的区别：" class="headerlink" title="单页应用与多页应用的区别："></a>单页应用与多页应用的区别：</h4><img src="/posts/32710/image-20221011061336211.png" class title="image-20221011061336211">
+
+<h4 id="单页应用优缺点"><a href="#单页应用优缺点" class="headerlink" title="单页应用优缺点"></a>单页应用优缺点</h4><p>优点：</p>
+<ul>
+<li>具有桌面应用的即时性、网站的可移植性和可访问性</li>
+<li>用户体验好、快，内容的改变不需要重新加载整个页面</li>
+<li>良好的前后端分离，分工更明确</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>不利于搜索引擎的抓取</li>
+<li>首次渲染速度相对较慢</li>
+</ul>
+<h2 id="三、实现一个SPA"><a href="#三、实现一个SPA" class="headerlink" title="三、实现一个SPA"></a>三、实现一个SPA</h2><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><ol>
+<li>监听地址栏中<code>hash</code>变化驱动界面变化</li>
+<li>用<code>pushsate</code>记录浏览器的历史，驱动界面发送变化</li>
+</ol>
+<img src="/posts/32710/image-20221011061432829.png" class title="image-20221011061432829">
+
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><h5 id="hash-模式"><a href="#hash-模式" class="headerlink" title="hash 模式"></a><code>hash</code> 模式</h5><p>核心通过监听<code>url</code>中的<code>hash</code>来进行路由跳转</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义 Router  </span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Router</span> &#123;  </span><br><span class="line">    <span class="title function_">constructor</span> () &#123;  </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">routes</span> = &#123;&#125;; <span class="comment">// 存放路由path及callback  </span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">currentUrl</span> = <span class="string">&#x27;&#x27;</span>;  </span><br><span class="line">          </span><br><span class="line">        <span class="comment">// 监听路由change调用相对应的路由回调  </span></span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="variable language_">this</span>.<span class="property">refresh</span>, <span class="literal">false</span>);  </span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;hashchange&#x27;</span>, <span class="variable language_">this</span>.<span class="property">refresh</span>, <span class="literal">false</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="title function_">route</span>(<span class="params">path, callback</span>)&#123;  </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">routes</span>[path] = callback;  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="title function_">push</span>(<span class="params">path</span>) &#123;  </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">routes</span>[path] &amp;&amp; <span class="variable language_">this</span>.<span class="property">routes</span>[path]()  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 使用 router  </span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">miniRouter</span> = <span class="keyword">new</span> <span class="title class_">Router</span>();  </span><br><span class="line">miniRouter.<span class="title function_">route</span>(<span class="string">&#x27;/&#x27;</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;page1&#x27;</span>))  </span><br><span class="line">miniRouter.<span class="title function_">route</span>(<span class="string">&#x27;/page2&#x27;</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;page2&#x27;</span>))  </span><br><span class="line">  </span><br><span class="line">miniRouter.<span class="title function_">push</span>(<span class="string">&#x27;/&#x27;</span>) <span class="comment">// page1  </span></span><br><span class="line">miniRouter.<span class="title function_">push</span>(<span class="string">&#x27;/page2&#x27;</span>) <span class="comment">// page2  </span></span><br></pre></td></tr></table></figure>
+
+<h5 id="history模式"><a href="#history模式" class="headerlink" title="history模式"></a>history模式</h5><p><code>history</code> 模式核心借用 <code>HTML5 history api</code>，<code>api</code> 提供了丰富的 <code>router</code> 相关属性先了解一个几个相关的api</p>
+<ul>
+<li><p><code>history.pushState</code> 浏览器历史纪录添加记录</p>
+</li>
+<li><p><code>history.replaceState</code>修改浏览器历史纪录中当前纪录</p>
+</li>
+<li><p><code>history.popState</code> 当 <code>history</code> 发生变化时触发</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义 Router  </span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Router</span> &#123;  </span><br><span class="line">    <span class="title function_">constructor</span> () &#123;  </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">routes</span> = &#123;&#125;;  </span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">listerPopState</span>()  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="title function_">init</span>(<span class="params">path</span>) &#123;  </span><br><span class="line">        history.<span class="title function_">replaceState</span>(&#123;<span class="attr">path</span>: path&#125;, <span class="literal">null</span>, path);  </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">routes</span>[path] &amp;&amp; <span class="variable language_">this</span>.<span class="property">routes</span>[path]();  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="title function_">route</span>(<span class="params">path, callback</span>)&#123;  </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">routes</span>[path] = callback;  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="title function_">push</span>(<span class="params">path</span>) &#123;  </span><br><span class="line">        history.<span class="title function_">pushState</span>(&#123;<span class="attr">path</span>: path&#125;, <span class="literal">null</span>, path);  </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">routes</span>[path] &amp;&amp; <span class="variable language_">this</span>.<span class="property">routes</span>[path]();  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    listerPopState () &#123;  </span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;popstate&#x27;</span> , <span class="function"><span class="params">e</span> =&gt;</span> &#123;  </span><br><span class="line">            <span class="keyword">const</span> path = e.<span class="property">state</span> &amp;&amp; e.<span class="property">state</span>.<span class="property">path</span>;  </span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">routers</span>[path] &amp;&amp; <span class="variable language_">this</span>.<span class="property">routers</span>[path]()  </span><br><span class="line">        &#125;)  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 使用 Router  </span></span><br><span class="line">  </span><br><span class="line"><span class="variable language_">window</span>.<span class="property">miniRouter</span> = <span class="keyword">new</span> <span class="title class_">Router</span>();  </span><br><span class="line">miniRouter.<span class="title function_">route</span>(<span class="string">&#x27;/&#x27;</span>, <span class="function">()=&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;page1&#x27;</span>))  </span><br><span class="line">miniRouter.<span class="title function_">route</span>(<span class="string">&#x27;/page2&#x27;</span>, <span class="function">()=&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;page2&#x27;</span>))  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 跳转  </span></span><br><span class="line">miniRouter.<span class="title function_">push</span>(<span class="string">&#x27;/page2&#x27;</span>)  <span class="comment">// page2  </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="四、题外话：如何给SPA做SEO"><a href="#四、题外话：如何给SPA做SEO" class="headerlink" title="四、题外话：如何给SPA做SEO"></a>四、题外话：如何给SPA做SEO</h2><p>下面给出基于<code>Vue</code>的<code>SPA</code>如何实现<code>SEO</code>的三种方式</p>
+<h4 id="SSR服务端渲染"><a href="#SSR服务端渲染" class="headerlink" title="SSR服务端渲染"></a>SSR服务端渲染</h4><p>将组件或页面通过服务器生成html，再返回给浏览器，如<code>nuxt.js</code></p>
+<h4 id="静态化"><a href="#静态化" class="headerlink" title="静态化"></a><strong>静态化</strong></h4><p>目前主流的静态化主要有两种：（1）一种是通过程序将动态页面抓取并保存为静态页面，这样的页面的实际存在于服务器的硬盘中（2）另外一种是通过WEB服务器的 <code>URL Rewrite</code>的方式，它的原理是通过web服务器内部模块按一定规则将外部的URL请求转化为内部的文件地址，一句话来说就是把外部请求的静态地址转化为实际的动态页面地址，而静态页面实际是不存在的。这两种方法都达到了实现URL静态化的效果</p>
+<ol>
+<li><strong>使用<code>Phantomjs</code>针对爬虫处理</strong></li>
+</ol>
+<p>原理是通过<code>Nginx</code>配置，判断访问来源是否为爬虫，如果是则搜索引擎的爬虫请求会转发到一个<code>node server</code>，再通过<code>PhantomJS</code>来解析完整的<code>HTML</code>，返回给爬虫。下面是大致流程图</p>
+<p><img src="/posts/image-20221011061639950.png" alt="image-20221011061639950"></p>
+<h2 id="五、参考文献"><a href="#五、参考文献" class="headerlink" title="五、参考文献"></a>五、参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000019623624">https://segmentfault.com/a/1190000019623624</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903512107663368">https://juejin.cn/post/6844903512107663368</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/constantince/p/5586851.html">https://www.cnblogs.com/constantince/p/5586851.html</a></li>
+</ul>
+<p>@js语音答题社区</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spa/" rel="tag"># spa</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/39274.html" rel="prev" title="vue2和vue3">
+      <i class="fa fa-chevron-left"></i> vue2和vue3
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/11819.html" rel="next" title="声明式框架和命令式框架">
+      声明式框架和命令式框架 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9A%E4%BD%A0%E5%AF%B9SPA%E5%8D%95%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%8C%E5%AE%83%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0SPA%E5%BA%94%E7%94%A8%E5%91%A2"><span class="nav-number">1.</span> <span class="nav-text">面试官：你对SPA单页面的理解，它的优缺点分别是什么？如何实现SPA应用呢</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFSPA"><span class="nav-number">1.1.</span> <span class="nav-text">一、什么是SPA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81SPA%E5%92%8CMPA%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">二、SPA和MPA的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E4%B8%8E%E5%A4%9A%E9%A1%B5%E5%BA%94%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">单页应用与多页应用的区别：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">单页应用优缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AASPA"><span class="nav-number">1.3.</span> <span class="nav-text">三、实现一个SPA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hash-%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.3.0.2.1.</span> <span class="nav-text">hash 模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#history%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.3.0.2.2.</span> <span class="nav-text">history模式</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%A2%98%E5%A4%96%E8%AF%9D%EF%BC%9A%E5%A6%82%E4%BD%95%E7%BB%99SPA%E5%81%9ASEO"><span class="nav-number">1.4.</span> <span class="nav-text">四、题外话：如何给SPA做SEO</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SSR%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%B8%B2%E6%9F%93"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">SSR服务端渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%8C%96"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">静态化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.5.</span> <span class="nav-text">五、参考文献</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>

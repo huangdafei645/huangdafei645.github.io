@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="vue权限管理面试官：vue要做权限管理该怎么做？如果控制到按钮级别的权限怎么做？  一、是什么权限是对特定资源的访问许可，所谓权限控制，也就是确保用户只能访问到被分配的资源 而前端权限归根结底是请求的发起权，请求的发起可能有下面两种形式触发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue权限管理">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/29902.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="vue权限管理面试官：vue要做权限管理该怎么做？如果控制到按钮级别的权限怎么做？  一、是什么权限是对特定资源的访问许可，所谓权限控制，也就是确保用户只能访问到被分配的资源 而前端权限归根结底是请求的发起权，请求的发起可能有下面两种形式触发">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/29902/image-20221107070338527.png">
+<meta property="article:published_time" content="2022-11-06T23:02:17.000Z">
+<meta property="article:modified_time" content="2022-12-09T07:58:26.023Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="vue权限管理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/29902/image-20221107070338527.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/29902.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vue权限管理 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/29902.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue权限管理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-07 07:02:17" itemprop="dateCreated datePublished" datetime="2022-11-07T07:02:17+08:00">2022-11-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 15:58:26" itemprop="dateModified" datetime="2022-12-09T15:58:26+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="vue权限管理"><a href="#vue权限管理" class="headerlink" title="vue权限管理"></a>vue权限管理</h1><h2 id="面试官：vue要做权限管理该怎么做？如果控制到按钮级别的权限怎么做？"><a href="#面试官：vue要做权限管理该怎么做？如果控制到按钮级别的权限怎么做？" class="headerlink" title="面试官：vue要做权限管理该怎么做？如果控制到按钮级别的权限怎么做？"></a>面试官：vue要做权限管理该怎么做？如果控制到按钮级别的权限怎么做？</h2><img src="/posts/29902/image-20221107070338527.png" class title="image-20221107070338527">
+
+<h3 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h3><p>权限是对特定资源的访问许可，所谓权限控制，也就是确保用户只能访问到被分配的资源</p>
+<p>而前端权限归根结底是请求的发起权，请求的发起可能有下面两种形式触发</p>
+<span id="more"></span>
+
+<ul>
+<li>页面加载触发</li>
+<li>页面上的按钮点击触发</li>
+</ul>
+<p>总的来说，所有的请求发起都触发自前端路由或视图</p>
+<p>所以我们可以从这两方面入手，对触发权限的源头进行控制，最终要实现的目标是：</p>
+<ul>
+<li>路由方面，用户登录后只能看到自己有权访问的导航菜单，也只能访问自己有权访问的路由地址，否则将跳转 <code>4xx</code> 提示页</li>
+<li>视图方面，用户只能看到自己有权浏览的内容和有权操作的控件</li>
+<li>最后再加上请求控制作为最后一道防线，路由可能配置失误，按钮可能忘了加权限，这种时候请求控制可以用来兜底，越权请求将在前端被拦截</li>
+</ul>
+<h3 id="二、如何做"><a href="#二、如何做" class="headerlink" title="二、如何做"></a>二、如何做</h3><p>前端权限控制可以分为四个方面：</p>
+<ul>
+<li>接口权限</li>
+<li>按钮权限</li>
+<li>菜单权限</li>
+<li>路由权限</li>
+</ul>
+<h4 id="接口权限"><a href="#接口权限" class="headerlink" title="接口权限"></a>接口权限</h4><p>接口权限目前一般采用<code>jwt</code>的形式来验证，没有通过的话一般返回<code>401</code>，跳转到登录页面重新进行登录</p>
+<p>登录完拿到<code>token</code>，将<code>token</code>存起来，通过<code>axios</code>请求拦截器进行拦截，每次请求的时候头部携带<code>token</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    config.<span class="property">headers</span>[<span class="string">&#x27;token&#x27;</span>] = cookie.<span class="title function_">get</span>(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br><span class="line">axios.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;&#125;,&#123;response&#125;=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span> (response.<span class="property">data</span>.<span class="property">code</span> === <span class="number">40099</span> || response.<span class="property">data</span>.<span class="property">code</span> === <span class="number">40098</span>) &#123; <span class="comment">//token过期或者错误</span></span><br><span class="line">        router.<span class="title function_">push</span>(<span class="string">&#x27;/login&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="路由权限控制"><a href="#路由权限控制" class="headerlink" title="路由权限控制"></a>路由权限控制</h4><p><strong>方案一</strong></p>
+<p>初始化即挂载全部路由，并且在路由上标记相应的权限信息，每次路由跳转前做校验</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routerMap = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/permission&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="title class_">Layout</span>,</span><br><span class="line">    <span class="attr">redirect</span>: <span class="string">&#x27;/permission/index&#x27;</span>,</span><br><span class="line">    <span class="attr">alwaysShow</span>: <span class="literal">true</span>, <span class="comment">// will always show the root menu</span></span><br><span class="line">    <span class="attr">meta</span>: &#123;</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&#x27;permission&#x27;</span>,</span><br><span class="line">      <span class="attr">icon</span>: <span class="string">&#x27;lock&#x27;</span>,</span><br><span class="line">      <span class="attr">roles</span>: [<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;editor&#x27;</span>] <span class="comment">// you can set roles in root nav</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">children</span>: [&#123;</span><br><span class="line">      <span class="attr">path</span>: <span class="string">&#x27;page&#x27;</span>,</span><br><span class="line">      <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/permission/page&#x27;</span>),</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;pagePermission&#x27;</span>,</span><br><span class="line">      <span class="attr">meta</span>: &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&#x27;pagePermission&#x27;</span>,</span><br><span class="line">        <span class="attr">roles</span>: [<span class="string">&#x27;admin&#x27;</span>] <span class="comment">// or you can only set roles in sub nav</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      <span class="attr">path</span>: <span class="string">&#x27;directive&#x27;</span>,</span><br><span class="line">      <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/permission/directive&#x27;</span>),</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;directivePermission&#x27;</span>,</span><br><span class="line">      <span class="attr">meta</span>: &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&#x27;directivePermission&#x27;</span></span><br><span class="line">        <span class="comment">// if do not set roles, means: this page does not require permission</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;]</span><br></pre></td></tr></table></figure>
+
+<p>这种方式存在以下四种缺点：</p>
+<ul>
+<li>加载所有的路由，如果路由很多，而用户并不是所有的路由都有权限访问，对性能会有影响。</li>
+<li>全局路由守卫里，每次路由跳转都要做权限判断。</li>
+<li>菜单信息写死在前端，要改个显示文字或权限信息，需要重新编译</li>
+<li>菜单跟路由耦合在一起，定义路由的时候还有添加菜单显示标题，图标之类的信息，而且路由不一定作为菜单显示，还要多加字段进行标识</li>
+</ul>
+<p><strong>方案二</strong></p>
+<p>初始化的时候先挂载不需要权限控制的路由，比如登录页，404等错误页。如果用户通过URL进行强制访问，则会直接进入404，相当于从源头上做了控制</p>
+<p>登录后，获取用户的权限信息，然后筛选有权限访问的路由，在全局路由守卫里进行调用<code>addRoutes</code>添加路由</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Message</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;element-ui&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">NProgress</span> <span class="keyword">from</span> <span class="string">&#x27;nprogress&#x27;</span> <span class="comment">// progress bar</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;nprogress/nprogress.css&#x27;</span><span class="comment">// progress bar style</span></span><br><span class="line"><span class="keyword">import</span> &#123; getToken &#125; <span class="keyword">from</span> <span class="string">&#x27;@/utils/auth&#x27;</span> <span class="comment">// getToken from cookie</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">NProgress</span>.<span class="title function_">configure</span>(&#123; <span class="attr">showSpinner</span>: <span class="literal">false</span> &#125;)<span class="comment">// NProgress Configuration</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// permission judge function</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hasPermission</span>(<span class="params">roles, permissionRoles</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (roles.<span class="title function_">indexOf</span>(<span class="string">&#x27;admin&#x27;</span>) &gt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span> <span class="comment">// admin permission passed directly</span></span><br><span class="line">  <span class="keyword">if</span> (!permissionRoles) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  <span class="keyword">return</span> roles.<span class="title function_">some</span>(<span class="function"><span class="params">role</span> =&gt;</span> permissionRoles.<span class="title function_">indexOf</span>(role) &gt;= <span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> whiteList = [<span class="string">&#x27;/login&#x27;</span>, <span class="string">&#x27;/authredirect&#x27;</span>]<span class="comment">// no redirect whitelist</span></span><br><span class="line"></span><br><span class="line">router.<span class="title function_">beforeEach</span>(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="title class_">NProgress</span>.<span class="title function_">start</span>() <span class="comment">// start progress bar</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">getToken</span>()) &#123; <span class="comment">// determine if there has token</span></span><br><span class="line">    <span class="comment">/* has token*/</span></span><br><span class="line">    <span class="keyword">if</span> (to.<span class="property">path</span> === <span class="string">&#x27;/login&#x27;</span>) &#123;</span><br><span class="line">      <span class="title function_">next</span>(&#123; <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span> &#125;)</span><br><span class="line">      <span class="title class_">NProgress</span>.<span class="title function_">done</span>() <span class="comment">// if current page is dashboard will not trigger	afterEach hook, so manually handle it</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (store.<span class="property">getters</span>.<span class="property">roles</span>.<span class="property">length</span> === <span class="number">0</span>) &#123; <span class="comment">// 判断当前用户是否已拉取完user_info信息</span></span><br><span class="line">        store.<span class="title function_">dispatch</span>(<span class="string">&#x27;GetUserInfo&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123; <span class="comment">// 拉取user_info</span></span><br><span class="line">          <span class="keyword">const</span> roles = res.<span class="property">data</span>.<span class="property">roles</span> <span class="comment">// note: roles must be a array! such as: [&#x27;editor&#x27;,&#x27;develop&#x27;]</span></span><br><span class="line">          store.<span class="title function_">dispatch</span>(<span class="string">&#x27;GenerateRoutes&#x27;</span>, &#123; roles &#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">// 根据roles权限生成可访问的路由表</span></span><br><span class="line">            router.<span class="title function_">addRoutes</span>(store.<span class="property">getters</span>.<span class="property">addRouters</span>) <span class="comment">// 动态添加可访问路由表</span></span><br><span class="line">            <span class="title function_">next</span>(&#123; ...to, <span class="attr">replace</span>: <span class="literal">true</span> &#125;) <span class="comment">// hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record</span></span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;).<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">          store.<span class="title function_">dispatch</span>(<span class="string">&#x27;FedLogOut&#x27;</span>).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title class_">Message</span>.<span class="title function_">error</span>(err || <span class="string">&#x27;Verification failed, please login again&#x27;</span>)</span><br><span class="line">            <span class="title function_">next</span>(&#123; <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span> &#125;)</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_">hasPermission</span>(store.<span class="property">getters</span>.<span class="property">roles</span>, to.<span class="property">meta</span>.<span class="property">roles</span>)) &#123;</span><br><span class="line">          <span class="title function_">next</span>()<span class="comment">//</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="title function_">next</span>(&#123; <span class="attr">path</span>: <span class="string">&#x27;/401&#x27;</span>, <span class="attr">replace</span>: <span class="literal">true</span>, <span class="attr">query</span>: &#123; <span class="attr">noGoBack</span>: <span class="literal">true</span> &#125;&#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 可删 ↑</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/* has no token*/</span></span><br><span class="line">    <span class="keyword">if</span> (whiteList.<span class="title function_">indexOf</span>(to.<span class="property">path</span>) !== -<span class="number">1</span>) &#123; <span class="comment">// 在免登录白名单，直接进入</span></span><br><span class="line">      <span class="title function_">next</span>()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="title function_">next</span>(<span class="string">&#x27;/login&#x27;</span>) <span class="comment">// 否则全部重定向到登录页</span></span><br><span class="line">      <span class="title class_">NProgress</span>.<span class="title function_">done</span>() <span class="comment">// if current page is login will not trigger afterEach hook, so manually handle it</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">afterEach</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title class_">NProgress</span>.<span class="title function_">done</span>() <span class="comment">// finish progress bar</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>按需挂载，路由就需要知道用户的路由权限，也就是在用户登录进来的时候就要知道当前用户拥有哪些路由权限</p>
+<p>这种方式也存在了以下的缺点：</p>
+<ul>
+<li>全局路由守卫里，每次路由跳转都要做判断</li>
+<li>菜单信息写死在前端，要改个显示文字或权限信息，需要重新编译</li>
+<li>菜单跟路由耦合在一起，定义路由的时候还有添加菜单显示标题，图标之类的信息，而且路由不一定作为菜单显示，还要多加字段进行标识</li>
+</ul>
+<h4 id="菜单权限"><a href="#菜单权限" class="headerlink" title="菜单权限"></a>菜单权限</h4><p>菜单权限可以理解成将页面与理由进行解耦</p>
+<h5 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h5><p>菜单与路由分离，菜单由后端返回</p>
+<p>前端定义路由信息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;login&quot;</span>,</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&quot;/login&quot;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&quot;@/pages/Login.vue&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>name</code>字段都不为空，需要根据此字段与后端返回菜单做关联，后端返回的菜单信息中必须要有<code>name</code>对应的字段，并且做唯一性校验</p>
+<p>全局路由守卫里做判断</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">hasPermission</span>(<span class="params">router, accessMenu</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (whiteList.<span class="title function_">indexOf</span>(router.<span class="property">path</span>) !== -<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> menu = <span class="title class_">Util</span>.<span class="title function_">getMenuByName</span>(router.<span class="property">name</span>, accessMenu);</span><br><span class="line">  <span class="keyword">if</span> (menu.<span class="property">name</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Router</span>.<span class="title function_">beforeEach</span>(<span class="keyword">async</span> (to, <span class="keyword">from</span>, next) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">getToken</span>()) &#123;</span><br><span class="line">    <span class="keyword">let</span> userInfo = store.<span class="property">state</span>.<span class="property">user</span>.<span class="property">userInfo</span>;</span><br><span class="line">    <span class="keyword">if</span> (!userInfo.<span class="property">name</span>) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">await</span> store.<span class="title function_">dispatch</span>(<span class="string">&quot;GetUserInfo&quot;</span>)</span><br><span class="line">        <span class="keyword">await</span> store.<span class="title function_">dispatch</span>(<span class="string">&#x27;updateAccessMenu&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> (to.<span class="property">path</span> === <span class="string">&#x27;/login&#x27;</span>) &#123;</span><br><span class="line">          <span class="title function_">next</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;home_index&#x27;</span> &#125;)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">//Util.toDefaultPage([...routers], to.name, router, next);</span></span><br><span class="line">          <span class="title function_">next</span>(&#123; ...to, <span class="attr">replace</span>: <span class="literal">true</span> &#125;)<span class="comment">//菜单权限更新完成,重新进一次当前路由</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;  </span><br><span class="line">      <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="keyword">if</span> (whiteList.<span class="title function_">indexOf</span>(to.<span class="property">path</span>) !== -<span class="number">1</span>) &#123; <span class="comment">// 在免登录白名单，直接进入</span></span><br><span class="line">          <span class="title function_">next</span>()</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="title function_">next</span>(<span class="string">&#x27;/login&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (to.<span class="property">path</span> === <span class="string">&#x27;/login&#x27;</span>) &#123;</span><br><span class="line">        <span class="title function_">next</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;home_index&#x27;</span> &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_">hasPermission</span>(to, store.<span class="property">getters</span>.<span class="property">accessMenu</span>)) &#123;</span><br><span class="line">          <span class="title class_">Util</span>.<span class="title function_">toDefaultPage</span>(store.<span class="property">getters</span>.<span class="property">accessMenu</span>,to, routes, next);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="title function_">next</span>(&#123; <span class="attr">path</span>: <span class="string">&#x27;/403&#x27;</span>,<span class="attr">replace</span>:<span class="literal">true</span> &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (whiteList.<span class="title function_">indexOf</span>(to.<span class="property">path</span>) !== -<span class="number">1</span>) &#123; <span class="comment">// 在免登录白名单，直接进入</span></span><br><span class="line">      <span class="title function_">next</span>()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="title function_">next</span>(<span class="string">&#x27;/login&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> menu = <span class="title class_">Util</span>.<span class="title function_">getMenuByName</span>(to.<span class="property">name</span>, store.<span class="property">getters</span>.<span class="property">accessMenu</span>);</span><br><span class="line">  <span class="title class_">Util</span>.<span class="title function_">title</span>(menu.<span class="property">title</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Router</span>.<span class="title function_">afterEach</span>(<span class="function">(<span class="params">to</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="title function_">scrollTo</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>每次路由跳转的时候都要判断权限，这里的判断也很简单，因为菜单的<code>name</code>与路由的<code>name</code>是一一对应的，而后端返回的菜单就已经是经过权限过滤的</p>
+<p>如果根据路由<code>name</code>找不到对应的菜单，就表示用户有没权限访问</p>
+<p>如果路由很多，可以在应用初始化的时候，只挂载不需要权限控制的路由。取得后端返回的菜单后，根据菜单与路由的对应关系，筛选出可访问的路由，通过<code>addRoutes</code>动态挂载</p>
+<p>这种方式的缺点：</p>
+<ul>
+<li>菜单需要与路由做一一对应，前端添加了新功能，需要通过菜单管理功能添加新的菜单，如果菜单配置的不对会导致应用不能正常使用</li>
+<li>全局路由守卫里，每次路由跳转都要做判断</li>
+</ul>
+<h5 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h5><p>菜单和路由都由后端返回</p>
+<p>前端统一定义路由组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">Home</span> = (<span class="params"></span>) =&gt; <span class="keyword">import</span>(<span class="string">&quot;../pages/Home.vue&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">UserInfo</span> = (<span class="params"></span>) =&gt; <span class="keyword">import</span>(<span class="string">&quot;../pages/UserInfo.vue&quot;</span>);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="attr">home</span>: <span class="title class_">Home</span>,</span><br><span class="line">    <span class="attr">userInfo</span>: <span class="title class_">UserInfo</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>后端路由组件返回以下格式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;home&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">        <span class="attr">component</span>: <span class="string">&quot;home&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;home&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&quot;/userinfo&quot;</span>,</span><br><span class="line">        <span class="attr">component</span>: <span class="string">&quot;userInfo&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>在将后端返回路由通过<code>addRoutes</code>动态挂载之间，需要将数据处理一下，将<code>component</code>字段换为真正的组件</p>
+<p>如果有嵌套路由，后端功能设计的时候，要注意添加相应的字段，前端拿到数据也要做相应的处理</p>
+<p>这种方法也会存在缺点：</p>
+<ul>
+<li>全局路由守卫里，每次路由跳转都要做判断</li>
+<li>前后端的配合要求更高</li>
+</ul>
+<h4 id="按钮权限"><a href="#按钮权限" class="headerlink" title="按钮权限"></a>按钮权限</h4><h5 id="方案一-1"><a href="#方案一-1" class="headerlink" title="方案一"></a>方案一</h5><p>按钮权限也可以用<code>v-if</code>判断</p>
+<p>但是如果页面过多，每个页面页面都要获取用户权限<code>role</code>和路由表里的<code>meta.btnPermissions</code>，然后再做判断</p>
+<p>这种方式就不展开举例了</p>
+<h5 id="方案二-1"><a href="#方案二-1" class="headerlink" title="方案二"></a>方案二</h5><p>通过自定义指令进行按钮权限的判断</p>
+<p>首先配置路由</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/permission&#x27;</span>,</span><br><span class="line">    <span class="attr">component</span>: <span class="title class_">Layout</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;权限测试&#x27;</span>,</span><br><span class="line">    <span class="attr">meta</span>: &#123;</span><br><span class="line">        <span class="attr">btnPermissions</span>: [<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;supper&#x27;</span>, <span class="string">&#x27;normal&#x27;</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//页面需要的权限</span></span><br><span class="line">    <span class="attr">children</span>: [&#123;</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;supper&#x27;</span>,</span><br><span class="line">        <span class="attr">component</span>: <span class="title function_">_import</span>(<span class="string">&#x27;system/supper&#x27;</span>),</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;权限测试页&#x27;</span>,</span><br><span class="line">        <span class="attr">meta</span>: &#123;</span><br><span class="line">            <span class="attr">btnPermissions</span>: [<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;supper&#x27;</span>]</span><br><span class="line">        &#125; <span class="comment">//页面需要的权限</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;normal&#x27;</span>,</span><br><span class="line">        <span class="attr">component</span>: <span class="title function_">_import</span>(<span class="string">&#x27;system/normal&#x27;</span>),</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;权限测试页&#x27;</span>,</span><br><span class="line">        <span class="attr">meta</span>: &#123;</span><br><span class="line">            <span class="attr">btnPermissions</span>: [<span class="string">&#x27;admin&#x27;</span>]</span><br><span class="line">        &#125; <span class="comment">//页面需要的权限</span></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义权限鉴定指令</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="comment">/**权限指令**/</span></span><br><span class="line"><span class="keyword">const</span> has = <span class="title class_">Vue</span>.<span class="title function_">directive</span>(<span class="string">&#x27;has&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">bind</span>: <span class="keyword">function</span> (<span class="params">el, binding, vnode</span>) &#123;</span><br><span class="line">        <span class="comment">// 获取页面按钮权限</span></span><br><span class="line">        <span class="keyword">let</span> btnPermissionsArr = [];</span><br><span class="line">        <span class="keyword">if</span>(binding.<span class="property">value</span>)&#123;</span><br><span class="line">            <span class="comment">// 如果指令传值，获取指令参数，根据指令参数和当前登录人按钮权限做比较。</span></span><br><span class="line">            btnPermissionsArr = <span class="title class_">Array</span>.<span class="title function_">of</span>(binding.<span class="property">value</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 否则获取路由中的参数，根据路由的btnPermissionsArr和当前登录人按钮权限做比较。</span></span><br><span class="line">            btnPermissionsArr = vnode.<span class="property">context</span>.<span class="property">$route</span>.<span class="property">meta</span>.<span class="property">btnPermissions</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.$_has(btnPermissionsArr)) &#123;</span><br><span class="line">            el.<span class="property">parentNode</span>.<span class="title function_">removeChild</span>(el);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 权限检查方法</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$_has</span> = <span class="keyword">function</span> (<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> isExist = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">// 获取用户按钮权限</span></span><br><span class="line">    <span class="keyword">let</span> btnPermissionsStr = sessionStorage.<span class="title function_">getItem</span>(<span class="string">&quot;btnPermissions&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (btnPermissionsStr == <span class="literal">undefined</span> || btnPermissionsStr == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (value.<span class="title function_">indexOf</span>(btnPermissionsStr) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">        isExist = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> isExist;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> &#123;has&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在使用的按钮中只需要引用<code>v-has</code>指令</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-button @click=<span class="string">&#x27;editClick&#x27;</span> type=<span class="string">&quot;primary&quot;</span> v-has&gt;编辑&lt;/el-button&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>关于权限如何选择哪种合适的方案，可以根据自己项目的方案项目，如考虑路由与菜单是否分离</p>
+<p>权限需要前后端结合，前端尽可能的去控制，更多的需要后台判断</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/b-D2eH1mLwL_FkaZwjueSw">https://mp.weixin.qq.com/s/b-D2eH1mLwL_FkaZwjueSw</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000020887109">https://segmentfault.com/a/1190000020887109</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903648057622536#heading-6">https://juejin.cn/post/6844903648057622536#heading-6</a></li>
+<li>@js语音答题社区</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" rel="tag"># vue权限管理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/15149.html" rel="prev" title="在大型项目中如何区分结构和组件">
+      <i class="fa fa-chevron-left"></i> 在大型项目中如何区分结构和组件
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/46596.html" rel="next" title="vue解决跨域问题">
+      vue解决跨域问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">vue权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9Avue%E8%A6%81%E5%81%9A%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E8%AF%A5%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F%E5%A6%82%E6%9E%9C%E6%8E%A7%E5%88%B6%E5%88%B0%E6%8C%89%E9%92%AE%E7%BA%A7%E5%88%AB%E7%9A%84%E6%9D%83%E9%99%90%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">面试官：vue要做权限管理该怎么做？如果控制到按钮级别的权限怎么做？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%A6%82%E4%BD%95%E5%81%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、如何做</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E6%9D%83%E9%99%90"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">接口权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">路由权限控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8F%9C%E5%8D%95%E6%9D%83%E9%99%90"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">菜单权限</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80"><span class="nav-number">1.1.2.3.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C"><span class="nav-number">1.1.2.3.2.</span> <span class="nav-text">方案二</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E9%92%AE%E6%9D%83%E9%99%90"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">按钮权限</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80-1"><span class="nav-number">1.1.2.4.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C-1"><span class="nav-number">1.1.2.4.2.</span> <span class="nav-text">方案二</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>
