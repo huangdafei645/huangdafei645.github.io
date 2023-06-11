@@ -28,7 +28,7 @@
 <meta property="og:description" content="vite的基本使用vite是下一代的前端构建工具 vite是一个法语单词，它的意思就是quick， 翻译过来就是快的意思；vite是一个被强烈建议的web开发工具， 通过ES  module的这种方式来导入。 官网文档地址： https:&#x2F;&#x2F;vitejs.dev&#x2F;guide">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-27T09:28:11.000Z">
-<meta property="article:modified_time" content="2022-12-09T07:47:29.376Z">
+<meta property="article:modified_time" content="2022-12-09T07:47:30.000Z">
 <meta property="article:author" content="coder-Tom">
 <meta property="article:tag" content="vite">
 <meta name="twitter:card" content="summary">
@@ -77,7 +77,7 @@
   </style>
 </noscript>
 
-<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -225,7 +225,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-09 15:47:29" itemprop="dateModified" datetime="2022-12-09T15:47:29+08:00">2022-12-09</time>
+                <time title="修改时间：2022-12-09 15:47:30" itemprop="dateModified" datetime="2022-12-09T15:47:30+08:00">2022-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,43 +248,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="vite的基本使用"><a href="#vite的基本使用" class="headerlink" title="vite的基本使用"></a>vite的基本使用</h1><p>vite是下一代的前端构建工具</p>
+        <html><head><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head><body><h1 id="vite的基本使用"><a href="#vite的基本使用" class="headerlink" title="vite的基本使用"></a>vite的基本使用</h1><p>vite是下一代的前端构建工具</p>
 <p>vite是一个法语单词，它的意思就是quick， 翻译过来就是快的意思；vite是一个被强烈建议的web开发工具， 通过ES  module的这种方式来导入。</p>
 <p>官网文档地址： <a target="_blank" rel="noopener" href="https://vitejs.dev/guide">https://vitejs.dev/guide</a></p>
 <span id="more"></span>
 
 <p>npm : </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm create vite@latest</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm create vite@latest</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
 <p>yarn: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn create vite</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn create vite</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
 <p>pnpm:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pnpm create vite</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pnpm create vite</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
 <p>当然你在创建的时候后面可以加上项目的名字：</p>
 <p>接着根据你的需要在窗口选择不同的选项 ， 这时候虽然是创建了项目， 但是它并没有安装任何的依赖， 这个时候就需要你亲自动手去做。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd your-project</span><br><span class="line">npm install</span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd your-project</span><br><span class="line">npm install</span><br><span class="line">npm run dev</span><br></pre></td></tr></tbody></table></figure>
 
 <p>vite 设计的时候主要是和vue3一起使用的， 但是它也是可以支持其他的框架的，比如说常见的react，想了解的可以去看官方文档， 这里我不多说</p>
 <h2 id="vite的其他搭建方案："><a href="#vite的其他搭建方案：" class="headerlink" title="vite的其他搭建方案："></a>vite的其他搭建方案：</h2><p>这种搭建方案有点像外部的开发服务器的搭建方法，如果你不想等待新版本的释放，你可以自己去克隆一份：</p>
 <p>我们安装官网的步骤来：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/vitejs/vite.git</span><br><span class="line">cd vite</span><br><span class="line">pnpm install 或者是yarn  安装依赖</span><br><span class="line">cd packages/vite</span><br><span class="line">yarn build 先进行项目打包，生成一个dist目录</span><br><span class="line">最后link一下</span><br><span class="line">yarn link </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/vitejs/vite.git</span><br><span class="line">cd vite</span><br><span class="line">pnpm install 或者是yarn  安装依赖</span><br><span class="line">cd packages/vite</span><br><span class="line">yarn build 先进行项目打包，生成一个dist目录</span><br><span class="line">最后link一下</span><br><span class="line">yarn link </span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
 <p>执行完之后， 如果出现了success</p>
 <p>然后：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn link vite</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn link vite</span><br></pre></td></tr></tbody></table></figure>
 
 <p>当终端弹出success之后 ，</p>
 <p>在package.json中把”script“中的test替换成下面的代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;script&quot;: &#123;</span><br><span class="line">	&quot;dev&quot;: &quot;vite&quot;,</span><br><span class="line">	&quot;build&quot;: &quot;vite build&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">"script": {</span><br><span class="line">	"dev": "vite",</span><br><span class="line">	"build": "vite build"</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>这样就是在外部搭建了一个vite，就是把vite作为了一个外部服务器和我自己的项目进行关联， 当然如果你还有一个项目的话， 那么你就可以再进行一次关联</p>
 <h3 id="vite对编译的支持："><a href="#vite对编译的支持：" class="headerlink" title="vite对编译的支持："></a>vite对编译的支持：</h3><p>vite支持importing</p>
 <h3 id="vite支持css和json"><a href="#vite支持css和json" class="headerlink" title="vite支持css和json"></a>vite支持css和json</h3><p>支持css和json热更新</p>
 <h3 id="vite支持Asset-url-handing"><a href="#vite支持Asset-url-handing" class="headerlink" title="vite支持Asset url handing"></a>vite支持Asset url handing</h3><p>有一句重要的话， 就是说所有的使用绝对路径的文档都会copy到dist中去进行哈希化， 就是在生产环境中打包，如果你没有引用这些资源的话， 它是不会被copy的，就像是vue-cli，图片如果小于4kb就自动转化成64位格式</p>
 <h3 id="vite支持postcss"><a href="#vite支持postcss" class="headerlink" title="vite支持postcss"></a>vite支持postcss</h3><p>可以自己去配置</p>
-
+</body></html>
     </div>
 
     
