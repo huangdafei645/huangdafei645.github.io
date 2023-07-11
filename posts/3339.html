@@ -20,22 +20,22 @@
     var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="vue3设计目标与优化面试官：Vue3.0的设计目标是什么？做了哪些优化  一、设计目标不以解决实际业务痛点的更新都是耍流氓，下面我们来列举一下Vue3之前我们或许会面临的问题  随着功能的增长，复杂组件的代码变得越来越难以维护 缺少一种比较「干净」的在多个组件之间提取和复用逻辑的机制 类型推断不够友好 bundle的时间太久了  而 Vue3 经过长达两三年时间的筹备，做了哪些事情？">
+  <meta name="description" content="vue3设计目标与优化面试官：Vue3.0的设计目标是什么？做了哪些优化 一、设计目标不以解决实际业务痛点的更新都是耍流氓，下面我们来列举一下Vue3之前我们或许会面临的问题  随着功能的增长，复杂组件的代码变得越来越难以维护 缺少一种比较「干净」的在多个组件之间提取和复用逻辑的机制 类型推断不够友好 bundle的时间太久了  而 Vue3 经过长达两三年时间的筹备，做了哪些事情？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue3设计目标与优化">
 <meta property="og:url" content="http://huangdafei645.github.io/posts/3339.html">
 <meta property="og:site_name" content="coder-Tom">
-<meta property="og:description" content="vue3设计目标与优化面试官：Vue3.0的设计目标是什么？做了哪些优化  一、设计目标不以解决实际业务痛点的更新都是耍流氓，下面我们来列举一下Vue3之前我们或许会面临的问题  随着功能的增长，复杂组件的代码变得越来越难以维护 缺少一种比较「干净」的在多个组件之间提取和复用逻辑的机制 类型推断不够友好 bundle的时间太久了  而 Vue3 经过长达两三年时间的筹备，做了哪些事情？">
+<meta property="og:description" content="vue3设计目标与优化面试官：Vue3.0的设计目标是什么？做了哪些优化 一、设计目标不以解决实际业务痛点的更新都是耍流氓，下面我们来列举一下Vue3之前我们或许会面临的问题  随着功能的增长，复杂组件的代码变得越来越难以维护 缺少一种比较「干净」的在多个组件之间提取和复用逻辑的机制 类型推断不够友好 bundle的时间太久了  而 Vue3 经过长达两三年时间的筹备，做了哪些事情？">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/3339/3339/image-20221112053446984.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/3339/3339/image-20221112053630601.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/3339/3339/image-20221112053725814.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/3339/image-20221112053446984.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/3339/image-20221112053630601.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/3339/image-20221112053725814.png">
 <meta property="article:published_time" content="2022-11-11T21:32:27.000Z">
-<meta property="article:modified_time" content="2022-12-09T07:55:24.000Z">
+<meta property="article:modified_time" content="2023-07-11T07:16:17.744Z">
 <meta property="article:author" content="coder-Tom">
 <meta property="article:tag" content="vue3设计目标与优化">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://huangdafei645.github.io/posts/3339/3339/image-20221112053446984.png">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/3339/image-20221112053446984.png">
 
 <link rel="canonical" href="http://huangdafei645.github.io/posts/3339.html">
 
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-09 15:55:24" itemprop="dateModified" datetime="2022-12-09T15:55:24+08:00">2022-12-09</time>
+                <time title="修改时间：2023-07-11 15:16:17" itemprop="dateModified" datetime="2023-07-11T15:16:17+08:00">2023-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,8 +252,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <html><head><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head><body><h1 id="vue3设计目标与优化"><a href="#vue3设计目标与优化" class="headerlink" title="vue3设计目标与优化"></a>vue3设计目标与优化</h1><h2 id="面试官：Vue3-0的设计目标是什么？做了哪些优化"><a href="#面试官：Vue3-0的设计目标是什么？做了哪些优化" class="headerlink" title="面试官：Vue3.0的设计目标是什么？做了哪些优化"></a>面试官：Vue3.0的设计目标是什么？做了哪些优化</h2><img src="/posts/3339/3339/image-20221112053446984.png" class="" title="image-20221112053446984">
-
+        <html><head><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head><body><h1 id="vue3设计目标与优化"><a href="#vue3设计目标与优化" class="headerlink" title="vue3设计目标与优化"></a>vue3设计目标与优化</h1><h2 id="面试官：Vue3-0的设计目标是什么？做了哪些优化"><a href="#面试官：Vue3-0的设计目标是什么？做了哪些优化" class="headerlink" title="面试官：Vue3.0的设计目标是什么？做了哪些优化"></a>面试官：Vue3.0的设计目标是什么？做了哪些优化</h2><p><img src="/posts/3339/image-20221112053446984.png" alt="image-20221112053446984"></p>
 <h3 id="一、设计目标"><a href="#一、设计目标" class="headerlink" title="一、设计目标"></a>一、设计目标</h3><p>不以解决实际业务痛点的更新都是耍流氓，下面我们来列举一下<code>Vue3</code>之前我们或许会面临的问题</p>
 <ul>
 <li>随着功能的增长，复杂组件的代码变得越来越难以维护</li>
@@ -305,8 +304,7 @@
 <li>TypeScript</li>
 </ul>
 <h5 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h5><p><code>vue3</code>整个源码是通过 <code>monorepo</code>的方式维护的，根据功能将不同的模块拆分到<code>packages</code>目录下面不同的子目录中</p>
-<img src="/posts/3339/3339/image-20221112053630601.png" class="" title="image-20221112053630601">
-
+<p><img src="/posts/3339/image-20221112053630601.png" alt="image-20221112053630601"></p>
 <p>这样使得模块拆分更细化，职责划分更明确，模块之间的依赖关系也更加明确，开发人员也更容易阅读、理解和更改所有模块源码，提高代码的可维护性</p>
 <p>另外一些 <code>package</code>（比如 <code>reactivity</code> 响应式库）是可以独立于 <code>Vue</code> 使用的，这样用户如果只想使用 <code>Vue3</code>的响应式能力，可以单独依赖这个响应式库而不用去依赖整个 <code>Vue</code></p>
 <h5 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h5><p><code>Vue3</code>是基于<code>typeScript</code>编写的，提供了更好的类型检查，能支持复杂的类型推导</p>
@@ -333,8 +331,7 @@
 <li>优化逻辑复用</li>
 </ul>
 <h5 id="逻辑组织"><a href="#逻辑组织" class="headerlink" title="逻辑组织"></a>逻辑组织</h5><p>一张图，我们可以很直观地感受到 <code>Composition API</code>在逻辑组织方面的优势</p>
-<img src="/posts/3339/3339/image-20221112053725814.png" class="" title="image-20221112053725814">
-
+<p><img src="/posts/3339/image-20221112053725814.png" alt="image-20221112053725814"></p>
 <p>相同功能的代码编写在一块，而不像<code>options API</code>那样，各个功能的代码混成一块</p>
 <h5 id="逻辑复用"><a href="#逻辑复用" class="headerlink" title="逻辑复用"></a>逻辑复用</h5><p>在<code>vue2</code>中，我们是通过<code>mixin</code>实现功能混合，如果多个<code>mixin</code>混合，会存在两个非常明显的问题：命名冲突和数据来源不清晰</p>
 <p>而通过<code>composition</code>这种形式，可以将一些复用的代码抽离出来作为一个函数，只要的使用的地方直接进行调用即可</p>
