@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangdafei645.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="用vue封装一个poemCard组件写这个组件的目的是碰巧我遇到一位写诗非常厉害的朋友， 我非常喜欢他的诗， 不知从什么时候开始， 我开始喜欢和他聊天， 和他聊天每次都学到新东西。于是我自己就用为他写了一个poemcard组件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用vue封装一个poemCard组件">
+<meta property="og:url" content="http://huangdafei645.github.io/posts/d38721c4.html">
+<meta property="og:site_name" content="coder-Tom">
+<meta property="og:description" content="用vue封装一个poemCard组件写这个组件的目的是碰巧我遇到一位写诗非常厉害的朋友， 我非常喜欢他的诗， 不知从什么时候开始， 我开始喜欢和他聊天， 和他聊天每次都学到新东西。于是我自己就用为他写了一个poemcard组件。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/d38721c4/image-20230717094251593.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/d38721c4/image-20230717094336285.png">
+<meta property="article:published_time" content="2023-07-17T01:39:52.000Z">
+<meta property="article:modified_time" content="2023-07-17T01:53:07.377Z">
+<meta property="article:author" content="coder-Tom">
+<meta property="article:tag" content="用vue封装一个poemCard组件">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/d38721c4/image-20230717094251593.png">
+
+<link rel="canonical" href="http://huangdafei645.github.io/posts/d38721c4.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>用vue封装一个poemCard组件 | coder-Tom</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">coder-Tom</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个喜欢代码， 音乐，读书， 跑步， 记录生活的程序员</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/d38721c4.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用vue封装一个poemCard组件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-17 09:39:52 / 修改时间：09:53:07" itemprop="dateCreated datePublished" datetime="2023-07-17T09:39:52+08:00">2023-07-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head><body><h1 id="用vue封装一个poemCard组件"><a href="#用vue封装一个poemCard组件" class="headerlink" title="用vue封装一个poemCard组件"></a>用vue封装一个poemCard组件</h1><p>写这个组件的目的是碰巧我遇到一位写诗非常厉害的朋友， 我非常喜欢他的诗， 不知从什么时候开始， 我开始喜欢和他聊天， 和他聊天每次都学到新东西。于是我自己就用为他写了一个poemcard组件。</p>
+<span id="more"></span>
+
+<p>废话不多说， 我们先来看看效果：</p>
+<p><img src="/posts/d38721c4/image-20230717094251593.png" alt="image-20230717094251593"></p>
+<p><img src="/posts/d38721c4/image-20230717094336285.png" alt="image-20230717094336285"></p>
+<p>接下来，我们来看看代码（组件代码）：</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line"><span class="keyword">import</span> { ref, onMounted} <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span>  <span class="title function_">openTab</span> = (<span class="params">evt, tab</span>) =&gt; {</span><br><span class="line">	<span class="keyword">var</span> i, tabcontent, tablinks;</span><br><span class="line">	tabcontent = <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">"content__inner"</span>);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; tabcontent.<span class="property">length</span>; i++) {</span><br><span class="line">		tabcontent[i].<span class="property">style</span>.<span class="property">display</span> = <span class="string">"none"</span>;</span><br><span class="line">	}</span><br><span class="line">	tablinks = <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">"tab"</span>);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; tablinks.<span class="property">length</span>; i++) {</span><br><span class="line">		tablinks[i].<span class="property">className</span> = tablinks[i].<span class="property">className</span>.<span class="title function_">replace</span>(<span class="string">" active"</span>, <span class="string">""</span>);</span><br><span class="line">	}</span><br><span class="line">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(tab).<span class="property">style</span>.<span class="property">display</span> = <span class="string">"block"</span>;</span><br><span class="line">	evt.<span class="property">currentTarget</span>.<span class="property">className</span> += <span class="string">" active"</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//Horizontal scroll for the tabs on mousewheel. If tabs are longer than the content section, there's a scroll bar but it's hidden to retain the design.</span></span><br><span class="line"><span class="comment">// if (window.innerWidth &gt; 800) {</span></span><br><span class="line"><span class="comment">// 	const scrollContainer = document.querySelector(".tabs");</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 	scrollContainer.addEventListener("wheel", (evt) =&gt; {</span></span><br><span class="line"><span class="comment">// 		evt.preventDefault();</span></span><br><span class="line"><span class="comment">// 		scrollContainer.scrollLeft += evt.deltaY;</span></span><br><span class="line"><span class="comment">// 	});</span></span><br><span class="line"><span class="comment">// }</span></span><br><span class="line"><span class="keyword">const</span> scrollContainer = <span class="title function_">ref</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_">onMounted</span>(<span class="function">() =&gt;</span> {</span><br><span class="line">    <span class="keyword">const</span> link1 = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">'link'</span>);</span><br><span class="line">      link1.<span class="property">rel</span> = <span class="string">'preconnect'</span>;</span><br><span class="line">      link1.<span class="property">href</span> = <span class="string">'https://fonts.googleapis.com'</span>;</span><br><span class="line">      <span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(link1);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> link2 = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">'link'</span>);</span><br><span class="line">      link2.<span class="property">rel</span> = <span class="string">'preconnect'</span>;</span><br><span class="line">      link2.<span class="property">href</span> = <span class="string">'https://fonts.gstatic.com'</span>;</span><br><span class="line">      link2.<span class="title function_">setAttribute</span>(<span class="string">'crossorigin'</span>, <span class="string">''</span>);</span><br><span class="line">      <span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(link2);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> link3 = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">'link'</span>);</span><br><span class="line">      link3.<span class="property">href</span> = <span class="string">'https://fonts.googleapis.com/css2?family=Patrick+Hand&amp;family=Yomogi&amp;display=swap'</span>;</span><br><span class="line">      link3.<span class="property">rel</span> = <span class="string">'stylesheet'</span>;</span><br><span class="line">      <span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(link3);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> link4 = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">'link'</span>);</span><br><span class="line">      link4.<span class="property">rel</span> = <span class="string">'stylesheet'</span>;</span><br><span class="line">      link4.<span class="property">href</span> = <span class="string">'https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'</span>;</span><br><span class="line">      <span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(link4);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> link5 = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">'link'</span>);</span><br><span class="line">      link5.<span class="property">rel</span> = <span class="string">'stylesheet'</span>;</span><br><span class="line">      link5.<span class="property">href</span> = <span class="string">'./style.css'</span>;</span><br><span class="line">      <span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(link5);</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">innerWidth</span> &gt; <span class="number">800</span>) {</span><br><span class="line">    scrollContainer.<span class="property">value</span>.<span class="title function_">addEventListener</span>(<span class="string">'wheel'</span>, <span class="function">(<span class="params">evt</span>) =&gt;</span> {</span><br><span class="line">        evt.<span class="title function_">preventDefault</span>();</span><br><span class="line">        scrollContainer.<span class="property">value</span>.<span class="property">scrollLeft</span> += evt.<span class="property">deltaY</span>;</span><br><span class="line">    });</span><br><span class="line">    }</span><br><span class="line">});</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"> <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"variation"</span> <span class="attr">id</span>=<span class="string">"solid"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">name</span>=<span class="string">"border"</span> <span class="attr">checked</span>=<span class="string">"checked"</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"solid"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"circle"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>默认<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"variation"</span> <span class="attr">id</span>=<span class="string">"shadow"</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">"2"</span> <span class="attr">name</span>=<span class="string">"border"</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"shadow"</span>&gt;</span> <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"circle"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>更换主题<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"folder"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tabs"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"tab active"</span> @<span class="attr">click</span>=<span class="string">"openTab(event, 'tab-1')"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>诗词<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"tab"</span> @<span class="attr">click</span>=<span class="string">"openTab(event, 'tab-2')"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>对联<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"tab"</span> @<span class="attr">click</span>=<span class="string">"openTab(event, 'tab-3')"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>诗歌<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"tab"</span> @<span class="attr">click</span>=<span class="string">"openTab(event, 'tab-4')"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>更多<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content__inner"</span> <span class="attr">id</span>=<span class="string">"tab-1"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"page"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>分享几句朋友写的诗：<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>你是光影间的一处声浪，逆光的落点捎带一场谎<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>就是一个人站在逆光的地方，看不清长什么样，人们好奇就会去猜测（声浪），我们目光看过去的时候就会放在人的脸或者身上（落点）  ，然后我们想象她到底长什么样子，我们就希望长这样，是靠我们想象的不是真的长这样（谎）<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>当然其中的你 是我写的想象的对象<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content__inner"</span> <span class="attr">id</span>=<span class="string">"tab-2"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"page"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>I love cheese, especially the big cheese gouda. Monterey jack red leicester roquefort cheese and wine fromage frais smelly cheese melted cheese dolcelatte. Fromage smelly cheese manchego paneer cheese and wine danish fontina macaroni cheese red leicester. <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Stilton fondue queso emmental when the cheese comes out everybody's happy croque monsieur queso paneer. Say cheese pecorino swiss boursin halloumi cottage cheese taleggio boursin. <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content__inner"</span> <span class="attr">id</span>=<span class="string">"tab-3"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"page"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>春风折好‮我了‬给你写的信，留给每个路过‮人的‬一首诗<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>夏日偷看了我‮你给‬写的信，蓝‮白天‬云日落‮时‬一眼深情<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>落叶弄丢‮我了‬给你‮的写‬信，惆怅‮努在‬力配合我的足音<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>晴雪听说了‮给我‬你写的信，以身犯险有关‮你于‬的细节<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        </span></span><br><span class="line"><span class="language-xml">        </span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content__inner"</span> <span class="attr">id</span>=<span class="string">"tab-4"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"page"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Miaow then turn around and show you my bum flee in terror at cucumber discovered on floor. Terrorize the hundred-and-twenty-pound rottweiler and steal his bed, not sorry sleep on dog bed, force dog to sleep on floor and grab pompom in mouth and put in water dish cats are fats i like to pets them they like to meow back present belly, scratch hand when stroked. <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Bleghbleghvomit my furball really tie the room together love asdflkjaertvlkjasntvkjn (sits on keyboard) but bawl under human beds.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"scss"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">* {</span></span><br><span class="line"><span class="language-xml">	box-sizing: border-box;</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">:root {</span></span><br><span class="line"><span class="language-xml">	--background: #f9d877;</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">body {</span></span><br><span class="line"><span class="language-xml">	padding: 4rem 2rem 2rem;</span></span><br><span class="line"><span class="language-xml">	min-height: 100vh;</span></span><br><span class="line"><span class="language-xml">	background: linear-gradient(to bottom right, rgb(173, 83, 137), rgb(60, 16, 83));</span></span><br><span class="line"><span class="language-xml">	font-size: 1.2rem;</span></span><br><span class="line"><span class="language-xml">	font-family: "Patrick Hand";</span></span><br><span class="line"><span class="language-xml">	display: grid;</span></span><br><span class="line"><span class="language-xml">	grid: 2rem auto / repeat(2, 50%);</span></span><br><span class="line"><span class="language-xml">	grid-column-gap: 2rem;</span></span><br><span class="line"><span class="language-xml">	justify-content: center;</span></span><br><span class="line"><span class="language-xml">	width: 100%;</span></span><br><span class="line"><span class="language-xml">	.folder {</span></span><br><span class="line"><span class="language-xml">		grid-column: 1 / -1;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">p {</span></span><br><span class="line"><span class="language-xml">	margin-bottom: 1rem;</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">.tab {</span></span><br><span class="line"><span class="language-xml">	font-family: "Patrick Hand";</span></span><br><span class="line"><span class="language-xml">	text-transform: uppercase;</span></span><br><span class="line"><span class="language-xml">	line-height: 0.8;</span></span><br><span class="line"><span class="language-xml">	display: inline-block;</span></span><br><span class="line"><span class="language-xml">	margin-left: -35px;</span></span><br><span class="line"><span class="language-xml">	filter: drop-shadow(0px -3px 2px rgba(0, 0, 0, 0.05));</span></span><br><span class="line"><span class="language-xml">	border: none;</span></span><br><span class="line"><span class="language-xml">	border-radius: 6px 6px 0 0;</span></span><br><span class="line"><span class="language-xml">	position: relative;</span></span><br><span class="line"><span class="language-xml">	margin-right: 4rem;</span></span><br><span class="line"><span class="language-xml">	background: var(--background);</span></span><br><span class="line"><span class="language-xml">	white-space: nowrap;</span></span><br><span class="line"><span class="language-xml">	cursor: pointer;</span></span><br><span class="line"><span class="language-xml">	background: var(--background);</span></span><br><span class="line"><span class="language-xml">	&amp;:focus {</span></span><br><span class="line"><span class="language-xml">		outline: none;</span></span><br><span class="line"><span class="language-xml">		span {</span></span><br><span class="line"><span class="language-xml">			border-bottom: 2px solid;</span></span><br><span class="line"><span class="language-xml">			border-radius: 0;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	&amp;:first-of-type {</span></span><br><span class="line"><span class="language-xml">		margin-left: 30px;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	div {</span></span><br><span class="line"><span class="language-xml">		background: var(--background);</span></span><br><span class="line"><span class="language-xml">		padding: 6px 0;</span></span><br><span class="line"><span class="language-xml">		position: relative;</span></span><br><span class="line"><span class="language-xml">		z-index: 10;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	span {</span></span><br><span class="line"><span class="language-xml">		display: inline-block;</span></span><br><span class="line"><span class="language-xml">		border: 2px solid transparent;</span></span><br><span class="line"><span class="language-xml">		padding: 6px 15px 6px;</span></span><br><span class="line"><span class="language-xml">		border-radius: 5px;</span></span><br><span class="line"><span class="language-xml">		z-index: 5;</span></span><br><span class="line"><span class="language-xml">		position: relative;</span></span><br><span class="line"><span class="language-xml">		font-size: 140%;</span></span><br><span class="line"><span class="language-xml">		color: #fff;</span></span><br><span class="line"><span class="language-xml">		min-width: 6rem;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	&amp;:before,</span></span><br><span class="line"><span class="language-xml">	&amp;:after {</span></span><br><span class="line"><span class="language-xml">		content: "";</span></span><br><span class="line"><span class="language-xml">		height: 100%;</span></span><br><span class="line"><span class="language-xml">		position: absolute;</span></span><br><span class="line"><span class="language-xml">		background: var(--background);</span></span><br><span class="line"><span class="language-xml">		border-radius: 8px 8px 0 0;</span></span><br><span class="line"><span class="language-xml">		width: 30px;</span></span><br><span class="line"><span class="language-xml">		top: 0;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	&amp;:before {</span></span><br><span class="line"><span class="language-xml">		right: -16px;</span></span><br><span class="line"><span class="language-xml">		transform: skew(25deg);</span></span><br><span class="line"><span class="language-xml">		border-radius: 0 8px 0 0;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	&amp;:after {</span></span><br><span class="line"><span class="language-xml">		transform: skew(-25deg);</span></span><br><span class="line"><span class="language-xml">		left: -16px;</span></span><br><span class="line"><span class="language-xml">		border-radius: 8px 0 0 0;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	&amp;.active {</span></span><br><span class="line"><span class="language-xml">		z-index: 50;</span></span><br><span class="line"><span class="language-xml">		position: relative;</span></span><br><span class="line"><span class="language-xml">		span {</span></span><br><span class="line"><span class="language-xml">			background: white;</span></span><br><span class="line"><span class="language-xml">			box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);</span></span><br><span class="line"><span class="language-xml">			border-radius: 5px;</span></span><br><span class="line"><span class="language-xml">			color: black;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">.content {</span></span><br><span class="line"><span class="language-xml">	border-radius: 10px;</span></span><br><span class="line"><span class="language-xml">	position: relative;</span></span><br><span class="line"><span class="language-xml">	width: 100%;</span></span><br><span class="line"><span class="language-xml">	#tab-1 {</span></span><br><span class="line"><span class="language-xml">		display: block;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	&amp;:before {</span></span><br><span class="line"><span class="language-xml">		content: "";</span></span><br><span class="line"><span class="language-xml">		width: 100%;</span></span><br><span class="line"><span class="language-xml">		height: 100%;</span></span><br><span class="line"><span class="language-xml">		position: absolute;</span></span><br><span class="line"><span class="language-xml">		z-index: -1;</span></span><br><span class="line"><span class="language-xml">		top: 0;</span></span><br><span class="line"><span class="language-xml">		left: 0;</span></span><br><span class="line"><span class="language-xml">		border-radius: inherit;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	&amp;__inner {</span></span><br><span class="line"><span class="language-xml">		font-family: "Yomogi", sans-serif;</span></span><br><span class="line"><span class="language-xml">		display: none;</span></span><br><span class="line"><span class="language-xml">		background: var(--background);</span></span><br><span class="line"><span class="language-xml">		border-radius: inherit;</span></span><br><span class="line"><span class="language-xml">		padding: 1rem;</span></span><br><span class="line"><span class="language-xml">		filter: drop-shadow(0px -2px 2px rgba(0, 0, 0, 0.1));</span></span><br><span class="line"><span class="language-xml">		z-index: 5;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">.folder {</span></span><br><span class="line"><span class="language-xml">	margin: 1rem auto;</span></span><br><span class="line"><span class="language-xml">	max-width: 50rem;</span></span><br><span class="line"><span class="language-xml">	width: 100%;</span></span><br><span class="line"><span class="language-xml">	scrollbar-height: none; /* Firefox */</span></span><br><span class="line"><span class="language-xml">	-ms-overflow-style: none; /* IE 10+ */</span></span><br><span class="line"><span class="language-xml">	::-webkit-scrollbar {</span></span><br><span class="line"><span class="language-xml">		background: transparent; /* Chrome/Safari/Webkit */</span></span><br><span class="line"><span class="language-xml">		display: none;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">.page {</span></span><br><span class="line"><span class="language-xml">	padding: 1.5rem;</span></span><br><span class="line"><span class="language-xml">	border-radius: 2px;</span></span><br><span class="line"><span class="language-xml">	min-height: 20rem;</span></span><br><span class="line"><span class="language-xml">	line-height: 160%;</span></span><br><span class="line"><span class="language-xml">	background-color: #f9f9f9;</span></span><br><span class="line"><span class="language-xml">	filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15));</span></span><br><span class="line"><span class="language-xml">	background-image: linear-gradient(#e4e4e4 1px, transparent 1px);</span></span><br><span class="line"><span class="language-xml">	background-size: 8% 8%, 2px 2px;</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">.tabs {</span></span><br><span class="line"><span class="language-xml">	padding: 2rem 0 0 0;</span></span><br><span class="line"><span class="language-xml">	width: 100%;</span></span><br><span class="line"><span class="language-xml">	margin: 0 0.5rem;</span></span><br><span class="line"><span class="language-xml">	overflow-x: auto;</span></span><br><span class="line"><span class="language-xml">	width: calc(100% - 1rem);</span></span><br><span class="line"><span class="language-xml">	white-space: nowrap;</span></span><br><span class="line"><span class="language-xml">	@media(min-width: 50rem) {</span></span><br><span class="line"><span class="language-xml">		margin: 0 2rem;</span></span><br><span class="line"><span class="language-xml">		width: calc(100% - 4rem);</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">#solid:checked ~ .folder {</span></span><br><span class="line"><span class="language-xml">	.tab,</span></span><br><span class="line"><span class="language-xml">	.content__inner {</span></span><br><span class="line"><span class="language-xml">		&amp;:nth-of-type(1) {</span></span><br><span class="line"><span class="language-xml">			--background: #af4d98;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">		&amp;:nth-of-type(2) {</span></span><br><span class="line"><span class="language-xml">			--background: #d66ba0;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">		&amp;:nth-of-type(3) {</span></span><br><span class="line"><span class="language-xml">			--background: #e5a9a9;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">		&amp;:nth-of-type(4) {</span></span><br><span class="line"><span class="language-xml">			--background: #6cb6bb;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	.tab {</span></span><br><span class="line"><span class="language-xml">		border: 2px solid;</span></span><br><span class="line"><span class="language-xml">		border-width: 2px 0 0;</span></span><br><span class="line"><span class="language-xml">		&amp;:before,</span></span><br><span class="line"><span class="language-xml">		&amp;:after {</span></span><br><span class="line"><span class="language-xml">			top: -2px;</span></span><br><span class="line"><span class="language-xml">			border-top: 2px solid;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">		&amp;:before {</span></span><br><span class="line"><span class="language-xml">			border-right: 2px solid;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">		&amp;:after {</span></span><br><span class="line"><span class="language-xml">			border-left: 2px solid;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">		&amp;.active {</span></span><br><span class="line"><span class="language-xml">			span {</span></span><br><span class="line"><span class="language-xml">				border: 2px solid;</span></span><br><span class="line"><span class="language-xml">			}</span></span><br><span class="line"><span class="language-xml">			&amp;:focus span {</span></span><br><span class="line"><span class="language-xml">				outline: 1px solid rgba(255, 255, 255, 0.7);</span></span><br><span class="line"><span class="language-xml">			}</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">		&amp;:not(.active) {</span></span><br><span class="line"><span class="language-xml">			border-bottom: 2px solid;</span></span><br><span class="line"><span class="language-xml">			&amp;:before,</span></span><br><span class="line"><span class="language-xml">			&amp;:after {</span></span><br><span class="line"><span class="language-xml">				box-shadow: 0 1.5px 0 black;</span></span><br><span class="line"><span class="language-xml">			}</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	.content {</span></span><br><span class="line"><span class="language-xml">		top: -2px;</span></span><br><span class="line"><span class="language-xml">		left: -2px;</span></span><br><span class="line"><span class="language-xml">		&amp;__inner {</span></span><br><span class="line"><span class="language-xml">			box-shadow: 0 0 0 1.5px black;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	.page {</span></span><br><span class="line"><span class="language-xml">		border: 2px solid;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">#shadow:checked ~ .folder {</span></span><br><span class="line"><span class="language-xml">	.tab {</span></span><br><span class="line"><span class="language-xml">		--background: linear-gradient(to bottom, #fee9a5, #f9d877);</span></span><br><span class="line"><span class="language-xml">		span {</span></span><br><span class="line"><span class="language-xml">			color: black;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">		&amp;:focus span {</span></span><br><span class="line"><span class="language-xml">			border-bottom-color: black;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">		&amp;.active:focus span {</span></span><br><span class="line"><span class="language-xml">			border-color: black;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	.content__inner {</span></span><br><span class="line"><span class="language-xml">		--background: linear-gradient(to bottom, #f9d877, #fee9a5);</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">/* radio buttons styling */</span></span><br><span class="line"><span class="language-xml">input.variation {</span></span><br><span class="line"><span class="language-xml">	display: none;</span></span><br><span class="line"><span class="language-xml">	+ label {</span></span><br><span class="line"><span class="language-xml">		display: flex;</span></span><br><span class="line"><span class="language-xml">		column-gap: 10px;</span></span><br><span class="line"><span class="language-xml">		align-items: center;</span></span><br><span class="line"><span class="language-xml">		cursor: pointer;</span></span><br><span class="line"><span class="language-xml">		color: white;</span></span><br><span class="line"><span class="language-xml">		.circle {</span></span><br><span class="line"><span class="language-xml">			width: 25px;</span></span><br><span class="line"><span class="language-xml">			height: 25px;</span></span><br><span class="line"><span class="language-xml">			border-radius: 50%;</span></span><br><span class="line"><span class="language-xml">			border: 3px solid white;</span></span><br><span class="line"><span class="language-xml">		}</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	&amp;:checked + label .circle {</span></span><br><span class="line"><span class="language-xml">		background: white;</span></span><br><span class="line"><span class="language-xml">		box-shadow: inset 0 0 0 3px #3c1053;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">	&amp;:nth-of-type(1) + label {</span></span><br><span class="line"><span class="language-xml">		justify-self: flex-end;</span></span><br><span class="line"><span class="language-xml">	}</span></span><br><span class="line"><span class="language-xml">}</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<p>我们来看看package.json中的devDependencies配置项：</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">"devDependencies"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"@vitejs/plugin-vue"</span><span class="punctuation">:</span> <span class="string">"^4.2.3"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sass"</span><span class="punctuation">:</span> <span class="string">"^1.63.6"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"sass-loader"</span><span class="punctuation">:</span> <span class="string">"^13.3.2"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"vite"</span><span class="punctuation">:</span> <span class="string">"^4.4.0"</span></span><br><span class="line"> <span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>由于我的项目平时vue3 + vite 创建的， vue3中项目已经不需要再使用node-sass， 我的样式部分也是用sass写的， 这样确实比之前方便的多！</p>
+<p>喜欢就点个赞再走叭~</p>
+</body></html>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%A8vue%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AApoemCard%E7%BB%84%E4%BB%B6/" rel="tag"># 用vue封装一个poemCard组件</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3ebe0fba.html" rel="prev" title="vue中的nextTick的理解">
+      <i class="fa fa-chevron-left"></i> vue中的nextTick的理解
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzMxMy8zMzc3Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8vue%E5%B0%81%E8%A3%85%E4%B8%80%E4%B8%AApoemCard%E7%BB%84%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">用vue封装一个poemCard组件</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="coder-Tom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">coder-Tom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">99</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangdafei645" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangdafei645" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1635482898@qq.com" title="E-Mail → mailto:1635482898@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/@huangdafei11" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;@huangdafei11" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/Dafei%20Huang" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;Dafei Huang" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coder-Tom</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '84px',
+  right: 'unset',
+  left: '22px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>
