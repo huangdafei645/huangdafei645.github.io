@@ -27,16 +27,16 @@
 <meta property="og:site_name" content="coder-Tom">
 <meta property="og:description" content="js类型转换机制面试官：谈谈 JavaScript 中的类型转换机制 一、概述前面我们讲到，JS中有六种简单数据类型：undefined、null、boolean、string、number、symbol，以及引用类型：object 但是我们在声明的时候只有一种数据类型，只有到运行期间才会确定当前类型">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/2abd00a0-6692-11eb-85f6-6fac77c0c9b3.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/915b7300-6692-11eb-ab90-d9ae814b240d.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/48dd8eb0-6692-11eb-85f6-6fac77c0c9b3.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/53bdad10-6692-11eb-ab90-d9ae814b240d.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/17077/2abd00a0-6692-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/17077/915b7300-6692-11eb-ab90-d9ae814b240d.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/17077/48dd8eb0-6692-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/17077/53bdad10-6692-11eb-ab90-d9ae814b240d.png">
 <meta property="article:published_time" content="2022-12-01T02:27:50.000Z">
 <meta property="article:modified_time" content="2023-07-11T07:13:45.731Z">
 <meta property="article:author" content="coder-Tom">
 <meta property="article:tag" content="js类型转换机制">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://huangdafei645.github.io/posts/2abd00a0-6692-11eb-85f6-6fac77c0c9b3.png">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/17077/2abd00a0-6692-11eb-85f6-6fac77c0c9b3.png">
 
 <link rel="canonical" href="http://huangdafei645.github.io/posts/17077.html">
 
@@ -253,7 +253,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="js类型转换机制"><a href="#js类型转换机制" class="headerlink" title="js类型转换机制"></a>js类型转换机制</h1><h1 id="面试官：谈谈-JavaScript-中的类型转换机制"><a href="#面试官：谈谈-JavaScript-中的类型转换机制" class="headerlink" title="面试官：谈谈 JavaScript 中的类型转换机制"></a>面试官：谈谈 JavaScript 中的类型转换机制</h1><p><img src="2abd00a0-6692-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
+        <h1 id="js类型转换机制"><a href="#js类型转换机制" class="headerlink" title="js类型转换机制"></a>js类型转换机制</h1><h1 id="面试官：谈谈-JavaScript-中的类型转换机制"><a href="#面试官：谈谈-JavaScript-中的类型转换机制" class="headerlink" title="面试官：谈谈 JavaScript 中的类型转换机制"></a>面试官：谈谈 JavaScript 中的类型转换机制</h1><p><img src="/posts/17077/2abd00a0-6692-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
 <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>前面我们讲到，<code>JS</code>中有六种简单数据类型：<code>undefined</code>、<code>null</code>、<code>boolean</code>、<code>string</code>、<code>number</code>、<code>symbol</code>，以及引用类型：<code>object</code></p>
 <p>但是我们在声明的时候只有一种数据类型，只有到运行期间才会确定当前类型</p>
 <span id="more"></span>
@@ -276,7 +276,7 @@
 </ul>
 <h3 id="Number"><a href="#Number" class="headerlink" title="Number()"></a>Number()</h3><p>将任意类型的值转化为数值</p>
 <p>先给出类型转换规则：</p>
-<p><img src="915b7300-6692-11eb-ab90-d9ae814b240d.png" alt="img"></p>
+<p><img src="/posts/17077/915b7300-6692-11eb-ab90-d9ae814b240d.png" alt="img"></p>
 <p>实践一下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Number</span>(<span class="number">324</span>) <span class="comment">// 324</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串：如果可以被解析为数值，则转换为相应的数值</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&#x27;324&#x27;</span>) <span class="comment">// 324</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串：如果不可以被解析为数值，返回 NaN</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&#x27;324abc&#x27;</span>) <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 空字符串转为0</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="string">&#x27;&#x27;</span>) <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 布尔值：true 转成 1，false 转成 0</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">true</span>) <span class="comment">// 1</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">false</span>) <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined：转成 NaN</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">undefined</span>) <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// null：转成0</span></span><br><span class="line"><span class="title class_">Number</span>(<span class="literal">null</span>) <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象：通常转换成NaN(除了只包含单个数值的数组)</span></span><br><span class="line"><span class="title class_">Number</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;) <span class="comment">// NaN</span></span><br><span class="line"><span class="title class_">Number</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) <span class="comment">// NaN</span></span><br><span class="line"><span class="title class_">Number</span>([<span class="number">5</span>]) <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
 
@@ -286,12 +286,12 @@
 
 <h3 id="String"><a href="#String" class="headerlink" title="String()"></a>String()</h3><p>可以将任意类型的值转化成字符串</p>
 <p>给出转换规则图：</p>
-<p><img src="48dd8eb0-6692-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
+<p><img src="/posts/17077/48dd8eb0-6692-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
 <p>实践一下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数值：转为相应的字符串</span></span><br><span class="line"><span class="title class_">String</span>(<span class="number">1</span>) <span class="comment">// &quot;1&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串：转换后还是原来的值</span></span><br><span class="line"><span class="title class_">String</span>(<span class="string">&quot;a&quot;</span>) <span class="comment">// &quot;a&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//布尔值：true转为字符串&quot;true&quot;，false转为字符串&quot;false&quot;</span></span><br><span class="line"><span class="title class_">String</span>(<span class="literal">true</span>) <span class="comment">// &quot;true&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//undefined：转为字符串&quot;undefined&quot;</span></span><br><span class="line"><span class="title class_">String</span>(<span class="literal">undefined</span>) <span class="comment">// &quot;undefined&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//null：转为字符串&quot;null&quot;</span></span><br><span class="line"><span class="title class_">String</span>(<span class="literal">null</span>) <span class="comment">// &quot;null&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//对象</span></span><br><span class="line"><span class="title class_">String</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;) <span class="comment">// &quot;[object Object]&quot;</span></span><br><span class="line"><span class="title class_">String</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) <span class="comment">// &quot;1,2,3&quot;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean()"></a>Boolean()</h3><p>可以将任意类型的值转为布尔值，转换规则如下：</p>
-<p><img src="53bdad10-6692-11eb-ab90-d9ae814b240d.png" alt="img"></p>
+<p><img src="/posts/17077/53bdad10-6692-11eb-ab90-d9ae814b240d.png" alt="img"></p>
 <p>实践一下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Boolean</span>(<span class="literal">undefined</span>) <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="literal">null</span>) <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="number">0</span>) <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="title class_">NaN</span>) <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="string">&#x27;&#x27;</span>) <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Boolean</span>(&#123;&#125;) <span class="comment">// true</span></span><br><span class="line"><span class="title class_">Boolean</span>([]) <span class="comment">// true</span></span><br><span class="line"><span class="title class_">Boolean</span>(<span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="literal">false</span>)) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
@@ -426,7 +426,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

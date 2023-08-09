@@ -189,91 +189,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/43499.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="coder-Tom">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="coder-Tom">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/43499.html" class="post-title-link" itemprop="url">data属性为什么是一个函数并非对象</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-17 05:52:45" itemprop="dateCreated datePublished" datetime="2022-10-17T05:52:45+08:00">2022-10-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-11 15:12:50" itemprop="dateModified" datetime="2023-07-11T15:12:50+08:00">2023-07-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="面试官：为什么data属性是一个函数而不是一个对象？"><a href="#面试官：为什么data属性是一个函数而不是一个对象？" class="headerlink" title="面试官：为什么data属性是一个函数而不是一个对象？"></a>面试官：为什么data属性是一个函数而不是一个对象？</h1><p><img src="image-20221017055354871.png" alt="image-20221017055354871"></p>
-<h2 id="一、实例和组件定义data的区别"><a href="#一、实例和组件定义data的区别" class="headerlink" title="一、实例和组件定义data的区别"></a>一、实例和组件定义data的区别</h2><p><code>vue</code>实例的时候定义<code>data</code>属性既可以是一个对象，也可以是一个函数</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>:<span class="string">&quot;#app&quot;</span>,</span><br><span class="line">    <span class="comment">// 对象格式</span></span><br><span class="line">    <span class="attr">data</span>:&#123;</span><br><span class="line">        <span class="attr">foo</span>:<span class="string">&quot;foo&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 函数格式</span></span><br><span class="line">    <span class="title function_">data</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">             <span class="attr">foo</span>:<span class="string">&quot;foo&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>组件中定义<code>data</code>属性，只能是一个函数</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/43499.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/30272.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -328,7 +243,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="SPA首屏加载慢怎么办？"><a href="#SPA首屏加载慢怎么办？" class="headerlink" title="SPA首屏加载慢怎么办？"></a>SPA首屏加载慢怎么办？</h1><h2 id="面试官：SPA首屏加载速度慢的怎么解决？"><a href="#面试官：SPA首屏加载速度慢的怎么解决？" class="headerlink" title="面试官：SPA首屏加载速度慢的怎么解决？"></a>面试官：SPA首屏加载速度慢的怎么解决？</h2><p><img src="image-20221016063624694.png" alt="image-20221016063624694"></p>
+          <h1 id="SPA首屏加载慢怎么办？"><a href="#SPA首屏加载慢怎么办？" class="headerlink" title="SPA首屏加载慢怎么办？"></a>SPA首屏加载慢怎么办？</h1><h2 id="面试官：SPA首屏加载速度慢的怎么解决？"><a href="#面试官：SPA首屏加载速度慢的怎么解决？" class="headerlink" title="面试官：SPA首屏加载速度慢的怎么解决？"></a>面试官：SPA首屏加载速度慢的怎么解决？</h2><p><img src="/posts/30272/image-20221016063624694.png" alt="image-20221016063624694"></p>
 <h3 id="一、什么是首屏加载"><a href="#一、什么是首屏加载" class="headerlink" title="一、什么是首屏加载"></a>一、什么是首屏加载</h3><p>首屏时间（First Contentful Paint），指的是浏览器从响应用户输入网址地址，到首屏内容渲染完成的时间，此时整个网页不一定要全部渲染完成，但需要展示当前视窗需要的内容</p>
 <p>首屏加载可以说是用户体验中<strong>最重要</strong>的环节</p>
           <!--noindex-->
@@ -494,7 +409,7 @@
 
       
           <h1 id="vue3-ref的用法解析"><a href="#vue3-ref的用法解析" class="headerlink" title="vue3_ref的用法解析"></a>vue3_ref的用法解析</h1><h2 id="ref是干什么的？"><a href="#ref是干什么的？" class="headerlink" title="ref是干什么的？"></a>ref是干什么的？</h2><p>我们知道， vue2是这样配置响应式的：</p>
-<p><img src="image-20221015081038182.png" alt="image-20221015081038182"></p>
+<p><img src="/posts/19895/image-20221015081038182.png" alt="image-20221015081038182"></p>
 <p>而在vue3中， 我们可以使用ref来配置响应式：</p>
           <!--noindex-->
             <div class="post-button">
@@ -657,7 +572,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="v-if和v-show不能一起使用"><a href="#v-if和v-show不能一起使用" class="headerlink" title="v-if和v-show不能一起使用"></a>v-if和v-show不能一起使用</h1><h2 id="面试官：v-if和v-for的优先级是什么？"><a href="#面试官：v-if和v-for的优先级是什么？" class="headerlink" title="面试官：v-if和v-for的优先级是什么？"></a>面试官：v-if和v-for的优先级是什么？</h2><p><img src="image-20221015062131031.png" alt="image-20221015062131031"></p>
+          <h1 id="v-if和v-show不能一起使用"><a href="#v-if和v-show不能一起使用" class="headerlink" title="v-if和v-show不能一起使用"></a>v-if和v-show不能一起使用</h1><h2 id="面试官：v-if和v-for的优先级是什么？"><a href="#面试官：v-if和v-for的优先级是什么？" class="headerlink" title="面试官：v-if和v-for的优先级是什么？"></a>面试官：v-if和v-for的优先级是什么？</h2><p><img src="/posts/34987/image-20221015062131031.png" alt="image-20221015062131031"></p>
 <h2 id="一、作用"><a href="#一、作用" class="headerlink" title="一、作用"></a>一、作用</h2><p><code>v-if</code> 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 <code>true</code>值的时候被渲染</p>
 <p><code>v-for</code> 指令基于一个数组来渲染一个列表。<code>v-for</code> 指令需要使用 <code>item in items</code> 形式的特殊语法，其中 <code>items</code> 是源数据数组或者对象，而 <code>item</code> 则是被迭代的数组元素的别名</p>
 <p>在 <code>v-for</code> 的时候，建议设置<code>key</code>值，并且保证每个<code>key</code>值是独一无二的，这便于<code>diff</code>算法进行优化</p>
@@ -742,7 +657,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="vue面试题"><a href="#vue面试题" class="headerlink" title="vue面试题"></a>vue面试题</h1><h2 id="面试官：请描述下你对vue生命周期的理解？在created和mounted这两个生命周期中请求数据有什么区别呢？"><a href="#面试官：请描述下你对vue生命周期的理解？在created和mounted这两个生命周期中请求数据有什么区别呢？" class="headerlink" title="面试官：请描述下你对vue生命周期的理解？在created和mounted这两个生命周期中请求数据有什么区别呢？"></a>面试官：请描述下你对vue生命周期的理解？在created和mounted这两个生命周期中请求数据有什么区别呢？</h2><p><img src="image-20221014073650919.png" alt="image-20221014073650919"></p>
+          <h1 id="vue面试题"><a href="#vue面试题" class="headerlink" title="vue面试题"></a>vue面试题</h1><h2 id="面试官：请描述下你对vue生命周期的理解？在created和mounted这两个生命周期中请求数据有什么区别呢？"><a href="#面试官：请描述下你对vue生命周期的理解？在created和mounted这两个生命周期中请求数据有什么区别呢？" class="headerlink" title="面试官：请描述下你对vue生命周期的理解？在created和mounted这两个生命周期中请求数据有什么区别呢？"></a>面试官：请描述下你对vue生命周期的理解？在created和mounted这两个生命周期中请求数据有什么区别呢？</h2><p><img src="/posts/21750/image-20221014073650919.png" alt="image-20221014073650919"></p>
 <h3 id="一、生命周期是什么"><a href="#一、生命周期是什么" class="headerlink" title="一、生命周期是什么"></a>一、生命周期是什么</h3><p>生命周期<code>（Life Cycle）</code>的概念应用很广泛，特别是在政治、经济、环境、技术、社会等诸多领域经常出现，其基本涵义可以通俗地理解为“从摇篮到坟墓”<code>（Cradle-to-Grave）</code>的整个过程在<code>Vue</code>中实例从创建到销毁的过程就是生命周期，即指从创建、初始化数据、编译模板、挂载Dom→渲染、更新→渲染、卸载等一系列过程我们可以把组件比喻成工厂里面的一条流水线，每个工人（生命周期）站在各自的岗位，当任务流转到工人身边的时候，工人就开始工作PS：在<code>Vue</code>生命周期钩子会自动绑定 <code>this</code> 上下文到实例中，因此你可以访问数据，对 <code>property</code> 和方法进行运算这意味着<strong>你不能使用箭头函数来定义一个生命周期方法</strong> (例如 <code>created: () =&gt; this.fetchTodos()</code>)</p>
           <!--noindex-->
             <div class="post-button">
@@ -824,7 +739,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="vue实例挂载的过程中发生了什么？"><a href="#vue实例挂载的过程中发生了什么？" class="headerlink" title="vue实例挂载的过程中发生了什么？"></a>vue实例挂载的过程中发生了什么？</h1><h2 id="面试官：Vue实例挂载的过程"><a href="#面试官：Vue实例挂载的过程" class="headerlink" title="面试官：Vue实例挂载的过程"></a>面试官：Vue实例挂载的过程</h2><p><img src="image-20221013055145173.png" alt="image-20221013055145173"></p>
+          <h1 id="vue实例挂载的过程中发生了什么？"><a href="#vue实例挂载的过程中发生了什么？" class="headerlink" title="vue实例挂载的过程中发生了什么？"></a>vue实例挂载的过程中发生了什么？</h1><h2 id="面试官：Vue实例挂载的过程"><a href="#面试官：Vue实例挂载的过程" class="headerlink" title="面试官：Vue实例挂载的过程"></a>面试官：Vue实例挂载的过程</h2><p><img src="/posts/60238/image-20221013055145173.png" alt="image-20221013055145173"></p>
 <h3 id="一、思考"><a href="#一、思考" class="headerlink" title="一、思考"></a>一、思考</h3><p>我们都听过知其然知其所以然这句话</p>
 <p>那么不知道大家是否思考过<code>new Vue()</code>这个过程中究竟做了些什么？</p>
 <p>过程中是如何完成数据的绑定，又是如何将数据渲染到视图的等等</p>
@@ -908,7 +823,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="世界上最贵的bug"><a href="#世界上最贵的bug" class="headerlink" title="世界上最贵的bug"></a>世界上最贵的bug</h1><h2 id="一个价值8-7亿美元的bug"><a href="#一个价值8-7亿美元的bug" class="headerlink" title="一个价值8.7亿美元的bug"></a>一个价值8.7亿美元的bug</h2><p><img src="image-20221012160903562.png" alt="image-20221012160903562"></p>
+          <h1 id="世界上最贵的bug"><a href="#世界上最贵的bug" class="headerlink" title="世界上最贵的bug"></a>世界上最贵的bug</h1><h2 id="一个价值8-7亿美元的bug"><a href="#一个价值8-7亿美元的bug" class="headerlink" title="一个价值8.7亿美元的bug"></a>一个价值8.7亿美元的bug</h2><p><img src="/posts/58853/image-20221012160903562.png" alt="image-20221012160903562"></p>
 <p>一位资深程序员曾经说过:</p>
 <p>没有经历过 P0级错误的职业生涯</p>
           <!--noindex-->
@@ -991,12 +906,94 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="面试官：v-show和v-if有什么区别？使用场景分别是什么？"><a href="#面试官：v-show和v-if有什么区别？使用场景分别是什么？" class="headerlink" title="面试官：v-show和v-if有什么区别？使用场景分别是什么？"></a>面试官：v-show和v-if有什么区别？使用场景分别是什么？</h1><p><img src="image-20221012082812636.png" alt="image-20221012082812636"></p>
+          <h1 id="面试官：v-show和v-if有什么区别？使用场景分别是什么？"><a href="#面试官：v-show和v-if有什么区别？使用场景分别是什么？" class="headerlink" title="面试官：v-show和v-if有什么区别？使用场景分别是什么？"></a>面试官：v-show和v-if有什么区别？使用场景分别是什么？</h1><p><img src="/posts/37259/image-20221012082812636.png" alt="image-20221012082812636"></p>
 <h2 id="一、v-show与v-if的共同点"><a href="#一、v-show与v-if的共同点" class="headerlink" title="一、v-show与v-if的共同点"></a>一、v-show与v-if的共同点</h2><p>我们都知道在 <code>vue</code> 中 <code>v-show</code> 与 <code>v-if</code> 的作用效果是相同的(不含v-else)，都能控制元素在页面是否显示</p>
 <p>在用法上也是相同的</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/37259.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://huangdafei645.github.io/posts/11819.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="coder-Tom">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coder-Tom">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/11819.html" class="post-title-link" itemprop="url">声明式框架和命令式框架</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-11 09:56:33" itemprop="dateCreated datePublished" datetime="2022-10-11T09:56:33+08:00">2022-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-09 16:15:46" itemprop="dateModified" datetime="2022-12-09T16:15:46+08:00">2022-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">vue面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="声明式框架和命令式框架"><a href="#声明式框架和命令式框架" class="headerlink" title="声明式框架和命令式框架"></a>声明式框架和命令式框架</h1><p>最近读了霍春阳大佬的《vue.js设计与实现》， 里面提到了有关声明式框架和命令式框架的一些概念， 根据它的介绍， 加上我网上找的资料， 在我自己理解的基础上， 写下了这篇文章</p>
+<h2 id="声明式框架"><a href="#声明式框架" class="headerlink" title="声明式框架"></a>声明式框架</h2><p>早年间流行的 jQuery 就是典型的命令式框架。命令式框架的一大特点就是关注过程。例如，我们把下面这段话翻译成对应的代码：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/11819.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1087,7 +1084,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

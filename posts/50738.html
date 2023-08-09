@@ -27,17 +27,17 @@
 <meta property="og:site_name" content="coder-Tom">
 <meta property="og:description" content="treeshaking的特性面试官：说说Vue 3.0中Treeshaking特性？举例说明一下？ 一、是什么1Tree shaking&#96; 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 &#96;Dead code elimination  简单来讲，就是在保持代码运行结果不变的前提下，去除无用的代码">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221117083332200.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221117083500912.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221117083541303.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221117083612396.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221117083641013.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/50738/image-20221117083332200.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/50738/image-20221117083500912.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/50738/image-20221117083541303.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/50738/image-20221117083612396.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/50738/image-20221117083641013.png">
 <meta property="article:published_time" content="2022-11-17T00:31:39.000Z">
 <meta property="article:modified_time" content="2023-07-11T07:14:07.130Z">
 <meta property="article:author" content="coder-Tom">
 <meta property="article:tag" content="treeshaking特性">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://huangdafei645.github.io/posts/image-20221117083332200.png">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/50738/image-20221117083332200.png">
 
 <link rel="canonical" href="http://huangdafei645.github.io/posts/50738.html">
 
@@ -254,7 +254,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="treeshaking的特性"><a href="#treeshaking的特性" class="headerlink" title="treeshaking的特性"></a>treeshaking的特性</h1><h2 id="面试官：说说Vue-3-0中Treeshaking特性？举例说明一下？"><a href="#面试官：说说Vue-3-0中Treeshaking特性？举例说明一下？" class="headerlink" title="面试官：说说Vue 3.0中Treeshaking特性？举例说明一下？"></a>面试官：说说Vue 3.0中Treeshaking特性？举例说明一下？</h2><p><img src="image-20221117083332200.png" alt="image-20221117083332200"></p>
+        <h1 id="treeshaking的特性"><a href="#treeshaking的特性" class="headerlink" title="treeshaking的特性"></a>treeshaking的特性</h1><h2 id="面试官：说说Vue-3-0中Treeshaking特性？举例说明一下？"><a href="#面试官：说说Vue-3-0中Treeshaking特性？举例说明一下？" class="headerlink" title="面试官：说说Vue 3.0中Treeshaking特性？举例说明一下？"></a>面试官：说说Vue 3.0中Treeshaking特性？举例说明一下？</h2><p><img src="/posts/50738/image-20221117083332200.png" alt="image-20221117083332200"></p>
 <h3 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Tree</span> shaking<span class="string">` 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 `</span><span class="title class_">Dead</span> code elimination</span><br></pre></td></tr></table></figure>
 
 <p>简单来讲，就是在保持代码运行结果不变的前提下，去除无用的代码</p>
@@ -283,22 +283,22 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        data: () =&gt; (&#123;</span><br><span class="line">            count: 1,</span><br><span class="line">        &#125;),</span><br><span class="line">    &#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 <p>对项目进行打包，体积如下图</p>
-<p><img src="image-20221117083500912.png" alt="image-20221117083500912"></p>
+<p><img src="/posts/50738/image-20221117083500912.png" alt="image-20221117083500912"></p>
 <p>为组件设置其他属性（<code>compted</code>、<code>watch</code>）</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="attr">data</span>: <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">        <span class="attr">question</span>:<span class="string">&quot;&quot;</span>, </span><br><span class="line">        <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="attr">computed</span>: &#123;</span><br><span class="line">        <span class="attr">double</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">count</span> * <span class="number">2</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">watch</span>: &#123;</span><br><span class="line">        <span class="attr">question</span>: <span class="keyword">function</span> (<span class="params">newQuestion, oldQuestion</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">answer</span> = <span class="string">&#x27;xxxx&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>再一次打包，发现打包出来的体积并没有变化</p>
-<p><img src="image-20221117083541303.png" alt="image-20221117083541303"></p>
+<p><img src="/posts/50738/image-20221117083541303.png" alt="image-20221117083541303"></p>
 <h4 id="Vue3-项目"><a href="#Vue3-项目" class="headerlink" title="Vue3 项目"></a>Vue3 项目</h4><p>组件中简单使用</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; reactive, defineComponent &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span><br><span class="line">  <span class="title function_">setup</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> state = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      state,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>将项目进行打包</p>
-<p><img src="image-20221117083612396.png" alt="image-20221117083612396"></p>
+<p><img src="/posts/50738/image-20221117083612396.png" alt="image-20221117083612396"></p>
 <p>在组件中引入<code>computed</code>和<code>watch</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; reactive, defineComponent, computed, watch &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span><br><span class="line">  <span class="title function_">setup</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> state = <span class="title function_">reactive</span>(&#123;</span><br><span class="line">      <span class="attr">count</span>: <span class="number">1</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">const</span> double = <span class="title function_">computed</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> state.<span class="property">count</span> * <span class="number">2</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="title function_">watch</span>(</span><br><span class="line">      <span class="function">() =&gt;</span> state.<span class="property">count</span>,</span><br><span class="line">      <span class="function">(<span class="params">count, preCount</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(count);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(preCount);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      state,</span><br><span class="line">      double,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>再次对项目进行打包，可以看到在引入<code>computer</code>和<code>watch</code>之后，项目整体体积变大了</p>
-<p><img src="image-20221117083641013.png" alt="image-20221117083641013"></p>
+<p><img src="/posts/50738/image-20221117083641013.png" alt="image-20221117083641013"></p>
 <h3 id="三、作用"><a href="#三、作用" class="headerlink" title="三、作用"></a>三、作用</h3><p>通过<code>Tree shaking</code>，<code>Vue3</code>给我们带来的好处是：</p>
 <ul>
 <li>减少程序体积（更小）</li>
@@ -413,7 +413,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

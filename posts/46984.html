@@ -27,15 +27,15 @@
 <meta property="og:site_name" content="coder-Tom">
 <meta property="og:description" content="js中的数据类型面试官：说说JavaScript中的数据类型？存储上的差别？">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221127084309003.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/906ffb90-6463-11eb-85f6-6fac77c0c9b3.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221127084348348.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/46984/image-20221127084309003.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/46984/906ffb90-6463-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/46984/image-20221127084348348.png">
 <meta property="article:published_time" content="2022-11-27T00:40:44.000Z">
 <meta property="article:modified_time" content="2023-07-11T07:13:19.214Z">
 <meta property="article:author" content="coder-Tom">
 <meta property="article:tag" content="js中的数据类型">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://huangdafei645.github.io/posts/image-20221127084309003.png">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/46984/image-20221127084309003.png">
 
 <link rel="canonical" href="http://huangdafei645.github.io/posts/46984.html">
 
@@ -252,7 +252,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="js中的数据类型"><a href="#js中的数据类型" class="headerlink" title="js中的数据类型"></a>js中的数据类型</h1><h2 id="面试官：说说JavaScript中的数据类型？存储上的差别？"><a href="#面试官：说说JavaScript中的数据类型？存储上的差别？" class="headerlink" title="面试官：说说JavaScript中的数据类型？存储上的差别？"></a>面试官：说说JavaScript中的数据类型？存储上的差别？</h2><p><img src="image-20221127084309003.png" alt="image-20221127084309003"></p>
+        <h1 id="js中的数据类型"><a href="#js中的数据类型" class="headerlink" title="js中的数据类型"></a>js中的数据类型</h1><h2 id="面试官：说说JavaScript中的数据类型？存储上的差别？"><a href="#面试官：说说JavaScript中的数据类型？存储上的差别？" class="headerlink" title="面试官：说说JavaScript中的数据类型？存储上的差别？"></a>面试官：说说JavaScript中的数据类型？存储上的差别？</h2><p><img src="/posts/46984/image-20221127084309003.png" alt="image-20221127084309003"></p>
 <span id="more"></span>
 
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在<code>JavaScript</code>中，我们可以分成两种类型：</p>
@@ -351,13 +351,13 @@
 
 <p><code>a</code>的值为一个基本类型，是存储在栈中，将<code>a</code>的值赋给<code>b</code>，虽然两个变量的值相等，但是两个变量保存了两个不同的内存地址</p>
 <p>下图演示了基本类型赋值的过程：</p>
-<p><img src="906ffb90-6463-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
+<p><img src="/posts/46984/906ffb90-6463-11eb-85f6-6fac77c0c9b3.png" alt="img"></p>
 <h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> obj2 = obj1;</span><br><span class="line">obj2.<span class="property">name</span> = <span class="string">&quot;Xxx&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj1.<span class="property">name</span>); <span class="comment">// xxx</span></span><br></pre></td></tr></table></figure>
 
 <p>引用类型数据存放在堆中，每个堆内存对象都有对应的引用地址指向它，引用地址存放在栈中。</p>
 <p><code>obj1</code>是一个引用类型，在赋值操作过程汇总，实际是将堆内存对象在栈内存的引用地址复制了一份给了<code>obj2</code>，实际上他们共同指向了同一个堆内存对象，所以更改<code>obj2</code>会对<code>obj1</code>产生影响</p>
 <p>下图演示这个引用类型赋值过程</p>
-<p><img src="image-20221127084348348.png" alt="image-20221127084348348"></p>
+<p><img src="/posts/46984/image-20221127084348348.png" alt="image-20221127084348348"></p>
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
 <li>声明变量时不同的内存地址分配：<ul>
 <li>简单类型的值存放在栈中，在栈中存放的是对应的值</li>
@@ -474,7 +474,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

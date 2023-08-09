@@ -27,15 +27,15 @@
 <meta property="og:site_name" content="coder-Tom">
 <meta property="og:description" content="vue3的性能提升体现在哪些方面面试官：Vue3.0性能提升主要是通过哪几方面体现的？ 一、编译阶段回顾Vue2，我们知道每个组件实例都对应一个 watcher 实例，它会在组件渲染的过程中把用到的数据property记录为依赖，当依赖发生改变，触发setter，则会通知watcher，从而使关联的组件重新渲染">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221114070332595.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221114070349951.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221114070426948.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/14509/image-20221114070332595.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/14509/image-20221114070349951.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/14509/image-20221114070426948.png">
 <meta property="article:published_time" content="2022-11-13T23:01:41.000Z">
 <meta property="article:modified_time" content="2023-07-11T07:16:03.328Z">
 <meta property="article:author" content="coder-Tom">
 <meta property="article:tag" content="vue3的性能提升">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://huangdafei645.github.io/posts/image-20221114070332595.png">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/14509/image-20221114070332595.png">
 
 <link rel="canonical" href="http://huangdafei645.github.io/posts/14509.html">
 
@@ -252,11 +252,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="vue3的性能提升体现在哪些方面"><a href="#vue3的性能提升体现在哪些方面" class="headerlink" title="vue3的性能提升体现在哪些方面"></a>vue3的性能提升体现在哪些方面</h1><h2 id="面试官：Vue3-0性能提升主要是通过哪几方面体现的？"><a href="#面试官：Vue3-0性能提升主要是通过哪几方面体现的？" class="headerlink" title="面试官：Vue3.0性能提升主要是通过哪几方面体现的？"></a>面试官：Vue3.0性能提升主要是通过哪几方面体现的？</h2><p><img src="image-20221114070332595.png" alt="image-20221114070332595"></p>
+        <h1 id="vue3的性能提升体现在哪些方面"><a href="#vue3的性能提升体现在哪些方面" class="headerlink" title="vue3的性能提升体现在哪些方面"></a>vue3的性能提升体现在哪些方面</h1><h2 id="面试官：Vue3-0性能提升主要是通过哪几方面体现的？"><a href="#面试官：Vue3-0性能提升主要是通过哪几方面体现的？" class="headerlink" title="面试官：Vue3.0性能提升主要是通过哪几方面体现的？"></a>面试官：Vue3.0性能提升主要是通过哪几方面体现的？</h2><p><img src="/posts/14509/image-20221114070332595.png" alt="image-20221114070332595"></p>
 <h3 id="一、编译阶段"><a href="#一、编译阶段" class="headerlink" title="一、编译阶段"></a>一、编译阶段</h3><p>回顾<code>Vue2</code>，我们知道每个组件实例都对应一个 <code>watcher</code> 实例，它会在组件渲染的过程中把用到的数据<code>property</code>记录为依赖，当依赖发生改变，触发<code>setter</code>，则会通知<code>watcher</code>，从而使关联的组件重新渲染</p>
 <span id="more"></span>
 
-<p><img src="image-20221114070349951.png" alt="image-20221114070349951"></p>
+<p><img src="/posts/14509/image-20221114070349951.png" alt="image-20221114070349951"></p>
 <p>试想一下，一个组件结构如下图</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span>静态文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span>静态文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span>静态文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span>静态文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -271,7 +271,7 @@
 <h4 id="diff算法优化"><a href="#diff算法优化" class="headerlink" title="diff算法优化"></a>diff算法优化</h4><p><code>vue3</code>在<code>diff</code>算法中相比<code>vue2</code>增加了静态标记</p>
 <p>关于这个静态标记，其作用是为了会发生变化的地方添加一个<code>flag</code>标记，下次发生变化的时候直接找该地方进行比较</p>
 <p>下图这里，已经标记静态节点的<code>p</code>标签在<code>diff</code>过程中则不会比较，把性能进一步提高</p>
-<p><img src="image-20221114070426948.png" alt="image-20221114070426948"></p>
+<p><img src="/posts/14509/image-20221114070426948.png" alt="image-20221114070426948"></p>
 <p>关于静态类型枚举如下</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> enum <span class="title class_">PatchFlags</span> &#123;</span><br><span class="line">  <span class="variable constant_">TEXT</span> = <span class="number">1</span>,<span class="comment">// 动态的文本节点</span></span><br><span class="line">  <span class="variable constant_">CLASS</span> = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,  <span class="comment">// 2 动态的 class</span></span><br><span class="line">  <span class="variable constant_">STYLE</span> = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,  <span class="comment">// 4 动态的 style</span></span><br><span class="line">  <span class="variable constant_">PROPS</span> = <span class="number">1</span> &lt;&lt; <span class="number">3</span>,  <span class="comment">// 8 动态属性，不包括类名和样式</span></span><br><span class="line">  <span class="variable constant_">FULL_PROPS</span> = <span class="number">1</span> &lt;&lt; <span class="number">4</span>,  <span class="comment">// 16 动态 key，当 key 变化时需要完整的 diff 算法做比较</span></span><br><span class="line">  <span class="variable constant_">HYDRATE_EVENTS</span> = <span class="number">1</span> &lt;&lt; <span class="number">5</span>,  <span class="comment">// 32 表示带有事件监听器的节点</span></span><br><span class="line">  <span class="variable constant_">STABLE_FRAGMENT</span> = <span class="number">1</span> &lt;&lt; <span class="number">6</span>,   <span class="comment">// 64 一个不会改变子节点顺序的 Fragment</span></span><br><span class="line">  <span class="variable constant_">KEYED_FRAGMENT</span> = <span class="number">1</span> &lt;&lt; <span class="number">7</span>, <span class="comment">// 128 带有 key 属性的 Fragment</span></span><br><span class="line">  <span class="variable constant_">UNKEYED_FRAGMENT</span> = <span class="number">1</span> &lt;&lt; <span class="number">8</span>, <span class="comment">// 256 子节点没有 key 的 Fragment</span></span><br><span class="line">  <span class="variable constant_">NEED_PATCH</span> = <span class="number">1</span> &lt;&lt; <span class="number">9</span>,   <span class="comment">// 512</span></span><br><span class="line">  <span class="variable constant_">DYNAMIC_SLOTS</span> = <span class="number">1</span> &lt;&lt; <span class="number">10</span>,  <span class="comment">// 动态 solt</span></span><br><span class="line">  <span class="variable constant_">HOISTED</span> = -<span class="number">1</span>,  <span class="comment">// 特殊标志是负整数表示永远不会用作 diff</span></span><br><span class="line">  <span class="variable constant_">BAIL</span> = -<span class="number">2</span> <span class="comment">// 一个特殊的标志，指代差异算法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -423,7 +423,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

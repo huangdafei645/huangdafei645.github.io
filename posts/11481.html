@@ -27,22 +27,22 @@
 <meta property="og:site_name" content="coder-Tom">
 <meta property="og:description" content="说说vue中的diff算法面试官：你了解vue的diff算法吗？说说看 一、是什么diff 算法是一种通过同层的树节点进行比较的高效算法 其有两个特点：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221102070413262.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221102070430931.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221102070456398.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221102070512895.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221102070534981.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221102070553310.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221102070612116.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221102070631461.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221102070649216.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221102070706588.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/11481/image-20221102070413262.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/11481/image-20221102070430931.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/11481/image-20221102070456398.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/11481/image-20221102070512895.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/11481/image-20221102070534981.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/11481/image-20221102070553310.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/11481/image-20221102070612116.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/11481/image-20221102070631461.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/11481/image-20221102070649216.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/11481/image-20221102070706588.png">
 <meta property="article:published_time" content="2022-11-01T23:01:45.000Z">
 <meta property="article:modified_time" content="2023-07-11T07:24:04.286Z">
 <meta property="article:author" content="coder-Tom">
 <meta property="article:tag" content="vue中的diff算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://huangdafei645.github.io/posts/image-20221102070413262.png">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/11481/image-20221102070413262.png">
 
 <link rel="canonical" href="http://huangdafei645.github.io/posts/11481.html">
 
@@ -259,7 +259,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="说说vue中的diff算法"><a href="#说说vue中的diff算法" class="headerlink" title="说说vue中的diff算法"></a>说说vue中的diff算法</h1><h2 id="面试官：你了解vue的diff算法吗？说说看"><a href="#面试官：你了解vue的diff算法吗？说说看" class="headerlink" title="面试官：你了解vue的diff算法吗？说说看"></a>面试官：你了解vue的diff算法吗？说说看</h2><p><img src="image-20221102070413262.png" alt="image-20221102070413262"></p>
+        <h1 id="说说vue中的diff算法"><a href="#说说vue中的diff算法" class="headerlink" title="说说vue中的diff算法"></a>说说vue中的diff算法</h1><h2 id="面试官：你了解vue的diff算法吗？说说看"><a href="#面试官：你了解vue的diff算法吗？说说看" class="headerlink" title="面试官：你了解vue的diff算法吗？说说看"></a>面试官：你了解vue的diff算法吗？说说看</h2><p><img src="/posts/11481/image-20221102070413262.png" alt="image-20221102070413262"></p>
 <h3 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h3><p><code>diff</code> 算法是一种通过同层的树节点进行比较的高效算法</p>
 <p>其有两个特点：</p>
 <span id="more"></span>
@@ -273,26 +273,26 @@
 <ol>
 <li>比较只会在同层级进行, 不会跨层级比较</li>
 </ol>
-<p><img src="image-20221102070430931.png" alt="image-20221102070430931"></p>
+<p><img src="/posts/11481/image-20221102070430931.png" alt="image-20221102070430931"></p>
 <ol start="2">
 <li>比较的过程中，循环从两边向中间收拢</li>
 </ol>
-<p><img src="image-20221102070456398.png" alt="image-20221102070456398"></p>
+<p><img src="/posts/11481/image-20221102070456398.png" alt="image-20221102070456398"></p>
 <p>下面举个<code>vue</code>通过<code>diff</code>算法更新的例子：</p>
 <p>新旧<code>VNode</code>节点如下图所示：</p>
-<p><img src="image-20221102070512895.png" alt="image-20221102070512895"></p>
+<p><img src="/posts/11481/image-20221102070512895.png" alt="image-20221102070512895"></p>
 <p>第一次循环后，发现旧节点D与新节点D相同，直接复用旧节点D作为<code>diff</code>后的第一个真实节点，同时旧节点<code>endIndex</code>移动到C，新节点的 <code>startIndex</code> 移动到了 C</p>
-<p><img src="image-20221102070534981.png" alt="image-20221102070534981"></p>
+<p><img src="/posts/11481/image-20221102070534981.png" alt="image-20221102070534981"></p>
 <p>第二次循环后，同样是旧节点的末尾和新节点的开头(都是 C)相同，同理，<code>diff</code> 后创建了 C 的真实节点插入到第一次创建的 D 节点后面。同时旧节点的 <code>endIndex</code> 移动到了 B，新节点的 <code>startIndex</code> 移动到了 E</p>
-<p><img src="image-20221102070553310.png" alt="image-20221102070553310"></p>
+<p><img src="/posts/11481/image-20221102070553310.png" alt="image-20221102070553310"></p>
 <p>第三次循环中，发现E没有找到，这时候只能直接创建新的真实节点 E，插入到第二次创建的 C 节点之后。同时新节点的 <code>startIndex</code> 移动到了 A。旧节点的 <code>startIndex</code> 和 <code>endIndex</code> 都保持不动</p>
-<p><img src="image-20221102070612116.png" alt="image-20221102070612116"></p>
+<p><img src="/posts/11481/image-20221102070612116.png" alt="image-20221102070612116"></p>
 <p>第四次循环中，发现了新旧节点的开头(都是 A)相同，于是 <code>diff</code> 后创建了 A 的真实节点，插入到前一次创建的 E 节点后面。同时旧节点的 <code>startIndex</code> 移动到了 B，新节点的<code>startIndex</code> 移动到了 B</p>
-<p><img src="image-20221102070631461.png" alt="image-20221102070631461"></p>
+<p><img src="/posts/11481/image-20221102070631461.png" alt="image-20221102070631461"></p>
 <p>第五次循环中，情形同第四次循环一样，因此 <code>diff</code> 后创建了 B 真实节点 插入到前一次创建的 A 节点后面。同时旧节点的 <code>startIndex</code>移动到了 C，新节点的 startIndex 移动到了 F</p>
-<p><img src="image-20221102070649216.png" alt="image-20221102070649216"></p>
+<p><img src="/posts/11481/image-20221102070649216.png" alt="image-20221102070649216"></p>
 <p>新节点的 <code>startIndex</code> 已经大于 <code>endIndex</code> 了，需要创建 <code>newStartIdx</code> 和 <code>newEndIdx</code> 之间的所有节点，也就是节点F，直接创建 F 节点对应的真实节点放到 B 节点后面</p>
-<p><img src="image-20221102070706588.png" alt="image-20221102070706588"></p>
+<p><img src="/posts/11481/image-20221102070706588.png" alt="image-20221102070706588"></p>
 <h3 id="三、原理分析"><a href="#三、原理分析" class="headerlink" title="三、原理分析"></a>三、原理分析</h3><p>当数据发生改变时，<code>set</code>方法会调用<code>Dep.notify</code>通知所有订阅者<code>Watcher</code>，订阅者就会调用<code>patch</code>给真实的<code>DOM</code>打补丁，更新相应的视图</p>
 <p>源码位置：src/core/vdom/patch.js</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">patch</span>(<span class="params">oldVnode, vnode, hydrating, removeOnly</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isUndef</span>(vnode)) &#123; <span class="comment">// 没有新节点，直接执行destory钩子函数</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_">isDef</span>(oldVnode)) <span class="title function_">invokeDestroyHook</span>(oldVnode)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> isInitialPatch = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">const</span> insertedVnodeQueue = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">isUndef</span>(oldVnode)) &#123;</span><br><span class="line">        isInitialPatch = <span class="literal">true</span></span><br><span class="line">        <span class="title function_">createElm</span>(vnode, insertedVnodeQueue) <span class="comment">// 没有旧节点，直接用新节点生成dom元素</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> isRealElement = <span class="title function_">isDef</span>(oldVnode.<span class="property">nodeType</span>)</span><br><span class="line">        <span class="keyword">if</span> (!isRealElement &amp;&amp; <span class="title function_">sameVnode</span>(oldVnode, vnode)) &#123;</span><br><span class="line">            <span class="comment">// 判断旧节点和新节点自身一样，一致执行patchVnode</span></span><br><span class="line">            <span class="title function_">patchVnode</span>(oldVnode, vnode, insertedVnodeQueue, <span class="literal">null</span>, <span class="literal">null</span>, removeOnly)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 否则直接销毁及旧节点，根据新节点生成dom元素</span></span><br><span class="line">            <span class="keyword">if</span> (isRealElement) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (oldVnode.<span class="property">nodeType</span> === <span class="number">1</span> &amp;&amp; oldVnode.<span class="title function_">hasAttribute</span>(<span class="variable constant_">SSR_ATTR</span>)) &#123;</span><br><span class="line">                    oldVnode.<span class="title function_">removeAttribute</span>(<span class="variable constant_">SSR_ATTR</span>)</span><br><span class="line">                    hydrating = <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (<span class="title function_">isTrue</span>(hydrating)) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (<span class="title function_">hydrate</span>(oldVnode, vnode, insertedVnodeQueue)) &#123;</span><br><span class="line">                        <span class="title function_">invokeInsertHook</span>(vnode, insertedVnodeQueue, <span class="literal">true</span>)</span><br><span class="line">                        <span class="keyword">return</span> oldVnode</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                oldVnode = <span class="title function_">emptyNodeAt</span>(oldVnode)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> vnode.<span class="property">elm</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -453,7 +453,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

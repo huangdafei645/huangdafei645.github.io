@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="coder-Tom">
 <meta property="og:description" content="说说vue中的key原理面试官：你知道vue中key的原理吗？说说你对它的理解 一、Key是什么开始之前，我们先还原两个实际工作场景  当我们在使用v-for时，需要给单元加上key">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221026065449653.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221026065709047.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/22527/image-20221026065449653.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/22527/image-20221026065709047.png">
 <meta property="article:published_time" content="2022-10-25T22:53:24.000Z">
 <meta property="article:modified_time" content="2023-07-11T07:24:08.866Z">
 <meta property="article:author" content="coder-Tom">
 <meta property="article:tag" content="vue中的key原理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://huangdafei645.github.io/posts/image-20221026065449653.png">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/22527/image-20221026065449653.png">
 
 <link rel="canonical" href="http://huangdafei645.github.io/posts/22527.html">
 
@@ -251,7 +251,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="说说vue中的key原理"><a href="#说说vue中的key原理" class="headerlink" title="说说vue中的key原理"></a>说说vue中的key原理</h1><h2 id="面试官：你知道vue中key的原理吗？说说你对它的理解"><a href="#面试官：你知道vue中key的原理吗？说说你对它的理解" class="headerlink" title="面试官：你知道vue中key的原理吗？说说你对它的理解"></a>面试官：你知道vue中key的原理吗？说说你对它的理解</h2><p><img src="image-20221026065449653.png" alt="image-20221026065449653"></p>
+        <h1 id="说说vue中的key原理"><a href="#说说vue中的key原理" class="headerlink" title="说说vue中的key原理"></a>说说vue中的key原理</h1><h2 id="面试官：你知道vue中key的原理吗？说说你对它的理解"><a href="#面试官：你知道vue中key的原理吗？说说你对它的理解" class="headerlink" title="面试官：你知道vue中key的原理吗？说说你对它的理解"></a>面试官：你知道vue中key的原理吗？说说你对它的理解</h2><p><img src="/posts/22527/image-20221026065449653.png" alt="image-20221026065449653"></p>
 <h3 id="一、Key是什么"><a href="#一、Key是什么" class="headerlink" title="一、Key是什么"></a>一、Key是什么</h3><p>开始之前，我们先还原两个实际工作场景</p>
 <ol>
 <li><p>当我们在使用<code>v-for</code>时，需要给单元加上<code>key</code></p>
@@ -283,7 +283,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;demo&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-for</span>=<span class="string">&quot;item in items&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;item&quot;</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../../dist/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 创建实例</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">el</span>: <span class="string">&#x27;#demo&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">data</span>: &#123; <span class="attr">items</span>: [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>] &#125;,</span></span><br><span class="line"><span class="language-javascript">      mounted () &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123; </span></span><br><span class="line"><span class="language-javascript">          <span class="variable language_">this</span>.<span class="property">items</span>.<span class="title function_">splice</span>(<span class="number">2</span>, <span class="number">0</span>, <span class="string">&#x27;f&#x27;</span>)  <span class="comment">// </span></span></span><br><span class="line"><span class="language-javascript">       &#125;, <span class="number">2000</span>);</span></span><br><span class="line"><span class="language-javascript">     &#125;,</span></span><br><span class="line"><span class="language-javascript">   &#125;);</span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>在不使用<code>key</code>的情况，<code>vue</code>会进行这样的操作：</p>
-<p><img src="image-20221026065709047.png" alt="image-20221026065709047"></p>
+<p><img src="/posts/22527/image-20221026065709047.png" alt="image-20221026065709047"></p>
 <p>分析下整体流程：</p>
 <ul>
 <li>比较A，A，相同类型的节点，进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
@@ -432,7 +432,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

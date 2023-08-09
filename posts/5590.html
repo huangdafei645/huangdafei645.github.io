@@ -27,23 +27,23 @@
 <meta property="og:site_name" content="coder-Tom">
 <meta property="og:description" content="axios拦截器实现原理先用拦截器实现下面这个案例：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221004132401288.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221004132758252.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221004132954521.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221004133521420.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221004133800774.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221004133944352.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221004134318706.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221004135627537.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221004140014732.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221004140106265.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221004141149745.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5590/image-20221004132401288.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5590/image-20221004132758252.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5590/image-20221004132954521.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5590/image-20221004133521420.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5590/image-20221004133800774.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5590/image-20221004133944352.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5590/image-20221004134318706.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5590/image-20221004135627537.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5590/image-20221004140014732.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5590/image-20221004140106265.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/5590/image-20221004141149745.png">
 <meta property="article:published_time" content="2022-10-04T05:21:33.000Z">
 <meta property="article:modified_time" content="2023-07-11T07:11:42.078Z">
 <meta property="article:author" content="coder-Tom">
 <meta property="article:tag" content="axios拦截器实现原理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://huangdafei645.github.io/posts/image-20221004132401288.png">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/5590/image-20221004132401288.png">
 
 <link rel="canonical" href="http://huangdafei645.github.io/posts/5590.html">
 
@@ -266,30 +266,30 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">       </span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params">config</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请求拦截器1 成功&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> config;</span></span><br><span class="line"><span class="language-javascript">        &#125;,<span class="keyword">function</span> (<span class="params">error</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请求拦截器1 失败&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">        axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params">config</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请求拦截器2 成功&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> config;</span></span><br><span class="line"><span class="language-javascript">        &#125;,<span class="keyword">function</span> (<span class="params">error</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请求拦截器2 失败&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">        axios.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params">response</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;响应拦截器1 成功&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> response;</span></span><br><span class="line"><span class="language-javascript">        &#125;,<span class="keyword">function</span> (<span class="params">error</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;响应拦截器1 失败&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">        axios.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params">response</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;响应拦截器2 成功&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> response;</span></span><br><span class="line"><span class="language-javascript">        &#125;,<span class="keyword">function</span> (<span class="params">error</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;响应拦截器2 失败&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// 发送请求</span></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">axios</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">method</span>: <span class="string">&quot;GET&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">url</span>:<span class="string">&quot;http://localhost:3000/posts&quot;</span></span></span><br><span class="line"><span class="language-javascript">        &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(response)</span></span><br><span class="line"><span class="language-javascript">        &#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(err)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>如果一切正常的话， 它的打印结果应该是这样的：</p>
-<p><img src="image-20221004132401288.png" alt="image-20221004132401288"></p>
-<p><img src="image-20221004132758252.png" alt="image-20221004132758252"></p>
+<p><img src="/posts/5590/image-20221004132401288.png" alt="image-20221004132401288"></p>
+<p><img src="/posts/5590/image-20221004132758252.png" alt="image-20221004132758252"></p>
 <p>我们来解释一下这个axios上面的interceptors是哪里来的，我们打开Axios.js文件， 如图</p>
-<p><img src="image-20221004132954521.png" alt="image-20221004132954521"></p>
+<p><img src="/posts/5590/image-20221004132954521.png" alt="image-20221004132954521"></p>
 <p>因为里面有this.interceptors来进行构造，里面又有一个request对象，所以：、</p>
 <p>axios.interceptors.request = new InterceptorManager ()</p>
 <p>而axios.interceptoes.request.use = new InterceptorManager().use()</p>
 <p>接着， 我们来到了这里</p>
-<p><img src="image-20221004133521420.png" alt="image-20221004133521420"></p>
+<p><img src="/posts/5590/image-20221004133521420.png" alt="image-20221004133521420"></p>
 <p>这里的this.hanlders是当你new InterceptorManager()的时候创建的一个空数组：</p>
-<p><img src="image-20221004133800774.png" alt="image-20221004133800774"></p>
+<p><img src="/posts/5590/image-20221004133800774.png" alt="image-20221004133800774"></p>
 <p>然后你调用上面的use方法的时候：就给this.handlers上面push了一些东西：</p>
-<p><img src="image-20221004133944352.png" alt="image-20221004133944352"></p>
+<p><img src="/posts/5590/image-20221004133944352.png" alt="image-20221004133944352"></p>
 <p>接着往下执行， 你会看到：</p>
-<p><img src="image-20221004134318706.png" alt="image-20221004134318706"></p>
+<p><img src="/posts/5590/image-20221004134318706.png" alt="image-20221004134318706"></p>
 <p>此时。halders上面已经有数据了，当执行到第二个拦截器的时候：</p>
-<p><img src="image-20221004135627537.png" alt="image-20221004135627537"></p>
+<p><img src="/posts/5590/image-20221004135627537.png" alt="image-20221004135627537"></p>
 <p>handlers又变了，接着往下执行：</p>
-<p><img src="image-20221004140014732.png" alt="image-20221004140014732"></p>
+<p><img src="/posts/5590/image-20221004140014732.png" alt="image-20221004140014732"></p>
 <p>这是响应拦截器添加的回调，同理：</p>
-<p><img src="image-20221004140106265.png" alt="image-20221004140106265"></p>
+<p><img src="/posts/5590/image-20221004140106265.png" alt="image-20221004140106265"></p>
 <p>和请求拦截器是同样的原理。</p>
 <p>为什么请求拦截器顺序是倒着的， 也就是如图所示这个样子？</p>
-<p><img src="image-20221004141149745.png" alt="image-20221004141149745"></p>
+<p><img src="/posts/5590/image-20221004141149745.png" alt="image-20221004141149745"></p>
 <p>原因就是 在请求拦截器中， requestInterceptorChain使用了unshift方法， 而在响应拦截器中使用了push方法</p>
 <p>use在使用的时候只是进行了一个保存， 就是把回调保存在了request.handlers上面</p>
 <p>以上就是拦截器的工作原理</p>
@@ -397,7 +397,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
