@@ -27,16 +27,16 @@
 <meta property="og:site_name" content="coder-Tom">
 <meta property="og:description" content="vue组件之间的通信方式有哪些？面试官：Vue组件之间的通信方式都有哪些？ 一、组件间通信的概念开始之前，我们把组件间通信这个词进行拆分  组件 通信">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/50684/image-20221020135724159.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/50684/image-20221020135747171.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/50684/image-20221020135804121.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/50684/image-20221020140206505.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221020135724159.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221020135747171.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221020135804121.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221020140206505.png">
 <meta property="article:published_time" content="2022-10-20T05:52:41.000Z">
 <meta property="article:modified_time" content="2023-07-11T07:17:49.964Z">
 <meta property="article:author" content="coder-Tom">
 <meta property="article:tag" content="vue组件之间的通信方式">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://huangdafei645.github.io/posts/50684/image-20221020135724159.png">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/image-20221020135724159.png">
 
 <link rel="canonical" href="http://huangdafei645.github.io/posts/50684.html">
 
@@ -82,7 +82,7 @@
   </style>
 </noscript>
 
-</head>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -253,7 +253,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <html><head><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head><body><h1 id="vue组件之间的通信方式有哪些？"><a href="#vue组件之间的通信方式有哪些？" class="headerlink" title="vue组件之间的通信方式有哪些？"></a>vue组件之间的通信方式有哪些？</h1><h2 id="面试官：Vue组件之间的通信方式都有哪些？"><a href="#面试官：Vue组件之间的通信方式都有哪些？" class="headerlink" title="面试官：Vue组件之间的通信方式都有哪些？"></a>面试官：Vue组件之间的通信方式都有哪些？</h2><p><img src="/posts/50684/image-20221020135724159.png" alt="image-20221020135724159"></p>
+        <h1 id="vue组件之间的通信方式有哪些？"><a href="#vue组件之间的通信方式有哪些？" class="headerlink" title="vue组件之间的通信方式有哪些？"></a>vue组件之间的通信方式有哪些？</h1><h2 id="面试官：Vue组件之间的通信方式都有哪些？"><a href="#面试官：Vue组件之间的通信方式都有哪些？" class="headerlink" title="面试官：Vue组件之间的通信方式都有哪些？"></a>面试官：Vue组件之间的通信方式都有哪些？</h2><p><img src="image-20221020135724159.png" alt="image-20221020135724159"></p>
 <h3 id="一、组件间通信的概念"><a href="#一、组件间通信的概念" class="headerlink" title="一、组件间通信的概念"></a>一、组件间通信的概念</h3><p>开始之前，我们把<strong>组件间通信</strong>这个词进行拆分</p>
 <ul>
 <li>组件</li>
@@ -271,7 +271,7 @@
 <li>非关系组件间之间的通信</li>
 </ul>
 <p>关系图:</p>
-<p><img src="/posts/50684/image-20221020135747171.png" alt="image-20221020135747171"></p>
+<p><img src="image-20221020135747171.png" alt="image-20221020135747171"></p>
 <h3 id="四、组件间通信的方案"><a href="#四、组件间通信的方案" class="headerlink" title="四、组件间通信的方案"></a>四、组件间通信的方案</h3><p>整理<code>vue</code>中8种常规的通信方案</p>
 <ol>
 <li>通过 props 传递</li>
@@ -283,37 +283,37 @@
 <li>Provide 与 Inject</li>
 <li>Vuex</li>
 </ol>
-<h4 id="props传递数据"><a href="#props传递数据" class="headerlink" title="props传递数据"></a>props传递数据</h4><p><img src="/posts/50684/image-20221020135804121.png" alt="image-20221020135804121"></p>
+<h4 id="props传递数据"><a href="#props传递数据" class="headerlink" title="props传递数据"></a>props传递数据</h4><p><img src="image-20221020135804121.png" alt="image-20221020135804121"></p>
 <ul>
 <li>适用场景：父组件传递数据给子组件</li>
 <li>子组件设置<code>props</code>属性，定义接收父组件传递过来的参数</li>
 <li>父组件在使用子组件标签中通过字面量来传递值</li>
 </ul>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Children</span>.<span class="property">vue</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Children</span>.<span class="property">vue</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">props</span>:{  </span><br><span class="line">    <span class="comment">// 字符串形式  </span></span><br><span class="line"> <span class="attr">name</span>:<span class="title class_">String</span> <span class="comment">// 接收的类型参数  </span></span><br><span class="line">    <span class="comment">// 对象形式  </span></span><br><span class="line">    <span class="attr">age</span>:{    </span><br><span class="line">        <span class="attr">type</span>:<span class="title class_">Number</span>, <span class="comment">// 接收的类型为数值  </span></span><br><span class="line">        <span class="attr">defaule</span>:<span class="number">18</span>,  <span class="comment">// 默认值为18  </span></span><br><span class="line">       <span class="attr">require</span>:<span class="literal">true</span> <span class="comment">// age属性必须传递  </span></span><br><span class="line">    }  </span><br><span class="line">}  </span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">props</span>:&#123;  </span><br><span class="line">    <span class="comment">// 字符串形式  </span></span><br><span class="line"> <span class="attr">name</span>:<span class="title class_">String</span> <span class="comment">// 接收的类型参数  </span></span><br><span class="line">    <span class="comment">// 对象形式  </span></span><br><span class="line">    <span class="attr">age</span>:&#123;    </span><br><span class="line">        <span class="attr">type</span>:<span class="title class_">Number</span>, <span class="comment">// 接收的类型为数值  </span></span><br><span class="line">        <span class="attr">defaule</span>:<span class="number">18</span>,  <span class="comment">// 默认值为18  </span></span><br><span class="line">       <span class="attr">require</span>:<span class="literal">true</span> <span class="comment">// age属性必须传递  </span></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
 
 <p><code>Father.vue</code>组件</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Children</span> name=<span class="string">"jack"</span> age=<span class="number">18</span> /&gt; </span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Children</span> name=<span class="string">&quot;jack&quot;</span> age=<span class="number">18</span> /&gt; </span><br></pre></td></tr></table></figure>
 
 <h4 id="emit-触发自定义事件"><a href="#emit-触发自定义事件" class="headerlink" title="$emit 触发自定义事件"></a>$emit 触发自定义事件</h4><ul>
 <li>适用场景：子组件传递数据给父组件</li>
 <li>子组件通过<code>$emit触发</code>自定义事件，<code>$emit</code>第二个参数为传递的数值</li>
 <li>父组件绑定监听器获取到子组件传递过来的参数</li>
 </ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Chilfen.vue</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Chilfen.vue</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.$emit(<span class="string">'add'</span>, good) </span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.$emit(<span class="string">&#x27;add&#x27;</span>, good) </span><br></pre></td></tr></table></figure>
 
 <p>Father.vue</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Children</span> @add=<span class="string">"cartAdd($event)"</span> /&gt;  </span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Children</span> @add=<span class="string">&quot;cartAdd($event)&quot;</span> /&gt;  </span><br></pre></td></tr></table></figure>
 
 <h4 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h4><ul>
 <li>父组件在使用子组件的时候设置<code>ref</code></li>
 <li>父组件通过设置子组件<code>ref</code>来获取数据</li>
 </ul>
 <p>父组件：</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Children</span> ref=<span class="string">"foo"</span> /&gt;  </span><br><span class="line">  </span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">foo</span>  <span class="comment">// 获取子组件实例，通过子组件实例我们就能拿到对应的数据 </span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Children</span> ref=<span class="string">&quot;foo&quot;</span> /&gt;  </span><br><span class="line">  </span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">foo</span>  <span class="comment">// 获取子组件实例，通过子组件实例我们就能拿到对应的数据 </span></span><br></pre></td></tr></table></figure>
 
 <h4 id="EventBus"><a href="#EventBus" class="headerlink" title="EventBus"></a>EventBus</h4><ul>
 <li>使用场景：兄弟组件传值</li>
@@ -321,51 +321,51 @@
 <li>兄弟组件通过<code>$emit</code>触发自定义事件，<code>$emit</code>第二个参数为传递的数值</li>
 <li>另一个兄弟组件通过<code>$on</code>监听自定义事件</li>
 </ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bus.js</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bus.js</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个中央时间总线类  </span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bus</span> {  </span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) {  </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">callbacks</span> = {};   <span class="comment">// 存放事件的名字  </span></span><br><span class="line">  }  </span><br><span class="line">  $on(name, fn) {  </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">callbacks</span>[name] = <span class="variable language_">this</span>.<span class="property">callbacks</span>[name] || [];  </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">callbacks</span>[name].<span class="title function_">push</span>(fn);  </span><br><span class="line">  }  </span><br><span class="line">  $emit(name, args) {  </span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">callbacks</span>[name]) {  </span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">callbacks</span>[name].<span class="title function_">forEach</span>(<span class="function">(<span class="params">cb</span>) =&gt;</span> <span class="title function_">cb</span>(args));  </span><br><span class="line">    }  </span><br><span class="line">  }  </span><br><span class="line">}  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// main.js  </span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$bus</span> = <span class="keyword">new</span> <span class="title class_">Bus</span>() <span class="comment">// 将$bus挂载到vue实例的原型上  </span></span><br><span class="line"><span class="comment">// 另一种方式  </span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$bus</span> = <span class="keyword">new</span> <span class="title class_">Vue</span>() <span class="comment">// Vue已经实现了Bus的功能  </span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个中央时间总线类  </span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bus</span> &#123;  </span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;  </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">callbacks</span> = &#123;&#125;;   <span class="comment">// 存放事件的名字  </span></span><br><span class="line">  &#125;  </span><br><span class="line">  $on(name, fn) &#123;  </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">callbacks</span>[name] = <span class="variable language_">this</span>.<span class="property">callbacks</span>[name] || [];  </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">callbacks</span>[name].<span class="title function_">push</span>(fn);  </span><br><span class="line">  &#125;  </span><br><span class="line">  $emit(name, args) &#123;  </span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">callbacks</span>[name]) &#123;  </span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">callbacks</span>[name].<span class="title function_">forEach</span>(<span class="function">(<span class="params">cb</span>) =&gt;</span> <span class="title function_">cb</span>(args));  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// main.js  </span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$bus</span> = <span class="keyword">new</span> <span class="title class_">Bus</span>() <span class="comment">// 将$bus挂载到vue实例的原型上  </span></span><br><span class="line"><span class="comment">// 另一种方式  </span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$bus</span> = <span class="keyword">new</span> <span class="title class_">Vue</span>() <span class="comment">// Vue已经实现了Bus的功能  </span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Children1.vue</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Children1.vue</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$bus</span>.$emit(<span class="string">'foo'</span>)  </span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$bus</span>.$emit(<span class="string">&#x27;foo&#x27;</span>)  </span><br></pre></td></tr></table></figure>
 
 <p>Children2.vue</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$bus</span>.$on(<span class="string">'foo'</span>, <span class="variable language_">this</span>.<span class="property">handle</span>) </span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$bus</span>.$on(<span class="string">&#x27;foo&#x27;</span>, <span class="variable language_">this</span>.<span class="property">handle</span>) </span><br></pre></td></tr></table></figure>
 
 <h4 id="parent-或-root"><a href="#parent-或-root" class="headerlink" title="$parent 或$ root"></a>$parent 或$ root</h4><ul>
 <li>通过共同祖辈<code>$parent</code>或者<code>$root</code>搭建通信桥连</li>
 </ul>
 <p>兄弟组件</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$parent.on('add',this.add)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$parent.on(&#x27;add&#x27;,this.add)</span><br></pre></td></tr></table></figure>
 
 <p>另一个兄弟组件</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$parent.emit('add')</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$parent.emit(&#x27;add&#x27;)</span><br></pre></td></tr></table></figure>
 
 <h4 id="attrs-与-listeners"><a href="#attrs-与-listeners" class="headerlink" title="$attrs 与$ listeners"></a>$attrs 与$ listeners</h4><ul>
 <li>适用场景：祖先传递数据给子孙</li>
 <li>设置批量向下传属性<code>$attrs</code>和 <code>$listeners</code></li>
 <li>包含了父级作用域中不作为 <code>prop</code> 被识别 (且获取) 的特性绑定 ( class 和 style 除外)。</li>
-<li>可以通过 <code>v-bind="$attrs"</code> 传⼊内部组件</li>
+<li>可以通过 <code>v-bind=&quot;$attrs&quot;</code> 传⼊内部组件</li>
 </ul>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// child：并未在props中声明foo  </span></span><br><span class="line">&lt;p&gt;{{$attrs.<span class="property">foo</span>}}&lt;/p&gt;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// parent  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">HelloWorld</span> <span class="attr">foo</span>=<span class="string">"foo"</span>/&gt;</span></span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// child：并未在props中声明foo  </span></span><br><span class="line">&lt;p&gt;&#123;&#123;$attrs.<span class="property">foo</span>&#125;&#125;&lt;/p&gt;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// parent  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">HelloWorld</span> <span class="attr">foo</span>=<span class="string">&quot;foo&quot;</span>/&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给Grandson隔代传值，communication/index.vue  </span></span><br><span class="line">&lt;<span class="title class_">Child2</span> msg=<span class="string">"lalala"</span> @some-event=<span class="string">"onSomeEvent"</span>&gt;&lt;/<span class="title class_">Child2</span>&gt;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Child2做展开  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">Grandson</span> <span class="attr">v-bind</span>=<span class="string">"$attrs"</span> <span class="attr">v-on</span>=<span class="string">"$listeners"</span>&gt;</span><span class="tag">&lt;/<span class="name">Grandson</span>&gt;</span></span>  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Grandson使⽤  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">"$emit('some-event', 'msg from grandson')"</span>&gt;</span>  </span></span><br><span class="line"><span class="language-xml">{{msg}}  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>  </span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给Grandson隔代传值，communication/index.vue  </span></span><br><span class="line">&lt;<span class="title class_">Child2</span> msg=<span class="string">&quot;lalala&quot;</span> @some-event=<span class="string">&quot;onSomeEvent&quot;</span>&gt;&lt;/<span class="title class_">Child2</span>&gt;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Child2做展开  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">Grandson</span> <span class="attr">v-bind</span>=<span class="string">&quot;$attrs&quot;</span> <span class="attr">v-on</span>=<span class="string">&quot;$listeners&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Grandson</span>&gt;</span></span>  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Grandson使⽤  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">&quot;$emit(&#x27;some-event&#x27;, &#x27;msg from grandson&#x27;)&quot;</span>&gt;</span>  </span></span><br><span class="line"><span class="language-xml">&#123;&#123;msg&#125;&#125;  </span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>  </span><br></pre></td></tr></table></figure>
 
 <h4 id="provide-与-inject"><a href="#provide-与-inject" class="headerlink" title="provide 与 inject"></a>provide 与 inject</h4><ul>
 <li>在祖先组件定义<code>provide</code>属性，返回传递的值</li>
 <li>在后代组件通过<code>inject</code>接收组件传递过来的值</li>
 </ul>
 <p>祖先组件</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">provide</span>(<span class="params"></span>){  </span><br><span class="line">    <span class="keyword">return</span> {  </span><br><span class="line">        <span class="attr">foo</span>:<span class="string">'foo'</span>  </span><br><span class="line">    }  </span><br><span class="line">}  </span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">provide</span>(<span class="params"></span>)&#123;  </span><br><span class="line">    <span class="keyword">return</span> &#123;  </span><br><span class="line">        <span class="attr">foo</span>:<span class="string">&#x27;foo&#x27;</span>  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
 
 <p>后代组件</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">inject</span>:[<span class="string">'foo'</span>] <span class="comment">// 获取到祖先组件传递过来的值</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">inject</span>:[<span class="string">&#x27;foo&#x27;</span>] <span class="comment">// 获取到祖先组件传递过来的值</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a><code>vuex</code></h4><ul>
 <li>适用场景: 复杂关系的组件数据传递</li>
 <li><code>Vuex</code>作用相当于一个用来存储共享变量的容器</li>
 </ul>
-<p><img src="/posts/50684/image-20221020140206505.png" alt="image-20221020140206505"></p>
+<p><img src="image-20221020140206505.png" alt="image-20221020140206505"></p>
 <ul>
 <li><code>state</code>用来存放共享变量的地方</li>
 <li><code>getter</code>，可以增加一个<code>getter</code>派生状态，(相当于<code>store</code>中的计算属性），用来获得共享变量的值</li>
@@ -384,7 +384,7 @@
 <li><a target="_blank" rel="noopener" href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
 <li>@js语音答题社区</li>
 </ul>
-</body></html>
+
     </div>
 
     
@@ -488,20 +488,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">103</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">99</span>
+        <span class="site-state-item-count">100</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -27,15 +27,15 @@
 <meta property="og:site_name" content="coder-Tom">
 <meta property="og:description" content="vue3设计目标与优化面试官：Vue3.0的设计目标是什么？做了哪些优化 一、设计目标不以解决实际业务痛点的更新都是耍流氓，下面我们来列举一下Vue3之前我们或许会面临的问题  随着功能的增长，复杂组件的代码变得越来越难以维护 缺少一种比较「干净」的在多个组件之间提取和复用逻辑的机制 类型推断不够友好 bundle的时间太久了  而 Vue3 经过长达两三年时间的筹备，做了哪些事情？">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/3339/image-20221112053446984.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/3339/image-20221112053630601.png">
-<meta property="og:image" content="http://huangdafei645.github.io/posts/3339/image-20221112053725814.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221112053446984.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221112053630601.png">
+<meta property="og:image" content="http://huangdafei645.github.io/posts/image-20221112053725814.png">
 <meta property="article:published_time" content="2022-11-11T21:32:27.000Z">
 <meta property="article:modified_time" content="2023-07-11T07:16:17.744Z">
 <meta property="article:author" content="coder-Tom">
 <meta property="article:tag" content="vue3设计目标与优化">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://huangdafei645.github.io/posts/3339/image-20221112053446984.png">
+<meta name="twitter:image" content="http://huangdafei645.github.io/posts/image-20221112053446984.png">
 
 <link rel="canonical" href="http://huangdafei645.github.io/posts/3339.html">
 
@@ -81,7 +81,7 @@
   </style>
 </noscript>
 
-</head>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -252,7 +252,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <html><head><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head><body><h1 id="vue3设计目标与优化"><a href="#vue3设计目标与优化" class="headerlink" title="vue3设计目标与优化"></a>vue3设计目标与优化</h1><h2 id="面试官：Vue3-0的设计目标是什么？做了哪些优化"><a href="#面试官：Vue3-0的设计目标是什么？做了哪些优化" class="headerlink" title="面试官：Vue3.0的设计目标是什么？做了哪些优化"></a>面试官：Vue3.0的设计目标是什么？做了哪些优化</h2><p><img src="/posts/3339/image-20221112053446984.png" alt="image-20221112053446984"></p>
+        <h1 id="vue3设计目标与优化"><a href="#vue3设计目标与优化" class="headerlink" title="vue3设计目标与优化"></a>vue3设计目标与优化</h1><h2 id="面试官：Vue3-0的设计目标是什么？做了哪些优化"><a href="#面试官：Vue3-0的设计目标是什么？做了哪些优化" class="headerlink" title="面试官：Vue3.0的设计目标是什么？做了哪些优化"></a>面试官：Vue3.0的设计目标是什么？做了哪些优化</h2><p><img src="image-20221112053446984.png" alt="image-20221112053446984"></p>
 <h3 id="一、设计目标"><a href="#一、设计目标" class="headerlink" title="一、设计目标"></a>一、设计目标</h3><p>不以解决实际业务痛点的更新都是耍流氓，下面我们来列举一下<code>Vue3</code>之前我们或许会面临的问题</p>
 <ul>
 <li>随着功能的增长，复杂组件的代码变得越来越难以维护</li>
@@ -273,7 +273,7 @@
 <li>开放更多底层功能</li>
 </ul>
 <p>一句话概述，就是更小更快更友好了</p>
-<h4 id="更小"><a href="#更小" class="headerlink" title="更小"></a>更小</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue3`移除一些不常用的 `API</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="更小"><a href="#更小" class="headerlink" title="更小"></a>更小</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue3`移除一些不常用的 `API</span><br></pre></td></tr></table></figure>
 
 <p>引入<code>tree-shaking</code>，可以将无用模块“剪辑”，仅打包需要的，使打包的整体体积变小了</p>
 <h4 id="更快"><a href="#更快" class="headerlink" title="更快"></a>更快</h4><p>主要体现在编译方面：</p>
@@ -287,7 +287,7 @@
 <h4 id="更友好"><a href="#更友好" class="headerlink" title="更友好"></a>更友好</h4><p><code>vue3</code>在兼顾<code>vue2</code>的<code>options API</code>的同时还推出了<code>composition API</code>，大大增加了代码的逻辑组织和代码复用能力</p>
 <p>这里代码简单演示下：</p>
 <p>存在一个获取鼠标位置的函数</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> { toRefs, reactive } <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">useMouse</span>(<span class="params"></span>){</span><br><span class="line">    <span class="keyword">const</span> state = <span class="title function_">reactive</span>({<span class="attr">x</span>:<span class="number">0</span>,<span class="attr">y</span>:<span class="number">0</span>});</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">update</span> = e=&gt;{</span><br><span class="line">        state.<span class="property">x</span> = e.<span class="property">pageX</span>;</span><br><span class="line">        state.<span class="property">y</span> = e.<span class="property">pageY</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="title function_">onMounted</span>(<span class="function">()=&gt;</span>{</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">'mousemove'</span>,update);</span><br><span class="line">    })</span><br><span class="line">    <span class="title function_">onUnmounted</span>(<span class="function">()=&gt;</span>{</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">'mousemove'</span>,update);</span><br><span class="line">    })</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">toRefs</span>(state);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; toRefs, reactive &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">useMouse</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> state = <span class="title function_">reactive</span>(&#123;<span class="attr">x</span>:<span class="number">0</span>,<span class="attr">y</span>:<span class="number">0</span>&#125;);</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">update</span> = e=&gt;&#123;</span><br><span class="line">        state.<span class="property">x</span> = e.<span class="property">pageX</span>;</span><br><span class="line">        state.<span class="property">y</span> = e.<span class="property">pageY</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">onMounted</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mousemove&#x27;</span>,update);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="title function_">onUnmounted</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;mousemove&#x27;</span>,update);</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">toRefs</span>(state);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>我们只需要调用这个函数，即可获取<code>x</code>、<code>y</code>的坐标，完全不用关注实现过程</p>
 <p>试想一下，如果很多类似的第三方库，我们只需要调用即可，不必关注实现过程，开发效率大大提高</p>
@@ -304,7 +304,7 @@
 <li>TypeScript</li>
 </ul>
 <h5 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h5><p><code>vue3</code>整个源码是通过 <code>monorepo</code>的方式维护的，根据功能将不同的模块拆分到<code>packages</code>目录下面不同的子目录中</p>
-<p><img src="/posts/3339/image-20221112053630601.png" alt="image-20221112053630601"></p>
+<p><img src="image-20221112053630601.png" alt="image-20221112053630601"></p>
 <p>这样使得模块拆分更细化，职责划分更明确，模块之间的依赖关系也更加明确，开发人员也更容易阅读、理解和更改所有模块源码，提高代码的可维护性</p>
 <p>另外一些 <code>package</code>（比如 <code>reactivity</code> 响应式库）是可以独立于 <code>Vue</code> 使用的，这样用户如果只想使用 <code>Vue3</code>的响应式能力，可以单独依赖这个响应式库而不用去依赖整个 <code>Vue</code></p>
 <h5 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h5><p><code>Vue3</code>是基于<code>typeScript</code>编写的，提供了更好的类型检查，能支持复杂的类型推导</p>
@@ -316,11 +316,11 @@
 </ul>
 <p>这里讲述数据劫持：</p>
 <p>在<code>vue2</code>中，数据劫持是通过<code>Object.defineProperty</code>，这个 API 有一些缺陷，并不能检测对象属性的添加和删除</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(data, <span class="string">'a'</span>,{</span><br><span class="line">  <span class="title function_">get</span>(<span class="params"></span>){</span><br><span class="line">    <span class="comment">// track</span></span><br><span class="line">  },</span><br><span class="line">  <span class="title function_">set</span>(<span class="params"></span>){</span><br><span class="line">    <span class="comment">// trigger</span></span><br><span class="line">  }</span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(data, <span class="string">&#x27;a&#x27;</span>,&#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">// track</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">set</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">// trigger</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <p>尽管<code>Vue</code>为了解决这个问题提供了 <code>set</code>和<code>delete</code>实例方法，但是对于用户来说，还是增加了一定的心智负担</p>
 <p>同时在面对嵌套层级比较深的情况下，就存在性能问题</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">default</span> {</span><br><span class="line">  <span class="attr">data</span>: {</span><br><span class="line">    <span class="attr">a</span>: {</span><br><span class="line">      <span class="attr">b</span>: {</span><br><span class="line">          <span class="attr">c</span>: {</span><br><span class="line">          <span class="attr">d</span>: <span class="number">1</span></span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">a</span>: &#123;</span><br><span class="line">      <span class="attr">b</span>: &#123;</span><br><span class="line">          <span class="attr">c</span>: &#123;</span><br><span class="line">          <span class="attr">d</span>: <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 <p>相比之下，<code>vue3</code>是通过<code>proxy</code>监听整个对象，那么对于删除还是监听当然也能监听到</p>
@@ -331,15 +331,15 @@
 <li>优化逻辑复用</li>
 </ul>
 <h5 id="逻辑组织"><a href="#逻辑组织" class="headerlink" title="逻辑组织"></a>逻辑组织</h5><p>一张图，我们可以很直观地感受到 <code>Composition API</code>在逻辑组织方面的优势</p>
-<p><img src="/posts/3339/image-20221112053725814.png" alt="image-20221112053725814"></p>
+<p><img src="image-20221112053725814.png" alt="image-20221112053725814"></p>
 <p>相同功能的代码编写在一块，而不像<code>options API</code>那样，各个功能的代码混成一块</p>
 <h5 id="逻辑复用"><a href="#逻辑复用" class="headerlink" title="逻辑复用"></a>逻辑复用</h5><p>在<code>vue2</code>中，我们是通过<code>mixin</code>实现功能混合，如果多个<code>mixin</code>混合，会存在两个非常明显的问题：命名冲突和数据来源不清晰</p>
 <p>而通过<code>composition</code>这种形式，可以将一些复用的代码抽离出来作为一个函数，只要的使用的地方直接进行调用即可</p>
 <p>同样是上文的获取鼠标位置的例子</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> { toRefs, reactive, onUnmounted, onMounted } <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">useMouse</span>(<span class="params"></span>){</span><br><span class="line">    <span class="keyword">const</span> state = <span class="title function_">reactive</span>({<span class="attr">x</span>:<span class="number">0</span>,<span class="attr">y</span>:<span class="number">0</span>});</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">update</span> = e=&gt;{</span><br><span class="line">        state.<span class="property">x</span> = e.<span class="property">pageX</span>;</span><br><span class="line">        state.<span class="property">y</span> = e.<span class="property">pageY</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="title function_">onMounted</span>(<span class="function">()=&gt;</span>{</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">'mousemove'</span>,update);</span><br><span class="line">    })</span><br><span class="line">    <span class="title function_">onUnmounted</span>(<span class="function">()=&gt;</span>{</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">'mousemove'</span>,update);</span><br><span class="line">    })</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">toRefs</span>(state);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; toRefs, reactive, onUnmounted, onMounted &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">useMouse</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> state = <span class="title function_">reactive</span>(&#123;<span class="attr">x</span>:<span class="number">0</span>,<span class="attr">y</span>:<span class="number">0</span>&#125;);</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">update</span> = e=&gt;&#123;</span><br><span class="line">        state.<span class="property">x</span> = e.<span class="property">pageX</span>;</span><br><span class="line">        state.<span class="property">y</span> = e.<span class="property">pageY</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">onMounted</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mousemove&#x27;</span>,update);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="title function_">onUnmounted</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;mousemove&#x27;</span>,update);</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">toRefs</span>(state);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>组件使用</p>
-<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> useMousePosition <span class="keyword">from</span> <span class="string">'./mouse'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> {</span><br><span class="line">    <span class="title function_">setup</span>(<span class="params"></span>) {</span><br><span class="line">        <span class="keyword">const</span> { x, y } = <span class="title function_">useMousePosition</span>()</span><br><span class="line">        <span class="keyword">return</span> { x, y }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> useMousePosition <span class="keyword">from</span> <span class="string">&#x27;./mouse&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="title function_">setup</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; x, y &#125; = <span class="title function_">useMousePosition</span>()</span><br><span class="line">        <span class="keyword">return</span> &#123; x, y &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>可以看到，整个数据来源清晰了，即使去编写更多的<code>hook</code>函数，也不会出现命名冲突的问题</p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
@@ -347,7 +347,7 @@
 <li><a target="_blank" rel="noopener" href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
 <li>@js语音答题社区</li>
 </ul>
-</body></html>
+
     </div>
 
     
@@ -451,20 +451,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">103</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">99</span>
+        <span class="site-state-item-count">100</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
